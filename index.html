@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#ff72b6">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="author" content="Teddy Maloney">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,6 +155,33 @@ header p {
     letter-spacing: 0.5px;
 }
 
+.creator-badge-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 7px 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 2px solid rgba(255, 95, 162, 0.35);
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #533464;
+    box-shadow: 0 5px 16px rgba(255, 75, 155, 0.12);
+    backdrop-filter: blur(8px);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.creator-badge-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 75, 155, 0.22);
+}
+
+.creator-badge-header strong {
+    color: var(--pink-dark);
+    font-weight: 800;
+}
+
 /* ============================================================
    WORKSPACE LAYOUT & STICKY PREVIEW
 ============================================================ */
@@ -228,6 +256,158 @@ header p {
 .preview-panel::-webkit-scrollbar-thumb {
     background: rgba(255, 95, 162, 0.35);
     border-radius: 10px;
+}
+
+/* ============================================================
+   RELAXING BACKGROUND MUSIC BAR
+============================================================ */
+
+.music-bar {
+    width: min(440px, 94%);
+    background: rgba(255, 255, 255, 0.94);
+    border: 2px solid rgba(255, 95, 162, 0.35);
+    border-radius: 18px;
+    padding: 8px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(120, 50, 140, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.music-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.music-icon-wrap {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff75c3, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 17px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.25);
+    overflow: hidden;
+}
+
+.music-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.music-title {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-artist {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #78628c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.equalizer {
+    display: none;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 16px;
+}
+
+.music-bar.playing .equalizer {
+    display: flex;
+}
+
+.music-bar.playing .music-icon-static {
+    display: none;
+}
+
+.eq-bar {
+    width: 3px;
+    background: white;
+    border-radius: 2px;
+    height: 3px;
+}
+
+.music-bar.playing .eq-bar:nth-child(1) { animation: eqBounce 0.65s ease-in-out infinite alternate; }
+.music-bar.playing .eq-bar:nth-child(2) { animation: eqBounce 0.45s ease-in-out infinite alternate 0.15s; }
+.music-bar.playing .eq-bar:nth-child(3) { animation: eqBounce 0.75s ease-in-out infinite alternate 0.3s; }
+.music-bar.playing .eq-bar:nth-child(4) { animation: eqBounce 0.55s ease-in-out infinite alternate 0.2s; }
+
+@keyframes eqBounce {
+    0% { height: 3px; }
+    100% { height: 14px; }
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.music-play-btn {
+    border: 0;
+    background: linear-gradient(135deg, var(--pink), #ec3e89);
+    color: white;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 7px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(255, 75, 155, 0.25);
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    touch-action: manipulation;
+}
+
+.music-play-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(255, 75, 155, 0.35);
+}
+
+.music-play-btn.playing {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+.volume-slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.vol-icon {
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.volume-slider {
+    width: 52px;
+    height: 14px;
+    accent-color: var(--pink);
+    cursor: pointer;
 }
 
 .name-input {
@@ -688,6 +868,25 @@ header p {
 .info-card strong {
     color: var(--pink);
     font-size: 18px;
+}
+
+.info-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.creator-pill {
+    display: inline-block;
+    background: #ffe3f0;
+    color: #d82b78;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 9px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 95, 162, 0.28);
 }
 
 .info-details {
@@ -1223,6 +1422,9 @@ footer {
         <h1>NeeDoh!</h1>
     </div>
     <p>✨ DESIGN YOUR DREAM SQUISHY ✨</p>
+    <div class="creator-badge-header">
+        ✨ Created by <strong>Teddy Maloney</strong> ✨
+    </div>
 </header>
 
 <!-- Workspace -->
@@ -1333,6 +1535,35 @@ footer {
 
 <h2>✨ Your Squishy</h2>
 
+<!-- Relaxing Background Music Player -->
+<div class="music-bar" id="musicBar">
+    <div class="music-info">
+        <div class="music-icon-wrap" id="musicIconWrap">
+            <span class="music-icon-static">🎵</span>
+            <div class="equalizer" id="equalizer" aria-hidden="true">
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+                <span class="eq-bar"></span>
+            </div>
+        </div>
+        <div class="music-meta">
+            <span class="music-title">Happier (Chill Mix)</span>
+            <span class="music-artist">Marshmello & Bastille Vibe</span>
+        </div>
+    </div>
+    <div class="music-controls">
+        <button type="button" class="music-play-btn" id="musicToggleBtn" aria-label="Play relaxing music">
+            <span id="musicBtnIcon">▶️</span>
+            <span id="musicBtnText">Play</span>
+        </button>
+        <div class="volume-slider-wrap">
+            <span class="vol-icon" id="volIcon" title="Toggle Mute">🔊</span>
+            <input type="range" id="musicVolume" min="0" max="100" value="70" class="volume-slider" title="Music Volume">
+        </div>
+    </div>
+</div>
+
 <input
     id="designName"
     class="name-input"
@@ -1391,7 +1622,10 @@ footer {
 </div>
 
 <div class="info-card">
-    <div><strong id="infoName">My NeeDoh</strong></div>
+    <div class="info-card-header">
+        <strong id="infoName">My NeeDoh</strong>
+        <span class="creator-pill">By Teddy Maloney</span>
+    </div>
     <div id="infoDetails" class="info-details">Bubblegum Pink • Plain • Super Soft • Nice Cube</div>
 </div>
 
@@ -1565,7 +1799,7 @@ footer {
 </div>
 
 <footer>
-    🫧 NeeDoh Squishy Designer • Made with squishy love! ✨
+    🫧 NeeDoh Squishy Designer • Created by <strong>Teddy Maloney</strong> with squishy love! ✨
 </footer>
 
 <div id="toast" class="toast">Design saved! 💖</div>
@@ -1802,23 +2036,369 @@ const miniName = document.getElementById("miniSquishyName");
 const miniInfo = document.getElementById("miniSquishyInfo");
 
 /* ============================================================
-   SOUND SYNTHESIZER (Web Audio API)
+   SHARED AUDIO CONTEXT & RELAXING BACKGROUND MUSIC ENGINE
+   Procedural Web Audio API synthesizer reproducing the melody &
+   uplifting chords inspired by "Happier" by Marshmello & Bastille.
+   100% Standalone • Zero external audio file dependencies.
 ============================================================ */
 let audioCtx = null;
 
+function getSharedAudioContext() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+    }
+    return audioCtx;
+}
+
+const MusicEngine = (() => {
+    let masterGain = null;
+    let delayNode = null;
+    let delayFeedback = null;
+    let isPlaying = false;
+    let nextNoteTime = 0;
+    let current16thNote = 0;
+    let timerID = null;
+    const tempo = 100; // 100 BPM - chill & bouncy
+    const secondsPer16th = (60.0 / tempo) / 4.0; // 0.15s per 16th note
+
+    // Note frequencies in Hz
+    const N = {
+        F2: 87.31,  G2: 98.00,  A2: 110.00, Bb2: 116.54, C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61,
+        G3: 196.00, A3: 220.00, Bb3: 233.08, C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+        G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46
+    };
+
+    // Soft marimba / kalimba pluck note
+    function playPluck(freq, time, duration = 0.35, gainMult = 0.2) {
+        const ctx = getSharedAudioContext();
+        if (!ctx || !freq) return;
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const noteGain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        osc1.type = "triangle";
+        osc1.frequency.setValueAtTime(freq, time);
+
+        // Subtle chime shimmer overtone
+        osc2.type = "sine";
+        osc2.frequency.setValueAtTime(freq * 2, time);
+
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(2600, time);
+        filter.frequency.exponentialRampToValueAtTime(700, time + duration);
+
+        noteGain.gain.setValueAtTime(0.0001, time);
+        noteGain.gain.linearRampToValueAtTime(gainMult, time + 0.006);
+        noteGain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(noteGain);
+        noteGain.connect(masterGain);
+        if (delayNode) noteGain.connect(delayNode);
+
+        osc1.start(time);
+        osc2.start(time);
+        osc1.stop(time + duration + 0.05);
+        osc2.stop(time + duration + 0.05);
+    }
+
+    // Soft warm electric piano chord pad
+    function playChord(chordNotes, time, duration = 1.35) {
+        const ctx = getSharedAudioContext();
+        if (!ctx) return;
+        chordNotes.forEach(freq => {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            const f = ctx.createBiquadFilter();
+
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, time);
+
+            f.type = "lowpass";
+            f.frequency.setValueAtTime(650, time);
+
+            g.gain.setValueAtTime(0.0001, time);
+            g.gain.linearRampToValueAtTime(0.038, time + 0.1);
+            g.gain.linearRampToValueAtTime(0.024, time + duration * 0.7);
+            g.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+            osc.connect(f);
+            f.connect(g);
+            g.connect(masterGain);
+
+            osc.start(time);
+            osc.stop(time + duration + 0.05);
+        });
+    }
+
+    // Soft round sub bass
+    function playBass(freq, time, duration = 0.45) {
+        const ctx = getSharedAudioContext();
+        if (!ctx || !freq) return;
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, time);
+
+        g.gain.setValueAtTime(0.0001, time);
+        g.gain.linearRampToValueAtTime(0.12, time + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+        osc.connect(g);
+        g.connect(masterGain);
+
+        osc.start(time);
+        osc.stop(time + duration + 0.05);
+    }
+
+    // Gentle lo-fi drum beats
+    function playDrums(type, time) {
+        const ctx = getSharedAudioContext();
+        if (!ctx) return;
+        if (type === "kick") {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.frequency.setValueAtTime(75, time);
+            osc.frequency.exponentialRampToValueAtTime(36, time + 0.12);
+            g.gain.setValueAtTime(0.08, time);
+            g.gain.exponentialRampToValueAtTime(0.001, time + 0.14);
+            osc.connect(g);
+            g.connect(masterGain);
+            osc.start(time);
+            osc.stop(time + 0.15);
+        } else if (type === "shaker") {
+            try {
+                const bufferSize = Math.floor(ctx.sampleRate * 0.035);
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+                const noise = ctx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = ctx.createBiquadFilter();
+                filter.type = "highpass";
+                filter.frequency.setValueAtTime(7200, time);
+                const g = ctx.createGain();
+                g.gain.setValueAtTime(0.018, time);
+                g.gain.exponentialRampToValueAtTime(0.0005, time + 0.035);
+                noise.connect(filter);
+                filter.connect(g);
+                g.connect(masterGain);
+                noise.start(time);
+            } catch(e) {}
+        } else if (type === "rim") {
+            const osc = ctx.createOscillator();
+            const g = ctx.createGain();
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(380, time);
+            g.gain.setValueAtTime(0.04, time);
+            g.gain.exponentialRampToValueAtTime(0.001, time + 0.055);
+            osc.connect(g);
+            g.connect(masterGain);
+            osc.start(time);
+            osc.stop(time + 0.065);
+        }
+    }
+
+    // 128-step score table (16 steps per bar * 8 bars)
+    // Bars 0-3: Verse/Chorus Melody (Bastille's "Happier" vocal line)
+    // Bars 4-7: Marshmello Drop Plucks
+    const scoreNotes = new Array(128).fill(null);
+
+    // BAR 1: F Major (Steps 0-15) - "Lately, I've been, I've been thinking..."
+    scoreNotes[0]  = { lead: N.A4, bass: N.F2, chord: [N.F3, N.A3, N.C4], dur: 0.5 };
+    scoreNotes[4]  = { lead: N.A4, dur: 0.3 };
+    scoreNotes[6]  = { lead: N.A4, dur: 0.3 };
+    scoreNotes[8]  = { lead: N.A4, dur: 0.3 };
+    scoreNotes[10] = { lead: N.G4, dur: 0.3 };
+    scoreNotes[12] = { lead: N.F4, bass: N.F2, dur: 0.5 };
+    scoreNotes[14] = { lead: N.F4, dur: 0.3 };
+
+    // BAR 2: C Major (Steps 16-31) - "I want you to be happier..."
+    scoreNotes[16] = { lead: N.G4, bass: N.C3, chord: [N.E3, N.G3, N.C4], dur: 0.5 };
+    scoreNotes[20] = { lead: N.G4, dur: 0.3 };
+    scoreNotes[22] = { lead: N.A4, dur: 0.3 };
+    scoreNotes[24] = { lead: N.G4, bass: N.C3, dur: 0.5 };
+    scoreNotes[28] = { lead: N.E4, dur: 0.5 };
+
+    // BAR 3: D Minor (Steps 32-47) - "I want you to be happier..."
+    scoreNotes[32] = { lead: N.F4, bass: N.D3, chord: [N.D3, N.F3, N.A3], dur: 0.5 };
+    scoreNotes[36] = { lead: N.F4, dur: 0.3 };
+    scoreNotes[38] = { lead: N.F4, dur: 0.3 };
+    scoreNotes[40] = { lead: N.F4, dur: 0.3 };
+    scoreNotes[42] = { lead: N.E4, dur: 0.3 };
+    scoreNotes[44] = { lead: N.D4, bass: N.D3, dur: 0.5 };
+    scoreNotes[46] = { lead: N.D4, dur: 0.3 };
+
+    // BAR 4: Bb Major (Steps 48-63)
+    scoreNotes[48] = { lead: N.D4, bass: N.Bb2, chord: [N.D3, N.F3, N.Bb3], dur: 0.3 };
+    scoreNotes[50] = { lead: N.F4, dur: 0.3 };
+    scoreNotes[52] = { lead: N.G4, dur: 0.3 };
+    scoreNotes[54] = { lead: N.A4, dur: 0.3 };
+    scoreNotes[56] = { lead: N.G4, bass: N.Bb2, dur: 0.5 };
+    scoreNotes[60] = { lead: N.F4, dur: 0.5 };
+
+    // BAR 5: F Major - Marshmello Drop Riff (Steps 64-79)
+    scoreNotes[64] = { lead: N.C5, bass: N.F2, chord: [N.F3, N.A3, N.C4], dur: 0.28 };
+    scoreNotes[66] = { lead: N.A4, dur: 0.25 };
+    scoreNotes[68] = { lead: N.F4, dur: 0.25 };
+    scoreNotes[70] = { lead: N.C5, dur: 0.25 };
+    scoreNotes[72] = { lead: N.A4, bass: N.F2, dur: 0.25 };
+    scoreNotes[74] = { lead: N.F4, dur: 0.25 };
+    scoreNotes[76] = { lead: N.A4, dur: 0.25 };
+    scoreNotes[78] = { lead: N.C5, dur: 0.25 };
+
+    // BAR 6: C Major - Marshmello Drop Riff (Steps 80-95)
+    scoreNotes[80] = { lead: N.G4, bass: N.C3, chord: [N.E3, N.G3, N.C4], dur: 0.28 };
+    scoreNotes[82] = { lead: N.E4, dur: 0.25 };
+    scoreNotes[84] = { lead: N.C4, dur: 0.25 };
+    scoreNotes[86] = { lead: N.G4, dur: 0.25 };
+    scoreNotes[88] = { lead: N.E4, bass: N.C3, dur: 0.25 };
+    scoreNotes[90] = { lead: N.C4, dur: 0.25 };
+    scoreNotes[92] = { lead: N.G4, dur: 0.25 };
+    scoreNotes[94] = { lead: N.C5, dur: 0.25 };
+
+    // BAR 7: D Minor - Marshmello Drop Riff (Steps 96-111)
+    scoreNotes[96]  = { lead: N.F4, bass: N.D3, chord: [N.D3, N.F3, N.A3], dur: 0.28 };
+    scoreNotes[98]  = { lead: N.D4, dur: 0.25 };
+    scoreNotes[100] = { lead: N.A3, dur: 0.25 };
+    scoreNotes[102] = { lead: N.F4, dur: 0.25 };
+    scoreNotes[104] = { lead: N.D4, bass: N.D3, dur: 0.25 };
+    scoreNotes[106] = { lead: N.A3, dur: 0.25 };
+    scoreNotes[108] = { lead: N.F4, dur: 0.25 };
+    scoreNotes[110] = { lead: N.A4, dur: 0.25 };
+
+    // BAR 8: Bb Major - Marshmello Drop Riff (Steps 112-127)
+    scoreNotes[112] = { lead: N.F4, bass: N.Bb2, chord: [N.D3, N.F3, N.Bb3], dur: 0.28 };
+    scoreNotes[114] = { lead: N.D4, dur: 0.25 };
+    scoreNotes[116] = { lead: N.Bb3, dur: 0.25 };
+    scoreNotes[118] = { lead: N.D4, dur: 0.25 };
+    scoreNotes[120] = { lead: N.F4, bass: N.Bb2, dur: 0.25 };
+    scoreNotes[122] = { lead: N.G4, dur: 0.25 };
+    scoreNotes[124] = { lead: N.A4, dur: 0.25 };
+    scoreNotes[126] = { lead: N.G4, dur: 0.35 };
+
+    function scheduleStep(stepNumber, time) {
+        const item = scoreNotes[stepNumber];
+
+        if (item) {
+            if (item.chord) {
+                playChord(item.chord, time, 1.4);
+            }
+            if (item.bass) {
+                playBass(item.bass, time, 0.45);
+            }
+            if (item.lead) {
+                playPluck(item.lead, time, item.dur || 0.32, 0.22);
+            }
+        }
+
+        // Drums / Shaker groove
+        const barStep = stepNumber % 16;
+        if (barStep === 0 || barStep === 8) {
+            playDrums("kick", time);
+        }
+        if (barStep === 4 || barStep === 12) {
+            playDrums("rim", time);
+        }
+        if (stepNumber % 2 === 0) {
+            playDrums("shaker", time);
+        }
+    }
+
+    function scheduler() {
+        if (!isPlaying) return;
+        const ctx = getSharedAudioContext();
+        if (!ctx) return;
+        // Schedule notes up to 0.15 seconds ahead
+        while (nextNoteTime < ctx.currentTime + 0.15) {
+            scheduleStep(current16thNote, nextNoteTime);
+            nextNoteTime += secondsPer16th;
+            current16thNote = (current16thNote + 1) % 128;
+        }
+        timerID = setTimeout(scheduler, 35);
+    }
+
+    function ensureInit() {
+        const ctx = getSharedAudioContext();
+        if (!masterGain) {
+            masterGain = ctx.createGain();
+            masterGain.gain.setValueAtTime(0.7, ctx.currentTime);
+
+            // Dreamy Lo-Fi Ping-Pong Echo
+            delayNode = ctx.createDelay();
+            delayNode.delayTime.setValueAtTime(0.24, ctx.currentTime);
+            delayFeedback = ctx.createGain();
+            delayFeedback.gain.setValueAtTime(0.2, ctx.currentTime);
+
+            const delayFilter = ctx.createBiquadFilter();
+            delayFilter.type = "lowpass";
+            delayFilter.frequency.setValueAtTime(1400, ctx.currentTime);
+
+            delayNode.connect(delayFilter);
+            delayFilter.connect(delayFeedback);
+            delayFeedback.connect(delayNode);
+            delayFilter.connect(masterGain);
+
+            masterGain.connect(ctx.destination);
+        }
+    }
+
+    return {
+        play() {
+            ensureInit();
+            const ctx = getSharedAudioContext();
+            if (ctx && ctx.state === "suspended") {
+                ctx.resume();
+            }
+            if (isPlaying) return;
+            isPlaying = true;
+            nextNoteTime = ctx.currentTime + 0.05;
+            scheduler();
+            updateMusicUI(true);
+        },
+        pause() {
+            if (!isPlaying) return;
+            isPlaying = false;
+            if (timerID) clearTimeout(timerID);
+            updateMusicUI(false);
+        },
+        toggle() {
+            if (isPlaying) {
+                this.pause();
+                showToast("Music Paused ⏸️");
+            } else {
+                this.play();
+                showToast("Playing 'Happier' 🎶✨");
+            }
+        },
+        setVolume(val) {
+            ensureInit();
+            const ctx = getSharedAudioContext();
+            if (!masterGain || !ctx) return;
+            masterGain.gain.setValueAtTime(Math.max(0, Math.min(1, val)), ctx.currentTime);
+        },
+        getPlaying() {
+            return isPlaying;
+        }
+    };
+})();
+
+/* Squish Sound FX */
 function playSquishSound() {
     if (!state.sound) return;
     try {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === "suspended") {
-            audioCtx.resume();
-        }
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        const filter = audioCtx.createBiquadFilter();
+        const ctx = getSharedAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
 
         const basePitch = 240 + (state.softness / 100) * 110 - (state.wobble / 100) * 60;
         osc.type = "sine";
@@ -1835,7 +2415,7 @@ function playSquishSound() {
 
         osc.connect(filter);
         filter.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
 
         osc.start(now);
         osc.stop(now + 0.22);
@@ -3075,9 +3655,9 @@ function saveDesignCard() {
         805
     );
 
-    ctx.font = "600 19px Fredoka, Arial";
+    ctx.font = "700 20px Fredoka, Arial";
     ctx.fillStyle = "#ff4d9d";
-    ctx.fillText("✨ Designed with NeeDoh Designer ✨", cx, 855);
+    ctx.fillText("✨ Created by Teddy Maloney • NeeDoh Designer ✨", cx, 855);
 
     const link = document.createElement("a");
     link.download = (name.replace(/[^a-z0-9]/gi, "-").toLowerCase() || "my-needoh") + "-design.png";
@@ -3233,6 +3813,50 @@ document.getElementById("saveButton").addEventListener("click", () => {
 });
 document.getElementById("shareButton").addEventListener("click", shareDesign);
 document.getElementById("resetButton").addEventListener("click", resetDesign);
+
+// Background Relaxing Music Controls
+const musicBar = document.getElementById("musicBar");
+const musicToggleBtn = document.getElementById("musicToggleBtn");
+const musicBtnIcon = document.getElementById("musicBtnIcon");
+const musicBtnText = document.getElementById("musicBtnText");
+const musicVolume = document.getElementById("musicVolume");
+const volIcon = document.getElementById("volIcon");
+
+function updateMusicUI(playing) {
+    if (musicBar) musicBar.classList.toggle("playing", playing);
+    if (musicToggleBtn) {
+        musicToggleBtn.classList.toggle("playing", playing);
+        if (musicBtnIcon) musicBtnIcon.textContent = playing ? "⏸️" : "▶️";
+        if (musicBtnText) musicBtnText.textContent = playing ? "Pause" : "Play";
+    }
+}
+
+musicToggleBtn?.addEventListener("click", () => {
+    MusicEngine.toggle();
+});
+
+musicVolume?.addEventListener("input", (e) => {
+    const val = Number(e.target.value) / 100;
+    MusicEngine.setVolume(val);
+    if (volIcon) {
+        volIcon.textContent = val === 0 ? "🔇" : val < 0.4 ? "🔉" : "🔊";
+    }
+});
+
+let lastVol = 70;
+volIcon?.addEventListener("click", () => {
+    if (!musicVolume) return;
+    if (Number(musicVolume.value) > 0) {
+        lastVol = Number(musicVolume.value);
+        musicVolume.value = 0;
+        MusicEngine.setVolume(0);
+        volIcon.textContent = "🔇";
+    } else {
+        musicVolume.value = lastVol || 70;
+        MusicEngine.setVolume((lastVol || 70) / 100);
+        volIcon.textContent = "🔊";
+    }
+});
 
 // Mobile Bar Buttons
 document.getElementById("miniSquishBtn")?.addEventListener("click", squeezeCube);
