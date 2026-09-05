@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Needoh Squishy Designer</title>
+<title>NeeDoh Squishy Designer ✨</title>
 
 <meta name="theme-color" content="#ff72b6">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,8 +17,7 @@
 <style>
 
 /* ============================================================
-   NEEDOH DESIGNER
-   Complete standalone version
+   NEEDOH DESIGNER - MODERN ENHANCED EDITION
 ============================================================ */
 
 * {
@@ -34,7 +33,7 @@
     --yellow: #ffd84d;
     --green: #65e6a5;
     --dark: #30243f;
-    --panel: rgba(255,255,255,.88);
+    --panel: rgba(255, 255, 255, 0.9);
 }
 
 html {
@@ -49,8 +48,8 @@ body {
     overflow-x: hidden;
 
     background:
-        radial-gradient(circle at 8% 8%, rgba(255,255,255,.95), transparent 20%),
-        radial-gradient(circle at 92% 12%, rgba(255,255,255,.9), transparent 20%),
+        radial-gradient(circle at 8% 8%, rgba(255,255,255,.95), transparent 22%),
+        radial-gradient(circle at 92% 12%, rgba(255,255,255,.9), transparent 22%),
         radial-gradient(circle at 50% 100%, rgba(255,255,255,.6), transparent 35%),
         linear-gradient(
             135deg,
@@ -85,63 +84,16 @@ body {
     background: rgba(255,255,255,.8);
 }
 
-.b1 {
-    width: 80px;
-    height: 80px;
-    left: 3%;
-    top: 22%;
-    background: #ff9dcc;
-    animation-duration: 10s;
-}
-
-.b2 {
-    width: 48px;
-    height: 48px;
-    right: 6%;
-    top: 32%;
-    background: #7edcff;
-    animation-duration: 12s;
-}
-
-.b3 {
-    width: 105px;
-    height: 105px;
-    right: 12%;
-    bottom: 8%;
-    background: #d8a5ff;
-    animation-duration: 15s;
-}
-
-.b4 {
-    width: 38px;
-    height: 38px;
-    left: 25%;
-    bottom: 8%;
-    background: #ffe477;
-    animation-duration: 9s;
-}
-
-.b5 {
-    width: 58px;
-    height: 58px;
-    left: 48%;
-    top: 8%;
-    background: #a5f1d0;
-    animation-duration: 13s;
-}
+.b1 { width: 80px; height: 80px; left: 3%; top: 22%; background: #ff9dcc; animation-duration: 10s; }
+.b2 { width: 48px; height: 48px; right: 6%; top: 32%; background: #7edcff; animation-duration: 12s; }
+.b3 { width: 105px; height: 105px; right: 12%; bottom: 8%; background: #d8a5ff; animation-duration: 15s; }
+.b4 { width: 38px; height: 38px; left: 25%; bottom: 8%; background: #ffe477; animation-duration: 9s; }
+.b5 { width: 58px; height: 58px; left: 48%; top: 8%; background: #a5f1d0; animation-duration: 13s; }
 
 @keyframes floatBubble {
-    0% {
-        transform: translateY(30px) scale(.85);
-    }
-
-    50% {
-        transform: translateY(-80px) scale(1.08);
-    }
-
-    100% {
-        transform: translateY(30px) scale(.85);
-    }
+    0% { transform: translateY(30px) scale(.85); }
+    50% { transform: translateY(-80px) scale(1.08); }
+    100% { transform: translateY(30px) scale(.85); }
 }
 
 /* ============================================================
@@ -150,7 +102,7 @@ body {
 
 header {
     text-align: center;
-    padding: 25px 16px 18px;
+    padding: 24px 16px 16px;
 }
 
 .logo-title {
@@ -164,48 +116,42 @@ header {
     width: 64px;
     height: 64px;
     border-radius: 20px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-size: 28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff63aa,
-            #ff9dca
-        );
-
+    font-size: 30px;
+    background: linear-gradient(135deg, #ff63aa, #ff9dca);
     transform: rotate(-7deg);
-
     box-shadow:
         0 12px 28px rgba(255,75,155,.25),
         inset 0 3px 0 rgba(255,255,255,.5);
+    animation: gentleWobble 4s ease-in-out infinite alternate;
+}
+
+@keyframes gentleWobble {
+    0% { transform: rotate(-8deg) scale(1); }
+    100% { transform: rotate(6deg) scale(1.04); }
 }
 
 header h1 {
     margin: 0;
-
     font-family: "Baloo 2", sans-serif;
     font-size: clamp(45px, 8vw, 76px);
     line-height: .85;
     font-weight: 800;
     letter-spacing: -3px;
-
     color: #ff4d9d;
-
     text-shadow:
         3px 3px 0 white,
         6px 6px 0 rgba(255,255,255,.5);
 }
 
 header p {
-    margin: 14px 0 0;
-
+    margin: 12px 0 0;
     font-size: clamp(15px, 2vw, 19px);
     font-weight: 700;
+    color: #533966;
+    letter-spacing: 0.5px;
 }
 
 /* ============================================================
@@ -213,33 +159,22 @@ header p {
 ============================================================ */
 
 .workspace {
-    width: min(1650px, 96%);
+    width: min(1660px, 96%);
     margin: auto;
-
     display: grid;
-
-    grid-template-columns:
-        330px
-        minmax(420px, 1fr)
-        330px;
-
+    grid-template-columns: 340px minmax(420px, 1fr) 340px;
     gap: 18px;
-
     align-items: start;
 }
 
 .panel {
     background: var(--panel);
-
-    border: 3px solid rgba(255,255,255,.85);
+    border: 3px solid rgba(255,255,255,.88);
     border-radius: 28px;
-
     padding: 20px;
-
     box-shadow:
         0 18px 45px rgba(80,50,100,.13),
         inset 0 1px 0 white;
-
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
 }
@@ -247,25 +182,29 @@ header p {
 .panel h2 {
     margin: 0 0 16px;
     font-size: 24px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .section {
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 .section-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
-
     margin-bottom: 10px;
-
     display: flex;
     align-items: center;
     gap: 6px;
+    color: #433256;
+    letter-spacing: .2px;
 }
 
 /* ============================================================
-   OPTION BUTTONS
+   OPTION BUTTONS & SHAPES
 ============================================================ */
 
 .options {
@@ -275,33 +214,33 @@ header p {
 }
 
 .option {
-    min-height: 58px;
-
+    min-height: 60px;
     border: 2px solid transparent;
-
     background: rgba(255,255,255,.95);
-
-    border-radius: 15px;
-
+    border-radius: 16px;
     padding: 8px 5px;
-
     cursor: pointer;
-
     font-family: inherit;
     font-weight: 700;
     color: var(--dark);
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
     transition:
         transform .16s ease,
         box-shadow .16s ease,
         border-color .16s ease,
         background .16s ease;
-
     touch-action: manipulation;
+    user-select: none;
 }
 
 .option:hover {
     transform: translateY(-2px);
+    background: #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,.08);
 }
 
 .option:active {
@@ -310,18 +249,29 @@ header p {
 
 .option.active {
     border-color: var(--pink);
-
     background: #fff0f8;
-
     box-shadow:
-        0 0 0 3px rgba(255,77,157,.12),
-        0 5px 12px rgba(255,77,157,.08);
+        0 0 0 3px rgba(255,77,157,.15),
+        0 6px 14px rgba(255,77,157,.12);
 }
 
 .option small {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.1;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Shape Swatches */
+.shape-preview-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 2px;
 }
 
 /* ============================================================
@@ -336,58 +286,43 @@ header p {
 
 .colour {
     position: relative;
-
-    height: 43px;
-
+    height: 42px;
     border-radius: 13px;
     border: 3px solid white;
-
     cursor: pointer;
-
-    box-shadow:
-        0 3px 8px rgba(0,0,0,.12);
-
-    transition:
-        transform .16s ease,
-        box-shadow .16s ease;
-
+    box-shadow: 0 3px 8px rgba(0,0,0,.12);
+    transition: transform .16s ease, box-shadow .16s ease, outline .16s ease;
     touch-action: manipulation;
 }
 
 .colour:hover {
-    transform: scale(1.08);
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(0,0,0,.18);
 }
 
 .colour.active {
     outline: 3px solid var(--pink);
+    outline-offset: 1px;
     transform: scale(1.08);
-
-    box-shadow:
-        0 4px 12px rgba(255,77,157,.25);
+    box-shadow: 0 5px 14px rgba(255,77,157,.3);
 }
 
 .colour-name {
     position: absolute;
     left: 50%;
     bottom: calc(100% + 7px);
-
     transform: translateX(-50%);
-
     background: var(--dark);
     color: white;
-
-    padding: 5px 8px;
-
+    padding: 4px 8px;
     border-radius: 8px;
-
     font-size: 10px;
-
+    font-weight: 700;
     white-space: nowrap;
-
     opacity: 0;
     pointer-events: none;
-
     transition: opacity .15s;
+    z-index: 100;
 }
 
 .colour:hover .colour-name {
@@ -395,45 +330,38 @@ header p {
 }
 
 /* ============================================================
-   PREVIEW
+   PREVIEW PANEL
 ============================================================ */
 
 .preview-panel {
     min-height: 760px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     overflow: hidden;
+    position: relative;
 }
 
 .name-input {
-    width: min(450px, 92%);
-
+    width: min(460px, 94%);
     padding: 14px 18px;
-
     border: 3px solid white;
-    border-radius: 18px;
-
+    border-radius: 20px;
     font-family: inherit;
     font-size: 18px;
     font-weight: 700;
-
     text-align: center;
-
     outline: none;
-
     margin-bottom: 15px;
-
-    background: rgba(255,255,255,.92);
-
-    box-shadow:
-        0 6px 18px rgba(0,0,0,.08);
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 8px 20px rgba(0,0,0,.07);
+    color: var(--dark);
+    transition: border-color .2s, box-shadow .2s;
 }
 
 .name-input:focus {
     border-color: #ff79b7;
+    box-shadow: 0 8px 25px rgba(255,100,170,.22);
 }
 
 /* ============================================================
@@ -442,170 +370,215 @@ header p {
 
 .preview-stage {
     width: 100%;
-    min-height: 505px;
-
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     position: relative;
-
     perspective: 1200px;
-
     touch-action: manipulation;
 }
 
 .cube-wrap {
     position: relative;
-
-    width: 350px;
-    height: 350px;
-
+    width: 360px;
+    height: 360px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    transition: .3s;
+    filter: drop-shadow(0 26px 36px rgba(55,35,70,.25));
+    transition: transform .25s ease;
 }
 
 /* ============================================================
-   SQUISHY CUBE
+   SQUISHY BODY (Supports All Shapes!)
 ============================================================ */
 
 .cube {
     position: relative;
-
     width: 290px;
     height: 290px;
-
-    border-radius: 48px;
-
+    border-radius: 52px;
     transform-style: preserve-3d;
-
-    transform:
-        rotateX(-8deg)
-        rotateY(-12deg)
-        rotateZ(-2deg);
-
+    transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg);
     transition:
         width .35s ease,
         height .35s ease,
         border-radius .35s ease,
-        transform .22s ease,
-        box-shadow .3s ease;
-
-    box-shadow:
-        inset -25px -28px 45px rgba(0,0,0,.16),
-        inset 20px 18px 32px rgba(255,255,255,.5),
-        0 32px 45px rgba(55,35,70,.25);
-
+        transform .2s ease,
+        clip-path .35s ease;
     overflow: hidden;
-
     cursor: pointer;
-
     user-select: none;
-
     touch-action: manipulation;
+
+    /* Base 3D silicone shading */
+    box-shadow:
+        inset -22px -24px 42px rgba(0,0,0,.16),
+        inset 18px 16px 32px rgba(255,255,255,.48);
 }
 
+/* 3D Curved Top Specular Highlight Glare */
 .cube::before {
     content: "";
-
     position: absolute;
-
-    left: 5%;
-    top: 3%;
-
-    width: 45%;
+    left: 7%;
+    top: 5%;
+    width: 44%;
     height: 22%;
-
     border-radius: 50%;
-
-    background: rgba(255,255,255,.32);
-
+    background: rgba(255,255,255,.36);
     filter: blur(8px);
-
-    transform: rotate(-15deg);
-
+    transform: rotate(-16deg);
     pointer-events: none;
-
     z-index: 40;
+    transition: opacity .25s, filter .25s, transform .25s;
 }
 
+/* 3D Global Volume Gradient Overlay */
 .cube::after {
     content: "";
-
     position: absolute;
     inset: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.2),
-            transparent 35%,
-            transparent 65%,
-            rgba(0,0,0,.11)
-        );
-
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,.24),
+        transparent 38%,
+        transparent 62%,
+        rgba(0,0,0,.14)
+    );
     pointer-events: none;
-
     z-index: 39;
+    transition: opacity .25s, background .25s;
+}
+
+/* Center hole for Dohnut shape */
+.donut-hole {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 82px;
+    height: 82px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.7), #eedaf5);
+    box-shadow:
+        inset 8px 8px 18px rgba(50,20,70,0.42),
+        inset -6px -6px 14px rgba(255,255,255,0.7),
+        0 0 12px rgba(0,0,0,0.18);
+    z-index: 36;
+    pointer-events: none;
+}
+
+.shape-donut .donut-hole {
+    display: block;
+}
+
+/* Cute Bear Ears Overlay */
+.bear-ears {
+    display: none;
+    position: absolute;
+    top: 10px;
+    width: 290px;
+    height: 70px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.bear-ear {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: inherit;
+    box-shadow:
+        inset -8px -8px 16px rgba(0,0,0,.18),
+        inset 6px 6px 14px rgba(255,255,255,.45);
+}
+
+.bear-ear.left { left: 16px; top: -18px; }
+.bear-ear.right { right: 16px; top: -18px; }
+
+.shape-bear-ears-active .bear-ears {
+    display: block;
+}
+
+/* Cute Cat Ears Overlay */
+.cat-ears {
+    display: none;
+    position: absolute;
+    top: -20px;
+    width: 280px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.cat-ear {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    border-bottom: 45px solid var(--cat-color, #ff72b6);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
+}
+
+.cat-ear.left { left: 24px; transform: rotate(-18deg); }
+.cat-ear.right { right: 24px; transform: rotate(18deg); }
+
+.shape-cat-ears-active .cat-ears {
+    display: block;
 }
 
 /* ============================================================
-   CUBE LAYERS
+   LAYERS
 ============================================================ */
 
 .pattern-layer {
     position: absolute;
     inset: 0;
-
     z-index: 5;
-
     pointer-events: none;
+    opacity: .78;
+    transition: opacity .2s;
+}
 
-    opacity: .72;
+.texture-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 12;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s, filter .3s;
 }
 
 .decorations-layer {
     position: absolute;
     inset: 0;
-
     z-index: 18;
-
     pointer-events: none;
 }
 
 .glitter {
     position: absolute;
     inset: 0;
-
     z-index: 25;
-
     pointer-events: none;
-
     opacity: 0;
-
     background-image:
-        radial-gradient(circle, rgba(255,255,255,.95) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.95) 1.5px, transparent 2.5px),
         radial-gradient(circle, rgba(255,255,255,.85) 1px, transparent 2px),
-        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 2px);
-
-    background-size:
-        19px 23px,
-        29px 31px,
-        37px 41px;
-
-    background-position:
-        2px 3px,
-        10px 12px,
-        20px 4px;
-
+        radial-gradient(circle, rgba(255,255,255,.7) 1.2px, transparent 2.2px);
+    background-size: 21px 25px, 31px 33px, 39px 43px;
+    background-position: 2px 3px, 10px 12px, 20px 4px;
     mix-blend-mode: screen;
+    transition: opacity .3s;
 }
 
 .glitter.on {
-    opacity: .8;
+    opacity: .85;
 }
 
 /* ============================================================
@@ -614,35 +587,22 @@ header p {
 
 .printed-logo {
     position: absolute;
-
     left: 50%;
-    top: 49%;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(-3deg);
-
+    top: 50%;
+    transform: translate(-50%,-50%) rotate(-3deg);
     font-family: "Baloo 2", sans-serif;
-
     font-weight: 800;
-
-    font-size: 43px;
-
+    font-size: 42px;
     letter-spacing: -2px;
-
     color: white;
-
     text-shadow:
         2px 3px 0 rgba(80,40,80,.22),
         -1px -1px 0 rgba(255,255,255,.45);
-
     z-index: 30;
-
     pointer-events: none;
-
     white-space: nowrap;
-
     opacity: .94;
+    transition: opacity .2s;
 }
 
 .logo-hidden {
@@ -650,107 +610,192 @@ header p {
 }
 
 /* ============================================================
-   DECORATIONS
+   STICKERS / DECORATIONS
 ============================================================ */
 
 .sticker {
     position: absolute;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    filter:
-        drop-shadow(2px 3px 2px rgba(0,0,0,.16));
-
-    animation:
-        stickerFloat 3s ease-in-out infinite;
-
+    filter: drop-shadow(2px 4px 3px rgba(0,0,0,.18));
+    animation: stickerFloat 3.2s ease-in-out infinite;
     will-change: transform;
 }
 
 @keyframes stickerFloat {
-
-    0%,100% {
-        transform: translateY(0) rotate(-4deg);
-    }
-
-    50% {
-        transform: translateY(-5px) rotate(4deg);
-    }
-
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-6px) rotate(4deg); }
 }
 
 /* ============================================================
-   GLOW
+   GLOW AROUND SQUISHY
 ============================================================ */
 
 .glow {
     position: absolute;
-
-    inset: 0;
-
-    border-radius: 80px;
-
+    inset: -15px;
+    border-radius: 90px;
     z-index: -1;
-
     opacity: 0;
-
-    filter: blur(38px);
-
-    transition: opacity .3s;
+    filter: blur(42px);
+    transition: opacity .3s, background .3s;
 }
 
 .glow.on {
-    opacity: .72;
+    opacity: .75;
 }
 
 /* ============================================================
-   TEXTURES
+   TEXTURE ENGINE (Realistic, Distinct & Tactile!)
 ============================================================ */
 
+/* 1. SUPER SOFT (Standard Smooth Silicone) */
 .texture-soft {
     filter: saturate(1.05);
 }
 
+/* 2. GLOSSY (Wet Look, High Specular Glare & Shimmer) */
 .texture-glossy {
-    filter:
-        saturate(1.16)
-        contrast(1.04);
+    filter: saturate(1.18) contrast(1.08);
+}
+.texture-glossy::before {
+    opacity: .92 !important;
+    filter: blur(3px) !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.4) 75%, transparent 100%) !important;
+}
+.texture-glossy .texture-layer {
+    opacity: .65;
+    background:
+        radial-gradient(ellipse at 75% 82%, rgba(255,255,255,0.45) 0%, transparent 40%),
+        linear-gradient(to top, rgba(255,255,255,0.3) 0%, transparent 35%);
 }
 
+/* 3. MATTE (Powdered Velvet Silicone, Zero Glare) */
 .texture-matte {
-    filter:
-        saturate(.88)
-        brightness(.99);
+    filter: saturate(.92) brightness(.98);
+}
+.texture-matte::before {
+    opacity: 0 !important; /* Eliminate glossy specular glare completely */
+}
+.texture-matte::after {
+    background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 50%, rgba(0,0,0,.22)) !important;
+}
+.texture-matte .texture-layer {
+    opacity: .45;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)' opacity='0.16'/%3E%3C/svg%3E");
 }
 
+/* 4. PEARL (Iridescent Shifting Opal Luster) */
 .texture-pearl {
-    filter:
-        saturate(1.15)
-        brightness(1.05);
+    filter: saturate(1.12) brightness(1.04);
+}
+.texture-pearl .texture-layer {
+    opacity: .85;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 180, 220, 0.45) 0%,
+        rgba(180, 230, 255, 0.45) 28%,
+        rgba(255, 255, 190, 0.48) 55%,
+        rgba(225, 190, 255, 0.48) 78%,
+        rgba(255, 210, 230, 0.45) 100%
+    );
+    mix-blend-mode: color-dodge;
+}
+.texture-pearl::before {
+    opacity: .55 !important;
+    filter: blur(6px) !important;
 }
 
+/* 5. FUZZY (Authentic Flocked / Velveteen / Peach Fuzz!) */
 .texture-fuzzy {
-    filter:
-        saturate(.9)
-        contrast(.94);
+    filter: saturate(.96) contrast(.96);
+}
+.texture-fuzzy::before {
+    /* Diffuse the glare spot into a soft suede highlight */
+    opacity: .18 !important;
+    filter: blur(16px) !important;
+    transform: scale(1.4) rotate(-12deg) !important;
+}
+.texture-fuzzy::after {
+    /* Flocked rim-light fiber aura */
+    background: radial-gradient(circle at 50% 50%, transparent 62%, rgba(255,255,255,.45) 100%) !important;
+    opacity: .88 !important;
+}
+.texture-fuzzy .texture-layer {
+    opacity: .9;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='fuzz'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 1  0 1 0 0 1  0 0 1 0 1  0 0 0 0.52 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fuzz)'/%3E%3C/svg%3E"),
+        radial-gradient(circle, rgba(255,255,255,0.42) 1px, transparent 1px);
+    background-size: 130px 130px, 4px 4px;
+    mix-blend-mode: soft-light;
+}
+.texture-fuzzy {
+    /* Tactile fuzzy fiber outline */
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,0.38),
+        0 0 16px rgba(255,255,255,0.48),
+        inset -18px -18px 38px rgba(0,0,0,.15),
+        inset 16px 16px 30px rgba(255,255,255,.42) !important;
 }
 
+/* 6. FROSTED (Sugar Coated / Icy Sea Glass) */
 .texture-frosted {
-    filter:
-        brightness(1.08)
-        saturate(.82);
+    filter: brightness(1.06) saturate(.85);
+}
+.texture-frosted::before {
+    opacity: .4 !important;
+    filter: blur(12px) !important;
+}
+.texture-frosted .texture-layer {
+    opacity: .8;
+    background:
+        radial-gradient(circle, rgba(255,255,255,.85) 1px, transparent 1.6px),
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.38) 0%, transparent 65%);
+    background-size: 7px 7px, 100% 100%;
 }
 
+/* 7. METALLIC (Liquid Chrome & Mirror Reflection Bands) */
 .texture-metallic {
-    filter:
-        contrast(1.2)
-        saturate(1.18);
+    filter: contrast(1.22) saturate(1.2);
+}
+.texture-metallic::before {
+    opacity: .95 !important;
+    filter: blur(1.5px) !important;
+}
+.texture-metallic .texture-layer {
+    opacity: .85;
+    background: linear-gradient(
+        125deg,
+        transparent 15%,
+        rgba(255,255,255,0.78) 26%,
+        transparent 36%,
+        rgba(255,255,255,0.95) 49%,
+        rgba(255,255,255,0.2) 53%,
+        transparent 62%,
+        rgba(0,0,0,0.32) 74%,
+        transparent 88%
+    );
+    mix-blend-mode: overlay;
+}
+
+/* 8. GUMMY / JELLY (Translucent Nice Cube Candy Gel) */
+.texture-gummy {
+    filter: saturate(1.25) brightness(1.05);
+}
+.texture-gummy::before {
+    opacity: .75 !important;
+    filter: blur(4px) !important;
+}
+.texture-gummy .texture-layer {
+    opacity: .8;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.45) 0%, transparent 72%),
+        radial-gradient(circle at 35% 35%, rgba(255,255,255,0.65) 0%, transparent 35%);
 }
 
 /* ============================================================
-   SQUISH ANIMATION
+   SQUISH ANIMATION & FEEL
 ============================================================ */
 
 .cube.squishing {
@@ -758,68 +803,33 @@ header p {
         rotateX(-8deg)
         rotateY(-12deg)
         rotateZ(-2deg)
-        scale(.84,.97,1.05);
+        scale(1.16, 0.82) !important;
+    transition: transform .08s ease-out;
 }
 
 .cube.bouncy {
-    animation: bounceCube .55s ease;
+    animation: bounceCube .58s cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes bounceCube {
-
-    0% {
-        transform:
-            rotateX(-8deg)
-            rotateY(-12deg)
-            rotateZ(-2deg)
-            scale(1);
-    }
-
-    35% {
-        transform:
-            rotateX(-8deg)
-            rotateY(-12deg)
-            rotateZ(-2deg)
-            scale(.88,1.08,.94);
-    }
-
-    65% {
-        transform:
-            rotateX(-8deg)
-            rotateY(-12deg)
-            rotateZ(-2deg)
-            scale(1.04,.96,1.02);
-    }
-
-    100% {
-        transform:
-            rotateX(-8deg)
-            rotateY(-12deg)
-            rotateZ(-2deg)
-            scale(1);
-    }
+    0% { transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg) scale(1); }
+    30% { transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg) scale(0.86, 1.15); }
+    55% { transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg) scale(1.08, 0.94); }
+    80% { transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg) scale(0.98, 1.02); }
+    100% { transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg) scale(1); }
 }
 
-/* ============================================================
-   SQUISH MESSAGE
-============================================================ */
-
+/* Squish Message Pop */
 .squish-text {
     position: absolute;
-
-    bottom: 10px;
-
+    bottom: 8px;
     font-size: 28px;
-
     font-weight: 800;
-
     color: var(--pink);
-
     opacity: 0;
-
     pointer-events: none;
-
     z-index: 50;
+    text-shadow: 2px 2px 0 white;
 }
 
 .squish-text.show {
@@ -827,70 +837,41 @@ header p {
 }
 
 @keyframes squishPop {
-
-    0% {
-        opacity: 0;
-        transform: scale(.5) translateY(20px);
-    }
-
-    35% {
-        opacity: 1;
-        transform: scale(1.15) translateY(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(1) translateY(-10px);
-    }
+    0% { opacity: 0; transform: scale(.5) translateY(20px); }
+    35% { opacity: 1; transform: scale(1.15) translateY(0); }
+    100% { opacity: 0; transform: scale(1) translateY(-10px); }
 }
 
 /* ============================================================
-   PREVIEW BUTTONS
+   PREVIEW CONTROLS & BUTTONS
 ============================================================ */
 
 .preview-buttons {
     display: flex;
-
     flex-wrap: wrap;
-
     justify-content: center;
-
     gap: 9px;
-
     width: 100%;
 }
 
 .big-button {
     border: 0;
-
     border-radius: 17px;
-
     padding: 13px 18px;
-
     font-family: inherit;
-
-    font-size: 16px;
-
+    font-size: 15px;
     font-weight: 800;
-
     cursor: pointer;
-
     background: white;
-
     color: var(--dark);
-
-    box-shadow:
-        0 7px 16px rgba(0,0,0,.1);
-
-    transition:
-        transform .16s ease,
-        box-shadow .16s ease;
-
+    box-shadow: 0 7px 16px rgba(0,0,0,.1);
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
     touch-action: manipulation;
 }
 
 .big-button:hover {
     transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.14);
 }
 
 .big-button:active {
@@ -898,36 +879,23 @@ header p {
 }
 
 .random-button {
-    background:
-        linear-gradient(
-            135deg,
-            #ff5fa2,
-            #9d6cff
-        );
-
+    background: linear-gradient(135deg, #ff5fa2, #9d6cff);
     color: white;
 }
 
 .save-button {
-    background:
-        linear-gradient(
-            135deg,
-            #65e6a5,
-            #43c7b4
-        );
-
-    color: #183d39;
+    background: linear-gradient(135deg, #65e6a5, #43c7b4);
+    color: #163e39;
 }
 
 .share-button {
-    background:
-        linear-gradient(
-            135deg,
-            #62cfff,
-            #738cff
-        );
-
+    background: linear-gradient(135deg, #62cfff, #738cff);
     color: white;
+}
+
+.sound-button {
+    background: #fff0f8;
+    color: var(--pink-dark);
 }
 
 /* ============================================================
@@ -936,19 +904,12 @@ header p {
 
 .info-card {
     width: min(500px, 95%);
-
-    background: rgba(255,255,255,.68);
-
-    border-radius: 18px;
-
-    padding: 13px;
-
-    margin-top: 13px;
-
+    background: rgba(255,255,255,.75);
+    border-radius: 20px;
+    padding: 14px;
+    margin-top: 14px;
     text-align: center;
-
-    box-shadow:
-        inset 0 1px 0 white;
+    box-shadow: inset 0 1px 0 white, 0 6px 16px rgba(80,50,100,.06);
 }
 
 .info-card strong {
@@ -957,12 +918,14 @@ header p {
 }
 
 .info-details {
-    margin-top: 4px;
+    margin-top: 5px;
     font-size: 14px;
+    font-weight: 600;
+    color: #4b3e58;
 }
 
 /* ============================================================
-   SLIDERS
+   SLIDERS & SETTINGS
 ============================================================ */
 
 .slider-row {
@@ -972,69 +935,53 @@ header p {
 .slider-label {
     display: flex;
     justify-content: space-between;
-
     font-weight: 700;
-
     margin-bottom: 6px;
+    font-size: 14px;
 }
 
 .slider-value {
     color: var(--pink);
+    font-weight: 800;
 }
 
 input[type="range"] {
     width: 100%;
-
-    height: 28px;
-
+    height: 26px;
     accent-color: var(--pink);
-
     cursor: pointer;
 }
 
 /* ============================================================
-   THEMES
+   THEMES & LOGO
 ============================================================ */
 
 .themes {
     display: grid;
-
-    grid-template-columns: repeat(2,1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
 }
 
 .theme-button {
     border: 0;
-
     padding: 11px 6px;
-
     border-radius: 14px;
-
     background: white;
-
     font-family: inherit;
-
     font-weight: 800;
-
     cursor: pointer;
-
-    transition: transform .15s ease;
-
+    transition: transform .15s ease, box-shadow .15s ease;
     touch-action: manipulation;
 }
 
 .theme-button:hover {
     transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,.08);
 }
 
 .theme-button:active {
     transform: scale(.95);
 }
-
-/* ============================================================
-   LOGO SWITCH
-============================================================ */
 
 .logo-control {
     display: flex;
@@ -1043,21 +990,14 @@ input[type="range"] {
 
 .logo-button {
     flex: 1;
-
     border: 0;
-
-    border-radius: 13px;
-
-    padding: 11px;
-
+    border-radius: 14px;
+    padding: 12px;
     font-family: inherit;
-
     font-weight: 800;
-
     cursor: pointer;
-
     background: white;
-
+    transition: background .16s, color .16s;
     touch-action: manipulation;
 }
 
@@ -1066,209 +1006,90 @@ input[type="range"] {
     color: white;
 }
 
-/* ============================================================
-   DECORATION COUNTER
-============================================================ */
-
 .decoration-counter {
     display: inline-flex;
-
     align-items: center;
-
     margin-left: auto;
-
     padding: 3px 8px;
-
     border-radius: 20px;
-
     background: #fff0f8;
-
     color: var(--pink);
-
     font-size: 12px;
 }
 
 /* ============================================================
-   SAVE MESSAGE
+   TOAST NOTIFICATION
 ============================================================ */
 
 .toast {
     position: fixed;
-
     left: 50%;
     bottom: 25px;
-
-    transform:
-        translate(-50%, 100px);
-
+    transform: translate(-50%, 100px);
     background: var(--dark);
-
     color: white;
-
-    padding: 12px 18px;
-
-    border-radius: 16px;
-
+    padding: 12px 22px;
+    border-radius: 18px;
     font-weight: 700;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.2);
-
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
     z-index: 9999;
-
     opacity: 0;
-
-    transition:
-        transform .3s ease,
-        opacity .3s ease;
-
+    transition: transform .3s ease, opacity .3s ease;
     pointer-events: none;
 }
 
 .toast.show {
-    transform:
-        translate(-50%, 0);
-
+    transform: translate(-50%, 0);
     opacity: 1;
 }
 
-/* ============================================================
-   FOOTER
-============================================================ */
-
 footer {
     text-align: center;
-
     padding: 25px 15px 35px;
-
-    font-size: 13px;
-
+    font-size: 14px;
     font-weight: 600;
-
-    opacity: .7;
+    opacity: .75;
 }
 
 /* ============================================================
    RESPONSIVE
 ============================================================ */
 
-@media(max-width:1200px) {
-
+@media(max-width: 1200px) {
     .workspace {
-        grid-template-columns:
-            300px
-            minmax(360px,1fr)
-            300px;
+        grid-template-columns: 310px minmax(360px,1fr) 310px;
     }
-
 }
 
-@media(max-width:1000px) {
-
+@media(max-width: 1000px) {
     .workspace {
         grid-template-columns: 1fr 1fr;
     }
-
     .preview-panel {
         grid-column: 1 / -1;
         grid-row: 1;
     }
-
 }
 
-@media(max-width:720px) {
-
-    header {
-        padding-top: 18px;
-    }
-
-    .logo-badge {
-        width: 52px;
-        height: 52px;
-        font-size: 23px;
-    }
-
-    .workspace {
-        width: 94%;
-        grid-template-columns: 1fr;
-    }
-
-    .preview-panel {
-        grid-column: auto;
-        grid-row: auto;
-        order: -1;
-        min-height: auto;
-    }
-
-    .panel {
-        padding: 16px;
-        border-radius: 24px;
-    }
-
-    .preview-stage {
-        min-height: 390px;
-    }
-
-    .cube-wrap {
-        width: 300px;
-        height: 300px;
-    }
-
-    .cube {
-        width: 250px;
-        height: 250px;
-    }
-
-    .printed-logo {
-        font-size: 34px;
-    }
-
-    .big-button {
-        padding: 12px 14px;
-        font-size: 14px;
-    }
-
-    .options {
-        grid-template-columns: repeat(3,1fr);
-    }
-
+@media(max-width: 720px) {
+    header { padding-top: 18px; }
+    .logo-badge { width: 52px; height: 52px; font-size: 24px; }
+    .workspace { width: 94%; grid-template-columns: 1fr; }
+    .preview-panel { grid-column: auto; grid-row: auto; min-height: auto; }
+    .panel { padding: 16px; border-radius: 24px; }
+    .preview-stage { min-height: 400px; }
+    .cube-wrap { width: 310px; height: 310px; }
+    .cube { width: 250px; height: 250px; }
+    .printed-logo { font-size: 34px; }
+    .big-button { padding: 12px 14px; font-size: 14px; }
+    .options { grid-template-columns: repeat(3, 1fr); }
 }
 
-@media(max-width:430px) {
-
-    .options {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .colours {
-        grid-template-columns: repeat(5,1fr);
-    }
-
-    .preview-buttons {
-        gap: 7px;
-    }
-
-    .big-button {
-        flex: 1 1 42%;
-    }
-
-}
-
-/* ============================================================
-   REDUCED MOTION
-============================================================ */
-
-@media(prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-    }
-
+@media(max-width: 430px) {
+    .options { grid-template-columns: repeat(2, 1fr); }
+    .colours { grid-template-columns: repeat(5, 1fr); }
+    .preview-buttons { gap: 7px; }
+    .big-button { flex: 1 1 42%; }
 }
 
 </style>
@@ -1276,142 +1097,133 @@ footer {
 
 <body>
 
-<!-- ============================================================
-     BACKGROUND
-============================================================ -->
+<!-- Hidden SVG Clip-Paths for Complex NeeDoh Silhouettes -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none">
+  <defs>
+    <!-- Heart Glob Shape -->
+    <clipPath id="clip-heart" clipPathUnits="objectBoundingBox">
+      <path d="M 0.5,0.24 C 0.43,0.06 0.28,0.02 0.16,0.08 C 0.02,0.16 0,0.34 0.03,0.5 C 0.08,0.7 0.32,0.86 0.5,0.99 C 0.68,0.86 0.92,0.7 0.97,0.5 C 1.0,0.34 0.98,0.16 0.84,0.08 C 0.72,0.02 0.57,0.06 0.5,0.24 Z" />
+    </clipPath>
 
+    <!-- Super Star Shape -->
+    <clipPath id="clip-star" clipPathUnits="objectBoundingBox">
+      <path d="M 0.5 0.03 C 0.52 0.03 0.54 0.05 0.56 0.1 L 0.64 0.31 C 0.65 0.33 0.67 0.35 0.7 0.35 L 0.93 0.36 C 0.98 0.36 1.0 0.41 0.97 0.44 L 0.78 0.58 C 0.76 0.6 0.75 0.63 0.76 0.66 L 0.84 0.88 C 0.86 0.93 0.81 0.96 0.77 0.93 L 0.57 0.79 C 0.55 0.77 0.52 0.77 0.5 0.79 L 0.3 0.93 C 0.26 0.96 0.22 0.93 0.24 0.88 L 0.32 0.66 C 0.33 0.63 0.32 0.6 0.3 0.58 L 0.11 0.44 C 0.07 0.41 0.09 0.36 0.14 0.36 L 0.37 0.35 C 0.4 0.35 0.42 0.33 0.43 0.31 L 0.51 0.1 C 0.53 0.05 0.55 0.03 0.57 0.03 Z" />
+    </clipPath>
+
+    <!-- Gummy Bear Shape -->
+    <clipPath id="clip-bear" clipPathUnits="objectBoundingBox">
+      <path d="M 0.25 0.02 C 0.34 0.02 0.38 0.11 0.37 0.18 C 0.41 0.17 0.45 0.16 0.5 0.16 C 0.55 0.16 0.59 0.17 0.63 0.18 C 0.62 0.11 0.66 0.02 0.75 0.02 C 0.85 0.02 0.91 0.13 0.87 0.23 C 0.95 0.31 0.98 0.43 0.94 0.54 C 0.97 0.63 0.98 0.73 0.95 0.82 C 0.91 0.93 0.79 0.99 0.67 0.99 L 0.33 0.99 C 0.21 0.99 0.09 0.93 0.05 0.82 C 0.02 0.73 0.03 0.63 0.06 0.54 C 0.02 0.43 0.05 0.31 0.13 0.23 C 0.09 0.13 0.15 0.02 0.25 0.02 Z" />
+    </clipPath>
+
+    <!-- Cool Cat Shape -->
+    <clipPath id="clip-cat" clipPathUnits="objectBoundingBox">
+      <path d="M 0.17 0.07 C 0.22 0.07 0.27 0.15 0.31 0.23 C 0.37 0.21 0.43 0.2 0.5 0.2 C 0.57 0.2 0.63 0.21 0.69 0.23 C 0.73 0.15 0.78 0.07 0.83 0.07 C 0.89 0.07 0.93 0.17 0.89 0.29 C 0.97 0.39 1 0.53 1 0.66 C 1 0.85 0.78 0.99 0.5 0.99 C 0.22 0.99 0 0.85 0 0.66 C 0 0.53 0.03 0.39 0.11 0.29 C 0.07 0.17 0.11 0.07 0.17 0.07 Z" />
+    </clipPath>
+
+    <!-- Groovy Shroom Shape -->
+    <clipPath id="clip-shroom" clipPathUnits="objectBoundingBox">
+      <path d="M 0.5 0.04 C 0.8 0.04 0.98 0.3 0.98 0.5 C 0.98 0.58 0.88 0.62 0.7 0.63 C 0.71 0.72 0.7 0.85 0.68 0.93 C 0.65 0.98 0.58 1 0.5 1 C 0.42 1 0.35 0.98 0.32 0.93 C 0.3 0.85 0.29 0.72 0.3 0.63 C 0.12 0.62 0.02 0.58 0.02 0.5 C 0.02 0.3 0.2 0.04 0.5 0.04 Z" />
+    </clipPath>
+  </defs>
+</svg>
+
+<!-- Background Bubbles -->
 <div class="bubble b1"></div>
 <div class="bubble b2"></div>
 <div class="bubble b3"></div>
 <div class="bubble b4"></div>
 <div class="bubble b5"></div>
 
-<!-- ============================================================
-     HEADER
-============================================================ -->
-
+<!-- Header -->
 <header>
-
     <div class="logo-title">
-
-        <div class="logo-badge">
-            🫧
-        </div>
-
-        <h1>Needoh!</h1>
-
+        <div class="logo-badge">🫧</div>
+        <h1>NeeDoh!</h1>
     </div>
-
-    <p>
-        ✨ DESIGN YOUR DREAM SQUISHY CUBE ✨
-    </p>
-
+    <p>✨ DESIGN YOUR DREAM SQUISHY ✨</p>
 </header>
 
-<!-- ============================================================
-     WORKSPACE
-============================================================ -->
-
+<!-- Workspace -->
 <div class="workspace">
 
 <!-- ============================================================
      LEFT PANEL
-============================================================ -->
-
+============================================================ */ -->
 <aside class="panel">
 
 <h2>🎨 Design Lab</h2>
 
-<!-- SHAPE -->
-
+<!-- NEEDOH SHAPES -->
 <div class="section">
-
-<div class="section-title">
-    📦 Cube Shape
-</div>
-
-<div class="options">
-
-<button class="option active" data-shape="classic">
-    <div class="swatch"
-         style="background:#ff8fc4;border-radius:24px">
+    <div class="section-title">✨ NeeDoh Shape</div>
+    <div class="options" id="shapeOptions">
+        <button class="option active" data-shape="cube">
+            <span class="shape-preview-icon">🧊</span>
+            <small>Nice Cube</small>
+        </button>
+        <button class="option" data-shape="ball">
+            <span class="shape-preview-icon">🫧</span>
+            <small>Classic Glob</small>
+        </button>
+        <button class="option" data-shape="bear">
+            <span class="shape-preview-icon">🧸</span>
+            <small>Gummy Bear</small>
+        </button>
+        <button class="option" data-shape="dohnut">
+            <span class="shape-preview-icon">🍩</span>
+            <small>Dohnut</small>
+        </button>
+        <button class="option" data-shape="heart">
+            <span class="shape-preview-icon">💖</span>
+            <small>Lovely Heart</small>
+        </button>
+        <button class="option" data-shape="star">
+            <span class="shape-preview-icon">⭐</span>
+            <small>Super Star</small>
+        </button>
+        <button class="option" data-shape="drop">
+            <span class="shape-preview-icon">💧</span>
+            <small>Dream Drop</small>
+        </button>
+        <button class="option" data-shape="cat">
+            <span class="shape-preview-icon">🐱</span>
+            <small>Cool Cat</small>
+        </button>
+        <button class="option" data-shape="shroom">
+            <span class="shape-preview-icon">🍄</span>
+            <small>Shroom</small>
+        </button>
+        <button class="option" data-shape="egg">
+            <span class="shape-preview-icon">🥚</span>
+            <small>Egg-stra</small>
+        </button>
+        <button class="option" data-shape="pill">
+            <span class="shape-preview-icon">💊</span>
+            <small>Puffy Pill</small>
+        </button>
+        <button class="option" data-shape="mini">
+            <span class="shape-preview-icon">🍬</span>
+            <small>Teenie Glob</small>
+        </button>
     </div>
-    Classic
-</button>
-
-<button class="option" data-shape="puffy">
-    <div class="swatch"
-         style="background:#ff8fc4;border-radius:35px">
-    </div>
-    Puffy
-</button>
-
-<button class="option" data-shape="mini">
-    <div class="swatch"
-         style="background:#ff8fc4;border-radius:18px">
-    </div>
-    Mini
-</button>
-
-<button class="option" data-shape="soft">
-    <div class="swatch"
-         style="background:#ff8fc4;border-radius:55px">
-    </div>
-    Super Soft
-</button>
-
-<button class="option" data-shape="wide">
-    <div class="swatch"
-         style="background:#ff8fc4;border-radius:24px">
-    </div>
-    Wide
-</button>
-
-<button class="option" data-shape="tall">
-    <div class="swatch"
-         style="background:#ff8fc4;border-radius:24px">
-    </div>
-    Tall
-</button>
-
-</div>
-
 </div>
 
 <!-- MAIN COLOUR -->
-
 <div class="section">
-
-<div class="section-title">
-    🌈 Main Colour
-</div>
-
-<div class="colours" id="mainColours"></div>
-
+    <div class="section-title">🌈 Main Colour</div>
+    <div class="colours" id="mainColours"></div>
 </div>
 
 <!-- PATTERN COLOUR -->
-
 <div class="section">
-
-<div class="section-title">
-    🎨 Pattern Colour
-</div>
-
-<div class="colours" id="secondaryColours"></div>
-
+    <div class="section-title">🎨 Pattern Colour</div>
+    <div class="colours" id="secondaryColours"></div>
 </div>
 
 <!-- PATTERNS -->
-
 <div class="section">
-
-<div class="section-title">
-    🌀 HUGE Pattern Collection
-</div>
-
-<div class="options" id="patterns"></div>
-
+    <div class="section-title">🌀 Pattern Collection</div>
+    <div class="options" id="patterns"></div>
 </div>
 
 </aside>
@@ -1419,7 +1231,6 @@ footer {
 <!-- ============================================================
      CENTRE PREVIEW
 ============================================================ -->
-
 <main class="panel preview-panel">
 
 <h2>✨ Your Squishy</h2>
@@ -1435,120 +1246,58 @@ footer {
 
 <div class="preview-stage">
 
-<div class="cube-wrap">
+<div class="cube-wrap" id="cubeWrap">
 
-<div id="glow" class="glow"></div>
+    <div id="glow" class="glow"></div>
 
-<div
-    id="cube"
-    class="cube texture-soft"
-    role="button"
-    tabindex="0"
-    aria-label="Squishy cube preview"
->
+    <div
+        id="cube"
+        class="cube texture-soft"
+        role="button"
+        tabindex="0"
+        aria-label="Squishy preview"
+    >
+        <!-- Center Hole for Dohnut Shape -->
+        <div id="donutHole" class="donut-hole"></div>
 
-<div id="patternLayer"
-     class="pattern-layer">
-</div>
+        <!-- Pattern Overlay -->
+        <div id="patternLayer" class="pattern-layer"></div>
 
-<div id="decorationsLayer"
-     class="decorations-layer">
-</div>
+        <!-- Texture Tactile Filter Layer -->
+        <div id="textureLayer" class="texture-layer"></div>
 
-<div id="glitter"
-     class="glitter">
-</div>
+        <!-- Stickers / Decorations -->
+        <div id="decorationsLayer" class="decorations-layer"></div>
 
-<div
-    id="printedLogo"
-    class="printed-logo"
->
-    NEEDOH!
-</div>
+        <!-- Shimmering Glitter -->
+        <div id="glitter" class="glitter"></div>
 
-</div>
+        <!-- Printed NeeDoh Logo -->
+        <div id="printedLogo" class="printed-logo">NEEDOH!</div>
+    </div>
 
 </div>
 
-<div
-    id="squishText"
-    class="squish-text"
->
-    SO SQUISHY! 🫧
-</div>
+<div id="squishText" class="squish-text">SO SQUISHY! 🫧</div>
 
 </div>
 
 <div class="preview-buttons">
-
-<button
-    class="big-button random-button"
-    id="randomButton"
->
-    🎲 Surprise Me!
-</button>
-
-<button
-    class="big-button"
-    id="spinButton"
->
-    🔄 Spin Me
-</button>
-
-<button
-    class="big-button"
-    id="squeezeButton"
->
-    🫧 SQUEEZE!
-</button>
-
-<button
-    class="big-button save-button"
-    id="saveButton"
->
-    💾 Save Design
-</button>
-
-<button
-    class="big-button share-button"
-    id="shareButton"
->
-    📤 Share
-</button>
-
-<button
-    class="big-button"
-    id="resetButton"
->
-    ↩️ Reset
-</button>
-
+    <button class="big-button random-button" id="randomButton">🎲 Surprise Me!</button>
+    <button class="big-button" id="spinButton">🔄 Spin Me</button>
+    <button class="big-button" id="squeezeButton">🫧 SQUEEZE!</button>
+    <button class="big-button sound-button" id="soundButton">🔊 Sound: On</button>
+    <button class="big-button save-button" id="saveButton">💾 Save Design</button>
+    <button class="big-button share-button" id="shareButton">📤 Share</button>
+    <button class="big-button" id="resetButton">↩️ Reset</button>
 </div>
 
 <div class="info-card">
-
-<div>
-    <strong id="infoName">
-        My Needoh
-    </strong>
-</div>
-
-<div
-    id="infoDetails"
-    class="info-details"
->
-    Bubblegum Pink • Plain • Super Soft
-</div>
-
-<div
-    style="
-        margin-top:7px;
-        font-size:12px;
-    "
->
-    ✨ Your design is automatically saved!
-</div>
-
+    <div><strong id="infoName">My NeeDoh</strong></div>
+    <div id="infoDetails" class="info-details">Bubblegum Pink • Plain • Super Soft • Nice Cube</div>
+    <div style="margin-top:7px; font-size:12px; color:#78668a;">
+        ✨ Tip: Tap, click or press space on the squishy to squish it! Double-tap to spin!
+    </div>
 </div>
 
 </main>
@@ -1556,339 +1305,137 @@ footer {
 <!-- ============================================================
      RIGHT PANEL
 ============================================================ -->
-
 <aside class="panel">
 
 <h2>✨ Finishing Touches</h2>
 
 <!-- TEXTURE -->
-
 <div class="section">
-
-<div class="section-title">
-    🫧 Texture
+    <div class="section-title">🫧 Texture Feel</div>
+    <div class="options">
+        <button class="option active" data-texture="soft">
+            <span>🫧</span>
+            <small>Super Soft</small>
+        </button>
+        <button class="option" data-texture="fuzzy">
+            <span>☁️</span>
+            <small>Fuzzy / Velvet</small>
+        </button>
+        <button class="option" data-texture="glossy">
+            <span>💎</span>
+            <small>Glossy</small>
+        </button>
+        <button class="option" data-texture="matte">
+            <span>🌸</span>
+            <small>Powder Matte</small>
+        </button>
+        <button class="option" data-texture="pearl">
+            <span>🦪</span>
+            <small>Pearl Shimmer</small>
+        </button>
+        <button class="option" data-texture="frosted">
+            <span>❄️</span>
+            <small>Frosted Sugar</small>
+        </button>
+        <button class="option" data-texture="metallic">
+            <span>🪩</span>
+            <small>Liquid Chrome</small>
+        </button>
+        <button class="option" data-texture="gummy">
+            <span>🍬</span>
+            <small>Gummy Jelly</small>
+        </button>
+    </div>
 </div>
 
-<div class="options">
-
-<button class="option active" data-texture="soft">
-    🫧
-    <small>Super Soft</small>
-</button>
-
-<button class="option" data-texture="glossy">
-    💎
-    <small>Glossy</small>
-</button>
-
-<button class="option" data-texture="matte">
-    🌸
-    <small>Matte</small>
-</button>
-
-<button class="option" data-texture="pearl">
-    🦪
-    <small>Pearl</small>
-</button>
-
-<button class="option" data-texture="fuzzy">
-    ☁️
-    <small>Fuzzy</small>
-</button>
-
-<button class="option" data-texture="frosted">
-    ❄️
-    <small>Frosted</small>
-</button>
-
-<button class="option" data-texture="metallic">
-    🪩
-    <small>Metallic</small>
-</button>
-
-</div>
-
-</div>
-
-<!-- EFFECTS -->
-
+<!-- SPECIAL EFFECTS -->
 <div class="section">
-
-<div class="section-title">
-    ✨ Special Effects
-</div>
-
-<div class="options">
-
-<button
-    class="option"
-    id="glitterButton"
->
-    ✨
-    <small>Glitter</small>
-</button>
-
-<button
-    class="option"
-    id="glowButton"
->
-    💡
-    <small>Glow</small>
-</button>
-
-<button
-    class="option"
-    id="rainbowButton"
->
-    🌈
-    <small>Rainbow Shine</small>
-</button>
-
-<button
-    class="option"
-    id="sparkleButton"
->
-    💫
-    <small>Sparkles</small>
-</button>
-
-</div>
-
+    <div class="section-title">✨ Special Effects</div>
+    <div class="options">
+        <button class="option" id="glitterButton">
+            <span>✨</span>
+            <small>Glitter</small>
+        </button>
+        <button class="option" id="glowButton">
+            <span>💡</span>
+            <small>Glow</small>
+        </button>
+        <button class="option" id="rainbowButton">
+            <span>🌈</span>
+            <small>Rainbow Shine</small>
+        </button>
+        <button class="option" id="sparkleButton">
+            <span>💫</span>
+            <small>Sparkles</small>
+        </button>
+    </div>
 </div>
 
 <!-- LOGO -->
-
 <div class="section">
-
-<div class="section-title">
-    🏷️ Printed Logo
-</div>
-
-<div class="logo-control">
-
-<button
-    class="logo-button active"
-    data-logo="on"
->
-    NEEDOH!
-</button>
-
-<button
-    class="logo-button"
-    data-logo="off"
->
-    No Logo
-</button>
-
-</div>
-
+    <div class="section-title">🏷️ Printed Logo</div>
+    <div class="logo-control">
+        <button class="logo-button active" data-logo="on">NEEDOH!</button>
+        <button class="logo-button" data-logo="off">No Logo</button>
+    </div>
 </div>
 
 <!-- DECORATIONS -->
-
 <div class="section">
-
-<div class="section-title">
-
-    🎀 Decorations
-
-    <span
-        class="decoration-counter"
-        id="decorationCounter"
-    >
-        0 selected
-    </span>
-
-</div>
-
-<p
-    style="
-        font-size:12px;
-        margin-top:-4px;
-    "
->
-    Choose as many as you like!
-</p>
-
-<div
-    class="options"
-    id="decorations"
-></div>
-
+    <div class="section-title">
+        🎀 Decorations
+        <span class="decoration-counter" id="decorationCounter">0 selected</span>
+    </div>
+    <p style="font-size:12px; margin-top:-4px; color:#78668a;">Tap to place charms on your squishy!</p>
+    <div class="options" id="decorations"></div>
 </div>
 
 <!-- THEMES -->
-
 <div class="section">
-
-<div class="section-title">
-    🌟 Quick Themes
-</div>
-
-<div class="themes">
-
-<button
-    class="theme-button"
-    data-theme="candy"
->
-    🍭 Candy
-</button>
-
-<button
-    class="theme-button"
-    data-theme="galaxy"
->
-    🌌 Galaxy
-</button>
-
-<button
-    class="theme-button"
-    data-theme="rainbow"
->
-    🌈 Rainbow
-</button>
-
-<button
-    class="theme-button"
-    data-theme="ocean"
->
-    🌊 Ocean
-</button>
-
-<button
-    class="theme-button"
-    data-theme="strawberry"
->
-    🍓 Strawberry
-</button>
-
-<button
-    class="theme-button"
-    data-theme="sunset"
->
-    🌅 Sunset
-</button>
-
-<button
-    class="theme-button"
-    data-theme="jungle"
->
-    🌴 Jungle
-</button>
-
-<button
-    class="theme-button"
-    data-theme="icecream"
->
-    🍦 Ice Cream
-</button>
-
-<button
-    class="theme-button"
-    data-theme="neon"
->
-    💥 Neon
-</button>
-
-<button
-    class="theme-button"
-    data-theme="space"
->
-    🚀 Space
-</button>
-
-<button
-    class="theme-button"
-    data-theme="fairy"
->
-    🧚 Fairy
-</button>
-
-<button
-    class="theme-button"
-    data-theme="sunshine"
->
-    ☀️ Sunshine
-</button>
-
-</div>
-
+    <div class="section-title">🌟 Quick Themes</div>
+    <div class="themes">
+        <button class="theme-button" data-theme="candy">🍭 Candy</button>
+        <button class="theme-button" data-theme="galaxy">🌌 Galaxy</button>
+        <button class="theme-button" data-theme="rainbow">🌈 Rainbow</button>
+        <button class="theme-button" data-theme="ocean">🌊 Ocean</button>
+        <button class="theme-button" data-theme="strawberry">🍓 Strawberry</button>
+        <button class="theme-button" data-theme="sunset">🌅 Sunset</button>
+        <button class="theme-button" data-theme="jungle">🌴 Jungle</button>
+        <button class="theme-button" data-theme="icecream">🍦 Ice Cream</button>
+        <button class="theme-button" data-theme="neon">💥 Neon</button>
+        <button class="theme-button" data-theme="space">🚀 Space</button>
+        <button class="theme-button" data-theme="fairy">🧚 Fairy</button>
+        <button class="theme-button" data-theme="sunshine">☀️ Sunshine</button>
+    </div>
 </div>
 
 <!-- SQUISH SETTINGS -->
-
 <div class="section">
+    <div class="section-title">🫧 Squishy Physics</div>
 
-<div class="section-title">
-    🫧 Squishy Settings
-</div>
+    <div class="slider-row">
+        <div class="slider-label">
+            <span>Softness</span>
+            <span class="slider-value" id="softnessValue">75%</span>
+        </div>
+        <input id="softness" type="range" min="20" max="100" value="75">
+    </div>
 
-<div class="slider-row">
+    <div class="slider-row">
+        <div class="slider-label">
+            <span>Wobble</span>
+            <span class="slider-value" id="wobbleValue">50%</span>
+        </div>
+        <input id="wobble" type="range" min="0" max="100" value="50">
+    </div>
 
-<div class="slider-label">
-    <span>Softness</span>
-    <span
-        class="slider-value"
-        id="softnessValue"
-    >
-        75%
-    </span>
-</div>
-
-<input
-    id="softness"
-    type="range"
-    min="20"
-    max="100"
-    value="75"
->
-
-</div>
-
-<div class="slider-row">
-
-<div class="slider-label">
-    <span>Wobble</span>
-    <span
-        class="slider-value"
-        id="wobbleValue"
-    >
-        50%
-    </span>
-</div>
-
-<input
-    id="wobble"
-    type="range"
-    min="0"
-    max="100"
-    value="50"
->
-
-</div>
-
-<div class="slider-row">
-
-<div class="slider-label">
-    <span>Bounciness</span>
-    <span
-        class="slider-value"
-        id="bounceValue"
-    >
-        60%
-    </span>
-</div>
-
-<input
-    id="bounce"
-    type="range"
-    min="0"
-    max="100"
-    value="60"
->
-
-</div>
-
+    <div class="slider-row">
+        <div class="slider-label">
+            <span>Bounciness</span>
+            <span class="slider-value" id="bounceValue">60%</span>
+        </div>
+        <input id="bounce" type="range" min="0" max="100" value="60">
+    </div>
 </div>
 
 </aside>
@@ -1896,28 +1443,20 @@ footer {
 </div>
 
 <footer>
-    🫧 Needoh Designer • Make it squishy • Make it colourful • Make it yours! ✨
+    🫧 NeeDoh Squishy Designer • Made with squishy love! ✨
 </footer>
 
-<div
-    id="toast"
-    class="toast"
->
-    Design saved! 💖
-</div>
+<div id="toast" class="toast">Design saved! 💖</div>
 
 <script>
-
 /* ============================================================
    NEEDOH DESIGNER JAVASCRIPT
 ============================================================ */
 
 /* ============================================================
-   COLOURS
+   COLOURS DATA
 ============================================================ */
-
 const mainColours = [
-
     ["Bubblegum Pink","#ff72b6"],
     ["Cotton Candy","#ffb7d8"],
     ["Hot Pink","#ff3f91"],
@@ -1959,11 +1498,9 @@ const mainColours = [
     ["Ice Blue","#c4f1ff"],
     ["Vanilla","#fff2ce"],
     ["Mocha","#a8755d"]
-
 ];
 
 const secondaryColours = [
-
     ["White","#ffffff"],
     ["Black","#2f2839"],
     ["Pink","#ff5fa2"],
@@ -1982,19 +1519,13 @@ const secondaryColours = [
     ["Silver","#cfd4df"],
     ["Cream","#fff0c2"],
 
-    [
-        "Rainbow",
-        "linear-gradient(90deg,#ff5c91,#ffbd4a,#ffe95c,#64e49a,#56c9ff,#a975ff)"
-    ]
-
+    ["Rainbow","linear-gradient(90deg,#ff5c91,#ffbd4a,#ffe95c,#64e49a,#56c9ff,#a975ff)"]
 ];
 
 /* ============================================================
-   PATTERNS
+   PATTERNS DATA
 ============================================================ */
-
 const patterns = [
-
     ["plain","⬜","Plain"],
     ["stripes","▥","Candy Stripes"],
     ["thinstripes","▤","Thin Stripes"],
@@ -2066,146 +1597,59 @@ const patterns = [
     ["bubbleSwirl","🫧","Bubble Swirl"],
     ["rainbowRings","🌈","Rainbow Rings"],
     ["sparkleGrid","✨","Sparkle Grid"]
-
 ];
 
 /* ============================================================
-   DECORATIONS
+   DECORATIONS DATA
 ============================================================ */
-
 const decorationData = [
-
-    ["⭐","Stars"],
-    ["✨","Sparkles"],
-    ["💫","Starbursts"],
-    ["🌟","Big Stars"],
-    ["🌠","Shooting Stars"],
-
-    ["💕","Hearts"],
-    ["💖","Pink Hearts"],
-    ["💜","Purple Hearts"],
-    ["💙","Blue Hearts"],
-    ["💛","Yellow Hearts"],
-
-    ["🌈","Rainbow"],
-    ["☁️","Clouds"],
-    ["🌸","Flowers"],
-    ["🌺","Tropical Flowers"],
-    ["🌼","Daisies"],
-    ["🌷","Tulips"],
-
-    ["🦋","Butterflies"],
-    ["🐝","Bees"],
-    ["🐞","Ladybirds"],
-    ["🐛","Caterpillars"],
-
-    ["🍓","Strawberries"],
-    ["🍒","Cherries"],
-    ["🍉","Watermelon"],
-    ["🍋","Lemon"],
-    ["🍊","Orange"],
-    ["🍑","Peach"],
-    ["🍇","Grapes"],
-    ["🍍","Pineapple"],
-
-    ["🍭","Lollipops"],
-    ["🍬","Candy"],
-    ["🍩","Donuts"],
-    ["🧁","Cupcakes"],
-    ["🍦","Ice Cream"],
-    ["🍪","Cookies"],
-    ["🍰","Cake"],
-    ["🍧","Shaved Ice"],
-
-    ["⚡","Lightning"],
-    ["🔥","Flames"],
-    ["💎","Diamonds"],
-    ["👑","Crowns"],
-    ["🎀","Bows"],
-    ["🪩","Disco Balls"],
-
-    ["🌙","Moon"],
-    ["☀️","Sun"],
-    ["🪐","Planets"],
-    ["🚀","Rocket"],
-    ["☄️","Comets"],
-    ["🛸","UFO"],
-
-    ["🍀","Clovers"],
-    ["🌿","Leaves"],
-    ["🌴","Palm Trees"],
-    ["🍄","Mushrooms"],
-    ["🌵","Cactus"],
-
-    ["🫧","Bubbles"],
-    ["🎈","Balloons"],
-    ["🎵","Music Notes"],
-    ["🎁","Gifts"],
-    ["🎉","Party"],
-    ["🎊","Confetti"],
-
-    ["❄️","Snowflakes"],
-    ["☃️","Snowy"],
-    ["🌊","Waves"],
-    ["🐚","Shells"],
-
-    ["🧚","Fairy"],
-    ["🦄","Unicorn"],
-    ["🐱","Kitten"],
-    ["🐶","Puppy"],
-    ["🐼","Panda"],
-    ["🐨","Koala"],
-    ["🐸","Frog"],
-    ["🐳","Whale"],
-    ["🐬","Dolphin"],
-    ["🐢","Turtle"]
-
+    ["⭐","Stars"], ["✨","Sparkles"], ["💫","Starbursts"], ["🌟","Big Stars"], ["🌠","Shooting Stars"],
+    ["💕","Hearts"], ["💖","Pink Hearts"], ["💜","Purple Hearts"], ["💙","Blue Hearts"], ["💛","Yellow Hearts"],
+    ["🌈","Rainbow"], ["☁️","Clouds"], ["🌸","Flowers"], ["🌺","Tropical Flowers"], ["🌼","Daisies"], ["🌷","Tulips"],
+    ["🦋","Butterflies"], ["🐝","Bees"], ["🐞","Ladybirds"], ["🐛","Caterpillars"],
+    ["🍓","Strawberries"], ["🍒","Cherries"], ["🍉","Watermelon"], ["🍋","Lemon"], ["🍊","Orange"], ["🍑","Peach"], ["🍇","Grapes"], ["🍍","Pineapple"],
+    ["🍭","Lollipops"], ["🍬","Candy"], ["🍩","Donuts"], ["🧁","Cupcakes"], ["🍦","Ice Cream"], ["🍪","Cookies"], ["🍰","Cake"], ["🍧","Shaved Ice"],
+    ["⚡","Lightning"], ["🔥","Flames"], ["💎","Diamonds"], ["👑","Crowns"], ["🎀","Bows"], ["🪩","Disco Balls"],
+    ["🌙","Moon"], ["☀️","Sun"], ["🪐","Planets"], ["🚀","Rocket"], ["☄️","Comets"], ["🛸","UFO"],
+    ["🍀","Clovers"], ["🌿","Leaves"], ["🌴","Palm Trees"], ["🍄","Mushrooms"], ["🌵","Cactus"],
+    ["🫧","Bubbles"], ["🎈","Balloons"], ["🎵","Music Notes"], ["🎁","Gifts"], ["🎉","Party"], ["🎊","Confetti"],
+    ["❄️","Snowflakes"], ["☃️","Snowy"], ["🌊","Waves"], ["🐚","Shells"],
+    ["🧚","Fairy"], ["🦄","Unicorn"], ["🐱","Kitten"], ["🐶","Puppy"], ["🐼","Panda"], ["🐨","Koala"], ["🐸","Frog"], ["🐳","Whale"], ["🐬","Dolphin"], ["🐢","Turtle"]
 ];
 
 /* ============================================================
-   DEFAULT STATE
+   STATE MANAGEMENT
 ============================================================ */
-
 const defaultState = {
-
     mainColour: "#ff72b6",
     mainName: "Bubblegum Pink",
-
     secondaryColour: "#ffffff",
     secondaryName: "White",
-
     pattern: "plain",
     patternName: "Plain",
-
     texture: "soft",
-
-    shape: "classic",
-
+    shape: "cube",
     decorations: [],
-
     glitter: false,
     glow: false,
     rainbowShine: false,
     sparkles: false,
-
     logo: true,
-
+    sound: true,
     softness: 75,
     wobble: 50,
     bounce: 60
-
 };
 
-let state = {
-    ...defaultState
-};
+let state = { ...defaultState };
 
 /* ============================================================
-   ELEMENTS
+   DOM ELEMENTS
 ============================================================ */
-
 const cube = document.getElementById("cube");
+const cubeWrap = document.getElementById("cubeWrap");
 const patternLayer = document.getElementById("patternLayer");
+const textureLayer = document.getElementById("textureLayer");
 const decorationsLayer = document.getElementById("decorationsLayer");
 const glitterLayer = document.getElementById("glitter");
 const glow = document.getElementById("glow");
@@ -2213,35 +1657,64 @@ const printedLogo = document.getElementById("printedLogo");
 const squishText = document.getElementById("squishText");
 
 /* ============================================================
-   TOAST
+   SOUND SYNTHESIZER (Web Audio API)
 ============================================================ */
+let audioCtx = null;
 
-let toastTimer;
+function playSquishSound() {
+    if (!state.sound) return;
+    try {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === "suspended") {
+            audioCtx.resume();
+        }
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
 
-function showToast(message) {
+        const basePitch = 240 + (state.softness / 100) * 110 - (state.wobble / 100) * 60;
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(basePitch, now);
+        osc.frequency.exponentialRampToValueAtTime(Math.max(65, basePitch * 0.4), now + 0.18);
 
-    const toast = document.getElementById("toast");
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(1200, now);
+        filter.frequency.exponentialRampToValueAtTime(320, now + 0.18);
 
-    toast.textContent = message;
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.2, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
 
-    toast.classList.add("show");
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
 
-    clearTimeout(toastTimer);
-
-    toastTimer = setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    }, 2200);
-
+        osc.start(now);
+        osc.stop(now + 0.22);
+    } catch(e) {}
 }
 
 /* ============================================================
-   BUILD COLOURS
+   TOAST
 ============================================================ */
+let toastTimer;
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2200);
+}
 
+/* ============================================================
+   COLOURS INITIALIZATION
+============================================================ */
 function createColours() {
-
     const main = document.getElementById("mainColours");
     const secondary = document.getElementById("secondaryColours");
 
@@ -2249,2802 +1722,1319 @@ function createColours() {
     secondary.innerHTML = "";
 
     mainColours.forEach(item => {
-
         const button = document.createElement("button");
-
         button.className = "colour";
-
         button.type = "button";
-
         button.dataset.name = item[0];
         button.dataset.colour = item[1];
-
         button.style.background = item[1];
 
         const name = document.createElement("span");
-
         name.className = "colour-name";
-
         name.textContent = item[0];
 
         button.appendChild(name);
-
         button.addEventListener("click", () => {
-
             state.mainColour = item[1];
             state.mainName = item[0];
-
             syncButtons();
             updateCube();
-
         });
-
         main.appendChild(button);
-
     });
 
     secondaryColours.forEach(item => {
-
         const button = document.createElement("button");
-
         button.className = "colour";
-
         button.type = "button";
-
         button.dataset.name = item[0];
         button.dataset.colour = item[1];
-
         button.style.background = item[1];
 
         const name = document.createElement("span");
-
         name.className = "colour-name";
-
         name.textContent = item[0];
 
         button.appendChild(name);
-
         button.addEventListener("click", () => {
-
             state.secondaryColour = item[1];
             state.secondaryName = item[0];
-
             syncButtons();
             updateCube();
-
         });
-
         secondary.appendChild(button);
-
     });
-
 }
 
 /* ============================================================
-   BUILD PATTERNS
+   PATTERNS INITIALIZATION
 ============================================================ */
-
 function createPatterns() {
-
     const container = document.getElementById("patterns");
-
     container.innerHTML = "";
 
     patterns.forEach(item => {
-
         const button = document.createElement("button");
-
         button.type = "button";
-
         button.className = "option pattern-option";
-
         button.dataset.pattern = item[0];
-
         button.innerHTML = `
-            <div style="font-size:23px">${item[1]}</div>
+            <div style="font-size:22px">${item[1]}</div>
             <small>${item[2]}</small>
         `;
 
         button.addEventListener("click", () => {
-
             state.pattern = item[0];
             state.patternName = item[2];
-
             syncButtons();
             updateCube();
-
         });
-
         container.appendChild(button);
-
     });
-
 }
 
 /* ============================================================
-   BUILD DECORATIONS
+   DECORATIONS INITIALIZATION
 ============================================================ */
-
 function createDecorations() {
-
     const container = document.getElementById("decorations");
-
     container.innerHTML = "";
 
-    decorationData.forEach((item,index) => {
-
+    decorationData.forEach(item => {
         const button = document.createElement("button");
-
         button.type = "button";
-
         button.className = "option";
-
         button.dataset.decoration = item[0];
-
         button.innerHTML = `
-            <div style="font-size:25px">${item[0]}</div>
+            <div style="font-size:24px">${item[0]}</div>
             <small>${item[1]}</small>
         `;
 
         button.addEventListener("click", () => {
-
             const emoji = item[0];
-
-            if(state.decorations.includes(emoji)) {
-
-                state.decorations =
-                    state.decorations.filter(
-                        x => x !== emoji
-                    );
-
+            if (state.decorations.includes(emoji)) {
+                state.decorations = state.decorations.filter(x => x !== emoji);
             } else {
-
                 state.decorations.push(emoji);
-
             }
-
             syncButtons();
             updateDecorations();
             saveDesign();
-
         });
-
         container.appendChild(button);
-
     });
-
 }
 
 /* ============================================================
-   PATTERN ENGINE
+   PATTERN ENGINE (Crisp, High Quality, No Awkward Cuts!)
 ============================================================ */
+const encodeSvg = (svg) => "data:image/svg+xml," + encodeURIComponent(svg.trim());
 
-function getPattern() {
-
+function getPatternConfig() {
     const s = state.secondaryColour;
-
-    const patternsMap = {
-
-        plain:
-            "none",
-
-        stripes:
-            `repeating-linear-gradient(
-                45deg,
-                ${s} 0 24px,
-                transparent 24px 48px
-            )`,
-
-        thinstripes:
-            `repeating-linear-gradient(
-                90deg,
-                ${s} 0 8px,
-                transparent 8px 18px
-            )`,
-
-        diagonal:
-            `repeating-linear-gradient(
-                -45deg,
-                ${s} 0 25px,
-                transparent 25px 50px
-            )`,
-
-        dots:
-            `radial-gradient(
-                circle,
-                ${s} 0 9px,
-                transparent 10px
-            )`,
-
-        bigdots:
-            `radial-gradient(
-                circle,
-                ${s} 0 23px,
-                transparent 24px
-            )`,
-
-        checker:
-            `conic-gradient(
-                ${s} 25%,
-                transparent 0 50%,
-                ${s} 0 75%,
-                transparent 0
-            )`,
-
-        grid:
-            `linear-gradient(
-                ${s} 3px,
-                transparent 3px
-            ),
-            linear-gradient(
-                90deg,
-                ${s} 3px,
-                transparent 3px
-            )`,
-
-        stars:
-            `radial-gradient(
-                circle at 20% 20%,
-                ${s} 0 5px,
-                transparent 6px
-            ),
-            radial-gradient(
-                circle at 70% 60%,
-                ${s} 0 7px,
-                transparent 8px
-            )`,
-
-        hearts:
-            `radial-gradient(
-                circle at 30% 30%,
-                ${s} 0 7px,
-                transparent 8px
-            ),
-            radial-gradient(
-                circle at 65% 70%,
-                ${s} 0 7px,
-                transparent 8px
-            )`,
-
-        clouds:
-            `radial-gradient(
-                circle at 20% 50%,
-                ${s} 0 16px,
-                transparent 17px
-            ),
-            radial-gradient(
-                circle at 42% 50%,
-                ${s} 0 21px,
-                transparent 22px
-            )`,
-
-        rainbow:
-            `linear-gradient(
-                135deg,
-                #ff5c91,
-                #ffbd4a,
-                #ffe95c,
-                #64e49a,
-                #56c9ff,
-                #a975ff
-            )`,
-
-        waves:
-            `repeating-radial-gradient(
-                ellipse at 50% 100%,
-                transparent 0 15px,
-                ${s} 16px 20px,
-                transparent 21px 38px
-            )`,
-
-        zigzag:
-            `repeating-linear-gradient(
-                135deg,
-                ${s} 0 8px,
-                transparent 8px 20px,
-                ${s} 20px 28px,
-                transparent 28px 40px
-            )`,
-
-        confetti:
-            `radial-gradient(
-                circle at 20% 20%,
-                ${s} 0 5px,
-                transparent 6px
-            ),
-            radial-gradient(
-                circle at 70% 70%,
-                ${s} 0 4px,
-                transparent 5px
-            )`,
-
-        sprinkles:
-            `repeating-linear-gradient(
-                25deg,
-                transparent 0 20px,
-                ${s} 21px 26px,
-                transparent 27px 42px
-            )`,
-
-        swirl:
-            `repeating-conic-gradient(
-                ${s} 0 15deg,
-                transparent 15deg 35deg
-            )`,
-
-        marble:
-            `repeating-radial-gradient(
-                ellipse,
-                transparent 0 14px,
-                ${s} 15px 18px,
-                transparent 19px 30px
-            )`,
-
-        galaxy:
-            `radial-gradient(
-                circle at 20% 20%,
-                white 0 3px,
-                transparent 4px
-            ),
-            radial-gradient(
-                circle at 75% 35%,
-                ${s} 0 5px,
-                transparent 6px
-            ),
-            radial-gradient(
-                circle at 50% 75%,
-                white 0 3px,
-                transparent 4px
-            )`,
-
-        lightning:
-            `linear-gradient(
-                125deg,
-                transparent 35%,
-                ${s} 36% 48%,
-                transparent 49%
-            )`,
-
-        flames:
-            `repeating-radial-gradient(
-                ellipse at 50% 100%,
-                ${s} 0 12px,
-                transparent 13px 30px
-            )`,
-
-        diamonds:
-            `repeating-conic-gradient(
-                transparent 0 25%,
-                ${s} 0 50%
-            )`,
-
-        crystals:
-            `linear-gradient(
-                60deg,
-                transparent 40%,
-                ${s} 41% 58%,
-                transparent 59%
-            )`,
-
-        bubbles:
-            `radial-gradient(
-                circle,
-                transparent 0 12px,
-                ${s} 13px 17px,
-                transparent 18px
-            )`,
-
-        leopard:
-            `radial-gradient(
-                ellipse at 30% 30%,
-                ${s} 0 10px,
-                transparent 11px
-            ),
-            radial-gradient(
-                ellipse at 65% 65%,
-                ${s} 0 12px,
-                transparent 13px
-            )`,
-
-        zebra:
-            `repeating-linear-gradient(
-                160deg,
-                ${s} 0 13px,
-                transparent 13px 30px
-            )`,
-
-        camo:
-            `radial-gradient(
-                ellipse at 30% 40%,
-                ${s} 0 30px,
-                transparent 31px
-            ),
-            radial-gradient(
-                ellipse at 70% 70%,
-                ${s} 0 40px,
-                transparent 41px
-            )`,
-
-        checkerPink:
-            `conic-gradient(
-                ${s} 25%,
-                transparent 0 50%,
-                ${s} 0 75%,
-                transparent 0
-            )`,
-
-        checkerRainbow:
-            `conic-gradient(
-                #ff5c91 0 25%,
-                #ffe45e 0 50%,
-                #64df9d 0 75%,
-                #62cfff 0
-            )`,
-
-        heartsDots:
-            `radial-gradient(
-                circle,
-                ${s} 0 7px,
-                transparent 8px
-            ),
-            radial-gradient(
-                circle,
-                ${s} 0 3px,
-                transparent 4px
-            )`,
-
-        starburst:
-            `repeating-conic-gradient(
-                ${s} 0 6deg,
-                transparent 6deg 24deg
-            )`,
-
-        sunshine:
-            `repeating-conic-gradient(
-                ${s} 0 8deg,
-                transparent 8deg 25deg
-            )`,
-
-        moonstars:
-            `radial-gradient(
-                circle at 30% 35%,
-                ${s} 0 18px,
-                transparent 19px
-            ),
-            radial-gradient(
-                circle at 75% 65%,
-                ${s} 0 5px,
-                transparent 6px
-            )`,
-
-        planet:
-            `radial-gradient(
-                circle at 30% 30%,
-                ${s} 0 24px,
-                transparent 25px
-            ),
-            repeating-linear-gradient(
-                20deg,
-                transparent 0 22px,
-                ${s} 23px 27px,
-                transparent 28px 45px
-            )`,
-
-        flowers:
-            `radial-gradient(
-                circle,
-                ${s} 0 7px,
-                transparent 8px
-            ),
-            radial-gradient(
-                circle at 30% 50%,
-                ${s} 0 6px,
-                transparent 7px
-            )`,
-
-        clover:
-            `radial-gradient(
-                circle at 30% 30%,
-                ${s} 0 8px,
-                transparent 9px
-            ),
-            radial-gradient(
-                circle at 60% 50%,
-                ${s} 0 8px,
-                transparent 9px
-            )`,
-
-        cherries:
-            `radial-gradient(
-                circle,
-                ${s} 0 8px,
-                transparent 9px
-            )`,
-
-        strawberry:
-            `radial-gradient(
-                circle,
-                ${s} 0 5px,
-                transparent 6px
-            )`,
-
-        candy:
-            `repeating-conic-gradient(
-                ${s} 0 20deg,
-                transparent 20deg 45deg
-            )`,
-
-        icecream:
-            `repeating-linear-gradient(
-                25deg,
-                ${s} 0 10px,
-                transparent 10px 24px
-            )`,
-
-        spray:
-            `radial-gradient(
-                circle,
-                ${s} 0 5px,
-                transparent 6px
-            )`,
-
-        pixel:
-            `linear-gradient(
-                90deg,
-                ${s} 50%,
-                transparent 50%
-            ),
-            linear-gradient(
-                ${s} 50%,
-                transparent 50%
-            )`,
-
-        rings:
-            `radial-gradient(
-                circle,
-                transparent 0 15px,
-                ${s} 16px 21px,
-                transparent 22px 35px
-            )`,
-
-        triangles:
-            `linear-gradient(
-                60deg,
-                ${s} 25%,
-                transparent 25% 75%,
-                ${s} 75%
-            )`,
-
-        bubblesSmall:
-            `radial-gradient(
-                circle,
-                transparent 0 5px,
-                ${s} 6px 9px,
-                transparent 10px
-            )`,
-
-        paint:
-            `radial-gradient(
-                circle at 20% 30%,
-                ${s} 0 30px,
-                transparent 31px
-            ),
-            radial-gradient(
-                circle at 75% 65%,
-                ${s} 0 25px,
-                transparent 26px
-            )`,
-
-        doodle:
-            `repeating-linear-gradient(
-                135deg,
-                transparent 0 20px,
-                ${s} 21px 24px,
-                transparent 25px 40px
-            )`,
-
-        sunset:
-            `linear-gradient(
-                180deg,
-                ${s},
-                transparent 70%
-            )`,
-
-        ocean:
-            `repeating-linear-gradient(
-                175deg,
-                ${s} 0 10px,
-                transparent 10px 28px
-            )`,
-
-        space:
-            `radial-gradient(
-                circle at 20% 25%,
-                white 0 3px,
-                transparent 4px
-            ),
-            radial-gradient(
-                circle at 70% 70%,
-                white 0 4px,
-                transparent 5px
-            )`,
-
-        checkerDots:
-            `radial-gradient(
-                circle,
-                ${s} 0 7px,
-                transparent 8px
-            ),
-            conic-gradient(
-                transparent 0 25%,
-                rgba(255,255,255,.25) 0 50%,
-                transparent 0 75%,
-                rgba(255,255,255,.25) 0
-            )`,
-
-        doubleStripes:
-            `repeating-linear-gradient(
-                45deg,
-                ${s} 0 8px,
-                transparent 8px 18px,
-                ${s} 18px 26px,
-                transparent 26px 40px
-            )`,
-
-        bubbleMix:
-            `radial-gradient(
-                circle at 20% 30%,
-                ${s} 0 8px,
-                transparent 9px
-            ),
-            radial-gradient(
-                circle at 70% 65%,
-                ${s} 0 14px,
-                transparent 15px
-            ),
-            radial-gradient(
-                circle at 45% 80%,
-                ${s} 0 5px,
-                transparent 6px
-            )`,
-
-        heartRain:
-            `radial-gradient(
-                circle at 20% 20%,
-                ${s} 0 7px,
-                transparent 8px
-            ),
-            radial-gradient(
-                circle at 70% 60%,
-                ${s} 0 7px,
-                transparent 8px
-            )`,
-
-        starRain:
-            `radial-gradient(
-                circle at 20% 20%,
-                ${s} 0 4px,
-                transparent 5px
-            ),
-            radial-gradient(
-                circle at 70% 60%,
-                ${s} 0 5px,
-                transparent 6px
-            )`,
-
-        candyDots:
-            `radial-gradient(
-                circle,
-                ${s} 0 6px,
-                transparent 7px
-            )`,
-
-        confettiMix:
-            `radial-gradient(
-                circle at 15% 25%,
-                ${s} 0 5px,
-                transparent 6px
-            ),
-            linear-gradient(
-                25deg,
-                transparent 45%,
-                ${s} 46% 53%,
-                transparent 54%
-            )`,
-
-        softClouds:
-            `radial-gradient(
-                circle at 25% 55%,
-                ${s} 0 20px,
-                transparent 21px
-            ),
-            radial-gradient(
-                circle at 50% 55%,
-                ${s} 0 15px,
-                transparent 16px
-            )`,
-
-        magic:
-            `radial-gradient(
-                circle at 20% 20%,
-                ${s} 0 4px,
-                transparent 5px
-            ),
-            repeating-conic-gradient(
-                transparent 0 20deg,
-                ${s} 21deg 23deg,
-                transparent 24deg 40deg
-            )`,
-
-        rain:
-            `repeating-linear-gradient(
-                105deg,
-                transparent 0 18px,
-                ${s} 19px 23px,
-                transparent 24px 40px
-            )`,
-
-        sunMoon:
-            `radial-gradient(
-                circle at 25% 30%,
-                ${s} 0 20px,
-                transparent 21px
-            ),
-            repeating-conic-gradient(
-                ${s} 0 5deg,
-                transparent 5deg 30deg
-            )`,
-
-        berry:
-            `radial-gradient(
-                circle,
-                ${s} 0 9px,
-                transparent 10px
-            )`,
-
-        flowerField:
-            `radial-gradient(
-                circle at 25% 25%,
-                ${s} 0 6px,
-                transparent 7px
-            ),
-            radial-gradient(
-                circle at 70% 70%,
-                ${s} 0 8px,
-                transparent 9px
-            )`,
-
-        music:
-            `repeating-radial-gradient(
-                ellipse,
-                transparent 0 12px,
-                ${s} 13px 17px,
-                transparent 18px 30px
-            )`,
-
-        circuit:
-            `repeating-linear-gradient(
-                90deg,
-                transparent 0 18px,
-                ${s} 19px 22px,
-                transparent 23px 38px
-            )`,
-
-        honeycomb:
-            `repeating-linear-gradient(
-                30deg,
-                ${s} 0 3px,
-                transparent 3px 25px
-            ),
-            repeating-linear-gradient(
-                150deg,
-                ${s} 0 3px,
-                transparent 3px 25px
-            )`,
-
-        shell:
-            `repeating-radial-gradient(
-                ellipse at 50% 100%,
-                transparent 0 10px,
-                ${s} 11px 14px,
-                transparent 15px 28px
-            )`,
-
-        bubbleSwirl:
-            `repeating-radial-gradient(
-                circle at 50% 50%,
-                transparent 0 10px,
-                ${s} 11px 15px,
-                transparent 16px 30px
-            )`,
-
-        rainbowRings:
-            `repeating-radial-gradient(
-                circle,
-                #ff5c91 0 10px,
-                #ffe45e 10px 20px,
-                #64df9d 20px 30px,
-                #62cfff 30px 40px,
-                #a975ff 40px 50px
-            )`,
-
-        sparkleGrid:
-            `radial-gradient(
-                circle,
-                ${s} 0 4px,
-                transparent 5px
-            ),
-            linear-gradient(
-                ${s} 2px,
-                transparent 2px
-            ),
-            linear-gradient(
-                90deg,
-                ${s} 2px,
-                transparent 2px
-            )`
-
-    };
-
-    return patternsMap[state.pattern] || "none";
-
-}
-
-/* ============================================================
-   SHAPE
-============================================================ */
-
-function applyShape() {
-
-    const shapes = {
-
-        classic: {
-            width: 290,
-            height: 290,
-            radius: 48
+    const safeS = s.startsWith("linear") ? "#ffffff" : s;
+
+    const map = {
+        plain: {
+            image: "none",
+            size: "auto"
         },
-
-        puffy: {
-            width: 305,
-            height: 305,
-            radius: 70
+        stripes: {
+            image: `repeating-linear-gradient(45deg, ${safeS} 0, ${safeS} 14px, transparent 14px, transparent 28px)`,
+            size: "auto"
         },
-
-        mini: {
-            width: 235,
-            height: 235,
-            radius: 35
+        thinstripes: {
+            image: `repeating-linear-gradient(90deg, ${safeS} 0, ${safeS} 5px, transparent 5px, transparent 15px)`,
+            size: "auto"
         },
-
-        soft: {
-            width: 300,
-            height: 300,
-            radius: 85
+        diagonal: {
+            image: `repeating-linear-gradient(-45deg, ${safeS} 0, ${safeS} 16px, transparent 16px, transparent 32px)`,
+            size: "auto"
         },
-
-        wide: {
-            width: 340,
-            height: 260,
-            radius: 45
+        dots: {
+            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 6px, transparent 7px)`,
+            size: "26px 26px"
         },
-
-        tall: {
-            width: 260,
-            height: 340,
-            radius: 45
+        bigdots: {
+            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 15px, transparent 16px)`,
+            size: "46px 46px"
+        },
+        checker: {
+            image: `conic-gradient(${safeS} 25%, transparent 25% 50%, ${safeS} 50% 75%, transparent 75%)`,
+            size: "44px 44px"
+        },
+        grid: {
+            image: `linear-gradient(${safeS} 2px, transparent 2px), linear-gradient(90deg, ${safeS} 2px, transparent 2px)`,
+            size: "34px 34px"
+        },
+        stars: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <path d="M24 6l4.2 10.8 11.8.8-9 7.8 2.8 11.6L24 31l-9.8 6 2.8-11.6-9-7.8 11.8-.8z" fill="${safeS}" opacity="0.88"/>
+                    <circle cx="8" cy="12" r="1.5" fill="${safeS}" opacity="0.6"/>
+                    <circle cx="40" cy="38" r="2" fill="${safeS}" opacity="0.6"/>
+                </svg>
+            `)}")`,
+            size: "48px 48px"
+        },
+        hearts: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
+                    <path d="M23 38s-13-8.8-17-16.6C2.2 14 7.6 6 15.4 7.8c3.2.7 6 3.6 7.6 5.8 1.6-2.2 4.4-5.1 7.6-5.8 7.8-1.8 13.2 6.2 9.4 13.6C36 29.2 23 38 23 38z" fill="${safeS}" opacity="0.88"/>
+                </svg>
+            `)}")`,
+            size: "46px 46px"
+        },
+        clouds: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54">
+                    <path d="M16 35h22a9 9 0 0 0 1-17.9A13 13 0 0 0 15 21a7 7 0 0 0 1 14z" fill="${safeS}" opacity="0.85"/>
+                </svg>
+            `)}")`,
+            size: "54px 54px"
+        },
+        rainbow: {
+            image: `linear-gradient(135deg, #ff5c91 0%, #ff9d42 18%, #ffe45e 36%, #64e49a 54%, #56c9ff 72%, #a975ff 90%, #ff7ac4 100%)`,
+            size: "100% 100%"
+        },
+        waves: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="30" viewBox="0 0 60 30">
+                    <path d="M0 15 Q 15 0, 30 15 T 60 15" fill="none" stroke="${safeS}" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+                </svg>
+            `)}")`,
+            size: "60px 30px"
+        },
+        zigzag: {
+            image: `repeating-linear-gradient(135deg, ${safeS} 0, ${safeS} 7px, transparent 7px, transparent 18px, ${safeS} 18px, ${safeS} 25px, transparent 25px, transparent 36px)`,
+            size: "auto"
+        },
+        confetti: {
+            image: `radial-gradient(circle at 20% 20%, ${safeS} 0, ${safeS} 4px, transparent 5px), radial-gradient(circle at 75% 70%, ${safeS} 0, ${safeS} 3px, transparent 4px), radial-gradient(circle at 45% 85%, ${safeS} 0, ${safeS} 3.5px, transparent 4.5px)`,
+            size: "45px 45px"
+        },
+        sprinkles: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+                    <rect x="8" y="14" width="13" height="4.5" rx="2.2" fill="${safeS}" transform="rotate(25 14 16)"/>
+                    <rect x="32" y="10" width="13" height="4.5" rx="2.2" fill="${safeS}" transform="rotate(-35 38 12)"/>
+                    <rect x="20" y="34" width="13" height="4.5" rx="2.2" fill="${safeS}" transform="rotate(65 26 36)"/>
+                </svg>
+            `)}")`,
+            size: "52px 52px"
+        },
+        swirl: {
+            image: `repeating-conic-gradient(from 0deg at 50% 50%, ${safeS} 0deg 15deg, transparent 15deg 30deg)`,
+            size: "100% 100%"
+        },
+        marble: {
+            image: `repeating-radial-gradient(ellipse at 30% 40%, transparent 0, transparent 16px, ${safeS} 17px, ${safeS} 22px, transparent 23px, transparent 36px)`,
+            size: "100% 100%"
+        },
+        galaxy: {
+            image: `radial-gradient(circle at 75% 25%, ${safeS} 0%, transparent 45%), radial-gradient(circle at 20% 70%, rgba(255,255,255,0.85) 0%, transparent 35%), radial-gradient(circle at 50% 50%, rgba(140,80,240,0.5) 0%, transparent 60%)`,
+            size: "100% 100%"
+        },
+        lightning: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
+                    <path d="M25 4L12 24h10l-4 18 16-22H24z" fill="${safeS}" opacity="0.9"/>
+                </svg>
+            `)}")`,
+            size: "46px 46px"
+        },
+        flames: {
+            image: `repeating-radial-gradient(ellipse at 50% 100%, ${safeS} 0, ${safeS} 12px, transparent 13px, transparent 32px)`,
+            size: "100% 100%"
+        },
+        diamonds: {
+            image: `conic-gradient(from 45deg at 50% 50%, ${safeS} 25%, transparent 25% 50%, ${safeS} 50% 75%, transparent 75%)`,
+            size: "38px 38px"
+        },
+        crystals: {
+            image: `linear-gradient(60deg, transparent 40%, ${safeS} 41% 58%, transparent 59%), linear-gradient(-60deg, transparent 40%, ${safeS} 41% 58%, transparent 59%)`,
+            size: "45px 45px"
+        },
+        bubbles: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+                    <circle cx="20" cy="22" r="12" fill="none" stroke="${safeS}" stroke-width="2.5" opacity="0.9"/>
+                    <ellipse cx="16" cy="16" rx="3" ry="1.8" fill="white" opacity="0.7" transform="rotate(-30 16 16)"/>
+                    <circle cx="40" cy="38" r="7" fill="none" stroke="${safeS}" stroke-width="2" opacity="0.8"/>
+                </svg>
+            `)}")`,
+            size: "52px 52px"
+        },
+        leopard: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+                    <path d="M12 8c4-3 9-1 10 3 1 3-1 6-4 6-4 0-7-4-6-9z" fill="${safeS}" opacity="0.85"/>
+                    <path d="M32 28c5-2 11 1 10 7-1 4-5 6-9 4-4-2-4-8-1-11z" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="36" cy="12" r="4" fill="${safeS}" opacity="0.75"/>
+                    <circle cx="16" cy="38" r="3.5" fill="${safeS}" opacity="0.75"/>
+                </svg>
+            `)}")`,
+            size: "50px 50px"
+        },
+        zebra: {
+            image: `repeating-linear-gradient(155deg, ${safeS} 0, ${safeS} 12px, transparent 12px, transparent 28px)`,
+            size: "auto"
+        },
+        camo: {
+            image: `radial-gradient(ellipse at 30% 40%, ${safeS} 0, ${safeS} 34px, transparent 35px), radial-gradient(ellipse at 70% 70%, ${safeS} 0, ${safeS} 44px, transparent 45px)`,
+            size: "120px 120px"
+        },
+        checkerPink: {
+            image: `conic-gradient(#ff5fa2 25%, transparent 25% 50%, #ff5fa2 50% 75%, transparent 75%)`,
+            size: "40px 40px"
+        },
+        checkerRainbow: {
+            image: `conic-gradient(#ff5c91 0 25%, #ffe45e 25% 50%, #64df9d 50% 75%, #62cfff 75% 100%)`,
+            size: "48px 48px"
+        },
+        heartsDots: {
+            image: `radial-gradient(circle at 25% 25%, ${safeS} 0, ${safeS} 6px, transparent 7px), radial-gradient(circle at 75% 75%, ${safeS} 0, ${safeS} 3px, transparent 4px)`,
+            size: "34px 34px"
+        },
+        starburst: {
+            image: `repeating-conic-gradient(from 0deg at 50% 50%, ${safeS} 0deg 8deg, transparent 8deg 24deg)`,
+            size: "100% 100%"
+        },
+        sunshine: {
+            image: `repeating-conic-gradient(from 0deg at 50% 50%, ${safeS} 0deg 11deg, transparent 11deg 30deg)`,
+            size: "100% 100%"
+        },
+        moonstars: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+                    <path d="M16 8 A12 12 0 1 0 34 26 A10 10 0 1 1 16 8 Z" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="38" cy="14" r="2.5" fill="${safeS}"/>
+                    <circle cx="12" cy="40" r="1.5" fill="${safeS}"/>
+                </svg>
+            `)}")`,
+            size: "50px 50px"
+        },
+        planet: {
+            image: `radial-gradient(circle at 30% 30%, ${safeS} 0, ${safeS} 18px, transparent 19px), repeating-linear-gradient(20deg, transparent 0, transparent 20px, ${safeS} 21px, ${safeS} 25px, transparent 26px, transparent 45px)`,
+            size: "70px 70px"
+        },
+        flowers: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+                    <circle cx="25" cy="14" r="6.5" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="35" cy="22" r="6.5" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="31" cy="34" r="6.5" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="19" cy="34" r="6.5" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="15" cy="22" r="6.5" fill="${safeS}" opacity="0.85"/>
+                    <circle cx="25" cy="25" r="5.5" fill="#fff566"/>
+                </svg>
+            `)}")`,
+            size: "50px 50px"
+        },
+        clover: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <circle cx="19" cy="17" r="6.5" fill="${safeS}"/>
+                    <circle cx="29" cy="17" r="6.5" fill="${safeS}"/>
+                    <circle cx="19" cy="27" r="6.5" fill="${safeS}"/>
+                    <circle cx="29" cy="27" r="6.5" fill="${safeS}"/>
+                    <path d="M24 24v13" stroke="${safeS}" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            `)}")`,
+            size: "48px 48px"
+        },
+        cherries: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+                    <circle cx="17" cy="32" r="8" fill="${safeS}"/>
+                    <circle cx="32" cy="34" r="8" fill="${safeS}"/>
+                    <path d="M17 25c2-10 11-15 15-17-4 5-4 11-1 17" stroke="${safeS}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                    <ellipse cx="14" cy="30" rx="2" ry="1.2" fill="white" opacity="0.6"/>
+                    <ellipse cx="29" cy="32" rx="2" ry="1.2" fill="white" opacity="0.6"/>
+                </svg>
+            `)}")`,
+            size: "50px 50px"
+        },
+        strawberry: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <path d="M24 13c-8 0-12 6-10 15 2 8 8 13 10 14 2-1 8-6 10-14 2-9-2-15-10-15z" fill="${safeS}"/>
+                    <path d="M24 10c-2 3-5 3-7 2 2 3 1 5-1 6 3-1 5 1 6 3 1-2 3-4 6-3-2-1-3-3-1-6-2 1-5 1-7-2z" fill="#60e68e"/>
+                    <circle cx="21" cy="22" r="1" fill="#fff799"/>
+                    <circle cx="27" cy="22" r="1" fill="#fff799"/>
+                    <circle cx="24" cy="28" r="1" fill="#fff799"/>
+                </svg>
+            `)}")`,
+            size: "48px 48px"
+        },
+        candy: {
+            image: `repeating-conic-gradient(from 0deg at 50% 50%, ${safeS} 0deg 20deg, transparent 20deg 45deg)`,
+            size: "100% 100%"
+        },
+        icecream: {
+            image: `repeating-linear-gradient(25deg, ${safeS} 0, ${safeS} 8px, transparent 8px, transparent 22px)`,
+            size: "auto"
+        },
+        spray: {
+            image: `radial-gradient(circle at 50% 50%, ${safeS} 0, ${safeS} 4px, transparent 5px), radial-gradient(circle at 20% 80%, ${safeS} 0, ${safeS} 3px, transparent 4px), radial-gradient(circle at 80% 20%, ${safeS} 0, ${safeS} 2px, transparent 3px)`,
+            size: "35px 35px"
+        },
+        pixel: {
+            image: `linear-gradient(90deg, ${safeS} 50%, transparent 50%), linear-gradient(${safeS} 50%, transparent 50%)`,
+            size: "20px 20px"
+        },
+        rings: {
+            image: `radial-gradient(circle, transparent 0, transparent 12px, ${safeS} 13px, ${safeS} 17px, transparent 18px, transparent 32px)`,
+            size: "36px 36px"
+        },
+        triangles: {
+            image: `linear-gradient(60deg, ${safeS} 25%, transparent 25% 75%, ${safeS} 75%)`,
+            size: "40px 40px"
+        },
+        bubblesSmall: {
+            image: `radial-gradient(circle, transparent 0, transparent 4px, ${safeS} 5px, ${safeS} 7px, transparent 8px)`,
+            size: "18px 18px"
+        },
+        paint: {
+            image: `radial-gradient(circle at 20% 30%, ${safeS} 0, ${safeS} 24px, transparent 25px), radial-gradient(circle at 75% 65%, ${safeS} 0, ${safeS} 20px, transparent 21px)`,
+            size: "90px 90px"
+        },
+        doodle: {
+            image: `repeating-linear-gradient(135deg, transparent 0, transparent 16px, ${safeS} 17px, ${safeS} 20px, transparent 21px, transparent 34px)`,
+            size: "auto"
+        },
+        sunset: {
+            image: `linear-gradient(180deg, ${safeS} 0%, rgba(255,140,50,0.85) 45%, rgba(255,220,100,0.7) 80%, transparent 100%)`,
+            size: "100% 100%"
+        },
+        ocean: {
+            image: `repeating-linear-gradient(175deg, ${safeS} 0, ${safeS} 8px, transparent 8px, transparent 24px)`,
+            size: "auto"
+        },
+        space: {
+            image: `radial-gradient(circle at 20% 25%, white 0, white 2.5px, transparent 3.5px), radial-gradient(circle at 70% 70%, ${safeS} 0, ${safeS} 3px, transparent 4px), radial-gradient(circle at 85% 20%, white 0, white 1.5px, transparent 2.5px)`,
+            size: "80px 80px"
+        },
+        checkerDots: {
+            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 5px, transparent 6px), conic-gradient(transparent 0 25%, rgba(255,255,255,.25) 0 50%, transparent 0 75%, rgba(255,255,255,.25) 0)`,
+            size: "38px 38px"
+        },
+        doubleStripes: {
+            image: `repeating-linear-gradient(45deg, ${safeS} 0, ${safeS} 6px, transparent 6px, transparent 14px, ${safeS} 14px, ${safeS} 20px, transparent 20px, transparent 32px)`,
+            size: "auto"
+        },
+        bubbleMix: {
+            image: `radial-gradient(circle at 20% 30%, ${safeS} 0, ${safeS} 6px, transparent 7px), radial-gradient(circle at 70% 65%, ${safeS} 0, ${safeS} 11px, transparent 12px), radial-gradient(circle at 45% 80%, ${safeS} 0, ${safeS} 4px, transparent 5px)`,
+            size: "50px 50px"
+        },
+        heartRain: {
+            image: `radial-gradient(circle at 25% 25%, ${safeS} 0, ${safeS} 5px, transparent 6px), radial-gradient(circle at 75% 65%, ${safeS} 0, ${safeS} 5px, transparent 6px)`,
+            size: "36px 36px"
+        },
+        starRain: {
+            image: `radial-gradient(circle at 20% 20%, ${safeS} 0, ${safeS} 3.5px, transparent 4.5px), radial-gradient(circle at 70% 60%, ${safeS} 0, ${safeS} 4px, transparent 5px)`,
+            size: "32px 32px"
+        },
+        candyDots: {
+            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 5px, transparent 6px)`,
+            size: "24px 24px"
+        },
+        confettiMix: {
+            image: `radial-gradient(circle at 15% 25%, ${safeS} 0, ${safeS} 4px, transparent 5px), linear-gradient(25deg, transparent 45%, ${safeS} 46% 53%, transparent 54%)`,
+            size: "40px 40px"
+        },
+        softClouds: {
+            image: `radial-gradient(circle at 25% 55%, ${safeS} 0, ${safeS} 16px, transparent 17px), radial-gradient(circle at 55% 55%, ${safeS} 0, ${safeS} 12px, transparent 13px)`,
+            size: "65px 65px"
+        },
+        magic: {
+            image: `radial-gradient(circle at 20% 20%, ${safeS} 0, ${safeS} 3px, transparent 4px), repeating-conic-gradient(transparent 0 20deg, ${safeS} 21deg 23deg, transparent 24deg 40deg)`,
+            size: "60px 60px"
+        },
+        rain: {
+            image: `repeating-linear-gradient(105deg, transparent 0, transparent 16px, ${safeS} 17px, ${safeS} 20px, transparent 21px, transparent 34px)`,
+            size: "auto"
+        },
+        sunMoon: {
+            image: `radial-gradient(circle at 25% 30%, ${safeS} 0, ${safeS} 15px, transparent 16px), repeating-conic-gradient(${safeS} 0 5deg, transparent 5deg 30deg)`,
+            size: "80px 80px"
+        },
+        berry: {
+            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 7px, transparent 8px)`,
+            size: "28px 28px"
+        },
+        flowerField: {
+            image: `radial-gradient(circle at 25% 25%, ${safeS} 0, ${safeS} 5px, transparent 6px), radial-gradient(circle at 70% 70%, ${safeS} 0, ${safeS} 7px, transparent 8px)`,
+            size: "42px 42px"
+        },
+        music: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <circle cx="15" cy="34" r="4.5" fill="${safeS}"/>
+                    <path d="M19.5 34V12l15-3.5v22" stroke="${safeS}" stroke-width="2.8" fill="none"/>
+                    <circle cx="34.5" cy="30.5" r="4.5" fill="${safeS}"/>
+                    <path d="M19.5 15l15-3.5" stroke="${safeS}" stroke-width="3.5"/>
+                </svg>
+            `)}")`,
+            size: "48px 48px"
+        },
+        circuit: {
+            image: `repeating-linear-gradient(90deg, transparent 0, transparent 18px, ${safeS} 19px, ${safeS} 21px, transparent 22px, transparent 38px)`,
+            size: "auto"
+        },
+        honeycomb: {
+            image: `url("${encodeSvg(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="96" viewBox="0 0 56 96">
+                    <path d="M28 0l28 16v32L28 64 0 48V16z M28 96l28-16V48L28 32 0 48v32z" fill="none" stroke="${safeS}" stroke-width="2.5" opacity="0.85"/>
+                </svg>
+            `)}")`,
+            size: "56px 96px"
+        },
+        shell: {
+            image: `repeating-radial-gradient(ellipse at 50% 100%, transparent 0, transparent 10px, ${safeS} 11px, ${safeS} 14px, transparent 15px, transparent 28px)`,
+            size: "100% 100%"
+        },
+        bubbleSwirl: {
+            image: `repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 10px, ${safeS} 11px, ${safeS} 15px, transparent 16px, transparent 30px)`,
+            size: "100% 100%"
+        },
+        rainbowRings: {
+            image: `repeating-radial-gradient(circle, #ff5c91 0 9px, #ffe45e 9px 18px, #64df9d 18px 27px, #62cfff 27px 36px, #a975ff 36px 45px)`,
+            size: "100% 100%"
+        },
+        sparkleGrid: {
+            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 3px, transparent 4px), linear-gradient(${safeS} 1.5px, transparent 1.5px), linear-gradient(90deg, ${safeS} 1.5px, transparent 1.5px)`,
+            size: "32px 32px"
         }
-
     };
 
-    const shape = shapes[state.shape] || shapes.classic;
-
-    cube.style.width = shape.width + "px";
-    cube.style.height = shape.height + "px";
-    cube.style.borderRadius = shape.radius + "px";
-
+    return map[state.pattern] || { image: "none", size: "auto" };
 }
 
 /* ============================================================
-   UPDATE CUBE
+   SHAPE APPLICATION ENGINE
 ============================================================ */
+function applyShape() {
+    const s = state.shape;
+    cubeWrap.classList.remove("shape-donut", "shape-bear-active", "shape-cat-active");
+    cube.style.clipPath = "none";
 
-function updateCube() {
+    const shapeDefinitions = {
+        cube: { width: 290, height: 290, radius: "52px" },
+        ball: { width: 290, height: 290, radius: "50%" },
+        bear: { width: 280, height: 300, radius: "46% 46% 48% 48% / 44% 44% 54% 54%", clip: "url(#clip-bear)" },
+        dohnut: { width: 290, height: 290, radius: "50%", isDonut: true },
+        heart: { width: 290, height: 280, radius: "30px", clip: "url(#clip-heart)" },
+        star: { width: 290, height: 290, radius: "30px", clip: "url(#clip-star)" },
+        drop: { width: 270, height: 320, radius: "50% 50% 46% 46% / 68% 68% 32% 32%" },
+        cat: { width: 280, height: 290, radius: "40px", clip: "url(#clip-cat)" },
+        shroom: { width: 280, height: 290, radius: "40px", clip: "url(#clip-shroom)" },
+        egg: { width: 260, height: 320, radius: "50% 50% 50% 50% / 60% 60% 40% 40%" },
+        pill: { width: 340, height: 230, radius: "75px" },
+        mini: { width: 215, height: 215, radius: "50%" }
+    };
 
-    applyShape();
+    const def = shapeDefinitions[s] || shapeDefinitions.cube;
 
-    cube.className =
-        "cube texture-" +
-        state.texture;
+    cube.style.width = def.width + "px";
+    cube.style.height = def.height + "px";
+    cube.style.borderRadius = def.radius;
 
-    cube.style.background =
-        state.mainColour;
-
-    patternLayer.style.background =
-        getPattern();
-
-    patternLayer.style.backgroundSize =
-        state.pattern === "plain"
-            ? "auto"
-            : "55px 55px";
-
-    /* Rainbow */
-
-    if(state.rainbowShine) {
-
-        cube.style.background =
-            `linear-gradient(
-                135deg,
-                ${state.mainColour},
-                #ff75c3,
-                #ffd95c,
-                #6be7a0,
-                #65caff,
-                #b77cff
-            )`;
-
+    if (def.clip) {
+        cube.style.clipPath = def.clip;
     }
 
-    /* Logo */
+    if (def.isDonut) {
+        cubeWrap.classList.add("shape-donut");
+    }
+}
 
-    printedLogo.classList.toggle(
-        "logo-hidden",
-        !state.logo
-    );
+/* ============================================================
+   UPDATE SQUISHY (Main Visual Controller)
+============================================================ */
+function updateCube() {
+    applyShape();
 
-    /* Glitter */
+    cube.className = "cube texture-" + state.texture;
+    cube.style.background = state.mainColour;
 
-    glitterLayer.classList.toggle(
-        "on",
-        state.glitter
-    );
+    const pConfig = getPatternConfig();
+    patternLayer.style.backgroundImage = pConfig.image;
+    patternLayer.style.backgroundSize = pConfig.size;
+    patternLayer.style.backgroundRepeat = pConfig.repeat || "repeat";
+    patternLayer.style.backgroundPosition = pConfig.position || "center";
 
-    /* Glow */
+    // Special Effects: Rainbow Shine
+    if (state.rainbowShine) {
+        cube.style.background = `linear-gradient(
+            135deg,
+            ${state.mainColour},
+            #ff75c3,
+            #ffd95c,
+            #6be7a0,
+            #65caff,
+            #b77cff
+        )`;
+    }
 
-    glow.classList.toggle(
-        "on",
-        state.glow
-    );
+    // Logo visibility
+    printedLogo.classList.toggle("logo-hidden", !state.logo);
 
-    glow.style.background =
-        state.mainColour;
+    // Glitter
+    glitterLayer.classList.toggle("on", state.glitter);
 
-    /* Interaction feel */
-
-    cube.style.setProperty(
-        "--wobble",
-        state.wobble
-    );
+    // Glow
+    glow.classList.toggle("on", state.glow);
+    glow.style.background = state.mainColour;
 
     updateDecorations();
     updateInfo();
     syncButtons();
-
     saveDesign();
-
 }
 
 /* ============================================================
-   DECORATIONS
+   DECORATIONS UPDATE
 ============================================================ */
-
 function updateDecorations() {
-
     decorationsLayer.innerHTML = "";
 
     const positions = [
-
-        [10,12,-12],
-        [76,12,8],
-        [12,68,8],
-        [76,70,-8],
-        [43,17,5],
-        [48,77,-5],
-        [23,43,-8],
-        [69,43,10],
-        [43,51,0],
-        [84,34,-5],
-        [29,77,7],
-        [59,24,-6]
-
+        [15,14,-10], [72,14,8], [14,68,8], [72,68,-8],
+        [43,18,4],  [46,74,-5], [23,42,-8], [69,42,10],
+        [43,49,0],  [82,34,-5], [28,75,6],  [57,25,-6]
     ];
 
-    const selected =
-        state.decorations.slice(0,12);
+    const selected = state.decorations.slice(0, 12);
+    selected.forEach((emoji, index) => {
+        const span = document.createElement("div");
+        span.className = "sticker";
+        span.textContent = emoji;
 
-    selected.forEach((emoji,index) => {
-
-        const span =
-            document.createElement("div");
-
-        span.className =
-            "sticker";
-
-        span.textContent =
-            emoji;
-
-        const p =
-            positions[index];
-
-        span.style.left =
-            p[0] + "%";
-
-        span.style.top =
-            p[1] + "%";
-
-        span.style.fontSize =
-            (
-                index % 4 === 0
-                    ? 44
-                    : index % 4 === 1
-                        ? 38
-                        : index % 4 === 2
-                            ? 32
-                            : 36
-            ) + "px";
-
-        span.style.animationDelay =
-            (index * .16) + "s";
-
-        span.style.transform =
-            `rotate(${p[2]}deg)`;
+        const p = positions[index % positions.length];
+        span.style.left = p[0] + "%";
+        span.style.top = p[1] + "%";
+        span.style.fontSize = (index % 3 === 0 ? 42 : index % 3 === 1 ? 36 : 32) + "px";
+        span.style.animationDelay = (index * 0.18) + "s";
+        span.style.transform = `rotate(${p[2]}deg)`;
 
         decorationsLayer.appendChild(span);
-
     });
 
-    document.getElementById(
-        "decorationCounter"
-    ).textContent =
-        state.decorations.length +
-        " selected";
-
+    document.getElementById("decorationCounter").textContent = state.decorations.length + " selected";
 }
 
 /* ============================================================
-   INFO
+   SHAPE & TEXTURE NAMES
 ============================================================ */
-
-function updateInfo() {
-
-    const name =
-        document.getElementById(
-            "designName"
-        ).value.trim()
-        || "My Needoh";
-
-    document.getElementById(
-        "infoName"
-    ).textContent = name;
-
-    document.getElementById(
-        "infoDetails"
-    ).textContent =
-        `${state.mainName} • ${state.patternName} • ${getTextureName(state.texture)}`;
-
+function getShapeName(shape) {
+    const names = {
+        cube: "Nice Cube",
+        ball: "Classic Glob",
+        bear: "Gummy Bear",
+        dohnut: "Dohnut",
+        heart: "Lovely Heart",
+        star: "Super Star",
+        drop: "Dream Drop",
+        cat: "Cool Cat",
+        shroom: "Shroom",
+        egg: "Egg-stra",
+        pill: "Puffy Pill",
+        mini: "Teenie Glob"
+    };
+    return names[shape] || shape;
 }
-
-/* ============================================================
-   TEXTURE NAME
-============================================================ */
 
 function getTextureName(texture) {
-
     const names = {
-
         soft: "Super Soft",
+        fuzzy: "Fuzzy / Velvet",
         glossy: "Glossy",
-        matte: "Matte",
-        pearl: "Pearl",
-        fuzzy: "Fuzzy",
-        frosted: "Frosted",
-        metallic: "Metallic"
-
+        matte: "Powder Matte",
+        pearl: "Pearl Shimmer",
+        frosted: "Frosted Sugar",
+        metallic: "Liquid Chrome",
+        gummy: "Gummy Jelly"
     };
-
     return names[texture] || texture;
-
 }
 
 /* ============================================================
-   SYNC BUTTONS
+   INFO UPDATE
 ============================================================ */
+function updateInfo() {
+    const name = document.getElementById("designName").value.trim() || "My NeeDoh";
+    document.getElementById("infoName").textContent = name;
+    document.getElementById("infoDetails").textContent =
+        `${state.mainName} • ${state.patternName} • ${getTextureName(state.texture)} • ${getShapeName(state.shape)}`;
+}
 
+/* ============================================================
+   SYNC BUTTONS TO ACTIVE STATE
+============================================================ */
 function syncButtons() {
+    document.querySelectorAll("#mainColours .colour").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.colour === state.mainColour);
+    });
 
-    /* Main colour */
+    document.querySelectorAll("#secondaryColours .colour").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.colour === state.secondaryColour);
+    });
 
-    document
-        .querySelectorAll("#mainColours .colour")
-        .forEach(button => {
+    document.querySelectorAll("#patterns .option").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.pattern === state.pattern);
+    });
 
-            button.classList.toggle(
-                "active",
-                button.dataset.colour ===
-                state.mainColour
-            );
+    document.querySelectorAll("[data-shape]").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.shape === state.shape);
+    });
 
-        });
+    document.querySelectorAll("[data-texture]").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.texture === state.texture);
+    });
 
-    /* Secondary colour */
+    document.querySelectorAll("[data-logo]").forEach(btn => {
+        btn.classList.toggle("active", (btn.dataset.logo === "on") === state.logo);
+    });
 
-    document
-        .querySelectorAll("#secondaryColours .colour")
-        .forEach(button => {
+    document.querySelectorAll("#decorations .option").forEach(btn => {
+        btn.classList.toggle("active", state.decorations.includes(btn.dataset.decoration));
+    });
 
-            button.classList.toggle(
-                "active",
-                button.dataset.colour ===
-                state.secondaryColour
-            );
+    document.getElementById("glitterButton").classList.toggle("active", state.glitter);
+    document.getElementById("glowButton").classList.toggle("active", state.glow);
+    document.getElementById("rainbowButton").classList.toggle("active", state.rainbowShine);
+    document.getElementById("sparkleButton").classList.toggle("active", state.sparkles);
 
-        });
+    const soundBtn = document.getElementById("soundButton");
+    soundBtn.textContent = state.sound ? "🔊 Sound: On" : "🔇 Sound: Off";
+    soundBtn.classList.toggle("active", state.sound);
 
-    /* Patterns */
-
-    document
-        .querySelectorAll("#patterns .option")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.pattern ===
-                state.pattern
-            );
-
-        });
-
-    /* Shapes */
-
-    document
-        .querySelectorAll("[data-shape]")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.shape ===
-                state.shape
-            );
-
-        });
-
-    /* Textures */
-
-    document
-        .querySelectorAll("[data-texture]")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.texture ===
-                state.texture
-            );
-
-        });
-
-    /* Logo */
-
-    document
-        .querySelectorAll("[data-logo]")
-        .forEach(button => {
-
-            const shouldBeActive =
-                (
-                    button.dataset.logo === "on"
-                ) === state.logo;
-
-            button.classList.toggle(
-                "active",
-                shouldBeActive
-            );
-
-        });
-
-    /* Decorations */
-
-    document
-        .querySelectorAll(
-            "#decorations .option"
-        )
-        .forEach(button => {
-
-            const emoji =
-                button.dataset.decoration;
-
-            button.classList.toggle(
-                "active",
-                state.decorations.includes(
-                    emoji
-                )
-            );
-
-        });
-
-    /* Effects */
-
-    document
-        .getElementById("glitterButton")
-        .classList.toggle(
-            "active",
-            state.glitter
-        );
-
-    document
-        .getElementById("glowButton")
-        .classList.toggle(
-            "active",
-            state.glow
-        );
-
-    document
-        .getElementById("rainbowButton")
-        .classList.toggle(
-            "active",
-            state.rainbowShine
-        );
-
-    document
-        .getElementById("sparkleButton")
-        .classList.toggle(
-            "active",
-            state.sparkles
-        );
-
-    /* Sliders */
-
-    document.getElementById(
-        "softness"
-    ).value = state.softness;
-
-    document.getElementById(
-        "wobble"
-    ).value = state.wobble;
-
-    document.getElementById(
-        "bounce"
-    ).value = state.bounce;
-
-    document.getElementById(
-        "softnessValue"
-    ).textContent =
-        state.softness + "%";
-
-    document.getElementById(
-        "wobbleValue"
-    ).textContent =
-        state.wobble + "%";
-
-    document.getElementById(
-        "bounceValue"
-    ).textContent =
-        state.bounce + "%";
-
+    document.getElementById("softness").value = state.softness;
+    document.getElementById("wobble").value = state.wobble;
+    document.getElementById("bounce").value = state.bounce;
+    document.getElementById("softnessValue").textContent = state.softness + "%";
+    document.getElementById("wobbleValue").textContent = state.wobble + "%";
+    document.getElementById("bounceValue").textContent = state.bounce + "%";
 }
 
 /* ============================================================
-   SQUEEZE
+   SQUEEZE INTERACTION
 ============================================================ */
-
 function squeezeCube() {
+    playSquishSound();
 
-    cube.classList.remove(
-        "squishing"
-    );
-
-    cube.classList.remove(
-        "bouncy"
-    );
-
+    cube.classList.remove("squishing", "bouncy");
     void cube.offsetWidth;
+    cube.classList.add("squishing");
 
-    cube.classList.add(
-        "squishing"
-    );
-
-    if(state.bounce >= 50) {
-
+    if (state.bounce >= 50) {
         setTimeout(() => {
-
-            cube.classList.remove(
-                "squishing"
-            );
-
-            cube.classList.add(
-                "bouncy"
-            );
-
+            cube.classList.remove("squishing");
+            cube.classList.add("bouncy");
             setTimeout(() => {
-
-                cube.classList.remove(
-                    "bouncy"
-                );
-
-            },600);
-
-        },420);
-
+                cube.classList.remove("bouncy");
+            }, 600);
+        }, 340);
     } else {
-
         setTimeout(() => {
-
-            cube.classList.remove(
-                "squishing"
-            );
-
-        },500);
-
+            cube.classList.remove("squishing");
+        }, 440);
     }
 
-    squishText.classList.remove(
-        "show"
-    );
-
+    squishText.classList.remove("show");
     void squishText.offsetWidth;
 
     squishText.textContent =
-        state.softness >= 80
-            ? "SUPER SQUISHY! 🫧"
-            : state.softness >= 55
-                ? "SO SQUISHY! 🫧"
-                : "SQUISH! 💥";
+        state.softness >= 80 ? "SUPER SQUISHY! 🫧" :
+        state.softness >= 55 ? "SO SQUISHY! 🫧" : "SQUISH! 💥";
 
-    squishText.classList.add(
-        "show"
-    );
-
+    squishText.classList.add("show");
 }
 
-/* ============================================================
-   POINTER / TOUCH
-============================================================ */
+/* Pointer & Touch Listener */
+cube.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    squeezeCube();
+});
 
-cube.addEventListener(
-    "pointerdown",
-    event => {
-
-        event.preventDefault();
-
+cube.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
         squeezeCube();
-
     }
-);
+});
 
-cube.addEventListener(
-    "keydown",
-    event => {
-
-        if(
-            event.key === "Enter" ||
-            event.key === " "
-        ) {
-
-            event.preventDefault();
-
-            squeezeCube();
-
-        }
-
+/* Double-tap to spin */
+let lastTap = 0;
+cube.addEventListener("pointerup", () => {
+    const now = Date.now();
+    if (now - lastTap < 350) {
+        spinCube();
     }
-);
+    lastTap = now;
+});
 
 /* ============================================================
-   SPIN
+   SPIN INTERACTION
 ============================================================ */
-
 function spinCube() {
+    const wobble = Number(state.wobble);
+    const amount = 300 + wobble * 1.3;
 
-    const wobble =
-        Number(state.wobble);
-
-    const amount =
-        300 + wobble * 1.2;
-
-    cube.animate(
-
-        [
-
-            {
-                transform:
-                    "rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg)"
-            },
-
-            {
-                transform:
-                    `rotateX(${10 + wobble / 8}deg)
-                     rotateY(${amount}deg)
-                     rotateZ(5deg)`
-            },
-
-            {
-                transform:
-                    "rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg)"
-            }
-
-        ],
-
-        {
-
-            duration:
-                800 + wobble * 5,
-
-            easing:
-                "cubic-bezier(.2,.8,.2,1)"
-
-        }
-
-    );
-
+    cube.animate([
+        { transform: "rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg)" },
+        { transform: `rotateX(${10 + wobble / 8}deg) rotateY(${amount}deg) rotateZ(6deg)` },
+        { transform: "rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg)" }
+    ], {
+        duration: 850 + wobble * 5,
+        easing: "cubic-bezier(.2,.8,.2,1)"
+    });
 }
 
 /* ============================================================
-   RANDOM DESIGN
+   RANDOM DESIGN GENERATOR
 ============================================================ */
-
 function randomDesign() {
+    const main = mainColours[Math.floor(Math.random() * mainColours.length)];
+    const secondary = secondaryColours[Math.floor(Math.random() * secondaryColours.length)];
+    const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+    const textures = ["soft", "fuzzy", "glossy", "matte", "pearl", "frosted", "metallic", "gummy"];
+    const shapes = ["cube", "ball", "bear", "dohnut", "heart", "star", "drop", "cat", "shroom", "egg", "pill", "mini"];
 
-    const main =
-        mainColours[
-            Math.floor(
-                Math.random() *
-                mainColours.length
-            )
-        ];
+    state.mainColour = main[1];
+    state.mainName = main[0];
+    state.secondaryColour = secondary[1];
+    state.secondaryName = secondary[0];
+    state.pattern = pattern[0];
+    state.patternName = pattern[2];
+    state.texture = textures[Math.floor(Math.random() * textures.length)];
+    state.shape = shapes[Math.floor(Math.random() * shapes.length)];
+    state.glitter = Math.random() > .48;
+    state.glow = Math.random() > .62;
+    state.rainbowShine = Math.random() > .82;
+    state.sparkles = Math.random() > .55;
+    state.logo = Math.random() > .12;
+    state.softness = 35 + Math.floor(Math.random() * 65);
+    state.wobble = Math.floor(Math.random() * 101);
+    state.bounce = 35 + Math.floor(Math.random() * 65);
 
-    const secondary =
-        secondaryColours[
-            Math.floor(
-                Math.random() *
-                secondaryColours.length
-            )
-        ];
-
-    const pattern =
-        patterns[
-            Math.floor(
-                Math.random() *
-                patterns.length
-            )
-        ];
-
-    const textures = [
-        "soft",
-        "glossy",
-        "matte",
-        "pearl",
-        "fuzzy",
-        "frosted",
-        "metallic"
-    ];
-
-    const shapes = [
-        "classic",
-        "puffy",
-        "mini",
-        "soft",
-        "wide",
-        "tall"
-    ];
-
-    state.mainColour =
-        main[1];
-
-    state.mainName =
-        main[0];
-
-    state.secondaryColour =
-        secondary[1];
-
-    state.secondaryName =
-        secondary[0];
-
-    state.pattern =
-        pattern[0];
-
-    state.patternName =
-        pattern[2];
-
-    state.texture =
-        textures[
-            Math.floor(
-                Math.random() *
-                textures.length
-            )
-        ];
-
-    state.shape =
-        shapes[
-            Math.floor(
-                Math.random() *
-                shapes.length
-            )
-        ];
-
-    state.glitter =
-        Math.random() > .48;
-
-    state.glow =
-        Math.random() > .65;
-
-    state.rainbowShine =
-        Math.random() > .8;
-
-    state.sparkles =
-        Math.random() > .55;
-
-    state.logo =
-        Math.random() > .12;
-
-    state.softness =
-        30 +
-        Math.floor(
-            Math.random() * 71
-        );
-
-    state.wobble =
-        Math.floor(
-            Math.random() * 101
-        );
-
-    state.bounce =
-        35 +
-        Math.floor(
-            Math.random() * 66
-        );
-
-    const shuffled =
-        [...decorationData]
-        .sort(
-            () => Math.random() - .5
-        );
-
-    const amount =
-        3 +
-        Math.floor(
-            Math.random() * 8
-        );
-
-    state.decorations =
-        shuffled
-        .slice(0,amount)
-        .map(item => item[0]);
+    const shuffled = [...decorationData].sort(() => Math.random() - .5);
+    state.decorations = shuffled.slice(0, 3 + Math.floor(Math.random() * 6)).map(item => item[0]);
 
     syncButtons();
     updateCube();
-
     sparkleBurst();
-
-    showToast(
-        "Surprise design created! 🎉"
-    );
-
+    showToast("Surprise design created! 🎉");
 }
 
 /* ============================================================
-   THEMES
+   PRESET THEMES
 ============================================================ */
-
 const themes = {
-
     candy: {
-        main:"#ff72b6",
-        mainName:"Bubblegum Pink",
-        secondary:"#ffffff",
-        secondaryName:"White",
-        pattern:"candy",
-        patternName:"Candy Swirl",
-        decorations:["🍭","🍬","🍩","🍦","🍓"],
-        texture:"glossy",
-        glitter:true,
-        glow:false,
-        rainbow:false
+        main: "#ff72b6", mainName: "Bubblegum Pink",
+        secondary: "#ffffff", secondaryName: "White",
+        pattern: "candy", patternName: "Candy Swirl",
+        shape: "cube",
+        decorations: ["🍭","🍬","🍩","🍦","🍓"],
+        texture: "glossy", glitter: true, glow: false, rainbow: false
     },
-
     galaxy: {
-        main:"#55329a",
-        mainName:"Purple",
-        secondary:"#ffffff",
-        secondaryName:"White",
-        pattern:"galaxy",
-        patternName:"Galaxy",
-        decorations:["⭐","✨","🌙","🪐","🚀","☄️"],
-        texture:"metallic",
-        glitter:true,
-        glow:true,
-        rainbow:false
+        main: "#55329a", mainName: "Purple",
+        secondary: "#ffffff", secondaryName: "White",
+        pattern: "galaxy", patternName: "Galaxy",
+        shape: "star",
+        decorations: ["⭐","✨","🌙","🪐","🚀","☄️"],
+        texture: "metallic", glitter: true, glow: true, rainbow: false
     },
-
     rainbow: {
-        main:"#ff72b6",
-        mainName:"Bubblegum Pink",
-        secondary:
-            "linear-gradient(90deg,#ff5c91,#ffbd4a,#ffe95c,#64e49a,#56c9ff,#a975ff)",
-        secondaryName:"Rainbow",
-        pattern:"rainbow",
-        patternName:"Rainbow",
-        decorations:["🌈","⭐","🌸","🦋"],
-        texture:"pearl",
-        glitter:true,
-        glow:true,
-        rainbow:true
+        main: "#ff72b6", mainName: "Bubblegum Pink",
+        secondary: "linear-gradient(90deg,#ff5c91,#ffbd4a,#ffe95c,#64e49a,#56c9ff,#a975ff)", secondaryName: "Rainbow",
+        pattern: "rainbow", patternName: "Rainbow",
+        shape: "ball",
+        decorations: ["🌈","⭐","🌸","🦋"],
+        texture: "pearl", glitter: true, glow: true, rainbow: true
     },
-
     ocean: {
-        main:"#45bfff",
-        mainName:"Aqua",
-        secondary:"#ffffff",
-        secondaryName:"White",
-        pattern:"ocean",
-        patternName:"Ocean",
-        decorations:["🌊","🫧","🐬","🐳"],
-        texture:"glossy",
-        glitter:false,
-        glow:true,
-        rainbow:false
+        main: "#45bfff", mainName: "Aqua",
+        secondary: "#ffffff", secondaryName: "White",
+        pattern: "ocean", patternName: "Ocean",
+        shape: "drop",
+        decorations: ["🌊","🫧","🐬","🐳"],
+        texture: "glossy", glitter: false, glow: true, rainbow: false
     },
-
     strawberry: {
-        main:"#ff657d",
-        mainName:"Watermelon",
-        secondary:"#ffffff",
-        secondaryName:"White",
-        pattern:"strawberry",
-        patternName:"Strawberries",
-        decorations:["🍓","🌸","💕","✨"],
-        texture:"soft",
-        glitter:true,
-        glow:false,
-        rainbow:false
+        main: "#ff657d", mainName: "Watermelon",
+        secondary: "#ffffff", secondaryName: "White",
+        pattern: "strawberry", patternName: "Strawberries",
+        shape: "heart",
+        decorations: ["🍓","🌸","💕","✨"],
+        texture: "soft", glitter: true, glow: false, rainbow: false
     },
-
     sunset: {
-        main:"#ff8b35",
-        mainName:"Tangerine",
-        secondary:"#ffd83d",
-        secondaryName:"Yellow",
-        pattern:"sunset",
-        patternName:"Sunset",
-        decorations:["☀️","🌅","⭐","🌴"],
-        texture:"pearl",
-        glitter:true,
-        glow:true,
-        rainbow:false
+        main: "#ff8b35", mainName: "Tangerine",
+        secondary: "#ffd83d", secondaryName: "Yellow",
+        pattern: "sunset", patternName: "Sunset",
+        shape: "ball",
+        decorations: ["☀️","🌅","⭐","🌴"],
+        texture: "pearl", glitter: true, glow: true, rainbow: false
     },
-
     jungle: {
-        main:"#59d98e",
-        mainName:"Green",
-        secondary:"#ffe45e",
-        secondaryName:"Yellow",
-        pattern:"camo",
-        patternName:"Camo",
-        decorations:["🌿","🌴","🍀","🦋","🐝"],
-        texture:"matte",
-        glitter:false,
-        glow:false,
-        rainbow:false
+        main: "#59d98e", mainName: "Green",
+        secondary: "#ffe45e", secondaryName: "Yellow",
+        pattern: "camo", patternName: "Camo",
+        shape: "bear",
+        decorations: ["🌿","🌴","🍀","🦋","🐝"],
+        texture: "fuzzy", glitter: false, glow: false, rainbow: false
     },
-
     icecream: {
-        main:"#ffb7d8",
-        mainName:"Cotton Candy",
-        secondary:"#a9dcff",
-        secondaryName:"Baby Blue",
-        pattern:"sprinkles",
-        patternName:"Sprinkles",
-        decorations:["🍦","🍩","🍭","🌸","✨"],
-        texture:"frosted",
-        glitter:true,
-        glow:false,
-        rainbow:false
+        main: "#ffb7d8", mainName: "Cotton Candy",
+        secondary: "#a9dcff", secondaryName: "Baby Blue",
+        pattern: "sprinkles", patternName: "Sprinkles",
+        shape: "dohnut",
+        decorations: ["🍦","🍩","🍭","🌸","✨"],
+        texture: "frosted", glitter: true, glow: false, rainbow: false
     },
-
     neon: {
-        main:"#ff3f91",
-        mainName:"Hot Pink",
-        secondary:"#ffe45e",
-        secondaryName:"Yellow",
-        pattern:"zigzag",
-        patternName:"Zig Zag",
-        decorations:["⚡","💥","🪩","⭐"],
-        texture:"glossy",
-        glitter:true,
-        glow:true,
-        rainbow:true
+        main: "#ff3f91", mainName: "Hot Pink",
+        secondary: "#ffe45e", secondaryName: "Yellow",
+        pattern: "zigzag", patternName: "Zig Zag",
+        shape: "cube",
+        decorations: ["⚡","💥","🪩","⭐"],
+        texture: "glossy", glitter: true, glow: true, rainbow: true
     },
-
     space: {
-        main:"#30243f",
-        mainName:"Black",
-        secondary:"#62cfff",
-        secondaryName:"Sky",
-        pattern:"space",
-        patternName:"Space",
-        decorations:["🚀","🪐","🌙","⭐","☄️"],
-        texture:"metallic",
-        glitter:true,
-        glow:true,
-        rainbow:false
+        main: "#30243f", mainName: "Black",
+        secondary: "#62cfff", secondaryName: "Sky",
+        pattern: "space", patternName: "Space",
+        shape: "star",
+        decorations: ["🚀","🪐","🌙","⭐","☄️"],
+        texture: "metallic", glitter: true, glow: true, rainbow: false
     },
-
     fairy: {
-        main:"#c39bff",
-        mainName:"Lavender",
-        secondary:"#ffb7d8",
-        secondaryName:"Cotton Candy",
-        pattern:"magic",
-        patternName:"Magic",
-        decorations:["🧚","🦋","✨","🌸","🌈"],
-        texture:"pearl",
-        glitter:true,
-        glow:true,
-        rainbow:false
+        main: "#c39bff", mainName: "Lavender",
+        secondary: "#ffb7d8", secondaryName: "Cotton Candy",
+        pattern: "magic", patternName: "Magic",
+        shape: "heart",
+        decorations: ["🧚","🦋","✨","🌸","🌈"],
+        texture: "pearl", glitter: true, glow: true, rainbow: false
     },
-
     sunshine: {
-        main:"#ffe45e",
-        mainName:"Lemon",
-        secondary:"#ff8b35",
-        secondaryName:"Tangerine",
-        pattern:"sunshine",
-        patternName:"Sunshine Rays",
-        decorations:["☀️","🌻","⭐","🌈"],
-        texture:"glossy",
-        glitter:true,
-        glow:true,
-        rainbow:false
+        main: "#ffe45e", mainName: "Lemon",
+        secondary: "#ff8b35", secondaryName: "Tangerine",
+        pattern: "sunshine", patternName: "Sunshine Rays",
+        shape: "ball",
+        decorations: ["☀️","🌻","⭐","🌈"],
+        texture: "glossy", glitter: true, glow: true, rainbow: false
     }
-
 };
 
 function applyTheme(type) {
+    const theme = themes[type];
+    if (!theme) return;
 
-    const theme =
-        themes[type];
-
-    if(!theme)
-        return;
-
-    state.mainColour =
-        theme.main;
-
-    state.mainName =
-        theme.mainName;
-
-    state.secondaryColour =
-        theme.secondary;
-
-    state.secondaryName =
-        theme.secondaryName;
-
-    state.pattern =
-        theme.pattern;
-
-    state.patternName =
-        theme.patternName;
-
-    state.decorations =
-        [...theme.decorations];
-
-    state.texture =
-        theme.texture;
-
-    state.glitter =
-        theme.glitter;
-
-    state.glow =
-        theme.glow;
-
-    state.rainbowShine =
-        theme.rainbow;
-
-    state.sparkles =
-        true;
+    state.mainColour = theme.main;
+    state.mainName = theme.mainName;
+    state.secondaryColour = theme.secondary;
+    state.secondaryName = theme.secondaryName;
+    state.pattern = theme.pattern;
+    state.patternName = theme.patternName;
+    state.shape = theme.shape || "cube";
+    state.decorations = [...theme.decorations];
+    state.texture = theme.texture;
+    state.glitter = theme.glitter;
+    state.glow = theme.glow;
+    state.rainbowShine = theme.rainbow;
+    state.sparkles = true;
 
     syncButtons();
     updateCube();
-
     sparkleBurst();
-
-    showToast(
-        "Theme applied! ✨"
-    );
-
+    showToast("Theme applied! ✨");
 }
 
 /* ============================================================
-   SPARKLE BURST
+   SPARKLE BURST ANIMATION
 ============================================================ */
-
 function sparkleBurst() {
+    if (!state.sparkles) return;
+    const stage = document.querySelector(".preview-stage");
 
-    if(
-        !state.sparkles &&
-        !document.body.classList.contains(
-            "force-sparkles"
-        )
-    ) {
-        return;
+    for (let i = 0; i < 18; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.textContent = Math.random() > .5 ? "✨" : "⭐";
+        sparkle.style.position = "absolute";
+        sparkle.style.left = (30 + Math.random() * 40) + "%";
+        sparkle.style.top = (25 + Math.random() * 40) + "%";
+        sparkle.style.fontSize = (16 + Math.random() * 22) + "px";
+        sparkle.style.pointerEvents = "none";
+        sparkle.style.zIndex = "100";
+        stage.appendChild(sparkle);
+
+        const x = (Math.random() - .5) * 500;
+        const y = (Math.random() - .5) * 400;
+
+        sparkle.animate([
+            { opacity: 1, transform: "scale(.3)" },
+            { opacity: 1, transform: `translate(${x}px,${y}px) scale(1.2)` },
+            { opacity: 0, transform: `translate(${x * 1.2}px,${y * 1.2}px) scale(.2)` }
+        ], {
+            duration: 800 + Math.random() * 600,
+            easing: "ease-out"
+        }).onfinish = () => sparkle.remove();
     }
-
-    const stage =
-        document.querySelector(
-            ".preview-stage"
-        );
-
-    for(
-        let i = 0;
-        i < 18;
-        i++
-    ) {
-
-        const sparkle =
-            document.createElement("div");
-
-        sparkle.textContent =
-            Math.random() > .5
-                ? "✨"
-                : "⭐";
-
-        sparkle.style.position =
-            "absolute";
-
-        sparkle.style.left =
-            (
-                30 +
-                Math.random() * 40
-            ) + "%";
-
-        sparkle.style.top =
-            (
-                25 +
-                Math.random() * 40
-            ) + "%";
-
-        sparkle.style.fontSize =
-            (
-                15 +
-                Math.random() * 22
-            ) + "px";
-
-        sparkle.style.pointerEvents =
-            "none";
-
-        sparkle.style.zIndex =
-            "100";
-
-        stage.appendChild(
-            sparkle
-        );
-
-        const x =
-            (
-                Math.random() - .5
-            ) * 500;
-
-        const y =
-            (
-                Math.random() - .5
-            ) * 400;
-
-        sparkle.animate(
-
-            [
-
-                {
-                    opacity: 1,
-                    transform:
-                        "scale(.3)"
-                },
-
-                {
-                    opacity: 1,
-                    transform:
-                        `translate(${x}px,${y}px)
-                         scale(1.2)`
-                },
-
-                {
-                    opacity: 0,
-                    transform:
-                        `translate(${x * 1.2}px,${y * 1.2}px)
-                         scale(.2)`
-                }
-
-            ],
-
-            {
-
-                duration:
-                    800 +
-                    Math.random() * 600,
-
-                easing:
-                    "ease-out"
-
-            }
-
-        ).onfinish = () => {
-
-            sparkle.remove();
-
-        };
-
-    }
-
 }
 
 /* ============================================================
-   RESET
+   RESET DESIGN
 ============================================================ */
-
 function resetDesign() {
-
-    state = {
-        ...defaultState,
-        decorations: []
-    };
-
-    document.getElementById(
-        "designName"
-    ).value = "";
-
+    state = { ...defaultState, decorations: [] };
+    document.getElementById("designName").value = "";
     syncButtons();
     updateCube();
-
-    showToast(
-        "Back to a fresh Needoh! 💕"
-    );
-
+    showToast("Back to a fresh NeeDoh! 💕");
 }
 
 /* ============================================================
-   SAVE DESIGN
+   SAVE & LOAD LOCAL STORAGE
 ============================================================ */
-
 function saveDesign(showMessage = false) {
-
     try {
-
         const saved = {
-
             state: state,
-
-            name:
-                document.getElementById(
-                    "designName"
-                ).value
-
+            name: document.getElementById("designName").value
         };
-
-        localStorage.setItem(
-            "needohDesign",
-            JSON.stringify(saved)
-        );
-
-        if(showMessage) {
-
-            showToast(
-                "Design saved! 💖"
-            );
-
-        }
-
-    } catch(error) {
-
-        console.warn(
-            "Could not save design:",
-            error
-        );
-
-    }
-
+        localStorage.setItem("needohDesign", JSON.stringify(saved));
+        if (showMessage) showToast("Design saved! 💖");
+    } catch(e) {}
 }
-
-/* ============================================================
-   LOAD DESIGN
-============================================================ */
 
 function loadDesign() {
-
     try {
-
-        const saved =
-            localStorage.getItem(
-                "needohDesign"
-            );
-
-        if(!saved)
-            return;
-
-        const data =
-            JSON.parse(saved);
-
-        if(data && data.state) {
-
+        const saved = localStorage.getItem("needohDesign");
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        if (data && data.state) {
             state = {
                 ...defaultState,
                 ...data.state,
-
-                decorations:
-                    Array.isArray(
-                        data.state.decorations
-                    )
-                        ? data.state.decorations
-                        : []
-
+                decorations: Array.isArray(data.state.decorations) ? data.state.decorations : []
             };
-
         }
-
-        if(data && typeof data.name === "string") {
-
-            document.getElementById(
-                "designName"
-            ).value =
-                data.name;
-
+        if (data && typeof data.name === "string") {
+            document.getElementById("designName").value = data.name;
         }
-
-    } catch(error) {
-
-        console.warn(
-            "Could not load saved design:",
-            error
-        );
-
-    }
-
+    } catch(e) {}
 }
 
 /* ============================================================
-   DOWNLOAD DESIGN CARD
+   SAVE DESIGN CARD (PNG Export with Actual Shape Drawing!)
 ============================================================ */
-
 function saveDesignCard() {
-
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
-
+    const canvas = document.createElement("canvas");
     canvas.width = 900;
     canvas.height = 900;
+    const ctx = canvas.getContext("2d");
 
-    const ctx =
-        canvas.getContext("2d");
-
-    /* Background */
-
-    const bg =
-        ctx.createLinearGradient(
-            0,
-            0,
-            900,
-            900
-        );
-
-    bg.addColorStop(
-        0,
-        "#ffd8eb"
-    );
-
-    bg.addColorStop(
-        .45,
-        "#dff7ff"
-    );
-
-    bg.addColorStop(
-        1,
-        "#eee2ff"
-    );
-
+    // Background Gradient
+    const bg = ctx.createLinearGradient(0, 0, 900, 900);
+    bg.addColorStop(0, "#ffd8eb");
+    bg.addColorStop(0.45, "#dff7ff");
+    bg.addColorStop(1, "#eee2ff");
     ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, 900, 900);
 
-    ctx.fillRect(
-        0,
-        0,
-        900,
-        900
-    );
-
-    /* Title */
-
+    // Header Title
     ctx.textAlign = "center";
+    ctx.fillStyle = "#ff4d9d";
+    ctx.font = "800 68px Fredoka, Arial";
+    ctx.fillText("MY NEEDOH!", 450, 95);
 
-    ctx.fillStyle =
-        "#ff4d9d";
+    // Render Shape on Canvas
+    const cx = 450;
+    const cy = 440;
+    const size = 210;
 
-    ctx.font =
-        "800 70px Fredoka, Arial";
-
-    ctx.fillText(
-        "MY NEEDOH!",
-        450,
-        100
-    );
-
-    /* Cube */
-
-    const cubeX = 230;
-    const cubeY = 220;
-    const cubeSize = 440;
-
-    const cubeGradient =
-        ctx.createLinearGradient(
-            cubeX,
-            cubeY,
-            cubeX + cubeSize,
-            cubeY + cubeSize
-        );
-
-    if(
-        state.rainbowShine
-    ) {
-
-        cubeGradient.addColorStop(
-            0,
-            state.mainColour
-        );
-
-        cubeGradient.addColorStop(
-            .2,
-            "#ff75c3"
-        );
-
-        cubeGradient.addColorStop(
-            .4,
-            "#ffd95c"
-        );
-
-        cubeGradient.addColorStop(
-            .6,
-            "#6be7a0"
-        );
-
-        cubeGradient.addColorStop(
-            .8,
-            "#65caff"
-        );
-
-        cubeGradient.addColorStop(
-            1,
-            "#b77cff"
-        );
-
-    } else {
-
-        cubeGradient.addColorStop(
-            0,
-            state.mainColour
-        );
-
-        cubeGradient.addColorStop(
-            1,
-            state.mainColour
-        );
-
-    }
-
-    ctx.fillStyle =
-        cubeGradient;
-
-    roundRect(
-        ctx,
-        cubeX,
-        cubeY,
-        cubeSize,
-        cubeSize,
-        75
-    );
-
-    ctx.fill();
-
-    /* Highlight */
-
-    ctx.fillStyle =
-        "rgba(255,255,255,.28)";
-
+    ctx.save();
     ctx.beginPath();
 
-    ctx.ellipse(
-        350,
-        275,
-        100,
-        45,
-        -.2,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.fill();
-
-    /* Decorations */
-
-    const positions = [
-
-        [300,300],
-        [580,300],
-        [300,560],
-        [590,570],
-        [450,290],
-        [450,590],
-        [350,440],
-        [550,440]
-
-    ];
-
-    ctx.font =
-        "48px Arial";
-
-    state.decorations
-        .slice(0,8)
-        .forEach((emoji,index) => {
-
-            ctx.fillText(
-                emoji,
-                positions[index][0],
-                positions[index][1]
-            );
-
-        });
-
-    /* Logo */
-
-    if(state.logo) {
-
-        ctx.fillStyle =
-            "white";
-
-        ctx.font =
-            "800 60px Baloo 2, Arial";
-
-        ctx.fillText(
-            "NEEDOH!",
-            450,
-            485
-        );
-
+    const shape = state.shape;
+    if (shape === "ball" || shape === "mini") {
+        ctx.arc(cx, cy, size * 0.95, 0, Math.PI * 2);
+    } else if (shape === "dohnut") {
+        ctx.arc(cx, cy, size * 0.95, 0, Math.PI * 2);
+    } else if (shape === "egg") {
+        ctx.ellipse(cx, cy, size * 0.85, size * 1.05, 0, 0, Math.PI * 2);
+    } else if (shape === "drop") {
+        ctx.moveTo(cx, cy - size * 1.05);
+        ctx.quadraticCurveTo(cx + size, cy, cx + size * 0.85, cy + size * 0.6);
+        ctx.arc(cx, cy + size * 0.3, size * 0.8, 0, Math.PI, false);
+        ctx.quadraticCurveTo(cx - size, cy, cx, cy - size * 1.05);
+    } else if (shape === "heart") {
+        const topCurveHeight = size * 0.6;
+        ctx.moveTo(cx, cy + size * 0.8);
+        ctx.bezierCurveTo(cx - size * 1.2, cy, cx - size * 0.8, cy - topCurveHeight, cx, cy - size * 0.3);
+        ctx.bezierCurveTo(cx + size * 0.8, cy - topCurveHeight, cx + size * 1.2, cy, cx, cy + size * 0.8);
+    } else if (shape === "star") {
+        const rot = Math.PI / 2 * 3;
+        const step = Math.PI / 5;
+        let x = cx, y = cy;
+        ctx.moveTo(cx, cy - size);
+        for (let i = 0; i < 5; i++) {
+            x = cx + Math.cos(rot + step * i * 2) * size;
+            y = cy + Math.sin(rot + step * i * 2) * size;
+            ctx.lineTo(x, y);
+            x = cx + Math.cos(rot + step * (i * 2 + 1)) * (size * 0.48);
+            y = cy + Math.sin(rot + step * (i * 2 + 1)) * (size * 0.48);
+            ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+    } else {
+        // Nice Cube / Pill / Default rounded rect
+        const rw = shape === "pill" ? size * 2.3 : size * 1.9;
+        const rh = shape === "pill" ? size * 1.4 : size * 1.9;
+        const rr = shape === "pill" ? 60 : 70;
+        roundRect(ctx, cx - rw / 2, cy - rh / 2, rw, rh, rr);
     }
 
-    /* Name */
+    // Fill with Main Color or Rainbow Gradient
+    if (state.rainbowShine) {
+        const rg = ctx.createLinearGradient(cx - size, cy - size, cx + size, cy + size);
+        rg.addColorStop(0, state.mainColour);
+        rg.addColorStop(0.2, "#ff75c3");
+        rg.addColorStop(0.4, "#ffd95c");
+        rg.addColorStop(0.6, "#6be7a0");
+        rg.addColorStop(0.8, "#65caff");
+        rg.addColorStop(1, "#b77cff");
+        ctx.fillStyle = rg;
+    } else {
+        ctx.fillStyle = state.mainColour;
+    }
+    ctx.shadowColor = "rgba(50, 30, 70, 0.22)";
+    ctx.shadowBlur = 35;
+    ctx.shadowOffsetY = 24;
+    ctx.fill();
+    ctx.restore();
 
-    const name =
-        document.getElementById(
-            "designName"
-        ).value.trim()
-        || "My Needoh";
+    // If Dohnut, cut out center hole
+    if (shape === "dohnut") {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, size * 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = bg;
+        ctx.shadowColor = "rgba(0,0,0,0.3)";
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+    }
 
-    ctx.fillStyle =
-        "#30243f";
+    // Glare highlight
+    ctx.fillStyle = "rgba(255,255,255,.32)";
+    ctx.beginPath();
+    ctx.ellipse(cx - size * 0.35, cy - size * 0.45, size * 0.45, size * 0.2, -0.25, 0, Math.PI * 2);
+    ctx.fill();
 
-    ctx.font =
-        "700 38px Fredoka, Arial";
+    // Decorations
+    const pos = [
+        [cx - 110, cy - 100], [cx + 110, cy - 100],
+        [cx - 110, cy + 110], [cx + 110, cy + 110],
+        [cx, cy - 110], [cx, cy + 120]
+    ];
+    ctx.font = "46px Arial";
+    ctx.textAlign = "center";
+    state.decorations.slice(0, 6).forEach((emoji, index) => {
+        ctx.fillText(emoji, pos[index][0], pos[index][1]);
+    });
 
+    // Logo
+    if (state.logo) {
+        ctx.fillStyle = "white";
+        ctx.font = "800 58px 'Baloo 2', Arial";
+        ctx.fillText("NEEDOH!", cx, cy + 15);
+    }
+
+    // Name & Details
+    const name = document.getElementById("designName").value.trim() || "My NeeDoh";
+    ctx.fillStyle = "#30243f";
+    ctx.font = "700 36px Fredoka, Arial";
+    ctx.fillText(name, cx, 755);
+
+    ctx.font = "600 22px Fredoka, Arial";
+    ctx.fillStyle = "#634d75";
     ctx.fillText(
-        name,
-        450,
-        760
+        `${state.mainName} • ${state.patternName} • ${getTextureName(state.texture)} • ${getShapeName(state.shape)}`,
+        cx,
+        805
     );
 
-    /* Details */
+    ctx.font = "600 19px Fredoka, Arial";
+    ctx.fillStyle = "#ff4d9d";
+    ctx.fillText("✨ Designed with NeeDoh Designer ✨", cx, 855);
 
-    ctx.font =
-        "600 23px Fredoka, Arial";
-
-    ctx.fillText(
-        `${state.mainName} • ${state.patternName} • ${getTextureName(state.texture)}`,
-        450,
-        810
-    );
-
-    /* Footer */
-
-    ctx.font =
-        "600 20px Fredoka, Arial";
-
-    ctx.fillStyle =
-        "#ff4d9d";
-
-    ctx.fillText(
-        "✨ Designed with Needoh Designer ✨",
-        450,
-        855
-    );
-
-    const link =
-        document.createElement(
-            "a"
-        );
-
-    link.download =
-        (
-            name
-                .replace(
-                    /[^a-z0-9]/gi,
-                    "-"
-                )
-                .toLowerCase()
-            || "my-needoh"
-        ) +
-        "-design.png";
-
-    link.href =
-        canvas.toDataURL(
-            "image/png"
-        );
-
+    // Download PNG
+    const link = document.createElement("a");
+    link.download = (name.replace(/[^a-z0-9]/gi, "-").toLowerCase() || "my-needoh") + "-design.png";
+    link.href = canvas.toDataURL("image/png");
     link.click();
 
-    showToast(
-        "Your design picture is ready! 📸"
-    );
-
+    showToast("Your design card is ready! 📸");
 }
 
-/* ============================================================
-   CANVAS ROUNDED RECTANGLE
-============================================================ */
-
-function roundRect(
-    ctx,
-    x,
-    y,
-    width,
-    height,
-    radius
-) {
-
+function roundRect(ctx, x, y, width, height, radius) {
     ctx.beginPath();
-
-    ctx.moveTo(
-        x + radius,
-        y
-    );
-
-    ctx.lineTo(
-        x + width - radius,
-        y
-    );
-
-    ctx.quadraticCurveTo(
-        x + width,
-        y,
-        x + width,
-        y + radius
-    );
-
-    ctx.lineTo(
-        x + width,
-        y + height - radius
-    );
-
-    ctx.quadraticCurveTo(
-        x + width,
-        y + height,
-        x + width - radius,
-        y + height
-    );
-
-    ctx.lineTo(
-        x + radius,
-        y + height
-    );
-
-    ctx.quadraticCurveTo(
-        x,
-        y + height,
-        x,
-        y + height - radius
-    );
-
-    ctx.lineTo(
-        x,
-        y + radius
-    );
-
-    ctx.quadraticCurveTo(
-        x,
-        y,
-        x + radius,
-        y
-    );
-
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
     ctx.closePath();
-
 }
 
 /* ============================================================
    SHARE
 ============================================================ */
-
 async function shareDesign() {
+    const name = document.getElementById("designName").value.trim() || "My NeeDoh";
+    const text = `Check out my custom NeeDoh squishy design: ${name}! 🫧✨`;
 
-    const name =
-        document.getElementById(
-            "designName"
-        ).value.trim()
-        || "My Needoh";
-
-    const text =
-        `Check out my Needoh design: ${name}! 🫧✨`;
-
-    if(
-        navigator.share
-    ) {
-
+    if (navigator.share) {
         try {
-
             await navigator.share({
-
-                title:
-                    "My Needoh Design",
-
-                text:
-                    text,
-
-                url:
-                    window.location.href
-
+                title: "My NeeDoh Design",
+                text: text,
+                url: window.location.href
             });
-
-            showToast(
-                "Design shared! 🎉"
-            );
-
+            showToast("Design shared! 🎉");
             return;
-
-        } catch(error) {
-
-            if(
-                error &&
-                error.name ===
-                "AbortError"
-            ) {
-
-                return;
-
-            }
-
-        }
-
+        } catch(e) {}
     }
 
     try {
-
-        await navigator.clipboard.writeText(
-            window.location.href
-        );
-
-        showToast(
-            "Website link copied! 📋"
-        );
-
-    } catch(error) {
-
-        showToast(
-            "Share this page using your browser menu! 📤"
-        );
-
+        await navigator.clipboard.writeText(window.location.href);
+        showToast("Website link copied! 📋");
+    } catch(e) {
+        showToast("Share this page using your browser menu! 📤");
     }
-
 }
 
 /* ============================================================
-   EFFECT BUTTONS
+   EVENT LISTENERS
 ============================================================ */
 
-document.getElementById(
-    "glitterButton"
-).addEventListener(
-    "click",
-    () => {
+// Special Effects Buttons
+document.getElementById("glitterButton").addEventListener("click", () => {
+    state.glitter = !state.glitter;
+    syncButtons();
+    updateCube();
+});
 
-        state.glitter =
-            !state.glitter;
+document.getElementById("glowButton").addEventListener("click", () => {
+    state.glow = !state.glow;
+    syncButtons();
+    updateCube();
+});
 
-        syncButtons();
+document.getElementById("rainbowButton").addEventListener("click", () => {
+    state.rainbowShine = !state.rainbowShine;
+    syncButtons();
+    updateCube();
+});
+
+document.getElementById("sparkleButton").addEventListener("click", () => {
+    state.sparkles = !state.sparkles;
+    syncButtons();
+    updateCube();
+    if (state.sparkles) sparkleBurst();
+});
+
+// Sound Toggle
+document.getElementById("soundButton").addEventListener("click", () => {
+    state.sound = !state.sound;
+    syncButtons();
+    if (state.sound) playSquishSound();
+    showToast(state.sound ? "Sound On 🔊" : "Sound Muted 🔇");
+});
+
+// Shapes Buttons
+document.querySelectorAll("[data-shape]").forEach(button => {
+    button.addEventListener("click", () => {
+        state.shape = button.dataset.shape;
         updateCube();
+    });
+});
 
-    }
-);
-
-document.getElementById(
-    "glowButton"
-).addEventListener(
-    "click",
-    () => {
-
-        state.glow =
-            !state.glow;
-
-        syncButtons();
+// Texture Buttons
+document.querySelectorAll("[data-texture]").forEach(button => {
+    button.addEventListener("click", () => {
+        state.texture = button.dataset.texture;
         updateCube();
+    });
+});
 
-    }
-);
-
-document.getElementById(
-    "rainbowButton"
-).addEventListener(
-    "click",
-    () => {
-
-        state.rainbowShine =
-            !state.rainbowShine;
-
-        syncButtons();
+// Logo Buttons
+document.querySelectorAll("[data-logo]").forEach(button => {
+    button.addEventListener("click", () => {
+        state.logo = button.dataset.logo === "on";
         updateCube();
-
-    }
-);
-
-document.getElementById(
-    "sparkleButton"
-).addEventListener(
-    "click",
-    () => {
-
-        state.sparkles =
-            !state.sparkles;
-
-        syncButtons();
-        updateCube();
-
-        if(state.sparkles) {
-
-            sparkleBurst();
-
-        }
-
-    }
-);
-
-/* ============================================================
-   SHAPE BUTTONS
-============================================================ */
-
-document
-    .querySelectorAll("[data-shape]")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                state.shape =
-                    button.dataset.shape;
-
-                updateCube();
-
-            }
-        );
-
     });
+});
 
-/* ============================================================
-   TEXTURE BUTTONS
-============================================================ */
-
-document
-    .querySelectorAll("[data-texture]")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                state.texture =
-                    button.dataset.texture;
-
-                updateCube();
-
-            }
-        );
-
+// Theme Buttons
+document.querySelectorAll("[data-theme]").forEach(button => {
+    button.addEventListener("click", () => {
+        applyTheme(button.dataset.theme);
     });
+});
 
-/* ============================================================
-   LOGO BUTTONS
-============================================================ */
+// Name Input
+document.getElementById("designName").addEventListener("input", () => {
+    updateInfo();
+    saveDesign();
+});
 
-document
-    .querySelectorAll("[data-logo]")
-    .forEach(button => {
+// Sliders
+document.getElementById("softness").addEventListener("input", (e) => {
+    state.softness = Number(e.target.value);
+    syncButtons();
+    saveDesign();
+});
 
-        button.addEventListener(
-            "click",
-            () => {
+document.getElementById("wobble").addEventListener("input", (e) => {
+    state.wobble = Number(e.target.value);
+    syncButtons();
+    saveDesign();
+});
 
-                state.logo =
-                    button.dataset.logo ===
-                    "on";
+document.getElementById("bounce").addEventListener("input", (e) => {
+    state.bounce = Number(e.target.value);
+    syncButtons();
+    saveDesign();
+});
 
-                updateCube();
-
-            }
-        );
-
-    });
-
-/* ============================================================
-   THEME BUTTONS
-============================================================ */
-
-document
-    .querySelectorAll("[data-theme]")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                applyTheme(
-                    button.dataset.theme
-                );
-
-            }
-        );
-
-    });
-
-/* ============================================================
-   NAME
-============================================================ */
-
-document
-    .getElementById("designName")
-    .addEventListener(
-        "input",
-        () => {
-
-            updateInfo();
-            saveDesign();
-
-        }
-    );
-
-/* ============================================================
-   SLIDERS
-============================================================ */
-
-document
-    .getElementById("softness")
-    .addEventListener(
-        "input",
-        event => {
-
-            state.softness =
-                Number(
-                    event.target.value
-                );
-
-            syncButtons();
-            updateInfo();
-            saveDesign();
-
-        }
-    );
-
-document
-    .getElementById("wobble")
-    .addEventListener(
-        "input",
-        event => {
-
-            state.wobble =
-                Number(
-                    event.target.value
-                );
-
-            syncButtons();
-            saveDesign();
-
-        }
-    );
-
-document
-    .getElementById("bounce")
-    .addEventListener(
-        "input",
-        event => {
-
-            state.bounce =
-                Number(
-                    event.target.value
-                );
-
-            syncButtons();
-            saveDesign();
-
-        }
-    );
-
-/* ============================================================
-   MAIN BUTTONS
-============================================================ */
-
-document
-    .getElementById("randomButton")
-    .addEventListener(
-        "click",
-        randomDesign
-    );
-
-document
-    .getElementById("spinButton")
-    .addEventListener(
-        "click",
-        spinCube
-    );
-
-document
-    .getElementById("squeezeButton")
-    .addEventListener(
-        "click",
-        squeezeCube
-    );
-
-document
-    .getElementById("saveButton")
-    .addEventListener(
-        "click",
-        () => {
-
-            saveDesign(true);
-            saveDesignCard();
-
-        }
-    );
-
-document
-    .getElementById("shareButton")
-    .addEventListener(
-        "click",
-        shareDesign
-    );
-
-document
-    .getElementById("resetButton")
-    .addEventListener(
-        "click",
-        resetDesign
-    );
-
-/* ============================================================
-   DOUBLE TAP / CLICK FUN
-============================================================ */
-
-let lastTap = 0;
-
-cube.addEventListener(
-    "pointerup",
-    () => {
-
-        const now =
-            Date.now();
-
-        if(
-            now - lastTap < 350
-        ) {
-
-            spinCube();
-
-        }
-
-        lastTap = now;
-
-    }
-);
+// Main Action Buttons
+document.getElementById("randomButton").addEventListener("click", randomDesign);
+document.getElementById("spinButton").addEventListener("click", spinCube);
+document.getElementById("squeezeButton").addEventListener("click", squeezeCube);
+document.getElementById("saveButton").addEventListener("click", () => {
+    saveDesign(true);
+    saveDesignCard();
+});
+document.getElementById("shareButton").addEventListener("click", shareDesign);
+document.getElementById("resetButton").addEventListener("click", resetDesign);
 
 /* ============================================================
    STARTUP
 ============================================================ */
-
 createColours();
 createPatterns();
 createDecorations();
-
 loadDesign();
-
 syncButtons();
 updateCube();
 
