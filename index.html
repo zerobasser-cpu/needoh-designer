@@ -17,7 +17,7 @@
 <style>
 
 /* ============================================================
-   NEEDOH DESIGNER - MODERN ENHANCED EDITION
+   NEEDOH DESIGNER - MODERN ENHANCED STICKY EDITION
 ============================================================ */
 
 * {
@@ -33,7 +33,7 @@
     --yellow: #ffd84d;
     --green: #65e6a5;
     --dark: #30243f;
-    --panel: rgba(255, 255, 255, 0.9);
+    --panel: rgba(255, 255, 255, 0.92);
 }
 
 html {
@@ -102,28 +102,28 @@ body {
 
 header {
     text-align: center;
-    padding: 24px 16px 16px;
+    padding: 20px 16px 14px;
 }
 
 .logo-title {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
 }
 
 .logo-badge {
-    width: 64px;
-    height: 64px;
-    border-radius: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 28px;
     background: linear-gradient(135deg, #ff63aa, #ff9dca);
     transform: rotate(-7deg);
     box-shadow:
-        0 12px 28px rgba(255,75,155,.25),
+        0 10px 24px rgba(255,75,155,.25),
         inset 0 3px 0 rgba(255,255,255,.5);
     animation: gentleWobble 4s ease-in-out infinite alternate;
 }
@@ -136,52 +136,53 @@ header {
 header h1 {
     margin: 0;
     font-family: "Baloo 2", sans-serif;
-    font-size: clamp(45px, 8vw, 76px);
+    font-size: clamp(40px, 7vw, 68px);
     line-height: .85;
     font-weight: 800;
     letter-spacing: -3px;
     color: #ff4d9d;
     text-shadow:
         3px 3px 0 white,
-        6px 6px 0 rgba(255,255,255,.5);
+        5px 5px 0 rgba(255,255,255,.5);
 }
 
 header p {
-    margin: 12px 0 0;
-    font-size: clamp(15px, 2vw, 19px);
+    margin: 10px 0 0;
+    font-size: clamp(14px, 1.8vw, 17px);
     font-weight: 700;
     color: #533966;
     letter-spacing: 0.5px;
 }
 
 /* ============================================================
-   WORKSPACE
+   WORKSPACE LAYOUT & STICKY PREVIEW
 ============================================================ */
 
 .workspace {
-    width: min(1660px, 96%);
+    width: min(1660px, 97%);
     margin: auto;
     display: grid;
-    grid-template-columns: 340px minmax(420px, 1fr) 340px;
-    gap: 18px;
-    align-items: start;
+    /* Left column, Center Sticky Preview, Right column */
+    grid-template-columns: 320px minmax(380px, 1fr) 320px;
+    gap: 16px;
+    align-items: start; /* Essential: prevents columns stretching so preview can stick! */
 }
 
 .panel {
     background: var(--panel);
-    border: 3px solid rgba(255,255,255,.88);
-    border-radius: 28px;
-    padding: 20px;
+    border: 3px solid rgba(255,255,255,.9);
+    border-radius: 26px;
+    padding: 18px;
     box-shadow:
-        0 18px 45px rgba(80,50,100,.13),
+        0 16px 40px rgba(80,50,100,.11),
         inset 0 1px 0 white;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
 }
 
 .panel h2 {
-    margin: 0 0 16px;
-    font-size: 24px;
+    margin: 0 0 14px;
+    font-size: 22px;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -189,13 +190,13 @@ header p {
 }
 
 .section {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .section-title {
     font-size: 15px;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -204,173 +205,60 @@ header p {
 }
 
 /* ============================================================
-   OPTION BUTTONS & SHAPES
-============================================================ */
-
-.options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-}
-
-.option {
-    min-height: 60px;
-    border: 2px solid transparent;
-    background: rgba(255,255,255,.95);
-    border-radius: 16px;
-    padding: 8px 5px;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 700;
-    color: var(--dark);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    transition:
-        transform .16s ease,
-        box-shadow .16s ease,
-        border-color .16s ease,
-        background .16s ease;
-    touch-action: manipulation;
-    user-select: none;
-}
-
-.option:hover {
-    transform: translateY(-2px);
-    background: #fff;
-    box-shadow: 0 6px 14px rgba(0,0,0,.08);
-}
-
-.option:active {
-    transform: scale(.96);
-}
-
-.option.active {
-    border-color: var(--pink);
-    background: #fff0f8;
-    box-shadow:
-        0 0 0 3px rgba(255,77,157,.15),
-        0 6px 14px rgba(255,77,157,.12);
-}
-
-.option small {
-    display: block;
-    font-size: 11px;
-    line-height: 1.1;
-    font-weight: 700;
-    text-align: center;
-}
-
-/* Shape Swatches */
-.shape-preview-icon {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    margin-bottom: 2px;
-}
-
-/* ============================================================
-   COLOURS
-============================================================ */
-
-.colours {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-}
-
-.colour {
-    position: relative;
-    height: 42px;
-    border-radius: 13px;
-    border: 3px solid white;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,.12);
-    transition: transform .16s ease, box-shadow .16s ease, outline .16s ease;
-    touch-action: manipulation;
-}
-
-.colour:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 14px rgba(0,0,0,.18);
-}
-
-.colour.active {
-    outline: 3px solid var(--pink);
-    outline-offset: 1px;
-    transform: scale(1.08);
-    box-shadow: 0 5px 14px rgba(255,77,157,.3);
-}
-
-.colour-name {
-    position: absolute;
-    left: 50%;
-    bottom: calc(100% + 7px);
-    transform: translateX(-50%);
-    background: var(--dark);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 10px;
-    font-weight: 700;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .15s;
-    z-index: 100;
-}
-
-.colour:hover .colour-name {
-    opacity: 1;
-}
-
-/* ============================================================
-   PREVIEW PANEL
+   STICKY CENTER PREVIEW PANEL
 ============================================================ */
 
 .preview-panel {
-    min-height: 760px;
+    position: sticky;
+    top: 14px;
+    z-index: 60;
+    max-height: calc(100vh - 28px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 95, 162, 0.4) transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
-    position: relative;
+    padding: 16px 18px;
+}
+
+.preview-panel::-webkit-scrollbar {
+    width: 5px;
+}
+.preview-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 95, 162, 0.35);
+    border-radius: 10px;
 }
 
 .name-input {
-    width: min(460px, 94%);
-    padding: 14px 18px;
+    width: min(440px, 94%);
+    padding: 11px 16px;
     border: 3px solid white;
-    border-radius: 20px;
+    border-radius: 18px;
     font-family: inherit;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     text-align: center;
     outline: none;
-    margin-bottom: 15px;
-    background: rgba(255,255,255,.94);
-    box-shadow: 0 8px 20px rgba(0,0,0,.07);
+    margin-bottom: 10px;
+    background: rgba(255,255,255,.95);
+    box-shadow: 0 6px 16px rgba(0,0,0,.06);
     color: var(--dark);
     transition: border-color .2s, box-shadow .2s;
 }
 
 .name-input:focus {
     border-color: #ff79b7;
-    box-shadow: 0 8px 25px rgba(255,100,170,.22);
+    box-shadow: 0 6px 20px rgba(255,100,170,.2);
 }
 
 /* ============================================================
-   PREVIEW STAGE
+   PREVIEW STAGE & SQUISHY
 ============================================================ */
 
 .preview-stage {
     width: 100%;
-    min-height: 500px;
+    min-height: 360px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -381,32 +269,28 @@ header p {
 
 .cube-wrap {
     position: relative;
-    width: 360px;
-    height: 360px;
+    width: 320px;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 26px 36px rgba(55,35,70,.25));
+    filter: drop-shadow(0 24px 34px rgba(55,35,70,.25));
     transition: transform .25s ease;
 }
 
-/* ============================================================
-   SQUISHY BODY (Supports All Shapes!)
-============================================================ */
-
 .cube {
     position: relative;
-    width: 290px;
-    height: 290px;
-    border-radius: 52px;
+    width: 270px;
+    height: 270px;
+    border-radius: 50px;
     transform-style: preserve-3d;
     transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg);
     transition:
-        width .35s ease,
-        height .35s ease,
-        border-radius .35s ease,
-        transform .2s ease,
-        clip-path .35s ease;
+        width .3s ease,
+        height .3s ease,
+        border-radius .3s ease,
+        transform .18s ease,
+        clip-path .3s ease;
     overflow: hidden;
     cursor: pointer;
     user-select: none;
@@ -414,11 +298,11 @@ header p {
 
     /* Base 3D silicone shading */
     box-shadow:
-        inset -22px -24px 42px rgba(0,0,0,.16),
-        inset 18px 16px 32px rgba(255,255,255,.48);
+        inset -20px -22px 38px rgba(0,0,0,.16),
+        inset 16px 14px 28px rgba(255,255,255,.48);
 }
 
-/* 3D Curved Top Specular Highlight Glare */
+/* 3D Specular Highlight Glare */
 .cube::before {
     content: "";
     position: absolute;
@@ -428,14 +312,14 @@ header p {
     height: 22%;
     border-radius: 50%;
     background: rgba(255,255,255,.36);
-    filter: blur(8px);
+    filter: blur(7px);
     transform: rotate(-16deg);
     pointer-events: none;
     z-index: 40;
     transition: opacity .25s, filter .25s, transform .25s;
 }
 
-/* 3D Global Volume Gradient Overlay */
+/* 3D Volume Gradient Overlay */
 .cube::after {
     content: "";
     position: absolute;
@@ -458,8 +342,8 @@ header p {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 82px;
-    height: 82px;
+    width: 78px;
+    height: 78px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.7), #eedaf5);
@@ -472,63 +356,6 @@ header p {
 }
 
 .shape-donut .donut-hole {
-    display: block;
-}
-
-/* Cute Bear Ears Overlay */
-.bear-ears {
-    display: none;
-    position: absolute;
-    top: 10px;
-    width: 290px;
-    height: 70px;
-    pointer-events: none;
-    z-index: 10;
-}
-
-.bear-ear {
-    position: absolute;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: inherit;
-    box-shadow:
-        inset -8px -8px 16px rgba(0,0,0,.18),
-        inset 6px 6px 14px rgba(255,255,255,.45);
-}
-
-.bear-ear.left { left: 16px; top: -18px; }
-.bear-ear.right { right: 16px; top: -18px; }
-
-.shape-bear-ears-active .bear-ears {
-    display: block;
-}
-
-/* Cute Cat Ears Overlay */
-.cat-ears {
-    display: none;
-    position: absolute;
-    top: -20px;
-    width: 280px;
-    height: 60px;
-    pointer-events: none;
-    z-index: 10;
-}
-
-.cat-ear {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 28px solid transparent;
-    border-right: 28px solid transparent;
-    border-bottom: 45px solid var(--cat-color, #ff72b6);
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
-}
-
-.cat-ear.left { left: 24px; transform: rotate(-18deg); }
-.cat-ear.right { right: 24px; transform: rotate(18deg); }
-
-.shape-cat-ears-active .cat-ears {
     display: block;
 }
 
@@ -581,10 +408,7 @@ header p {
     opacity: .85;
 }
 
-/* ============================================================
-   PRINTED LOGO
-============================================================ */
-
+/* Printed Logo */
 .printed-logo {
     position: absolute;
     left: 50%;
@@ -592,7 +416,7 @@ header p {
     transform: translate(-50%,-50%) rotate(-3deg);
     font-family: "Baloo 2", sans-serif;
     font-weight: 800;
-    font-size: 42px;
+    font-size: 38px;
     letter-spacing: -2px;
     color: white;
     text-shadow:
@@ -609,10 +433,7 @@ header p {
     display: none !important;
 }
 
-/* ============================================================
-   STICKERS / DECORATIONS
-============================================================ */
-
+/* Stickers / Charms */
 .sticker {
     position: absolute;
     display: flex;
@@ -625,20 +446,17 @@ header p {
 
 @keyframes stickerFloat {
     0%, 100% { transform: translateY(0) rotate(-4deg); }
-    50% { transform: translateY(-6px) rotate(4deg); }
+    50% { transform: translateY(-5px) rotate(4deg); }
 }
 
-/* ============================================================
-   GLOW AROUND SQUISHY
-============================================================ */
-
+/* Glow */
 .glow {
     position: absolute;
-    inset: -15px;
+    inset: -12px;
     border-radius: 90px;
     z-index: -1;
     opacity: 0;
-    filter: blur(42px);
+    filter: blur(38px);
     transition: opacity .3s, background .3s;
 }
 
@@ -647,18 +465,12 @@ header p {
 }
 
 /* ============================================================
-   TEXTURE ENGINE (Realistic, Distinct & Tactile!)
+   TEXTURE ENGINE
 ============================================================ */
 
-/* 1. SUPER SOFT (Standard Smooth Silicone) */
-.texture-soft {
-    filter: saturate(1.05);
-}
+.texture-soft { filter: saturate(1.05); }
 
-/* 2. GLOSSY (Wet Look, High Specular Glare & Shimmer) */
-.texture-glossy {
-    filter: saturate(1.18) contrast(1.08);
-}
+.texture-glossy { filter: saturate(1.18) contrast(1.08); }
 .texture-glossy::before {
     opacity: .92 !important;
     filter: blur(3px) !important;
@@ -671,13 +483,8 @@ header p {
         linear-gradient(to top, rgba(255,255,255,0.3) 0%, transparent 35%);
 }
 
-/* 3. MATTE (Powdered Velvet Silicone, Zero Glare) */
-.texture-matte {
-    filter: saturate(.92) brightness(.98);
-}
-.texture-matte::before {
-    opacity: 0 !important; /* Eliminate glossy specular glare completely */
-}
+.texture-matte { filter: saturate(.92) brightness(.98); }
+.texture-matte::before { opacity: 0 !important; }
 .texture-matte::after {
     background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 50%, rgba(0,0,0,.22)) !important;
 }
@@ -686,10 +493,7 @@ header p {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)' opacity='0.16'/%3E%3C/svg%3E");
 }
 
-/* 4. PEARL (Iridescent Shifting Opal Luster) */
-.texture-pearl {
-    filter: saturate(1.12) brightness(1.04);
-}
+.texture-pearl { filter: saturate(1.12) brightness(1.04); }
 .texture-pearl .texture-layer {
     opacity: .85;
     background: linear-gradient(
@@ -702,23 +506,15 @@ header p {
     );
     mix-blend-mode: color-dodge;
 }
-.texture-pearl::before {
-    opacity: .55 !important;
-    filter: blur(6px) !important;
-}
+.texture-pearl::before { opacity: .55 !important; filter: blur(6px) !important; }
 
-/* 5. FUZZY (Authentic Flocked / Velveteen / Peach Fuzz!) */
-.texture-fuzzy {
-    filter: saturate(.96) contrast(.96);
-}
+.texture-fuzzy { filter: saturate(.96) contrast(.96); }
 .texture-fuzzy::before {
-    /* Diffuse the glare spot into a soft suede highlight */
     opacity: .18 !important;
     filter: blur(16px) !important;
     transform: scale(1.4) rotate(-12deg) !important;
 }
 .texture-fuzzy::after {
-    /* Flocked rim-light fiber aura */
     background: radial-gradient(circle at 50% 50%, transparent 62%, rgba(255,255,255,.45) 100%) !important;
     opacity: .88 !important;
 }
@@ -731,7 +527,6 @@ header p {
     mix-blend-mode: soft-light;
 }
 .texture-fuzzy {
-    /* Tactile fuzzy fiber outline */
     box-shadow:
         0 0 0 3px rgba(255,255,255,0.38),
         0 0 16px rgba(255,255,255,0.48),
@@ -739,14 +534,8 @@ header p {
         inset 16px 16px 30px rgba(255,255,255,.42) !important;
 }
 
-/* 6. FROSTED (Sugar Coated / Icy Sea Glass) */
-.texture-frosted {
-    filter: brightness(1.06) saturate(.85);
-}
-.texture-frosted::before {
-    opacity: .4 !important;
-    filter: blur(12px) !important;
-}
+.texture-frosted { filter: brightness(1.06) saturate(.85); }
+.texture-frosted::before { opacity: .4 !important; filter: blur(12px) !important; }
 .texture-frosted .texture-layer {
     opacity: .8;
     background:
@@ -755,14 +544,8 @@ header p {
     background-size: 7px 7px, 100% 100%;
 }
 
-/* 7. METALLIC (Liquid Chrome & Mirror Reflection Bands) */
-.texture-metallic {
-    filter: contrast(1.22) saturate(1.2);
-}
-.texture-metallic::before {
-    opacity: .95 !important;
-    filter: blur(1.5px) !important;
-}
+.texture-metallic { filter: contrast(1.22) saturate(1.2); }
+.texture-metallic::before { opacity: .95 !important; filter: blur(1.5px) !important; }
 .texture-metallic .texture-layer {
     opacity: .85;
     background: linear-gradient(
@@ -779,14 +562,8 @@ header p {
     mix-blend-mode: overlay;
 }
 
-/* 8. GUMMY / JELLY (Translucent Nice Cube Candy Gel) */
-.texture-gummy {
-    filter: saturate(1.25) brightness(1.05);
-}
-.texture-gummy::before {
-    opacity: .75 !important;
-    filter: blur(4px) !important;
-}
+.texture-gummy { filter: saturate(1.25) brightness(1.05); }
+.texture-gummy::before { opacity: .75 !important; filter: blur(4px) !important; }
 .texture-gummy .texture-layer {
     opacity: .8;
     background:
@@ -803,7 +580,7 @@ header p {
         rotateX(-8deg)
         rotateY(-12deg)
         rotateZ(-2deg)
-        scale(1.16, 0.82) !important;
+        scale(1.15, 0.82) !important;
     transition: transform .08s ease-out;
 }
 
@@ -819,11 +596,10 @@ header p {
     100% { transform: rotateX(-8deg) rotateY(-12deg) rotateZ(-2deg) scale(1); }
 }
 
-/* Squish Message Pop */
 .squish-text {
     position: absolute;
-    bottom: 8px;
-    font-size: 28px;
+    bottom: 6px;
+    font-size: 26px;
     font-weight: 800;
     color: var(--pink);
     opacity: 0;
@@ -843,35 +619,36 @@ header p {
 }
 
 /* ============================================================
-   PREVIEW CONTROLS & BUTTONS
+   PREVIEW CONTROLS & INFO
 ============================================================ */
 
 .preview-buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 9px;
+    gap: 8px;
     width: 100%;
+    margin-top: 4px;
 }
 
 .big-button {
     border: 0;
-    border-radius: 17px;
-    padding: 13px 18px;
+    border-radius: 15px;
+    padding: 10px 15px;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
     cursor: pointer;
     background: white;
     color: var(--dark);
-    box-shadow: 0 7px 16px rgba(0,0,0,.1);
+    box-shadow: 0 5px 14px rgba(0,0,0,.08);
     transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
     touch-action: manipulation;
 }
 
 .big-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(0,0,0,.14);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
 }
 
 .big-button:active {
@@ -898,76 +675,268 @@ header p {
     color: var(--pink-dark);
 }
 
-/* ============================================================
-   INFO CARD
-============================================================ */
-
 .info-card {
-    width: min(500px, 95%);
-    background: rgba(255,255,255,.75);
-    border-radius: 20px;
-    padding: 14px;
-    margin-top: 14px;
+    width: min(480px, 98%);
+    background: rgba(255,255,255,.8);
+    border-radius: 18px;
+    padding: 10px 14px;
+    margin-top: 12px;
     text-align: center;
-    box-shadow: inset 0 1px 0 white, 0 6px 16px rgba(80,50,100,.06);
+    box-shadow: inset 0 1px 0 white, 0 4px 12px rgba(80,50,100,.05);
 }
 
 .info-card strong {
     color: var(--pink);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .info-details {
-    margin-top: 5px;
-    font-size: 14px;
+    margin-top: 3px;
+    font-size: 13px;
     font-weight: 600;
     color: #4b3e58;
 }
 
 /* ============================================================
-   SLIDERS & SETTINGS
+   OPTIONS, SEARCH & CATEGORY CHIPS
 ============================================================ */
 
-.slider-row {
-    margin: 16px 0;
+.options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
 }
 
-.slider-label {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 700;
-    margin-bottom: 6px;
-    font-size: 14px;
-}
-
-.slider-value {
-    color: var(--pink);
-    font-weight: 800;
-}
-
-input[type="range"] {
-    width: 100%;
-    height: 26px;
-    accent-color: var(--pink);
+.option {
+    min-height: 58px;
+    border: 2px solid transparent;
+    background: rgba(255,255,255,.95);
+    border-radius: 15px;
+    padding: 6px 4px;
     cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition:
+        transform .16s ease,
+        box-shadow .16s ease,
+        border-color .16s ease,
+        background .16s ease;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.option:hover {
+    transform: translateY(-2px);
+    background: #fff;
+    box-shadow: 0 5px 12px rgba(0,0,0,.08);
+}
+
+.option:active {
+    transform: scale(.96);
+}
+
+.option.active {
+    border-color: var(--pink);
+    background: #fff0f8;
+    box-shadow:
+        0 0 0 3px rgba(255,77,157,.15),
+        0 5px 12px rgba(255,77,157,.12);
+}
+
+.option small {
+    display: block;
+    font-size: 11px;
+    line-height: 1.1;
+    font-weight: 700;
+    text-align: center;
+}
+
+.shape-preview-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* Search bar */
+.search-box {
+    margin-bottom: 8px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid rgba(255, 114, 182, 0.3);
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    background: white;
+    color: var(--dark);
+    transition: border-color .16s, box-shadow .16s;
+}
+
+.search-input:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(255, 95, 162, 0.15);
+}
+
+/* Category Filter Chips */
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.cat-tab {
+    border: 0;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 4px 9px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #554466;
+    transition: background .15s, color .15s, transform .15s;
+}
+
+.cat-tab:hover {
+    background: white;
+    transform: translateY(-1px);
+}
+
+.cat-tab.active {
+    background: var(--pink);
+    color: white;
+}
+
+/* Scrollable Container for 70+ Patterns and 75+ Decorations */
+.scrollable-gallery {
+    max-height: 280px;
+    overflow-y: auto;
+    padding: 4px 6px 4px 2px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 2px dashed rgba(255, 114, 182, 0.28);
+    scrollbar-width: thin;
+    scrollbar-color: var(--pink) rgba(255, 255, 255, 0.6);
+    transition: max-height .3s ease;
+}
+
+.scrollable-gallery.expanded {
+    max-height: 850px;
+}
+
+.scrollable-gallery::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollable-gallery::-webkit-scrollbar-thumb {
+    background: var(--pink);
+    border-radius: 10px;
+}
+.scrollable-gallery::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.gallery-expand-btn {
+    width: 100%;
+    margin-top: 6px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--pink-dark);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .16s;
+}
+
+.gallery-expand-btn:hover {
+    background: white;
 }
 
 /* ============================================================
-   THEMES & LOGO
+   COLOURS
+============================================================ */
+
+.colours {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+}
+
+.colour {
+    position: relative;
+    height: 38px;
+    border-radius: 12px;
+    border: 3px solid white;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,.1);
+    transition: transform .16s ease, box-shadow .16s ease, outline .16s ease;
+    touch-action: manipulation;
+}
+
+.colour:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(0,0,0,.16);
+}
+
+.colour.active {
+    outline: 3px solid var(--pink);
+    outline-offset: 1px;
+    transform: scale(1.08);
+    box-shadow: 0 5px 14px rgba(255,77,157,.3);
+}
+
+.colour-name {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 7px);
+    transform: translateX(-50%);
+    background: var(--dark);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s;
+    z-index: 100;
+}
+
+.colour:hover .colour-name {
+    opacity: 1;
+}
+
+/* ============================================================
+   THEMES, LOGO & SLIDERS
 ============================================================ */
 
 .themes {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 7px;
 }
 
 .theme-button {
     border: 0;
-    padding: 11px 6px;
-    border-radius: 14px;
+    padding: 9px 5px;
+    border-radius: 13px;
     background: white;
     font-family: inherit;
+    font-size: 13px;
     font-weight: 800;
     cursor: pointer;
     transition: transform .15s ease, box-shadow .15s ease;
@@ -991,10 +960,11 @@ input[type="range"] {
 .logo-button {
     flex: 1;
     border: 0;
-    border-radius: 14px;
-    padding: 12px;
+    border-radius: 13px;
+    padding: 10px;
     font-family: inherit;
     font-weight: 800;
+    font-size: 13px;
     cursor: pointer;
     background: white;
     transition: background .16s, color .16s;
@@ -1015,6 +985,111 @@ input[type="range"] {
     background: #fff0f8;
     color: var(--pink);
     font-size: 12px;
+}
+
+.slider-row {
+    margin: 14px 0;
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.slider-value {
+    color: var(--pink);
+    font-weight: 800;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 24px;
+    accent-color: var(--pink);
+    cursor: pointer;
+}
+
+/* ============================================================
+   MOBILE STICKY LIVE MINI BAR (<1000px)
+============================================================ */
+
+.mobile-sticky-bar {
+    display: none;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    width: min(440px, 92%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid rgba(255, 114, 182, 0.6);
+    border-radius: 22px;
+    padding: 8px 14px;
+    box-shadow: 0 10px 30px rgba(70,30,80,.25);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 1000;
+    align-items: center;
+    gap: 10px;
+    transition: transform .3s cubic-bezier(.2,.8,.2,1);
+}
+
+.mobile-sticky-bar.visible {
+    display: flex;
+    transform: translate(-50%, 0);
+}
+
+.mini-squishy-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,.15), inset 3px 3px 6px rgba(255,255,255,.5);
+    flex-shrink: 0;
+}
+
+.mini-squishy-text {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.mini-squishy-text span {
+    display: block;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-squishy-text small {
+    font-size: 11px;
+    color: #665577;
+    white-space: nowrap;
+}
+
+.mini-squish-btn {
+    border: 0;
+    background: var(--pink);
+    color: white;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255,77,157,.3);
+}
+
+.mini-jump-btn {
+    border: 0;
+    background: #f0edf5;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 /* ============================================================
@@ -1057,8 +1132,12 @@ footer {
 
 @media(max-width: 1200px) {
     .workspace {
-        grid-template-columns: 310px minmax(360px,1fr) 310px;
+        grid-template-columns: 290px minmax(360px,1fr) 290px;
+        gap: 12px;
     }
+    .preview-stage { min-height: 340px; }
+    .cube-wrap { width: 290px; height: 290px; }
+    .cube { width: 250px; height: 250px; }
 }
 
 @media(max-width: 1000px) {
@@ -1068,27 +1147,30 @@ footer {
     .preview-panel {
         grid-column: 1 / -1;
         grid-row: 1;
+        position: relative; /* Not sticky on stacked tablet view so it flows naturally */
+        top: 0;
+        max-height: none;
     }
 }
 
 @media(max-width: 720px) {
-    header { padding-top: 18px; }
-    .logo-badge { width: 52px; height: 52px; font-size: 24px; }
-    .workspace { width: 94%; grid-template-columns: 1fr; }
-    .preview-panel { grid-column: auto; grid-row: auto; min-height: auto; }
-    .panel { padding: 16px; border-radius: 24px; }
-    .preview-stage { min-height: 400px; }
-    .cube-wrap { width: 310px; height: 310px; }
-    .cube { width: 250px; height: 250px; }
-    .printed-logo { font-size: 34px; }
-    .big-button { padding: 12px 14px; font-size: 14px; }
+    header { padding-top: 16px; }
+    .logo-badge { width: 48px; height: 48px; font-size: 22px; }
+    .workspace { width: 95%; grid-template-columns: 1fr; }
+    .preview-panel { grid-column: auto; grid-row: auto; }
+    .panel { padding: 16px; border-radius: 22px; }
+    .preview-stage { min-height: 330px; }
+    .cube-wrap { width: 280px; height: 280px; }
+    .cube { width: 240px; height: 240px; }
+    .printed-logo { font-size: 32px; }
+    .big-button { padding: 10px 12px; font-size: 13px; }
     .options { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media(max-width: 430px) {
     .options { grid-template-columns: repeat(2, 1fr); }
     .colours { grid-template-columns: repeat(5, 1fr); }
-    .preview-buttons { gap: 7px; }
+    .preview-buttons { gap: 6px; }
     .big-button { flex: 1 1 42%; }
 }
 
@@ -1148,7 +1230,7 @@ footer {
 
 <!-- ============================================================
      LEFT PANEL
-============================================================ */ -->
+============================================================ -->
 <aside class="panel">
 
 <h2>🎨 Design Lab</h2>
@@ -1220,16 +1302,32 @@ footer {
     <div class="colours" id="secondaryColours"></div>
 </div>
 
-<!-- PATTERNS -->
+<!-- PATTERNS (Scrollable + Search + Category Filter Tabs) -->
 <div class="section">
     <div class="section-title">🌀 Pattern Collection</div>
-    <div class="options" id="patterns"></div>
+
+    <div class="search-box">
+        <input type="text" id="patternSearch" class="search-input" placeholder="🔍 Search 70 patterns...">
+    </div>
+
+    <div class="category-tabs" id="patternCategories">
+        <button class="cat-tab active" data-cat="all">All (70)</button>
+        <button class="cat-tab" data-cat="cute">🌸 Cute</button>
+        <button class="cat-tab" data-cat="shapes">▦ Shapes</button>
+        <button class="cat-tab" data-cat="cosmic">🌌 Cosmic</button>
+        <button class="cat-tab" data-cat="nature">🌿 Nature</button>
+    </div>
+
+    <div class="scrollable-gallery" id="patternGallery">
+        <div class="options" id="patterns"></div>
+    </div>
+    <button class="gallery-expand-btn" id="togglePatternExpand">▼ Show All (70)</button>
 </div>
 
 </aside>
 
 <!-- ============================================================
-     CENTRE PREVIEW
+     CENTRE STICKY PREVIEW
 ============================================================ -->
 <main class="panel preview-panel">
 
@@ -1284,10 +1382,10 @@ footer {
 
 <div class="preview-buttons">
     <button class="big-button random-button" id="randomButton">🎲 Surprise Me!</button>
-    <button class="big-button" id="spinButton">🔄 Spin Me</button>
+    <button class="big-button" id="spinButton">🔄 Spin</button>
     <button class="big-button" id="squeezeButton">🫧 SQUEEZE!</button>
-    <button class="big-button sound-button" id="soundButton">🔊 Sound: On</button>
-    <button class="big-button save-button" id="saveButton">💾 Save Design</button>
+    <button class="big-button sound-button" id="soundButton">🔊 Sound</button>
+    <button class="big-button save-button" id="saveButton">💾 Save</button>
     <button class="big-button share-button" id="shareButton">📤 Share</button>
     <button class="big-button" id="resetButton">↩️ Reset</button>
 </div>
@@ -1295,9 +1393,6 @@ footer {
 <div class="info-card">
     <div><strong id="infoName">My NeeDoh</strong></div>
     <div id="infoDetails" class="info-details">Bubblegum Pink • Plain • Super Soft • Nice Cube</div>
-    <div style="margin-top:7px; font-size:12px; color:#78668a;">
-        ✨ Tip: Tap, click or press space on the squishy to squish it! Double-tap to spin!
-    </div>
 </div>
 
 </main>
@@ -1319,7 +1414,7 @@ footer {
         </button>
         <button class="option" data-texture="fuzzy">
             <span>☁️</span>
-            <small>Fuzzy / Velvet</small>
+            <small>Fuzzy Velvet</small>
         </button>
         <button class="option" data-texture="glossy">
             <span>💎</span>
@@ -1331,7 +1426,7 @@ footer {
         </button>
         <button class="option" data-texture="pearl">
             <span>🦪</span>
-            <small>Pearl Shimmer</small>
+            <small>Pearl Opal</small>
         </button>
         <button class="option" data-texture="frosted">
             <span>❄️</span>
@@ -1362,7 +1457,7 @@ footer {
         </button>
         <button class="option" id="rainbowButton">
             <span>🌈</span>
-            <small>Rainbow Shine</small>
+            <small>Rainbow</small>
         </button>
         <button class="option" id="sparkleButton">
             <span>💫</span>
@@ -1380,14 +1475,30 @@ footer {
     </div>
 </div>
 
-<!-- DECORATIONS -->
+<!-- DECORATIONS (Scrollable + Search + Category Filter Tabs) -->
 <div class="section">
     <div class="section-title">
         🎀 Decorations
         <span class="decoration-counter" id="decorationCounter">0 selected</span>
     </div>
-    <p style="font-size:12px; margin-top:-4px; color:#78668a;">Tap to place charms on your squishy!</p>
-    <div class="options" id="decorations"></div>
+
+    <div class="search-box">
+        <input type="text" id="decorationSearch" class="search-input" placeholder="🔍 Search charms...">
+    </div>
+
+    <div class="category-tabs" id="decorationCategories">
+        <button class="cat-tab active" data-cat="all">All (75)</button>
+        <button class="cat-tab" data-cat="stars">✨ Stars</button>
+        <button class="cat-tab" data-cat="hearts">💖 Hearts</button>
+        <button class="cat-tab" data-cat="food">🍓 Treats</button>
+        <button class="cat-tab" data-cat="nature">🌸 Nature</button>
+        <button class="cat-tab" data-cat="animals">🐱 Animals</button>
+    </div>
+
+    <div class="scrollable-gallery" id="decorationGallery">
+        <div class="options" id="decorations"></div>
+    </div>
+    <button class="gallery-expand-btn" id="toggleDecorationExpand">▼ Show All (75)</button>
 </div>
 
 <!-- THEMES -->
@@ -1440,6 +1551,17 @@ footer {
 
 </aside>
 
+</div>
+
+<!-- Mobile Live Floating Sticky Bar (Appears when scrolling down on phones) -->
+<div class="mobile-sticky-bar" id="mobileStickyBar">
+    <div class="mini-squishy-avatar" id="miniSquishyIcon"></div>
+    <div class="mini-squishy-text">
+        <span id="miniSquishyName">My NeeDoh</span>
+        <small id="miniSquishyInfo">Bubblegum Pink • Nice Cube</small>
+    </div>
+    <button class="mini-squish-btn" id="miniSquishBtn">🫧 Squish!</button>
+    <button class="mini-jump-btn" id="miniJumpBtn" title="Scroll to squishy">⬆️</button>
 </div>
 
 <footer>
@@ -1599,6 +1721,14 @@ const patterns = [
     ["sparkleGrid","✨","Sparkle Grid"]
 ];
 
+/* Category Classification for Patterns */
+const patternCategoriesMap = {
+    cute: ["stars", "hearts", "cherries", "strawberry", "candy", "flowers", "icecream", "heartsDots", "heartRain", "starRain", "candyDots", "confetti", "confettiMix", "sprinkles"],
+    shapes: ["stripes", "thinstripes", "diagonal", "dots", "bigdots", "checker", "grid", "zigzag", "diamonds", "crystals", "pixel", "rings", "triangles", "bubblesSmall", "checkerPink", "checkerRainbow", "checkerDots", "doubleStripes", "circuit", "honeycomb", "sparkleGrid"],
+    cosmic: ["galaxy", "space", "rainbow", "sunset", "sunshine", "starburst", "moonstars", "planet", "magic", "sunMoon", "rainbowRings"],
+    nature: ["ocean", "waves", "bubbles", "clouds", "leopard", "zebra", "camo", "clover", "softClouds", "rain", "berry", "flowerField", "music", "shell", "bubbleSwirl", "bubbleMix"]
+};
+
 /* ============================================================
    DECORATIONS DATA
 ============================================================ */
@@ -1616,6 +1746,15 @@ const decorationData = [
     ["❄️","Snowflakes"], ["☃️","Snowy"], ["🌊","Waves"], ["🐚","Shells"],
     ["🧚","Fairy"], ["🦄","Unicorn"], ["🐱","Kitten"], ["🐶","Puppy"], ["🐼","Panda"], ["🐨","Koala"], ["🐸","Frog"], ["🐳","Whale"], ["🐬","Dolphin"], ["🐢","Turtle"]
 ];
+
+/* Category Classification for Decorations */
+const decorationCategoriesMap = {
+    stars: ["⭐","✨","💫","🌟","🌠","🌙","☀️","🪐","🚀","☄️","🛸","⚡","🔥","💎","👑","🪩"],
+    hearts: ["💕","💖","💜","💙","💛","🎀"],
+    nature: ["🌸","🌺","🌼","🌷","🍀","🌿","🌴","🍄","🌵","❄️","☃️","🌊","🐚","🫧","☁️","🌈"],
+    food: ["🍓","🍒","🍉","🍋","🍊","🍑","🍇","🍍","🍭","🍬","🍩","🧁","🍦","🍪","🍰","🍧"],
+    animals: ["🦋","🐝","🐞","🐛","🧚","🦄","🐱","🐶","🐼","🐨","🐸","🐳","🐬","🐢"]
+};
 
 /* ============================================================
    STATE MANAGEMENT
@@ -1655,6 +1794,12 @@ const glitterLayer = document.getElementById("glitter");
 const glow = document.getElementById("glow");
 const printedLogo = document.getElementById("printedLogo");
 const squishText = document.getElementById("squishText");
+
+/* Mobile Mini Sticky Bar Elements */
+const mobileBar = document.getElementById("mobileStickyBar");
+const miniSquishy = document.getElementById("miniSquishyIcon");
+const miniName = document.getElementById("miniSquishyName");
+const miniInfo = document.getElementById("miniSquishyInfo");
 
 /* ============================================================
    SOUND SYNTHESIZER (Web Audio API)
@@ -1767,8 +1912,11 @@ function createColours() {
 }
 
 /* ============================================================
-   PATTERNS INITIALIZATION
+   PATTERNS INITIALIZATION & FILTERING
 ============================================================ */
+let activePatternCategory = "all";
+let patternSearchQuery = "";
+
 function createPatterns() {
     const container = document.getElementById("patterns");
     container.innerHTML = "";
@@ -1779,7 +1927,7 @@ function createPatterns() {
         button.className = "option pattern-option";
         button.dataset.pattern = item[0];
         button.innerHTML = `
-            <div style="font-size:22px">${item[1]}</div>
+            <div style="font-size:20px">${item[1]}</div>
             <small>${item[2]}</small>
         `;
 
@@ -1793,9 +1941,48 @@ function createPatterns() {
     });
 }
 
+function filterPatterns() {
+    const q = patternSearchQuery.toLowerCase();
+    const catList = activePatternCategory === "all" ? null : (patternCategoriesMap[activePatternCategory] || []);
+
+    document.querySelectorAll("#patterns .option").forEach(btn => {
+        const id = btn.dataset.pattern;
+        const name = (btn.querySelector("small")?.textContent || "").toLowerCase();
+        const matchesCategory = !catList || catList.includes(id) || (activePatternCategory === "all");
+        const matchesSearch = !q || id.toLowerCase().includes(q) || name.includes(q);
+        btn.style.display = (matchesCategory && matchesSearch) ? "flex" : "none";
+    });
+}
+
+// Category tabs listener for Patterns
+document.querySelectorAll("#patternCategories .cat-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll("#patternCategories .cat-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        activePatternCategory = tab.dataset.cat;
+        filterPatterns();
+    });
+});
+
+document.getElementById("patternSearch").addEventListener("input", (e) => {
+    patternSearchQuery = e.target.value.trim();
+    filterPatterns();
+});
+
+let patternsExpanded = false;
+document.getElementById("togglePatternExpand").addEventListener("click", () => {
+    patternsExpanded = !patternsExpanded;
+    const gallery = document.getElementById("patternGallery");
+    gallery.classList.toggle("expanded", patternsExpanded);
+    document.getElementById("togglePatternExpand").textContent = patternsExpanded ? "▲ Compact View" : "▼ Show All (70)";
+});
+
 /* ============================================================
-   DECORATIONS INITIALIZATION
+   DECORATIONS INITIALIZATION & FILTERING
 ============================================================ */
+let activeDecorationCategory = "all";
+let decorationSearchQuery = "";
+
 function createDecorations() {
     const container = document.getElementById("decorations");
     container.innerHTML = "";
@@ -1806,7 +1993,7 @@ function createDecorations() {
         button.className = "option";
         button.dataset.decoration = item[0];
         button.innerHTML = `
-            <div style="font-size:24px">${item[0]}</div>
+            <div style="font-size:22px">${item[0]}</div>
             <small>${item[1]}</small>
         `;
 
@@ -1825,6 +2012,42 @@ function createDecorations() {
     });
 }
 
+function filterDecorations() {
+    const q = decorationSearchQuery.toLowerCase();
+    const catList = activeDecorationCategory === "all" ? null : (decorationCategoriesMap[activeDecorationCategory] || []);
+
+    document.querySelectorAll("#decorations .option").forEach(btn => {
+        const emoji = btn.dataset.decoration;
+        const name = (btn.querySelector("small")?.textContent || "").toLowerCase();
+        const matchesCategory = !catList || catList.includes(emoji) || (activeDecorationCategory === "all");
+        const matchesSearch = !q || name.includes(q) || emoji.includes(q);
+        btn.style.display = (matchesCategory && matchesSearch) ? "flex" : "none";
+    });
+}
+
+// Category tabs listener for Decorations
+document.querySelectorAll("#decorationCategories .cat-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        document.querySelectorAll("#decorationCategories .cat-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        activeDecorationCategory = tab.dataset.cat;
+        filterDecorations();
+    });
+});
+
+document.getElementById("decorationSearch").addEventListener("input", (e) => {
+    decorationSearchQuery = e.target.value.trim();
+    filterDecorations();
+});
+
+let decorationsExpanded = false;
+document.getElementById("toggleDecorationExpand").addEventListener("click", () => {
+    decorationsExpanded = !decorationsExpanded;
+    const gallery = document.getElementById("decorationGallery");
+    gallery.classList.toggle("expanded", decorationsExpanded);
+    document.getElementById("toggleDecorationExpand").textContent = decorationsExpanded ? "▲ Compact View" : "▼ Show All (75)";
+});
+
 /* ============================================================
    PATTERN ENGINE (Crisp, High Quality, No Awkward Cuts!)
 ============================================================ */
@@ -1835,38 +2058,14 @@ function getPatternConfig() {
     const safeS = s.startsWith("linear") ? "#ffffff" : s;
 
     const map = {
-        plain: {
-            image: "none",
-            size: "auto"
-        },
-        stripes: {
-            image: `repeating-linear-gradient(45deg, ${safeS} 0, ${safeS} 14px, transparent 14px, transparent 28px)`,
-            size: "auto"
-        },
-        thinstripes: {
-            image: `repeating-linear-gradient(90deg, ${safeS} 0, ${safeS} 5px, transparent 5px, transparent 15px)`,
-            size: "auto"
-        },
-        diagonal: {
-            image: `repeating-linear-gradient(-45deg, ${safeS} 0, ${safeS} 16px, transparent 16px, transparent 32px)`,
-            size: "auto"
-        },
-        dots: {
-            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 6px, transparent 7px)`,
-            size: "26px 26px"
-        },
-        bigdots: {
-            image: `radial-gradient(circle, ${safeS} 0, ${safeS} 15px, transparent 16px)`,
-            size: "46px 46px"
-        },
-        checker: {
-            image: `conic-gradient(${safeS} 25%, transparent 25% 50%, ${safeS} 50% 75%, transparent 75%)`,
-            size: "44px 44px"
-        },
-        grid: {
-            image: `linear-gradient(${safeS} 2px, transparent 2px), linear-gradient(90deg, ${safeS} 2px, transparent 2px)`,
-            size: "34px 34px"
-        },
+        plain: { image: "none", size: "auto" },
+        stripes: { image: `repeating-linear-gradient(45deg, ${safeS} 0, ${safeS} 14px, transparent 14px, transparent 28px)`, size: "auto" },
+        thinstripes: { image: `repeating-linear-gradient(90deg, ${safeS} 0, ${safeS} 5px, transparent 5px, transparent 15px)`, size: "auto" },
+        diagonal: { image: `repeating-linear-gradient(-45deg, ${safeS} 0, ${safeS} 16px, transparent 16px, transparent 32px)`, size: "auto" },
+        dots: { image: `radial-gradient(circle, ${safeS} 0, ${safeS} 6px, transparent 7px)`, size: "26px 26px" },
+        bigdots: { image: `radial-gradient(circle, ${safeS} 0, ${safeS} 15px, transparent 16px)`, size: "46px 46px" },
+        checker: { image: `conic-gradient(${safeS} 25%, transparent 25% 50%, ${safeS} 50% 75%, transparent 75%)`, size: "44px 44px" },
+        grid: { image: `linear-gradient(${safeS} 2px, transparent 2px), linear-gradient(90deg, ${safeS} 2px, transparent 2px)`, size: "34px 34px" },
         stars: {
             image: `url("${encodeSvg(`
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -2216,22 +2415,22 @@ function getPatternConfig() {
 ============================================================ */
 function applyShape() {
     const s = state.shape;
-    cubeWrap.classList.remove("shape-donut", "shape-bear-active", "shape-cat-active");
+    cubeWrap.classList.remove("shape-donut");
     cube.style.clipPath = "none";
 
     const shapeDefinitions = {
-        cube: { width: 290, height: 290, radius: "52px" },
-        ball: { width: 290, height: 290, radius: "50%" },
-        bear: { width: 280, height: 300, radius: "46% 46% 48% 48% / 44% 44% 54% 54%", clip: "url(#clip-bear)" },
-        dohnut: { width: 290, height: 290, radius: "50%", isDonut: true },
-        heart: { width: 290, height: 280, radius: "30px", clip: "url(#clip-heart)" },
-        star: { width: 290, height: 290, radius: "30px", clip: "url(#clip-star)" },
-        drop: { width: 270, height: 320, radius: "50% 50% 46% 46% / 68% 68% 32% 32%" },
-        cat: { width: 280, height: 290, radius: "40px", clip: "url(#clip-cat)" },
-        shroom: { width: 280, height: 290, radius: "40px", clip: "url(#clip-shroom)" },
-        egg: { width: 260, height: 320, radius: "50% 50% 50% 50% / 60% 60% 40% 40%" },
-        pill: { width: 340, height: 230, radius: "75px" },
-        mini: { width: 215, height: 215, radius: "50%" }
+        cube: { width: 270, height: 270, radius: "50px" },
+        ball: { width: 270, height: 270, radius: "50%" },
+        bear: { width: 260, height: 280, radius: "46% 46% 48% 48% / 44% 44% 54% 54%", clip: "url(#clip-bear)" },
+        dohnut: { width: 270, height: 270, radius: "50%", isDonut: true },
+        heart: { width: 270, height: 260, radius: "30px", clip: "url(#clip-heart)" },
+        star: { width: 270, height: 270, radius: "30px", clip: "url(#clip-star)" },
+        drop: { width: 250, height: 300, radius: "50% 50% 46% 46% / 68% 68% 32% 32%" },
+        cat: { width: 260, height: 270, radius: "40px", clip: "url(#clip-cat)" },
+        shroom: { width: 260, height: 270, radius: "40px", clip: "url(#clip-shroom)" },
+        egg: { width: 245, height: 300, radius: "50% 50% 50% 50% / 60% 60% 40% 40%" },
+        pill: { width: 310, height: 215, radius: "70px" },
+        mini: { width: 200, height: 200, radius: "50%" }
     };
 
     const def = shapeDefinitions[s] || shapeDefinitions.cube;
@@ -2250,7 +2449,7 @@ function applyShape() {
 }
 
 /* ============================================================
-   UPDATE SQUISHY (Main Visual Controller)
+   UPDATE SQUISHY
 ============================================================ */
 function updateCube() {
     applyShape();
@@ -2264,7 +2463,7 @@ function updateCube() {
     patternLayer.style.backgroundRepeat = pConfig.repeat || "repeat";
     patternLayer.style.backgroundPosition = pConfig.position || "center";
 
-    // Special Effects: Rainbow Shine
+    // Rainbow Shine Effect
     if (state.rainbowShine) {
         cube.style.background = `linear-gradient(
             135deg,
@@ -2290,6 +2489,7 @@ function updateCube() {
     updateDecorations();
     updateInfo();
     syncButtons();
+    updateMobileMiniPreview();
     saveDesign();
 }
 
@@ -2314,7 +2514,7 @@ function updateDecorations() {
         const p = positions[index % positions.length];
         span.style.left = p[0] + "%";
         span.style.top = p[1] + "%";
-        span.style.fontSize = (index % 3 === 0 ? 42 : index % 3 === 1 ? 36 : 32) + "px";
+        span.style.fontSize = (index % 3 === 0 ? 38 : index % 3 === 1 ? 32 : 28) + "px";
         span.style.animationDelay = (index * 0.18) + "s";
         span.style.transform = `rotate(${p[2]}deg)`;
 
@@ -2348,10 +2548,10 @@ function getShapeName(shape) {
 function getTextureName(texture) {
     const names = {
         soft: "Super Soft",
-        fuzzy: "Fuzzy / Velvet",
+        fuzzy: "Fuzzy Velvet",
         glossy: "Glossy",
         matte: "Powder Matte",
-        pearl: "Pearl Shimmer",
+        pearl: "Pearl Opal",
         frosted: "Frosted Sugar",
         metallic: "Liquid Chrome",
         gummy: "Gummy Jelly"
@@ -2367,6 +2567,15 @@ function updateInfo() {
     document.getElementById("infoName").textContent = name;
     document.getElementById("infoDetails").textContent =
         `${state.mainName} • ${state.patternName} • ${getTextureName(state.texture)} • ${getShapeName(state.shape)}`;
+}
+
+/* Mobile Mini Preview Update */
+function updateMobileMiniPreview() {
+    if (!mobileBar) return;
+    miniSquishy.style.background = state.mainColour;
+    miniSquishy.style.borderRadius = state.shape === "cube" ? "8px" : state.shape === "pill" ? "12px" : "50%";
+    miniName.textContent = document.getElementById("designName").value.trim() || "My NeeDoh";
+    miniInfo.textContent = `${state.mainName} • ${getShapeName(state.shape)}`;
 }
 
 /* ============================================================
@@ -2407,7 +2616,7 @@ function syncButtons() {
     document.getElementById("sparkleButton").classList.toggle("active", state.sparkles);
 
     const soundBtn = document.getElementById("soundButton");
-    soundBtn.textContent = state.sound ? "🔊 Sound: On" : "🔇 Sound: Off";
+    soundBtn.textContent = state.sound ? "🔊 Sound" : "🔇 Muted";
     soundBtn.classList.toggle("active", state.sound);
 
     document.getElementById("softness").value = state.softness;
@@ -2730,7 +2939,7 @@ function loadDesign() {
 }
 
 /* ============================================================
-   SAVE DESIGN CARD (PNG Export with Actual Shape Drawing!)
+   SAVE DESIGN CARD (PNG Export)
 ============================================================ */
 function saveDesignCard() {
     const canvas = document.createElement("canvas");
@@ -2792,14 +3001,12 @@ function saveDesignCard() {
         }
         ctx.closePath();
     } else {
-        // Nice Cube / Pill / Default rounded rect
         const rw = shape === "pill" ? size * 2.3 : size * 1.9;
         const rh = shape === "pill" ? size * 1.4 : size * 1.9;
         const rr = shape === "pill" ? 60 : 70;
         roundRect(ctx, cx - rw / 2, cy - rh / 2, rw, rh, rr);
     }
 
-    // Fill with Main Color or Rainbow Gradient
     if (state.rainbowShine) {
         const rg = ctx.createLinearGradient(cx - size, cy - size, cx + size, cy + size);
         rg.addColorStop(0, state.mainColour);
@@ -2818,7 +3025,6 @@ function saveDesignCard() {
     ctx.fill();
     ctx.restore();
 
-    // If Dohnut, cut out center hole
     if (shape === "dohnut") {
         ctx.save();
         ctx.beginPath();
@@ -2830,7 +3036,7 @@ function saveDesignCard() {
         ctx.restore();
     }
 
-    // Glare highlight
+    // Specular Highlight
     ctx.fillStyle = "rgba(255,255,255,.32)";
     ctx.beginPath();
     ctx.ellipse(cx - size * 0.35, cy - size * 0.45, size * 0.45, size * 0.2, -0.25, 0, Math.PI * 2);
@@ -2873,7 +3079,6 @@ function saveDesignCard() {
     ctx.fillStyle = "#ff4d9d";
     ctx.fillText("✨ Designed with NeeDoh Designer ✨", cx, 855);
 
-    // Download PNG
     const link = document.createElement("a");
     link.download = (name.replace(/[^a-z0-9]/gi, "-").toLowerCase() || "my-needoh") + "-design.png";
     link.href = canvas.toDataURL("image/png");
@@ -2995,6 +3200,7 @@ document.querySelectorAll("[data-theme]").forEach(button => {
 // Name Input
 document.getElementById("designName").addEventListener("input", () => {
     updateInfo();
+    updateMobileMiniPreview();
     saveDesign();
 });
 
@@ -3027,6 +3233,29 @@ document.getElementById("saveButton").addEventListener("click", () => {
 });
 document.getElementById("shareButton").addEventListener("click", shareDesign);
 document.getElementById("resetButton").addEventListener("click", resetDesign);
+
+// Mobile Bar Buttons
+document.getElementById("miniSquishBtn")?.addEventListener("click", squeezeCube);
+document.getElementById("miniJumpBtn")?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+/* Mobile Scroll Observer to show/hide bottom mini squishy */
+window.addEventListener("scroll", () => {
+    if (window.innerWidth > 1000) {
+        if (mobileBar) mobileBar.classList.remove("visible");
+        return;
+    }
+    const previewStage = document.querySelector(".preview-stage");
+    if (!previewStage || !mobileBar) return;
+    const rect = previewStage.getBoundingClientRect();
+    if (rect.bottom < 80) {
+        mobileBar.classList.add("visible");
+        updateMobileMiniPreview();
+    } else {
+        mobileBar.classList.remove("visible");
+    }
+}, { passive: true });
 
 /* ============================================================
    STARTUP
