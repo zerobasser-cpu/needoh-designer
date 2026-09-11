@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bubble Pop Factory</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+overflow:hidden;
+height:100vh;
+background:linear-gradient(#7dd3fc,#c4b5fd,#f9a8d4);
+}
+
+h1{
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+color:white;
+text-shadow:2px 2px 4px rgba(0,0,0,.3);
+font-size:2rem;
+z-index:10;
+}
+
+#score{
+position:absolute;
+top:70px;
+left:20px;
+background:white;
+padding:10px 15px;
+border-radius:15px;
+font-weight:bold;
+z-index:10;
+}
+
+.controls{
+position:absolute;
+top:70px;
+right:20px;
+display:flex;
+gap:10px;
+z-index:10;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+background:white;
+transition:.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+#playArea{
+width:100%;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
+
+.bubble{
+position:absolute;
+border-radius:50%;
+cursor:pointer;
+animation:floatUp linear forwards;
+box-shadow:
+inset -10px -10px 20px rgba(255,255,255,.5),
+inset 10px 10px 20px rgba(255,255,255,.2);
+}
+
+.bubble::after{
+content:"";
+position:absolute;
+top:15%;
+left:20%;
+width:20%;
+height:20%;
+background:rgba(255,255,255,.8);
+border-radius:50%;
+}
+
+@keyframes floatUp{
+from{
+transform:translateY(0);
+}
+to{
+transform:translateY(-120vh);
+}
+}
+
+.bubble.popping{
+animation:none !important;
+transition:transform .12s ease-out, opacity .12s ease-out;
+transform:scale(1.35);
+opacity:0;
+pointer-events:none;
+}
+
+.sparkle{
+position:absolute;
+width:8px;
+height:8px;
+margin:-4px 0 0 -4px;
+border-radius:50%;
+background:white;
+pointer-events:none;
+box-shadow:0 0 6px 1px rgba(255,255,255,.9);
+animation:sparkleOut .35s cubic-bezier(.2,.8,.4,1) forwards;
+}
+
+@keyframes sparkleOut{
+to{
+transform:translate(var(--dx),var(--dy)) scale(0);
+opacity:0;
+}
+}
+</style>
+</head>
+<body>
+
+<h1>🫧 Bubble Pop Factory 🫧</h1>
+
+<div id="score">
+Score: <span id="scoreValue">0</span>
+</div>
+
+<div class="controls">
+<button id="machineBtn">Bubble Machine OFF</button>
+<button id="rainbowBtn">Rainbow OFF</button>
+<button id="giantBtn">Giant OFF</button>
+</div>
+
+<div id="playArea"></div>
+
+<script>
+
+const area = document.getElementById("playArea");
+const scoreValue = document.getElementById("scoreValue");
+
+let score = 0;
+let machine = false;
+let rainbow = false;
+let giant = false;
+let machineInterval;
+
+function randomColor(){
+const colors=[
+"#60a5fa",
+"#f472b6",
+"#34d399",
+"#fbbf24",
+"#a78bfa",
+"#fb7185",
+"#22d3ee"
+];
+return colors[Math.floor(Math.random()*colors.length)];
+}
+
+function createBubble(x,y){
+
+const bubble=document.createElement("div");
+bubble.className="bubble";
+
+let size = giant
+? 80 + Math.random()*120
+: 30 + Math.random()*70;
+
+bubble.style.width=size+"px";
+bubble.style.height=size+"px";
+
+bubble.style.background=
+rainbow
+? randomColor()
+: "rgba(255,255,255,.35)";
+
+bubble.style.left=(x-size/2)+"px";
+bubble.style.top=(y-size/2)+"px";
+
+bubble.style.animationDuration=
+(8+Math.random()*8)+"s";
+
+bubble.addEventListener("click",()=>{
+popBubble(bubble);
+});
+
+area.appendChild(bubble);
+
+setTimeout(()=>{
+bubble.remove();
+},18000);
+}
+
+function popBubble(bubble){
+
+if(bubble.dataset.popped){
+return;
+}
+bubble.dataset.popped="true";
+
+score++;
+scoreValue.textContent=score;
+
+const rect=bubble.getBoundingClientRect();
+const cx=rect.left+rect.width/2;
+const cy=rect.top+rect.height/2;
+
+bubble.classList.add("popping");
+
+const particleCount=8;
+for(let i=0;i<particleCount;i++){
+
+const angle=(Math.PI*2/particleCount)*i + Math.random()*0.4;
+const dist=30+Math.random()*30+rect.width*0.15;
+
+const spark=document.createElement("div");
+spark.className="sparkle";
+
+spark.style.left=cx+"px";
+spark.style.top=cy+"px";
+spark.style.setProperty("--dx",Math.cos(angle)*dist+"px");
+spark.style.setProperty("--dy",Math.sin(angle)*dist+"px");
+
+document.body.appendChild(spark);
+
+setTimeout(()=>{
+spark.remove();
+},350);
+}
+
+setTimeout(()=>{
+bubble.remove();
+},120);
+
+if(Math.random()<0.25){
+for(let i=0;i<3;i++){
+setTimeout(()=>{
+createBubble(
+Math.random()*window.innerWidth,
+window.innerHeight
+);
+},i*100);
+}
+}
+}
+
+document.getElementById("machineBtn").onclick=function(){
+
+machine=!machine;
+
+this.textContent=
+machine
+? "Bubble Machine ON"
+: "Bubble Machine OFF";
+
+if(machine){
+machineInterval=setInterval(()=>{
+createBubble(
+Math.random()*window.innerWidth,
+window.innerHeight+50
+);
+},300);
+}else{
+clearInterval(machineInterval);
+}
+};
+
+document.getElementById("rainbowBtn").onclick=function(){
+
+rainbow=!rainbow;
+
+this.textContent=
+rainbow
+? "Rainbow ON"
+: "Rainbow OFF";
+};
+
+document.getElementById("giantBtn").onclick=function(){
+
+giant=!giant;
+
+this.textContent=
+giant
+? "Giant ON"
+: "Giant OFF";
+};
+
+for(let i=0;i<15;i++){
+createBubble(
+Math.random()*window.innerWidth,
+Math.random()*window.innerHeight
+);
+}
+
+</script>
+
+</body>
+</html>

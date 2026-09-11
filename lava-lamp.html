@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Lava Lamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ui-dark: rgba(12,9,16,0.72);
+    --ui-cream: #F3E9D2;
+    --ui-accent: #E7B65C;
+    --glow-bright: #FFD98A;
+    --glow-mid: #B5651D;
+    --glow-dim: #2A1608;
+    --blob-light: #FFB37A;
+    --blob-base: #E4572E;
+    --blob-deep: #8C2E12;
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{
+    margin:0; padding:0; height:100%; overflow:hidden;
+    overscroll-behavior:none;
+    font-family:'Quicksand', system-ui, sans-serif;
+    background: radial-gradient(ellipse at 50% 40%, #1c1620 0%, #0a0810 70%, #050408 100%);
+  }
+  #hint{
+    position:fixed;
+    top:8%; left:50%;
+    transform:translateX(-50%);
+    color:rgba(243,233,210,0.55);
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-align:center;
+    line-height:1.6;
+    pointer-events:none;
+    transition:opacity 0.8s ease;
+    z-index:15;
+  }
+  #hint.hidden{ opacity:0; }
+
+  #lamp{
+    position:fixed;
+    left:50%; top:46%;
+    transform:translate(-50%,-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  #lampCap{
+    width: 44%;
+    height: 20px;
+    background: linear-gradient(180deg,#e8e8ec 0%, #9a9aa2 35%, #6a6a72 60%, #48484e 100%);
+    border-radius: 8px 8px 3px 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    z-index:3;
+    margin-bottom:-2px;
+  }
+
+  #lampGlass{
+    position:relative;
+    width: clamp(150px, 44vw, 240px);
+    height: clamp(300px, 58vh, 480px);
+    border-radius: 999px;
+    overflow:hidden;
+    box-shadow:
+      0 0 50px 6px var(--glow-mid),
+      inset 0 0 20px rgba(0,0,0,0.5);
+    border: 2px solid rgba(255,255,255,0.12);
+    background:#0a0608;
+    transition: box-shadow 0.6s ease;
+    z-index:2;
+  }
+  #lampGlass.off{
+    box-shadow: 0 0 12px 2px rgba(0,0,0,0.3), inset 0 0 20px rgba(0,0,0,0.6);
+  }
+
+  #glow{
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 50% 88%, var(--glow-bright) 0%, var(--glow-mid) 42%, var(--glow-dim) 78%, #050403 100%);
+    transition: opacity 0.6s ease;
+  }
+  #lampGlass.off #glow{ opacity:0.35; }
+
+  #blobField{
+    position:absolute; inset:0;
+    filter: url(#goo);
+  }
+  .blob{
+    position:absolute;
+    top:0; left:0;
+    border-radius:50%;
+    will-change:transform;
+    background: radial-gradient(circle at 32% 26%, var(--blob-light) 0%, var(--blob-base) 55%, var(--blob-deep) 100%);
+  }
+
+  #glassShine{
+    position:absolute; inset:0;
+    pointer-events:none;
+    background: linear-gradient(115deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.05) 12%, transparent 26%, transparent 80%, rgba(255,255,255,0.06) 100%);
+  }
+
+  #lampBase{
+    width: 58%;
+    height: 34px;
+    background: linear-gradient(180deg,#c9c9cf 0%, #85858c 30%, #4c4c52 65%, #2c2c30 100%);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.55);
+    margin-top:-2px;
+    position:relative;
+    z-index:3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  #lampBase .knob{
+    width:12px; height:12px;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #f0e6c8, #8a7a4a 70%, #4a3f22);
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.6);
+  }
+
+  #toolbar{
+    position:fixed;
+    left:50%;
+    bottom:18px;
+    transform:translateX(-50%);
+    max-width:calc(100% - 20px);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 14px;
+    background: var(--ui-dark);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:999px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.45);
+    overflow-x:auto;
+    scrollbar-width:none;
+    z-index:20;
+  }
+  #toolbar::-webkit-scrollbar{ display:none; }
+
+  .group{ display:flex; align-items:center; gap:6px; flex:0 0 auto; }
+  .divider{ width:1px; height:22px; background:rgba(255,255,255,0.14); flex:0 0 auto; }
+
+  button.icon-btn{
+    width:36px; height:36px;
+    border-radius:50%;
+    border:none;
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    flex:0 0 auto;
+    transition:background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  }
+  button.icon-btn svg{
+    width:18px; height:18px;
+    stroke:var(--ui-cream);
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  button.icon-btn.active{ background: var(--ui-accent); }
+  button.icon-btn.active svg{ stroke:#241705; }
+  button.icon-btn:active{ transform:scale(0.9); }
+  button.icon-btn:disabled{ opacity:0.3; pointer-events:none; }
+
+  .swatch{
+    width:22px; height:22px;
+    border-radius:50%;
+    border:2px solid transparent;
+    cursor:pointer;
+    flex:0 0 auto;
+    padding:0;
+  }
+  .swatch.active{ border-color:var(--ui-cream); box-shadow:0 0 0 2px rgba(0,0,0,0.4); }
+
+  #speedSlider{
+    -webkit-appearance:none;
+    width:56px; height:4px;
+    border-radius:2px;
+    background:rgba(255,255,255,0.22);
+    outline:none;
+  }
+  #speedSlider::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--ui-accent);
+    cursor:pointer;
+    border:2px solid #241705;
+  }
+  #speedSlider::-moz-range-thumb{
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--ui-accent);
+    cursor:pointer;
+    border:2px solid #241705;
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur" />
+      <feColorMatrix in="blur" mode="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 22 -9" result="goo" />
+      <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+    </filter>
+  </defs>
+</svg>
+
+<div id="hint">drag the blobs around<br>tap + to add more, or the power icon to cool it down</div>
+
+<div id="lamp">
+  <div id="lampCap"></div>
+  <div id="lampGlass">
+    <div id="glow"></div>
+    <div id="blobField"></div>
+    <div id="glassShine"></div>
+  </div>
+  <div id="lampBase"><div class="knob"></div></div>
+</div>
+
+<div id="toolbar">
+  <button class="icon-btn active" id="heatBtn" title="Heat on/off" aria-label="Heat on or off">
+    <svg viewBox="0 0 24 24"><path d="M12 2s5 5.5 5 10a5 5 0 0 1-10 0c0-1.5.7-2.7 1.5-3.8.3 1 1 1.8 1 1.8S9 7 12 2z"/></svg>
+  </button>
+
+  <div class="divider"></div>
+
+  <div class="group">
+    <button class="icon-btn" id="addBtn" title="Add blob" aria-label="Add blob">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+    </button>
+    <button class="icon-btn" id="removeBtn" title="Remove blob" aria-label="Remove blob">
+      <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+    </button>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="group" id="swatches">
+    <button class="swatch active" data-theme="amber" style="background:#E4572E" aria-label="Amber lamp"></button>
+    <button class="swatch" data-theme="magma" style="background:#C81D45" aria-label="Magma lamp"></button>
+    <button class="swatch" data-theme="ocean" style="background:#1E88B8" aria-label="Ocean lamp"></button>
+    <button class="swatch" data-theme="alien" style="background:#4C9A1A" aria-label="Alien lamp"></button>
+  </div>
+
+  <div class="divider"></div>
+
+  <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" aria-label="Flow speed" />
+
+  <div class="divider"></div>
+
+  <button class="icon-btn" id="resetBtn" title="Reset lamp" aria-label="Reset lamp">
+    <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.6"/><path d="M20 5v6h-6"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  const glass = document.getElementById('lampGlass');
+  const blobField = document.getElementById('blobField');
+  const hint = document.getElementById('hint');
+
+  const THEMES = {
+    amber:  { bright:'#FFD98A', mid:'#B5651D', dim:'#2A1608', light:'#FFB37A', base:'#E4572E', deep:'#8C2E12' },
+    magma:  { bright:'#FF8B6B', mid:'#7A1E1E', dim:'#210808', light:'#FF6B6B', base:'#C81D45', deep:'#5C0B24' },
+    ocean:  { bright:'#8FE3FF', mid:'#0F6E8C', dim:'#031B24', light:'#7FD8FF', base:'#1E88B8', deep:'#0B3B52' },
+    alien:  { bright:'#C6FF6B', mid:'#3E6B12', dim:'#0E1A05', light:'#B6FF5C', base:'#4C9A1A', deep:'#1F3D08' }
+  };
+
+  function applyTheme(key){
+    const t = THEMES[key];
+    const root = document.documentElement.style;
+    root.setProperty('--glow-bright', t.bright);
+    root.setProperty('--glow-mid', t.mid);
+    root.setProperty('--glow-dim', t.dim);
+    root.setProperty('--blob-light', t.light);
+    root.setProperty('--blob-base', t.base);
+    root.setProperty('--blob-deep', t.deep);
+  }
+
+  let heatOn = true;
+  let speedMult = 1;
+  let lampW = 0, lampH = 0;
+
+  const GRAVITY_BASE = 0.028;
+  const BUOY_BASE = 0.075;
+  const DAMPING = 0.965;
+  const HEAT_LAG = 0.02;
+  const WOBBLE = 0.014;
+  const MAX_BLOBS = 10;
+  const MIN_BLOBS = 2;
+
+  let blobs = [];
+
+  function measure(){
+    const rect = glass.getBoundingClientRect();
+    lampW = rect.width;
+    lampH = rect.height;
+  }
+  window.addEventListener('resize', ()=>{ measure(); });
+
+  function createBlob(xFrac){
+    const r = lampW * (0.13 + Math.random()*0.08);
+    const el = document.createElement('div');
+    el.className = 'blob';
+    el.style.width = (r*2) + 'px';
+    el.style.height = (r*2) + 'px';
+    blobField.appendChild(el);
+
+    const blob = {
+      el, r,
+      x: lampW * (xFrac !== undefined ? xFrac : (0.25 + Math.random()*0.5)),
+      y: lampH * (0.82 + Math.random()*0.1),
+      vx: 0, vy: 0,
+      heat: 0.3 + Math.random()*0.3,
+      phase: Math.random()*1000,
+      dragging: false
+    };
+    el.addEventListener('pointerdown', (e)=> onBlobPointerDown(e, blob));
+    blobs.push(blob);
+    return blob;
+  }
+
+  function removeBlob(){
+    if(blobs.length <= MIN_BLOBS) return;
+    const blob = blobs.pop();
+    blob.el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+    blob.el.style.opacity = '0';
+    const currentTransform = blob.el.style.transform;
+    blob.el.style.transform = currentTransform + ' scale(0.2)';
+    setTimeout(()=>{ blob.el.remove(); }, 260);
+  }
+
+  function seedLamp(){
+    blobField.innerHTML = '';
+    blobs = [];
+    const positions = [0.22, 0.4, 0.58, 0.76, 0.32, 0.66];
+    positions.forEach(p => createBlob(p));
+  }
+
+  // ---- Dragging ----
+  let dragBlob = null, dragPointerId = null;
+
+  function onBlobPointerDown(e, blob){
+    if(dragBlob) return;
+    dragBlob = blob;
+    dragPointerId = e.pointerId;
+    blob.dragging = true;
+    try{ blob.el.setPointerCapture(e.pointerId); }catch(err){}
+    updateDragPos(e);
+    hideHint();
+  }
+  function updateDragPos(e){
+    const rect = glass.getBoundingClientRect();
+    const nx = e.clientX - rect.left;
+    const ny = e.clientY - rect.top;
+    dragBlob.vx = (nx - dragBlob.x) * 0.6;
+    dragBlob.vy = (ny - dragBlob.y) * 0.6;
+    dragBlob.x = nx;
+    dragBlob.y = ny;
+  }
+  window.addEventListener('pointermove', (e)=>{
+    if(dragBlob && e.pointerId === dragPointerId) updateDragPos(e);
+  });
+  function endDrag(e){
+    if(dragBlob && e.pointerId === dragPointerId){
+      dragBlob.dragging = false;
+      dragBlob = null;
+      dragPointerId = null;
+    }
+  }
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  function hideHint(){ hint.classList.add('hidden'); }
+  setTimeout(hideHint, 6000);
+
+  // ---- Physics loop ----
+  function step(ts){
+    for(const b of blobs){
+      if(b.dragging) continue;
+      const ny = b.y / lampH;
+      let target;
+      if(!heatOn) target = 0;
+      else if(ny > 0.72) target = 1;
+      else if(ny < 0.28) target = 0;
+      else target = b.heat;
+      b.heat += (target - b.heat) * HEAT_LAG;
+
+      const buoy = (b.heat - 0.5) * 2 * BUOY_BASE * speedMult;
+      const gravity = GRAVITY_BASE * speedMult;
+      b.vy += gravity - buoy;
+      b.vy *= DAMPING;
+
+      b.vx += Math.sin(ts*0.0007 + b.phase) * WOBBLE * speedMult;
+      b.vx *= DAMPING;
+
+      b.x += b.vx;
+      b.y += b.vy;
+    }
+
+    // pairwise soft repulsion
+    for(let i=0;i<blobs.length;i++){
+      for(let j=i+1;j<blobs.length;j++){
+        const a = blobs[i], c = blobs[j];
+        const dx = c.x-a.x, dy = c.y-a.y;
+        const dist = Math.hypot(dx,dy) || 0.001;
+        const minDist = (a.r+c.r) * 0.58;
+        if(dist < minDist){
+          const overlap = (minDist-dist) * 0.5;
+          const ux = dx/dist, uy = dy/dist;
+          if(!a.dragging){ a.x -= ux*overlap*0.5; a.y -= uy*overlap*0.5; }
+          if(!c.dragging){ c.x += ux*overlap*0.5; c.y += uy*overlap*0.5; }
+        }
+      }
+    }
+
+    // boundaries + render
+    for(const b of blobs){
+      const padX = b.r*0.7;
+      if(b.x < padX){ b.x = padX; b.vx *= -0.3; }
+      if(b.x > lampW-padX){ b.x = lampW-padX; b.vx *= -0.3; }
+      const padY = b.r*0.6;
+      if(b.y < padY){ b.y = padY; b.vy *= -0.2; b.heat = Math.min(b.heat, 0.4); }
+      if(b.y > lampH-padY){ b.y = lampH-padY; b.vy *= -0.2; b.heat = Math.max(b.heat, 0.6); }
+
+      const pulse = 1 + Math.sin(ts*0.002 + b.phase) * 0.05;
+      b.el.style.transform = `translate3d(${b.x-b.r}px, ${b.y-b.r}px, 0) scale(${pulse})`;
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // ---- Toolbar wiring ----
+  document.getElementById('heatBtn').addEventListener('click', (e)=>{
+    heatOn = !heatOn;
+    e.currentTarget.classList.toggle('active', heatOn);
+    glass.classList.toggle('off', !heatOn);
+  });
+
+  document.getElementById('addBtn').addEventListener('click', ()=>{
+    if(blobs.length < MAX_BLOBS) createBlob();
+  });
+  document.getElementById('removeBtn').addEventListener('click', removeBlob);
+
+  document.getElementById('swatches').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button.swatch');
+    if(!btn) return;
+    document.querySelectorAll('#swatches .swatch').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    applyTheme(btn.dataset.theme);
+  });
+
+  document.getElementById('speedSlider').addEventListener('input', (e)=>{
+    speedMult = parseFloat(e.target.value);
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    measure();
+    seedLamp();
+  });
+
+  // ---- Init ----
+  function init(){
+    measure();
+    seedLamp();
+    requestAnimationFrame(step);
+  }
+  window.addEventListener('load', init);
+  if(document.readyState === 'complete') init();
+})();
+</script>
+</body>
+</html>
