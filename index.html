@@ -1,20 +1,1294 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Teddy's Game Hub</title><meta name="description" content="Teddy's Game Hub - fun creative games for kids 7+."><style>
-:root{--ink:#25304a;--muted:#68738d;--white:#fff;--pink:#ff67aa;--purple:#7665ee;--blue:#42b7f5;--green:#4dcc8b;--yellow:#ffd65a;--orange:#ff9254;--shadow:0 12px 30px rgba(47,57,92,.14)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 8% 5%,rgba(255,255,255,.9) 0 70px,transparent 71px),radial-gradient(circle at 92% 12%,rgba(255,255,255,.8) 0 55px,transparent 56px),linear-gradient(180deg,#dff7ff 0%,#f5edff 47%,#fff8d9 100%);min-height:100vh;overflow-x:hidden}body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.5}body:before{width:360px;height:360px;background:#ffd7e9;left:-180px;top:40%}body:after{width:400px;height:400px;background:#ccecff;right:-200px;bottom:3%}header{text-align:center;padding:30px 16px 20px;position:relative}.sparkles span{position:absolute;font-size:25px;animation:float 3s ease-in-out infinite}.sparkles span:nth-child(1){left:8%;top:25px}.sparkles span:nth-child(2){right:10%;top:40px;animation-delay:.5s}.sparkles span:nth-child(3){left:18%;bottom:0;animation-delay:1s}.sparkles span:nth-child(4){right:20%;bottom:4px;animation-delay:1.5s}@keyframes float{50%{transform:translateY(-8px) rotate(8deg)}}.brand{display:inline-flex;align-items:center;gap:14px;background:#fff;border-radius:999px;padding:10px 20px 10px 11px;box-shadow:var(--shadow)}h1{margin:0;font-size:clamp(2.2rem,6vw,4.4rem);line-height:.95;letter-spacing:-3px;background:linear-gradient(90deg,#ff559d,#7760ee,#27a9ee);-webkit-background-clip:text;background-clip:text;color:transparent}.tagline{margin-top:9px;color:var(--muted);font-weight:800}.teddy{width:65px;height:65px;border-radius:50%;background:#b97845;position:relative;box-shadow:inset -6px -8px 0 rgba(80,40,20,.12),0 6px 0 #8e5a36}.teddy:before,.teddy:after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:#a7663c;top:-4px;z-index:-1}.teddy:before{left:1px}.teddy:after{right:1px}.ear{position:absolute;width:22px;height:22px;border-radius:50%;background:#d69660;top:7px}.ear.l{left:6px}.ear.r{right:6px}.eye{position:absolute;width:7px;height:9px;border-radius:50%;background:#35251e;top:29px}.eye.l{left:21px}.eye.r{right:21px}.nose{position:absolute;width:12px;height:9px;border-radius:50%;background:#3c2921;left:27px;top:39px}.mouth{position:absolute;width:13px;height:7px;border-bottom:3px solid #3c2921;border-radius:50%;left:26px;top:45px}.toolbar{width:min(1100px,calc(100% - 10px));margin:17px auto 0;display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.search{flex:1 1 310px;max-width:510px;display:flex;align-items:center;background:#fff;border:3px solid rgba(118,101,238,.12);border-radius:18px;padding:0 14px;box-shadow:var(--shadow)}.search span{font-size:21px}.search input{width:100%;border:0;outline:0;padding:14px 9px;font-size:16px;font-weight:750;color:var(--ink);background:transparent}.filter{border:0;border-radius:15px;padding:0 16px;background:#fff;color:var(--ink);font-weight:900;box-shadow:var(--shadow);cursor:pointer}.filter.active{background:var(--ink);color:#fff}main{width:min(1150px,calc(100% - 26px));margin:20px auto 55px}.hero{position:relative;overflow:hidden;border-radius:30px;padding:30px;background:linear-gradient(135deg,#7865ee,#42b7f5);color:#fff;box-shadow:0 18px 45px rgba(75,85,190,.24);display:flex;justify-content:space-between;align-items:center;gap:25px}.hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12);right:-70px;top:-90px}.hero h2{font-size:clamp(1.8rem,4vw,2.8rem);margin:0 0 8px}.hero p{margin:0;max-width:680px;font-weight:650}.hero-buttons{display:flex;gap:10px;z-index:1;flex-wrap:wrap}.hero button{border:0;border-radius:16px;padding:14px 18px;font-weight:950;cursor:pointer}.surprise{background:var(--yellow);color:#493d18;box-shadow:0 5px 0 #d4ac35}.featured-link{background:#fff;color:#4e42c5}.section-title{display:flex;justify-content:space-between;align-items:end;margin:30px 3px 14px}.section-title h2{margin:0;font-size:1.7rem}.section-title small{color:var(--muted);font-weight:800}.featured{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}.feature-card{min-height:180px;border-radius:25px;padding:22px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:.2s transform}.feature-card:hover{transform:translateY(-5px)}.feature-card:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-45px;bottom:-55px;background:rgba(255,255,255,.16)}.feature-card h3{font-size:1.5rem;margin:0 0 7px}.feature-card p{max-width:430px;font-weight:650;margin:0 0 17px}.feature-card .mini{display:inline-block;background:#fff;color:var(--ink);border-radius:12px;padding:9px 13px;font-weight:950}.feature-icon{position:absolute;right:18px;top:18px;font-size:62px;filter:drop-shadow(0 8px 4px rgba(0,0,0,.13))}.f1{background:linear-gradient(135deg,#ff6cae,#ff9b63)}.f2{background:linear-gradient(135deg,#8067ef,#48b9f6)}.f3{background:linear-gradient(135deg,#45c98b,#9bdf77)}.games{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.game{background:#fff;border-radius:25px;overflow:hidden;box-shadow:var(--shadow);transition:.2s transform,.2s box-shadow}.game:hover{transform:translateY(-6px);box-shadow:0 18px 35px rgba(48,55,91,.2)}.thumb{height:145px;display:grid;place-items:center;position:relative;overflow:hidden}.thumb:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-40px;top:-65px;background:rgba(255,255,255,.17)}.thumb .emoji{font-size:73px;z-index:1;filter:drop-shadow(0 8px 5px rgba(0,0,0,.13))}.pink{background:linear-gradient(135deg,#ff91c1,#ff5e9f)}.blue{background:linear-gradient(135deg,#72d8ff,#48a9ff)}.green{background:linear-gradient(135deg,#91e9b3,#43c987)}.orange{background:linear-gradient(135deg,#ffc66e,#ff8751)}.purple{background:linear-gradient(135deg,#b79fff,#7965ed)}.yellow{background:linear-gradient(135deg,#ffea7b,#ffc84b)}.cyan{background:linear-gradient(135deg,#69e5e4,#39b8cf)}.game-body{padding:16px 17px 18px}.game h3{margin:0;font-size:1.27rem}.game p{margin:6px 0 14px;color:var(--muted);font-weight:650;line-height:1.4;font-size:.93rem}.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}.badge{position:absolute;top:11px;left:11px;z-index:2;background:#fff;border-radius:999px;padding:6px 9px;font-size:.7rem;font-weight:950}.play{border:0;border-radius:13px;padding:10px 15px;background:#efeeff;color:#5649c9;font-weight:950;cursor:pointer}.age{font-size:.78rem;color:var(--muted);font-weight:850}.no-results{display:none;background:#fff;border-radius:22px;padding:35px;text-align:center;box-shadow:var(--shadow);font-weight:800;color:var(--muted)}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.quick button{border:0;background:#fff;border-radius:18px;padding:15px 10px;box-shadow:var(--shadow);font-weight:900;color:var(--ink);cursor:pointer}.quick button span{display:block;font-size:28px;margin-bottom:4px}footer{text-align:center;padding:0 20px 35px;color:#68728b;font-weight:700}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);background:#26304a;color:#fff;padding:14px 20px;border-radius:16px;font-weight:850;box-shadow:0 12px 35px rgba(0,0,0,.25);transition:.3s;z-index:20;white-space:nowrap}.toast.show{transform:translate(-50%,0)}@media(max-width:900px){.featured{grid-template-columns:1fr 1fr}.feature-card:first-child{grid-column:1/-1}.games{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.hero{flex-direction:column;align-items:flex-start}.featured{grid-template-columns:1fr}.feature-card:first-child{grid-column:auto}.games{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.brand{gap:9px}.teddy{width:55px;height:55px}.teddy .eye{top:25px}.teddy .nose{top:34px}.teddy .mouth{top:40px}h1{letter-spacing:-2px}.sparkles{display:none}}
-</style></head><body>
-<header><div class="sparkles"><span>✨</span><span>⭐</span><span>💫</span><span>🌟</span></div><div class="brand"><div class="teddy"><div class="ear l"></div><div class="ear r"></div><div class="eye l"></div><div class="eye r"></div><div class="nose"></div><div class="mouth"></div></div><div><h1>Teddy's Game Hub</h1><div class="tagline">Play • Create • Experiment • Have Fun! 🧸🎮</div></div></div><div class="toolbar"><label class="search"><span>🔎</span><input id="search" type="search" placeholder="Search Teddy's games..."></label><button class="filter active" data-filter="all">All Games</button><button class="filter" data-filter="creative">Creative</button><button class="filter" data-filter="arcade">Arcade</button><button class="filter" data-filter="chill">Chill</button><button class="filter" data-filter="action">Action</button></div></header>
-<main><section class="hero"><div><h2>Welcome to Teddy's fun zone! 🎉</h2><p>Nine awesome games to build, create, smash, pop, experiment and explore. What will you play first?</p></div><div class="hero-buttons"><button class="featured-link" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">⭐ Featured</button><button class="surprise" onclick="randomGame()">🎲 Surprise Me!</button></div></section>
-<section id="featured"><div class="section-title"><h2>🌟 Featured Games</h2><small>Pick a favourite</small></div><div class="featured"><div class="feature-card f1" onclick="go('monster-maker-deluxe-v4.html')"><div class="feature-icon">👾</div><h3>Monster Maker Deluxe</h3><p>Create a totally crazy monster with loads of fun combinations.</p><span class="mini">Play Monster Maker →</span></div><div class="feature-card f2" onclick="go('volcano-builder-deluxe.html')"><div class="feature-icon">🌋</div><h3>Volcano Builder</h3><p>Build it, customise it and make the lava flow!</p><span class="mini">Erupt! →</span></div><div class="feature-card f3" onclick="go('crazy-potion-lab-deluxe.html')"><div class="feature-icon">🧪</div><h3>Crazy Potion Lab</h3><p>Mix up mysterious magical experiments.</p><span class="mini">Start Lab →</span></div></div></section>
-<div class="section-title"><h2>🎮 All Games</h2><small id="count">9 games</small></div><section class="games" id="games">
-<article class="game" data-category="arcade" data-name="Volcano Builder Deluxe"><div class="thumb orange"><span class="badge">ARCADE</span><span class="emoji">🌋</span></div><div class="game-body"><h3>Volcano Builder Deluxe</h3><p>Build your volcano, customise the eruption and watch lava flow down the mountain.</p><div class="meta"><button class="play" onclick="go('volcano-builder-deluxe.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="creative" data-name="Crazy Potion Lab Deluxe"><div class="thumb purple"><span class="badge">CREATIVE</span><span class="emoji">🧪</span></div><div class="game-body"><h3>Crazy Potion Lab Deluxe</h3><p>Mix strange ingredients, discover wild reactions and create magical potions.</p><div class="meta"><button class="play" onclick="go('crazy-potion-lab-deluxe.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="action" data-name="Paintball Target Blast"><div class="thumb blue"><span class="badge">ACTION</span><span class="emoji">🎯</span></div><div class="game-body"><h3>Paintball Target Blast</h3><p>Aim carefully and blast colourful targets. How high can you score?</p><div class="meta"><button class="play" onclick="go('paintball-target-blast.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="arcade" data-name="Whack-a-Mole"><div class="thumb yellow"><span class="badge">ARCADE</span><span class="emoji">🔨</span></div><div class="game-body"><h3>Whack-a-Mole</h3><p>Keep your eyes peeled and bonk those speedy moles before they disappear!</p><div class="meta"><button class="play" onclick="go('whack-a-mole.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="creative" data-name="Monster Maker Deluxe"><div class="thumb purple"><span class="badge">CREATIVE</span><span class="emoji">👾</span></div><div class="game-body"><h3>Monster Maker Deluxe</h3><p>Mix bodies, eyes, colours, horns and silly accessories to invent your monster.</p><div class="meta"><button class="play" onclick="go('monster-maker-deluxe-v4.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="arcade" data-name="Bubble Pop Factory"><div class="thumb pink"><span class="badge">ARCADE</span><span class="emoji">🫧</span></div><div class="game-body"><h3>Bubble Pop Factory</h3><p>Make bubbles, pop them and keep the colourful factory running!</p><div class="meta"><button class="play" onclick="go('bubble-pop-factory.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="creative" data-name="Needoh Designer"><div class="thumb pink"><span class="badge">CREATIVE</span><span class="emoji">🟪</span></div><div class="game-body"><h3>Needoh Designer</h3><p>Design your own squishy toy with fun colours, patterns and textures.</p><div class="meta"><button class="play" onclick="go('needoh-designer.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="chill" data-name="Kinetic Sand Rake"><div class="thumb green"><span class="badge">CHILL</span><span class="emoji">🏖️</span></div><div class="game-body"><h3>Kinetic Sand Rake</h3><p>Relax, rake patterns through the sand and create satisfying designs.</p><div class="meta"><button class="play" onclick="go('kinetic-sand-rake.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article>
-<article class="game" data-category="chill" data-name="Lava Lamp"><div class="thumb cyan"><span class="badge">CHILL</span><span class="emoji">🫧</span></div><div class="game-body"><h3>Lava Lamp</h3><p>Create your own mesmerising lava lamp and watch the blobs float around.</p><div class="meta"><button class="play" onclick="go('lava-lamp.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div></article></section>
-<div class="no-results" id="noResults">🔎 No games found. Try a different search!</div><div class="section-title"><h2>⚡ Quick Fun</h2><small>Something a little different</small></div><section class="quick"><button onclick="randomGame()"><span>🎲</span>Random Game</button><button onclick="toast('🏆 Daily Challenge coming soon!')"><span>🏆</span>Daily Challenge</button><button onclick="toast('🎁 Teddy found a mystery prize!')"><span>🎁</span>Mystery Prize</button><button onclick="toast('🚀 More games are on the way!')"><span>🚀</span>Coming Soon</button></section></main>
-<footer>🧸 Teddy's Game Hub · A colourful place for curious kids and big imaginations ⭐</footer><div class="toast" id="toast"></div>
-<script>const cards=[...document.querySelectorAll('.game')],search=document.getElementById('search'),count=document.getElementById('count'),noResults=document.getElementById('noResults');let active='all';function update(){const q=search.value.toLowerCase().trim();let shown=0;cards.forEach(card=>{const cat=active==='all'||card.dataset.category===active,text=card.dataset.name.toLowerCase().includes(q),visible=cat&&text;card.style.display=visible?'block':'none';if(visible)shown++});count.textContent=shown+(shown===1?' game':' games');noResults.style.display=shown?'none':'block'}search.addEventListener('input',update);document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');active=btn.dataset.filter;update()}));function go(file){window.location.href=file}function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}function randomGame(){const visible=cards.filter(c=>getComputedStyle(c).display!=='none');if(!visible.length){toast('🔎 Try another search!');return}const chosen=visible[Math.floor(Math.random()*visible.length)];chosen.scrollIntoView({behavior:'smooth',block:'center'});chosen.animate([{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}],{duration:650});toast('🎲 Teddy picked '+chosen.dataset.name+'!')}</script></body></html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Teddy's Game Hub</title>
+<meta name="description" content="Teddy's Game Hub - fun creative games for kids 7+.">
+
+<style>
+:root{
+--ink:#25304a;
+--muted:#68738d;
+--white:#fff;
+--pink:#ff67aa;
+--purple:#7665ee;
+--blue:#42b7f5;
+--green:#4dcc8b;
+--yellow:#ffd65a;
+--orange:#ff9254;
+--shadow:0 12px 30px rgba(47,57,92,.14)
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+color:var(--ink);
+font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+background:
+radial-gradient(circle at 8% 5%,rgba(255,255,255,.9) 0 70px,transparent 71px),
+radial-gradient(circle at 92% 12%,rgba(255,255,255,.8) 0 55px,transparent 56px),
+linear-gradient(180deg,#dff7ff 0%,#f5edff 47%,#fff8d9 100%);
+min-height:100vh;
+overflow-x:hidden
+}
+
+body:before,
+body:after{
+content:"";
+position:fixed;
+z-index:-1;
+border-radius:50%;
+filter:blur(2px);
+opacity:.5
+}
+
+body:before{
+width:360px;
+height:360px;
+background:#ffd7e9;
+left:-180px;
+top:40%
+}
+
+body:after{
+width:400px;
+height:400px;
+background:#ccecff;
+right:-200px;
+bottom:3%
+}
+
+header{
+text-align:center;
+padding:30px 16px 20px;
+position:relative
+}
+
+.sparkles span{
+position:absolute;
+font-size:25px;
+animation:float 3s ease-in-out infinite
+}
+
+.sparkles span:nth-child(1){left:8%;top:25px}
+.sparkles span:nth-child(2){right:10%;top:40px;animation-delay:.5s}
+.sparkles span:nth-child(3){left:18%;bottom:0;animation-delay:1s}
+.sparkles span:nth-child(4){right:20%;bottom:4px;animation-delay:1.5s}
+
+@keyframes float{
+50%{transform:translateY(-8px) rotate(8deg)}
+}
+
+.brand{
+display:inline-flex;
+align-items:center;
+gap:14px;
+background:#fff;
+border-radius:999px;
+padding:10px 20px 10px 11px;
+box-shadow:var(--shadow)
+}
+
+h1{
+margin:0;
+font-size:clamp(2.2rem,6vw,4.4rem);
+line-height:.95;
+letter-spacing:-3px;
+background:linear-gradient(90deg,#ff559d,#7760ee,#27a9ee);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent
+}
+
+.tagline{
+margin-top:9px;
+color:var(--muted);
+font-weight:800
+}
+
+.teddy{
+width:65px;
+height:65px;
+border-radius:50%;
+background:#b97845;
+position:relative;
+box-shadow:inset -6px -8px 0 rgba(80,40,20,.12),0 6px 0 #8e5a36
+}
+
+.teddy:before,
+.teddy:after{
+content:"";
+position:absolute;
+width:26px;
+height:26px;
+border-radius:50%;
+background:#a7663c;
+top:-4px;
+z-index:-1
+}
+
+.teddy:before{left:1px}
+.teddy:after{right:1px}
+
+.ear{
+position:absolute;
+width:22px;
+height:22px;
+border-radius:50%;
+background:#d69660;
+top:7px
+}
+
+.ear.l{left:6px}
+.ear.r{right:6px}
+
+.eye{
+position:absolute;
+width:7px;
+height:9px;
+border-radius:50%;
+background:#35251e;
+top:29px
+}
+
+.eye.l{left:21px}
+.eye.r{right:21px}
+
+.nose{
+position:absolute;
+width:12px;
+height:9px;
+border-radius:50%;
+background:#3c2921;
+left:27px;
+top:39px
+}
+
+.mouth{
+position:absolute;
+width:13px;
+height:7px;
+border-bottom:3px solid #3c2921;
+border-radius:50%;
+left:26px;
+top:45px
+}
+
+.toolbar{
+width:min(1100px,calc(100% - 10px));
+margin:17px auto 0;
+display:flex;
+gap:9px;
+flex-wrap:wrap;
+justify-content:center
+}
+
+.search{
+flex:1 1 310px;
+max-width:510px;
+display:flex;
+align-items:center;
+background:#fff;
+border:3px solid rgba(118,101,238,.12);
+border-radius:18px;
+padding:0 14px;
+box-shadow:var(--shadow)
+}
+
+.search span{font-size:21px}
+
+.search input{
+width:100%;
+border:0;
+outline:0;
+padding:14px 9px;
+font-size:16px;
+font-weight:750;
+color:var(--ink);
+background:transparent
+}
+
+.filter{
+border:0;
+border-radius:15px;
+padding:0 16px;
+background:#fff;
+color:var(--ink);
+font-weight:900;
+box-shadow:var(--shadow);
+cursor:pointer
+}
+
+.filter.active{
+background:var(--ink);
+color:#fff
+}
+
+main{
+width:min(1150px,calc(100% - 26px));
+margin:20px auto 55px
+}
+
+.hero{
+position:relative;
+overflow:hidden;
+border-radius:30px;
+padding:30px;
+background:linear-gradient(135deg,#7865ee,#42b7f5);
+color:#fff;
+box-shadow:0 18px 45px rgba(75,85,190,.24);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:25px
+}
+
+.hero:after{
+content:"";
+position:absolute;
+width:260px;
+height:260px;
+border-radius:50%;
+background:rgba(255,255,255,.12);
+right:-70px;
+top:-90px
+}
+
+.hero h2{
+font-size:clamp(1.8rem,4vw,2.8rem);
+margin:0 0 8px
+}
+
+.hero p{
+margin:0;
+max-width:680px;
+font-weight:650
+}
+
+.hero-buttons{
+display:flex;
+gap:10px;
+z-index:1;
+flex-wrap:wrap
+}
+
+.hero button{
+border:0;
+border-radius:16px;
+padding:14px 18px;
+font-weight:950;
+cursor:pointer
+}
+
+.surprise{
+background:var(--yellow);
+color:#493d18;
+box-shadow:0 5px 0 #d4ac35
+}
+
+.featured-link{
+background:#fff;
+color:#4e42c5
+}
+
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin:30px 3px 14px
+}
+
+.section-title h2{
+margin:0;
+font-size:1.7rem
+}
+
+.section-title small{
+color:var(--muted);
+font-weight:800
+}
+
+.featured{
+display:grid;
+grid-template-columns:1.4fr 1fr 1fr;
+gap:16px
+}
+
+.feature-card{
+min-height:180px;
+border-radius:25px;
+padding:22px;
+color:#fff;
+position:relative;
+overflow:hidden;
+box-shadow:var(--shadow);
+cursor:pointer;
+transition:.2s transform
+}
+
+.feature-card:hover{
+transform:translateY(-5px)
+}
+
+.feature-card:after{
+content:"";
+position:absolute;
+width:150px;
+height:150px;
+border-radius:50%;
+right:-45px;
+bottom:-55px;
+background:rgba(255,255,255,.16)
+}
+
+.feature-card h3{
+font-size:1.5rem;
+margin:0 0 7px
+}
+
+.feature-card p{
+max-width:430px;
+font-weight:650;
+margin:0 0 17px
+}
+
+.feature-card .mini{
+display:inline-block;
+background:#fff;
+color:var(--ink);
+border-radius:12px;
+padding:9px 13px;
+font-weight:950
+}
+
+.feature-icon{
+position:absolute;
+right:18px;
+top:18px;
+font-size:62px;
+filter:drop-shadow(0 8px 4px rgba(0,0,0,.13))
+}
+
+.f1{background:linear-gradient(135deg,#ff6cae,#ff9b63)}
+.f2{background:linear-gradient(135deg,#8067ef,#48b9f6)}
+.f3{background:linear-gradient(135deg,#45c98b,#9bdf77)}
+
+.games{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px
+}
+
+.game{
+background:#fff;
+border-radius:25px;
+overflow:hidden;
+box-shadow:var(--shadow);
+transition:.2s transform,.2s box-shadow
+}
+
+.game:hover{
+transform:translateY(-6px);
+box-shadow:0 18px 35px rgba(48,55,91,.2)
+}
+
+.thumb{
+height:145px;
+display:grid;
+place-items:center;
+position:relative;
+overflow:hidden
+}
+
+.thumb:before{
+content:"";
+position:absolute;
+width:180px;
+height:180px;
+border-radius:50%;
+right:-40px;
+top:-65px;
+background:rgba(255,255,255,.17)
+}
+
+.thumb .emoji{
+font-size:73px;
+z-index:1;
+filter:drop-shadow(0 8px 5px rgba(0,0,0,.13))
+}
+
+.pink{background:linear-gradient(135deg,#ff91c1,#ff5e9f)}
+.blue{background:linear-gradient(135deg,#72d8ff,#48a9ff)}
+.green{background:linear-gradient(135deg,#91e9b3,#43c987)}
+.orange{background:linear-gradient(135deg,#ffc66e,#ff8751)}
+.purple{background:linear-gradient(135deg,#b79fff,#7965ed)}
+.yellow{background:linear-gradient(135deg,#ffea7b,#ffc84b)}
+.cyan{background:linear-gradient(135deg,#69e5e4,#39b8cf)}
+
+.game-body{
+padding:16px 17px 18px
+}
+
+.game h3{
+margin:0;
+font-size:1.27rem
+}
+
+.game p{
+margin:6px 0 14px;
+color:var(--muted);
+font-weight:650;
+line-height:1.4;
+font-size:.93rem
+}
+
+.meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px
+}
+
+.badge{
+position:absolute;
+top:11px;
+left:11px;
+z-index:2;
+background:#fff;
+border-radius:999px;
+padding:6px 9px;
+font-size:.7rem;
+font-weight:950
+}
+
+.play{
+border:0;
+border-radius:13px;
+padding:10px 15px;
+background:#efeeff;
+color:#5649c9;
+font-weight:950;
+cursor:pointer
+}
+
+.age{
+font-size:.78rem;
+color:var(--muted);
+font-weight:850
+}
+
+.no-results{
+display:none;
+background:#fff;
+border-radius:22px;
+padding:35px;
+text-align:center;
+box-shadow:var(--shadow);
+font-weight:800;
+color:var(--muted)
+}
+
+.quick{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:13px
+}
+
+.quick button{
+border:0;
+background:#fff;
+border-radius:18px;
+padding:15px 10px;
+box-shadow:var(--shadow);
+font-weight:900;
+color:var(--ink);
+cursor:pointer
+}
+
+.quick button span{
+display:block;
+font-size:28px;
+margin-bottom:4px
+}
+
+footer{
+text-align:center;
+padding:0 20px 35px;
+color:#68728b;
+font-weight:700
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:25px;
+transform:translate(-50%,120px);
+background:#26304a;
+color:#fff;
+padding:14px 20px;
+border-radius:16px;
+font-weight:850;
+box-shadow:0 12px 35px rgba(0,0,0,.25);
+transition:.3s;
+z-index:20;
+white-space:nowrap
+}
+
+.toast.show{
+transform:translate(-50%,0)
+}
+
+@media(max-width:900px){
+.featured{grid-template-columns:1fr 1fr}
+.feature-card:first-child{grid-column:1/-1}
+.games{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:650px){
+.hero{
+flex-direction:column;
+align-items:flex-start
+}
+
+.featured{grid-template-columns:1fr}
+.feature-card:first-child{grid-column:auto}
+.games{grid-template-columns:1fr}
+.quick{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:500px){
+.brand{gap:9px}
+.teddy{
+width:55px;
+height:55px
+}
+.teddy .eye{top:25px}
+.teddy .nose{top:34px}
+.teddy .mouth{top:40px}
+h1{letter-spacing:-2px}
+.sparkles{display:none}
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="sparkles">
+<span>✨</span>
+<span>⭐</span>
+<span>💫</span>
+<span>🌟</span>
+</div>
+
+<div class="brand">
+
+<div class="teddy">
+<div class="ear l"></div>
+<div class="ear r"></div>
+<div class="eye l"></div>
+<div class="eye r"></div>
+<div class="nose"></div>
+<div class="mouth"></div>
+</div>
+
+<div>
+<h1>Teddy's Game Hub</h1>
+<div class="tagline">Play • Create • Experiment • Have Fun! 🧸🎮</div>
+</div>
+
+</div>
+
+<div class="toolbar">
+
+<label class="search">
+<span>🔎</span>
+<input id="search" type="search" placeholder="Search Teddy's games...">
+</label>
+
+<button class="filter active" data-filter="all">All Games</button> <button class="filter" data-filter="creative">Creative</button> <button class="filter" data-filter="arcade">Arcade</button> <button class="filter" data-filter="chill">Chill</button> <button class="filter" data-filter="action">Action</button>
+
+</div>
+
+</header>
+
+<main>
+
+<section class="hero">
+
+<div>
+<h2>Welcome to Teddy's fun zone! 🎉</h2>
+<p>
+Twelve awesome games to build, create, smash, pop, experiment,
+explore and play. What will you play first?
+</p>
+</div>
+
+<div class="hero-buttons">
+<button class="featured-link"
+onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">
+⭐ Featured
+</button>
+
+<button class="surprise" onclick="randomGame()">
+🎲 Surprise Me!
+</button>
+</div>
+
+</section>
+
+<section id="featured">
+
+<div class="section-title">
+<h2>🌟 Featured Games</h2>
+<small>Pick a favourite</small>
+</div>
+
+<div class="featured">
+
+<div class="feature-card f1"
+onclick="go('monster-maker-deluxe-v4.html')">
+
+<div class="feature-icon">👾</div>
+
+<h3>Monster Maker Deluxe</h3>
+
+<p>
+Create a totally crazy monster with loads of fun combinations.
+</p>
+
+<span class="mini">Play Monster Maker →</span>
+
+</div>
+
+<div class="feature-card f2"
+onclick="go('volcano-builder-deluxe.html')">
+
+<div class="feature-icon">🌋</div>
+
+<h3>Volcano Builder</h3>
+
+<p>
+Build it, customise it and make the lava flow!
+</p>
+
+<span class="mini">Erupt! →</span>
+
+</div>
+
+<div class="feature-card f3"
+onclick="go('crazy-potion-lab-deluxe.html')">
+
+<div class="feature-icon">🧪</div>
+
+<h3>Crazy Potion Lab</h3>
+
+<p>
+Mix up mysterious magical experiments.
+</p>
+
+<span class="mini">Start Lab →</span>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="section-title">
+
+<h2>🎮 All Games</h2>
+
+<small id="count">12 games</small>
+
+</div>
+
+<section class="games" id="games">
+
+<!-- 1 -->
+
+<article class="game"
+data-category="arcade"
+data-name="Volcano Builder Deluxe">
+
+<div class="thumb orange">
+<span class="badge">ARCADE</span>
+<span class="emoji">🌋</span>
+</div>
+
+<div class="game-body">
+
+<h3>Volcano Builder Deluxe</h3>
+
+<p>
+Build your volcano, customise the eruption and watch lava flow down the mountain.
+</p>
+
+<div class="meta">
+<button class="play"
+onclick="go('volcano-builder-deluxe.html')">
+Play Now →
+</button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+
+</div>
+</article>
+
+<!-- 2 -->
+
+<article class="game"
+data-category="creative"
+data-name="Crazy Potion Lab Deluxe">
+
+<div class="thumb purple">
+<span class="badge">CREATIVE</span>
+<span class="emoji">🧪</span>
+</div>
+
+<div class="game-body">
+
+<h3>Crazy Potion Lab Deluxe</h3>
+
+<p>
+Mix strange ingredients, discover wild reactions and create magical potions.
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('crazy-potion-lab-deluxe.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 3 -->
+
+<article class="game"
+data-category="action"
+data-name="Paintball Target Blast">
+
+<div class="thumb blue">
+<span class="badge">ACTION</span>
+<span class="emoji">🎯</span>
+</div>
+
+<div class="game-body">
+
+<h3>Paintball Target Blast</h3>
+
+<p>
+Aim carefully and blast colourful targets. How high can you score?
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('paintball-target-blast.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 4 -->
+
+<article class="game"
+data-category="arcade"
+data-name="Whack-a-Mole">
+
+<div class="thumb yellow">
+<span class="badge">ARCADE</span>
+<span class="emoji">🔨</span>
+</div>
+
+<div class="game-body">
+
+<h3>Whack-a-Mole</h3>
+
+<p>
+Keep your eyes peeled and bonk those speedy moles before they disappear!
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('whack-a-mole.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 5 -->
+
+<article class="game"
+data-category="creative"
+data-name="Monster Maker Deluxe">
+
+<div class="thumb purple">
+<span class="badge">CREATIVE</span>
+<span class="emoji">👾</span>
+</div>
+
+<div class="game-body">
+
+<h3>Monster Maker Deluxe</h3>
+
+<p>
+Mix bodies, eyes, colours, horns and silly accessories to invent your monster.
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('monster-maker-deluxe-v4.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 6 -->
+
+<article class="game"
+data-category="arcade"
+data-name="Bubble Pop Factory">
+
+<div class="thumb pink">
+<span class="badge">ARCADE</span>
+<span class="emoji">🫧</span>
+</div>
+
+<div class="game-body">
+
+<h3>Bubble Pop Factory</h3>
+
+<p>
+Make bubbles, pop them and keep the colourful factory running!
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('bubble-pop-factory.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 7 -->
+
+<article class="game"
+data-category="creative"
+data-name="Needoh Designer">
+
+<div class="thumb pink">
+<span class="badge">CREATIVE</span>
+<span class="emoji">🟪</span>
+</div>
+
+<div class="game-body">
+
+<h3>Needoh Designer</h3>
+
+<p>
+Design your own squishy toy with fun colours, patterns and textures.
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('needoh-designer.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 8 -->
+
+<article class="game"
+data-category="chill"
+data-name="Kinetic Sand Rake">
+
+<div class="thumb green">
+<span class="badge">CHILL</span>
+<span class="emoji">🏖️</span>
+</div>
+
+<div class="game-body">
+
+<h3>Kinetic Sand Rake</h3>
+
+<p>
+Relax, rake patterns through the sand and create satisfying designs.
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('kinetic-sand-rake.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 9 -->
+
+<article class="game"
+data-category="chill"
+data-name="Lava Lamp">
+
+<div class="thumb cyan">
+<span class="badge">CHILL</span>
+<span class="emoji">🫧</span>
+</div>
+
+<div class="game-body">
+
+<h3>Lava Lamp</h3>
+
+<p>
+Create your own mesmerising lava lamp and watch the blobs float around.
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('lava-lamp.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+</div>
+</article>
+
+<!-- 10 - NEW -->
+
+<article class="game"
+data-category="arcade"
+data-name="67 Clicker">
+
+<div class="thumb yellow">
+
+<span class="badge">ARCADE</span>
+
+<span class="emoji">🔢</span>
+
+</div>
+
+<div class="game-body">
+
+<h3>67 Clicker</h3>
+
+<p>
+Click 67, earn coins, unlock worlds and upgrade how many coins you earn per click!
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('67-clicker.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+
+</div>
+</article>
+
+<!-- 11 - NEW -->
+
+<article class="game"
+data-category="creative"
+data-name="Dumpling Squishy Designer">
+
+<div class="thumb orange">
+
+<span class="badge">CREATIVE</span>
+
+<span class="emoji">🥟</span>
+
+</div>
+
+<div class="game-body">
+
+<h3>Dumpling Squishy Designer</h3>
+
+<p>
+Create your own adorable dumpling squishy with loads of colours and fun designs.
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('dumpling-squishy-designer.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+
+</div>
+</article>
+
+<!-- 12 - NEW -->
+
+<article class="game"
+data-category="action"
+data-name="Find Nemo Deluxe">
+
+<div class="thumb blue">
+
+<span class="badge">ACTION</span>
+
+<span class="emoji">🐠</span>
+
+</div>
+
+<div class="game-body">
+
+<h3>Find Nemo Deluxe</h3>
+
+<p>
+Help Nemo swim through colourful coral, caves and gaps while avoiding danger!
+</p>
+
+<div class="meta">
+
+<button class="play"
+onclick="go('find-nemo-deluxe.html')">
+Play Now → </button>
+
+<span class="age">7+ ⭐</span>
+
+</div>
+
+</div>
+</article>
+
+</section>
+
+<div class="no-results" id="noResults">
+🔎 No games found. Try a different search!
+</div>
+
+<div class="section-title">
+
+<h2>⚡ Quick Fun</h2>
+
+<small>Something a little different</small>
+
+</div>
+
+<section class="quick">
+
+<button onclick="randomGame()">
+<span>🎲</span>
+Random Game
+</button>
+
+<button onclick="toast('🏆 Daily Challenge coming soon!')">
+<span>🏆</span>
+Daily Challenge
+</button>
+
+<button onclick="toast('🎁 Teddy found a mystery prize!')">
+<span>🎁</span>
+Mystery Prize
+</button>
+
+<button onclick="toast('🚀 More games are on the way!')">
+<span>🚀</span>
+Coming Soon
+</button>
+
+</section>
+
+</main>
+
+<footer>
+🧸 Teddy's Game Hub · A colourful place for curious kids and big imaginations ⭐
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const cards=[...document.querySelectorAll('.game')],
+search=document.getElementById('search'),
+count=document.getElementById('count'),
+noResults=document.getElementById('noResults');
+
+let active='all';
+
+
+function update(){
+
+const q=search.value.toLowerCase().trim();
+
+let shown=0;
+
+cards.forEach(card=>{
+
+const cat=
+active==='all' ||
+card.dataset.category===active;
+
+const text=
+card.dataset.name.toLowerCase().includes(q);
+
+const visible=cat&&text;
+
+card.style.display=
+visible?'block':'none';
+
+if(visible) shown++;
+
+});
+
+count.textContent=
+shown+(shown===1?' game':' games');
+
+noResults.style.display=
+shown?'none':'block';
+
+}
+
+
+search.addEventListener(
+'input',
+update
+);
+
+
+document.querySelectorAll('.filter')
+.forEach(btn=>
+
+btn.addEventListener(
+'click',
+()=>{
+
+document
+.querySelectorAll('.filter')
+.forEach(b=>
+b.classList.remove('active')
+);
+
+btn.classList.add('active');
+
+active=btn.dataset.filter;
+
+update();
+
+})
+);
+
+
+function go(file){
+
+window.location.href=file;
+
+}
+
+
+function toast(message){
+
+const el=
+document.getElementById('toast');
+
+el.textContent=message;
+
+el.classList.add('show');
+
+clearTimeout(window.toastTimer);
+
+window.toastTimer=
+setTimeout(
+()=>el.classList.remove('show'),
+2200
+);
+
+}
+
+
+function randomGame(){
+
+const visible=
+cards.filter(
+c=>getComputedStyle(c).display!=='none'
+);
+
+if(!visible.length){
+
+toast('🔎 Try another search!');
+
+return;
+
+}
+
+const chosen=
+visible[
+Math.floor(
+Math.random()*visible.length
+)
+];
+
+chosen.scrollIntoView({
+behavior:'smooth',
+block:'center'
+});
+
+chosen.animate(
+[
+{transform:'scale(1)'},
+{transform:'scale(1.04)'},
+{transform:'scale(1)'}
+],
+{
+duration:650
+}
+);
+
+toast(
+'🎲 Teddy picked '+
+chosen.dataset.name+
+'!'
+);
+
+}
+
+</script>
+
+</body>
+</html>
