@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>67 Clicker — Meme Edition</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    min-height:100%;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:#fff;
+    background:#090910;
+}
+
+body{
+    overflow-x:hidden;
+    transition:background .5s ease;
+}
+
+button{
+    font:inherit;
+}
+
+.app{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.bg-glow{
+    position:fixed;
+    inset:-20%;
+    pointer-events:none;
+    z-index:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(255,255,255,.12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(255,0,120,.14),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 70%,
+            rgba(0,200,255,.14),
+            transparent 25%
+        );
+}
+
+.bg67{
+    position:fixed;
+    pointer-events:none;
+    z-index:1;
+    font-weight:1000;
+    opacity:.045;
+    font-size:clamp(120px,25vw,350px);
+    animation:bg67move 15s linear infinite;
+    user-select:none;
+}
+
+.bg67.one{
+    left:-80px;
+    top:15%;
+}
+
+.bg67.two{
+    right:-120px;
+    bottom:5%;
+    animation-delay:-7s;
+}
+
+@keyframes bg67move{
+    0%{
+        transform:rotate(-10deg) scale(.9);
+    }
+
+    50%{
+        transform:rotate(10deg) scale(1.1);
+    }
+
+    100%{
+        transform:rotate(-10deg) scale(.9);
+    }
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header{
+    position:relative;
+    z-index:20;
+
+    padding:16px 22px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+
+    backdrop-filter:blur(15px);
+
+    background:rgba(0,0,0,.3);
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.logo{
+    font-weight:1000;
+    font-size:clamp(25px,4vw,42px);
+    letter-spacing:-2px;
+    text-shadow:0 5px 20px #0008;
+}
+
+.logo span{
+    display:block;
+    font-size:10px;
+    letter-spacing:4px;
+    opacity:.65;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.coins{
+    font-weight:900;
+    font-size:clamp(17px,3vw,27px);
+
+    background:rgba(0,0,0,.4);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    padding:9px 15px;
+
+    border-radius:17px;
+
+    white-space:nowrap;
+
+    box-shadow:0 8px 25px #0005;
+}
+
+.sound-btn{
+    width:44px;
+    height:44px;
+
+    border-radius:14px;
+
+    border:1px solid #fff2;
+
+    background:#fff1;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:20px;
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main{
+    position:relative;
+    z-index:5;
+
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:24px 18px 50px;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(300px,1.25fr)
+        minmax(300px,.85fr);
+
+    gap:22px;
+}
+
+.panel{
+    background:rgba(0,0,0,.29);
+
+    border:1px solid rgba(255,255,255,.13);
+
+    border-radius:28px;
+
+    padding:22px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.25);
+
+    backdrop-filter:blur(15px);
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+    text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    min-height:650px;
+}
+
+.world-name{
+    font-size:13px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    opacity:.7;
+}
+
+.world-title{
+    font-size:
+        clamp(38px,7vw,72px);
+
+    font-weight:1000;
+
+    line-height:.9;
+
+    margin:8px 0 8px;
+
+    text-shadow:
+        0 8px 30px #0007;
+}
+
+.rate{
+    font-size:17px;
+    opacity:.85;
+    margin-bottom:12px;
+}
+
+/* =========================================
+   CLICK BUTTON
+========================================= */
+
+.click-wrap{
+    position:relative;
+
+    width:min(420px,82vw);
+
+    aspect-ratio:1;
+
+    margin:5px auto 20px;
+
+    display:grid;
+
+    place-items:center;
+}
+
+.clicker{
+    width:82%;
+    height:82%;
+
+    border-radius:50%;
+
+    border:0;
+
+    cursor:pointer;
+
+    position:relative;
+
+    isolation:isolate;
+
+    color:white;
+
+    font-weight:1000;
+
+    touch-action:manipulation;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff6,
+            transparent 15%
+        ),
+        linear-gradient(
+            145deg,
+            #ff4b91,
+            #8b39ff 55%,
+            #283bff
+        );
+
+    box-shadow:
+        inset 0 5px 0 #fff5,
+        inset 0 -15px 30px #0005,
+        0 22px 50px #0007;
+
+    transition:
+        transform .07s,
+        filter .15s;
+}
+
+.clicker:before{
+    content:"";
+
+    position:absolute;
+
+    inset:9%;
+
+    border-radius:50%;
+
+    border:2px solid #fff5;
+
+    box-shadow:
+        0 0 35px #fff3;
+}
+
+.clicker:after{
+    content:"";
+
+    position:absolute;
+
+    inset:5%;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            140deg,
+            #fff4,
+            transparent 30%
+        );
+
+    pointer-events:none;
+}
+
+.clicker:active{
+    transform:
+        scale(.91)
+        rotate(-2deg);
+
+    filter:brightness(1.3);
+}
+
+.big67{
+    font-size:
+        clamp(90px,17vw,170px);
+
+    line-height:.8;
+
+    letter-spacing:-10px;
+
+    text-shadow:
+        0 8px 15px #0005;
+}
+
+.click-word{
+    font-size:17px;
+
+    letter-spacing:4px;
+
+    margin-top:15px;
+}
+
+/* Rings */
+
+.click-ring{
+    position:absolute;
+
+    inset:0;
+
+    border:
+        2px solid #fff2;
+
+    border-radius:50%;
+
+    animation:ring 3s infinite;
+}
+
+.click-ring:nth-child(2){
+    inset:3%;
+    animation-delay:1s;
+}
+
+.click-ring:nth-child(3){
+    inset:6%;
+    animation-delay:2s;
+}
+
+@keyframes ring{
+
+    0%,100%{
+        transform:scale(.96);
+        opacity:.15;
+    }
+
+    50%{
+        transform:scale(1.04);
+        opacity:.5;
+    }
+}
+
+/* =========================================
+   MEME TEXT
+========================================= */
+
+.meme-text{
+    position:fixed;
+
+    left:50%;
+    top:45%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.3)
+        rotate(-8deg);
+
+    z-index:100;
+
+    font-weight:1000;
+
+    font-size:
+        clamp(50px,12vw,145px);
+
+    letter-spacing:-5px;
+
+    white-space:nowrap;
+
+    pointer-events:none;
+
+    color:#fff;
+
+    text-shadow:
+        0 7px 0 #000,
+        0 12px 35px #000;
+
+    opacity:0;
+
+    animation:memePop .85s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.meme-text.gold{
+    color:#ffe45c;
+
+    text-shadow:
+        0 7px 0 #8b5200,
+        0 0 30px #ffd000,
+        0 12px 35px #000;
+}
+
+@keyframes memePop{
+
+    0%{
+        opacity:0;
+        transform:
+            translate(-50%,-50%)
+            scale(.2)
+            rotate(-15deg);
+    }
+
+    25%{
+        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1.2)
+            rotate(4deg);
+    }
+
+    55%{
+        transform:
+            translate(-50%,-50%)
+            scale(1)
+            rotate(-2deg);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translate(-50%,-65%)
+            scale(1.35)
+            rotate(8deg);
+    }
+}
+
+/* =========================================
+   67 SCREEN FLASH
+========================================= */
+
+.flash67{
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:90;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.35),
+            transparent 55%
+        );
+
+    animation:flash .3s ease-out forwards;
+}
+
+@keyframes flash{
+
+    0%{
+        opacity:.8;
+    }
+
+    100%{
+        opacity:0;
+    }
+}
+
+/* =========================================
+   COMBO
+========================================= */
+
+.combo{
+    position:fixed;
+
+    top:95px;
+    left:50%;
+
+    transform:
+        translateX(-50%)
+        scale(.8);
+
+    z-index:80;
+
+    font-weight:1000;
+
+    font-size:20px;
+
+    background:#0008;
+
+    border:
+        1px solid #fff3;
+
+    padding:8px 17px;
+
+    border-radius:30px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.2s;
+}
+
+.combo.show{
+    opacity:1;
+    transform:
+        translateX(-50%)
+        scale(1);
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats{
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.stat{
+    padding:10px 15px;
+
+    border-radius:15px;
+
+    background:#0004;
+
+    border:1px solid #fff1;
+
+    min-width:115px;
+}
+
+.stat b{
+    display:block;
+    font-size:20px;
+}
+
+.stat small{
+    opacity:.6;
+}
+
+/* =========================================
+   FLOATING COINS
+========================================= */
+
+.float{
+    position:fixed;
+
+    pointer-events:none;
+
+    font-weight:1000;
+
+    font-size:25px;
+
+    z-index:70;
+
+    text-shadow:
+        0 3px 10px #0008;
+
+    animation:
+        floatUp .8s ease-out forwards;
+}
+
+@keyframes floatUp{
+
+    to{
+        transform:
+            translateY(-100px)
+            scale(1.25);
+
+        opacity:0;
+    }
+}
+
+/* =========================================
+   SIDE
+========================================= */
+
+.side{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+.section-title{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:13px;
+}
+
+.section-title h2{
+    margin:0;
+
+    font-size:22px;
+}
+
+.section-title span{
+    font-size:12px;
+
+    opacity:.55;
+}
+
+/* =========================================
+   SHOP
+========================================= */
+
+.shop-grid{
+    display:grid;
+
+    gap:10px;
+}
+
+.item{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:13px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    transition:.2s;
+}
+
+.item:hover{
+    background:
+        rgba(255,255,255,.11);
+
+    transform:
+        translateY(-1px);
+}
+
+.item-info{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.icon{
+    font-size:28px;
+
+    width:40px;
+
+    text-align:center;
+}
+
+.item b{
+    display:block;
+}
+
+.item small{
+    opacity:.58;
+}
+
+.buy{
+    border:0;
+
+    border-radius:12px;
+
+    padding:10px 12px;
+
+    background:#fff;
+
+    color:#111;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    min-width:92px;
+}
+
+.buy:disabled{
+    opacity:.3;
+
+    cursor:not-allowed;
+}
+
+.buy.owned{
+    background:#55e6a5;
+}
+
+/* =========================================
+   WORLDS
+========================================= */
+
+.worlds{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+}
+
+.world{
+    min-height:110px;
+
+    border-radius:18px;
+
+    border:1px solid #fff2;
+
+    color:#fff;
+
+    text-align:left;
+
+    padding:14px;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--a),
+            var(--b)
+        );
+
+    transition:.2s;
+}
+
+.world:hover{
+    transform:
+        translateY(-3px)
+        scale(1.01);
+}
+
+.world strong{
+    display:block;
+
+    font-size:17px;
+}
+
+.world small{
+    opacity:.75;
+}
+
+.world.lock{
+    filter:saturate(.3);
+
+    opacity:.65;
+}
+
+.world.active{
+    outline:3px solid #fff;
+
+    box-shadow:
+        0 0 25px var(--a);
+}
+
+.world .price{
+    position:absolute;
+
+    bottom:10px;
+
+    right:10px;
+
+    background:#0007;
+
+    padding:5px 8px;
+
+    border-radius:9px;
+
+    font-weight:900;
+}
+
+.world .tick{
+    position:absolute;
+
+    right:10px;
+
+    top:8px;
+}
+
+/* =========================================
+   RESET
+========================================= */
+
+.reset{
+    width:100%;
+
+    border:
+        1px solid #fff2;
+
+    background:#fff1;
+
+    color:#fff;
+
+    border-radius:12px;
+
+    padding:10px;
+
+    cursor:pointer;
+}
+
+/* =========================================
+   PARTICLES
+========================================= */
+
+.particles{
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:60;
+}
+
+.particle{
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    animation:
+        particle .75s ease-out forwards;
+}
+
+@keyframes particle{
+
+    to{
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            scale(0);
+
+        opacity:0;
+    }
+}
+
+/* =========================================
+   67 SHAPES
+========================================= */
+
+.mini67{
+    position:fixed;
+
+    pointer-events:none;
+
+    z-index:55;
+
+    font-size:24px;
+
+    font-weight:1000;
+
+    animation:
+        mini67 .9s ease-out forwards;
+
+    text-shadow:
+        0 3px 8px #0008;
+}
+
+@keyframes mini67{
+
+    0%{
+        opacity:0;
+        transform:
+            translate(-50%,-50%)
+            scale(.3)
+            rotate(0);
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(1.4)
+            rotate(var(--rot));
+    }
+}
+
+/* =========================================
+   WORLD EFFECTS
+========================================= */
+
+.world-effect{
+    position:fixed;
+
+    pointer-events:none;
+
+    z-index:30;
+
+    font-size:42px;
+
+    animation:
+        worldFloat 1.3s ease-out forwards;
+}
+
+@keyframes worldFloat{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translateY(30px)
+            scale(.5)
+            rotate(-10deg);
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translateY(-150px)
+            scale(1.4)
+            rotate(15deg);
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:850px){
+
+    .main{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:auto;
+        padding:15px;
+    }
+
+    .side{
+        order:2;
+    }
+}
+
+@media(max-width:520px){
+
+    .header{
+        padding:12px;
+    }
+
+    .main{
+        padding:12px;
+    }
+
+    .panel{
+        padding:15px;
+
+        border-radius:22px;
+    }
+
+    .worlds{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .coins{
+        font-size:16px;
+
+        padding:
+            8px 11px;
+    }
+
+    .click-wrap{
+        width:
+            min(360px,92vw);
+    }
+
+    .meme-text{
+        letter-spacing:-3px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="bg-glow"></div>
+
+<div class="bg67 one">67</div>
+<div class="bg67 two">67</div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+        67 CLICKER
+        <span>MEME EDITION</span>
+    </div>
+
+    <div class="header-right">
+
+        <button
+            class="sound-btn"
+            id="soundBtn"
+            title="Toggle sound"
+        >
+            🔊
+        </button>
+
+        <div class="coins">
+            🪙
+            <span id="coins">0</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<div
+    class="combo"
+    id="combo"
+>
+    🔥 67 COMBO ×1
+</div>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<!-- CLICKER -->
+
+<section class="panel hero">
+
+    <div
+        class="world-name"
+        id="worldName"
+    >
+        STARTER WORLD
+    </div>
+
+    <div class="world-title">
+        CLICK 67
+    </div>
+
+    <div class="rate">
+        Each click gives
+        <b id="perClick">1</b>
+        coin
+    </div>
+
+
+    <div
+        class="click-wrap"
+        id="clickWrap"
+    >
+
+        <div class="click-ring"></div>
+        <div class="click-ring"></div>
+        <div class="click-ring"></div>
+
+
+        <button
+            class="clicker"
+            id="clicker"
+        >
+
+            <div class="big67">
+                67
+            </div>
+
+            <div class="click-word">
+                CLICK!
+            </div>
+
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <b id="totalClicks">
+                0
+            </b>
+
+            <small>
+                TOTAL CLICKS
+            </small>
+        </div>
+
+
+        <div class="stat">
+            <b id="lifetime">
+                0
+            </b>
+
+            <small>
+                LIFETIME COINS
+            </small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SIDE -->
+
+<aside class="side">
+
+
+<section class="panel">
+
+    <div class="section-title">
+
+        <h2>
+            ⚡ Click Power
+        </h2>
+
+        <span>
+            Bigger clicks
+        </span>
+
+    </div>
+
+    <div
+        class="shop-grid"
+        id="upgrades"
+    ></div>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="section-title">
+
+        <h2>
+            🌍 Worlds
+        </h2>
+
+        <span>
+            Unlock themes
+        </span>
+
+    </div>
+
+    <div
+        class="worlds"
+        id="worlds"
+    ></div>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="section-title">
+
+        <h2>
+            💾 Game
+        </h2>
+
+        <span>
+            Auto-save enabled
+        </span>
+
+    </div>
+
+    <button
+        class="reset"
+        id="reset"
+    >
+        Reset all progress
+    </button>
+
+</section>
+
+
+</aside>
+
+</main>
+
+
+<div
+    class="particles"
+    id="particles"
+></div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   GAME DATA
+========================================== */
+
+const upgrades = [
+
+    {
+        power:1,
+        cost:0,
+        icon:"🖱️",
+        name:"Starter Click",
+        desc:"1 coin per click"
+    },
+
+    {
+        power:5,
+        cost:50,
+        icon:"✨",
+        name:"Super Click",
+        desc:"5 coins per click"
+    },
+
+    {
+        power:10,
+        cost:250,
+        icon:"⚡",
+        name:"Mega Click",
+        desc:"10 coins per click"
+    },
+
+    {
+        power:25,
+        cost:1000,
+        icon:"💎",
+        name:"Diamond Click",
+        desc:"25 coins per click"
+    },
+
+    {
+        power:50,
+        cost:5000,
+        icon:"🔥",
+        name:"Fire Click",
+        desc:"50 coins per click"
+    },
+
+    {
+        power:100,
+        cost:25000,
+        icon:"🚀",
+        name:"Rocket Click",
+        desc:"100 coins per click"
+    },
+
+    {
+        power:500,
+        cost:150000,
+        icon:"🌟",
+        name:"Star Click",
+        desc:"500 coins per click"
+    },
+
+    {
+        power:1000,
+        cost:750000,
+        icon:"👑",
+        name:"67 King",
+        desc:"1,000 coins per click"
+    },
+
+    {
+        power:5000,
+        cost:5000000,
+        icon:"💥",
+        name:"67 LEGEND",
+        desc:"5,000 coins per click"
+    }
+
+];
+
+
+const worlds = [
+
+    {
+        id:"starter",
+        name:"Starter World",
+        icon:"🌱",
+        cost:0,
+        a:"#18a558",
+        b:"#086b72"
+    },
+
+    {
+        id:"volcano",
+        name:"Volcano World",
+        icon:"🌋",
+        cost:500,
+        a:"#ff4b1f",
+        b:"#8f0909"
+    },
+
+    {
+        id:"ice",
+        name:"Ice World",
+        icon:"❄️",
+        cost:2500,
+        a:"#39d8ff",
+        b:"#3155d9"
+    },
+
+    {
+        id:"candy",
+        name:"Candy World",
+        icon:"🍭",
+        cost:10000,
+        a:"#ff5aa5",
+        b:"#9c42ff"
+    },
+
+    {
+        id:"ocean",
+        name:"Ocean World",
+        icon:"🌊",
+        cost:50000,
+        a:"#00b4db",
+        b:"#005bea"
+    },
+
+    {
+        id:"space",
+        name:"Space World",
+        icon:"🌌",
+        cost:250000,
+        a:"#4924a7",
+        b:"#09001f"
+    },
+
+    {
+        id:"fantasy",
+        name:"Fantasy World",
+        icon:"🏰",
+        cost:1000000,
+        a:"#ffb347",
+        b:"#7b2cbf"
+    },
+
+    {
+        id:"gold",
+        name:"67 Gold World",
+        icon:"👑",
+        cost:5000000,
+        a:"#ffd700",
+        b:"#a45b00"
+    }
+
+];
+
+
+/* ==========================================
+   STATE
+========================================== */
+
+let state =
+    JSON.parse(
+        localStorage.getItem(
+            "67clicker"
+        )
+    ) || {
+
+        coins:0,
+
+        totalClicks:0,
+
+        lifetime:0,
+
+        power:1,
+
+        ownedWorlds:[
+            "starter"
+        ],
+
+        world:"starter"
+
+    };
+
+
+let soundOn =
+    localStorage.getItem(
+        "67sound"
+    ) !== "off";
+
+
+let combo = 0;
+
+let lastClick = 0;
+
+
+/* ==========================================
+   AUDIO ENGINE
+========================================== */
+
+let audioCtx = null;
+
+
+function audio(){
+
+    if(!soundOn)
+        return;
+
+    if(!audioCtx){
+
+        audioCtx =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+    if(
+        audioCtx.state ===
+        "suspended"
+    ){
+
+        audioCtx.resume();
+
+    }
+
+}
+
+
+/* Basic synthesised click */
+
+function clickSound(){
+
+    if(!soundOn)
+        return;
+
+    audio();
+
+    const osc =
+        audioCtx.createOscillator();
+
+    const gain =
+        audioCtx.createGain();
+
+
+    osc.type = "sine";
+
+    osc.frequency.setValueAtTime(
+        240,
+        audioCtx.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        520,
+        audioCtx.currentTime + .07
+    );
+
+
+    gain.gain.setValueAtTime(
+        .0001,
+        audioCtx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .12,
+        audioCtx.currentTime + .01
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioCtx.currentTime + .09
+    );
+
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioCtx.destination
+    );
+
+
+    osc.start();
+
+    osc.stop(
+        audioCtx.currentTime + .1
+    );
+
+}
+
+
+/* Meme-style two note sound */
+
+function memeSound(){
+
+    if(!soundOn)
+        return;
+
+    audio();
+
+    const now =
+        audioCtx.currentTime;
+
+
+    [330,494].forEach(
+        (frequency,index)=>{
+
+            const osc =
+                audioCtx.createOscillator();
+
+            const gain =
+                audioCtx.createGain();
+
+
+            osc.type =
+                index === 0
+                ? "square"
+                : "triangle";
+
+
+            osc.frequency.value =
+                frequency;
+
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now + index*.09
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .12,
+                now + index*.09 + .02
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + index*.09 + .16
+            );
+
+
+            osc.connect(gain);
+
+            gain.connect(
+                audioCtx.destination
+            );
+
+
+            osc.start(
+                now + index*.09
+            );
+
+            osc.stop(
+                now + index*.09 + .17
+            );
+
+        }
+    );
+
+}
+
+
+/* Upgrade sound */
+
+function upgradeSound(){
+
+    if(!soundOn)
+        return;
+
+    audio();
+
+    const now =
+        audioCtx.currentTime;
+
+
+    [440,554,659,880].forEach(
+        (frequency,index)=>{
+
+            const osc =
+                audioCtx.createOscillator();
+
+            const gain =
+                audioCtx.createGain();
+
+
+            osc.type =
+                "sine";
+
+            osc.frequency.value =
+                frequency;
+
+
+            gain.gain.setValueAtTime(
+                .0001,
+                now + index*.07
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .1,
+                now + index*.07 + .02
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                now + index*.07 + .14
+            );
+
+
+            osc.connect(gain);
+
+            gain.connect(
+                audioCtx.destination
+            );
+
+
+            osc.start(
+                now + index*.07
+            );
+
+            osc.stop(
+                now + index*.07 + .15
+            );
+
+        }
+    );
+
+}
+
+
+/* World unlock */
+
+function worldSound(){
+
+    if(!soundOn)
+        return;
+
+    audio();
+
+    const now =
+        audioCtx.currentTime;
+
+
+    const osc =
+        audioCtx.createOscillator();
+
+    const gain =
+        audioCtx.createGain();
+
+
+    osc.type =
+        "sawtooth";
+
+
+    osc.frequency.setValueAtTime(
+        180,
+        now
+    );
+
+
+    osc.frequency.exponentialRampToValueAtTime(
+        900,
+        now + .5
+    );
+
+
+    gain.gain.setValueAtTime(
+        .0001,
+        now
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .12,
+        now + .05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        now + .6
+    );
+
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioCtx.destination
+    );
+
+
+    osc.start();
+
+    osc.stop(
+        now + .65
+    );
+
+}
+
+
+/* ==========================================
+   HELPERS
+========================================== */
+
+const $ =
+    id => document.getElementById(id);
+
+
+function save(){
+
+    localStorage.setItem(
+        "67clicker",
+        JSON.stringify(state)
+    );
+
+}
+
+
+function fmt(number){
+
+    if(number >= 1000000000)
+        return (
+            number / 1000000000
+        ).toFixed(1) + "B";
+
+    if(number >= 1000000)
+        return (
+            number / 1000000
+        ).toFixed(1) + "M";
+
+    if(number >= 1000)
+        return (
+            number / 1000
+        ).toFixed(1) + "K";
+
+    return Math.floor(number)
+        .toLocaleString();
+
+}
+
+
+/* ==========================================
+   RENDER
+========================================== */
+
+function render(){
+
+    $("coins").textContent =
+        fmt(state.coins);
+
+    $("perClick").textContent =
+        fmt(state.power);
+
+    $("totalClicks").textContent =
+        fmt(state.totalClicks);
+
+    $("lifetime").textContent =
+        fmt(state.lifetime);
+
+
+    const world =
+        worlds.find(
+            w => w.id === state.world
+        ) || worlds[0];
+
+
+    $("worldName").textContent =
+        world.name.toUpperCase();
+
+
+    document.body.style.background =
+        `linear-gradient(
+            135deg,
+            ${world.a}22,
+            #090910 55%,
+            ${world.b}33
+        )`;
+
+
+    renderUpgrades();
+
+    renderWorlds();
+
+}
+
+
+/* ==========================================
+   UPGRADES
+========================================== */
+
+function renderUpgrades(){
+
+    $("upgrades").innerHTML =
+        upgrades.map(
+            (u,i)=>{
+
+                const owned =
+                    state.power >= u.power;
+
+                const affordable =
+                    state.coins >= u.cost;
+
+
+                return `
+
+                <div class="item">
+
+                    <div class="item-info">
+
+                        <div class="icon">
+                            ${u.icon}
+                        </div>
+
+                        <div>
+
+                            <b>
+                                ${u.name}
+                            </b>
+
+                            <small>
+                                ${u.desc}
+
+                                ${
+                                    owned &&
+                                    u.power === state.power
+                                    ? " • ACTIVE"
+                                    : owned
+                                    ? " • OWNED"
+                                    : ""
+                                }
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="
+                            buy
+                            ${
+                                owned &&
+                                u.power === state.power
+                                ? "owned"
+                                : ""
+                            }
+                        "
+
+                        ${
+                            owned ||
+                            !affordable
+                            ? "disabled"
+                            : ""
+                        }
+
+                        onclick="
+                            buyUpgrade(${i})
+                        "
+                    >
+
+                        ${
+                            owned
+                            ? "✓"
+                            : u.cost === 0
+                            ? "FREE"
+                            : "🪙 " +
+                              fmt(u.cost)
+                        }
+
+                    </button>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ==========================================
+   WORLDS
+========================================== */
+
+function renderWorlds(){
+
+    $("worlds").innerHTML =
+        worlds.map(
+            world=>{
+
+                const owned =
+                    state.ownedWorlds
+                        .includes(
+                            world.id
+                        );
+
+                const active =
+                    state.world ===
+                    world.id;
+
+
+                return `
+
+                <button
+                    class="
+                        world
+                        ${owned ? "" : "lock"}
+                        ${active ? "active" : ""}
+                    "
+
+                    style="
+                        --a:${world.a};
+                        --b:${world.b};
+                    "
+
+                    onclick="
+                        chooseWorld(
+                            '${world.id}'
+                        )
+                    "
+                >
+
+                    ${
+                        active
+                        ? '<span class="tick">✓</span>'
+                        : ""
+                    }
+
+
+                    <strong>
+                        ${world.icon}
+                        ${world.name}
+                    </strong>
+
+
+                    <small>
+                        ${
+                            owned
+                            ? "Unlocked"
+                            : "Unlock this world"
+                        }
+                    </small>
+
+
+                    ${
+                        owned
+                        ? ""
+                        : `
+                            <span class="price">
+                                🪙
+                                ${fmt(world.cost)}
+                            </span>
+                        `
+                    }
+
+                </button>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ==========================================
+   MEME ANIMATION
+========================================== */
+
+function meme(){
+
+    const text =
+        document.createElement(
+            "div"
+        );
+
+
+    const rare =
+        Math.random() < .12;
+
+
+    text.className =
+        "meme-text" +
+        (
+            rare
+            ? " gold"
+            : ""
+        );
+
+
+    text.textContent =
+        rare
+        ? "SIX SEVEN!!!"
+        : "67!";
+
+
+    document.body
+        .appendChild(text);
+
+
+    setTimeout(
+        () => text.remove(),
+        900
+    );
+
+}
+
+
+/* ==========================================
+   MINI 67 PARTICLES
+========================================== */
+
+function mini67Burst(
+    x,
+    y,
+    amount = 8
+){
+
+    for(
+        let i=0;
+        i<amount;
+        i++
+    ){
+
+        const el =
+            document.createElement(
+                "div"
+            );
+
+
+        el.className =
+            "mini67";
+
+
+        el.textContent =
+            Math.random() < .45
+            ? "67"
+            : "+67";
+
+
+        el.style.left =
+            x + "px";
+
+
+        el.style.top =
+            y + "px";
+
+
+        el.style.setProperty(
+            "--x",
+            (
+                Math.random()*300-150
+            ) + "px"
+        );
+
+
+        el.style.setProperty(
+            "--y",
+            (
+                Math.random()*300-150
+            ) + "px"
+        );
+
+
+        el.style.setProperty(
+            "--rot",
+            (
+                Math.random()*100-50
+            ) + "deg"
+        );
+
+
+        document.body
+            .appendChild(el);
+
+
+        setTimeout(
+            () => el.remove(),
+            950
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   FLASH
+========================================== */
+
+function flash(){
+
+    const el =
+        document.createElement(
+            "div"
+        );
+
+
+    el.className =
+        "flash67";
+
+
+    document.body
+        .appendChild(el);
+
+
+    setTimeout(
+        () => el.remove(),
+        350
+    );
+
+}
+
+
+/* ==========================================
+   WORLD EFFECT
+========================================== */
+
+function worldEffect(){
+
+    const world =
+        worlds.find(
+            w => w.id === state.world
+        );
+
+
+    const icons = {
+
+        starter:[
+            "🌱",
+            "🌿",
+            "✨",
+            "67"
+        ],
+
+        volcano:[
+            "🌋",
+            "🔥",
+            "💥",
+            "67"
+        ],
+
+        ice:[
+            "❄️",
+            "🧊",
+            "✨",
+            "67"
+        ],
+
+        candy:[
+            "🍭",
+            "🍬",
+            "🍩",
+            "67"
+        ],
+
+        ocean:[
+            "🌊",
+            "🐠",
+            "🐳",
+            "67"
+        ],
+
+        space:[
+            "⭐",
+            "🌙",
+            "🪐",
+            "67"
+        ],
+
+        fantasy:[
+            "🏰",
+            "🧙",
+            "✨",
+            "67"
+        ],
+
+        gold:[
+            "👑",
+            "💰",
+            "✨",
+            "67"
+        ]
+
+    };
+
+
+    const list =
+        icons[state.world] ||
+        icons.starter;
+
+
+    const el =
+        document.createElement(
+            "div"
+        );
+
+
+    el.className =
+        "world-effect";
+
+
+    el.textContent =
+        list[
+            Math.floor(
+                Math.random() *
+                list.length
+            )
+        ];
+
+
+    el.style.left =
+        (
+            Math.random()*90+5
+        ) + "%";
+
+
+    el.style.top =
+        (
+            Math.random()*70+20
+        ) + "%";
+
+
+    document.body
+        .appendChild(el);
+
+
+    setTimeout(
+        () => el.remove(),
+        1400
+    );
+
+}
+
+
+/* ==========================================
+   COMBO
+========================================== */
+
+function updateCombo(){
+
+    const now =
+        Date.now();
+
+
+    if(
+        now - lastClick <
+        1200
+    ){
+
+        combo++;
+
+    }else{
+
+        combo = 1;
+
+    }
+
+
+    lastClick =
+        now;
+
+
+    const box =
+        $("combo");
+
+
+    if(combo >= 2){
+
+        box.textContent =
+            "🔥 67 COMBO ×" +
+            combo;
+
+        box.classList.add(
+            "show"
+        );
+
+    }
+
+
+    clearTimeout(
+        window.comboTimer
+    );
+
+
+    window.comboTimer =
+        setTimeout(
+            ()=>{
+
+                combo = 0;
+
+                box.classList.remove(
+                    "show"
+                );
+
+            },
+            1300
+        );
+
+
+    if(
+        combo >= 10
+    ){
+
+        meme();
+
+        flash();
+
+        mini67Burst(
+            window.innerWidth/2,
+            window.innerHeight/2,
+            25
+        );
+
+        memeSound();
+
+    }
+
+}
+
+
+/* ==========================================
+   PARTICLES
+========================================== */
+
+function burst(
+    x,
+    y,
+    count=9
+){
+
+    for(
+        let i=0;
+        i<count;
+        i++
+    ){
+
+        const particle =
+            document.createElement(
+                "span"
+            );
+
+
+        particle.className =
+            "particle";
+
+
+        particle.style.left =
+            x + "px";
+
+
+        particle.style.top =
+            y + "px";
+
+
+        particle.style.setProperty(
+            "--x",
+            (
+                Math.random()*220-110
+            ) + "px"
+        );
+
+
+        particle.style.setProperty(
+            "--y",
+            (
+                Math.random()*220-110
+            ) + "px"
+        );
+
+
+        $("particles")
+            .appendChild(
+                particle
+            );
+
+
+        setTimeout(
+            () =>
+                particle.remove(),
+            750
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   MAIN CLICK
+========================================== */
+
+function click67(e){
+
+    state.coins +=
+        state.power;
+
+
+    state.lifetime +=
+        state.power;
+
+
+    state.totalClicks++;
+
+
+    save();
+
+    render();
+
+
+    clickSound();
+
+    updateCombo();
+
+
+    const x =
+        e.clientX ||
+        window.innerWidth/2;
+
+
+    const y =
+        e.clientY ||
+        window.innerHeight/2;
+
+
+    /* FLOATING COINS */
+
+    const float =
+        document.createElement(
+            "div"
+        );
+
+
+    float.className =
+        "float";
+
+
+    float.textContent =
+        "+" +
+        fmt(state.power);
+
+
+    float.style.left =
+        (x-20) + "px";
+
+
+    float.style.top =
+        (y-25) + "px";
+
+
+    document.body
+        .appendChild(float);
+
+
+    setTimeout(
+        () => float.remove(),
+        800
+    );
+
+
+    /* NORMAL PARTICLES */
+
+    burst(
+        x,
+        y,
+        8
+    );
+
+
+    /* 67 PARTICLES */
+
+    mini67Burst(
+        x,
+        y,
+        combo >= 5
+        ? 14
+        : 5
+    );
+
+
+    /* RANDOM MEME */
+
+    if(
+        Math.random() < .08
+    ){
+
+        meme();
+
+        memeSound();
+
+    }
+
+
+    /* EVERY 67TH CLICK */
+
+    if(
+        state.totalClicks % 67 === 0
+    ){
+
+        meme();
+
+        flash();
+
+        mini67Burst(
+            x,
+            y,
+            30
+        );
+
+        memeSound();
+
+    }
+
+
+    /* WORLD EFFECT */
+
+    if(
+        Math.random() < .12
+    ){
+
+        worldEffect();
+
+    }
+
+}
+
+
+/* ==========================================
+   BUY UPGRADE
+========================================== */
+
+function buyUpgrade(i){
+
+    const upgrade =
+        upgrades[i];
+
+
+    if(
+        state.power >=
+        upgrade.power
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        state.coins <
+        upgrade.cost
+    ){
+
+        return;
+
+    }
+
+
+    state.coins -=
+        upgrade.cost;
+
+
+    state.power =
+        upgrade.power;
+
+
+    save();
+
+    render();
+
+    upgradeSound();
+
+
+    meme();
+
+
+    flash();
+
+
+    mini67Burst(
+        window.innerWidth/2,
+        window.innerHeight/2,
+        18
+    );
+
+}
+
+
+/* ==========================================
+   WORLD
+========================================== */
+
+function chooseWorld(id){
+
+    const world =
+        worlds.find(
+            w => w.id === id
+        );
+
+
+    if(!world)
+        return;
+
+
+    if(
+        !state.ownedWorlds
+            .includes(id)
+    ){
+
+        if(
+            state.coins <
+            world.cost
+        ){
+
+            return;
+
+        }
+
+
+        state.coins -=
+            world.cost;
+
+
+        state.ownedWorlds
+            .push(id);
+
+
+        worldSound();
+
+
+        meme();
+
+
+        flash();
+
+    }
+
+
+    state.world =
+        id;
+
+
+    save();
+
+    render();
+
+}
+
+
+/* ==========================================
+   CLICK BUTTON
+========================================== */
+
+$("clicker")
+    .addEventListener(
+        "pointerdown",
+        e=>{
+
+            e.preventDefault();
+
+            audio();
+
+            click67(e);
+
+        }
+    );
+
+
+/* ==========================================
+   SOUND BUTTON
+========================================== */
+
+$("soundBtn")
+    .addEventListener(
+        "click",
+        ()=>{
+
+            soundOn =
+                !soundOn;
+
+
+            localStorage.setItem(
+                "67sound",
+                soundOn
+                ? "on"
+                : "off"
+            );
+
+
+            $("soundBtn")
+                .textContent =
+                soundOn
+                ? "🔊"
+                : "🔇";
+
+
+            if(soundOn){
+
+                audio();
+
+                memeSound();
+
+            }
+
+        }
+    );
+
+
+$("soundBtn")
+    .textContent =
+    soundOn
+    ? "🔊"
+    : "🔇";
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+$("reset")
+    .addEventListener(
+        "click",
+        ()=>{
+
+            if(
+                confirm(
+                    "Reset all 67 Clicker progress?"
+                )
+            ){
+
+                localStorage.removeItem(
+                    "67clicker"
+                );
+
+
+                state = {
+
+                    coins:0,
+
+                    totalClicks:0,
+
+                    lifetime:0,
+
+                    power:1,
+
+                    ownedWorlds:[
+                        "starter"
+                    ],
+
+                    world:"starter"
+
+                };
+
+
+                combo = 0;
+
+
+                render();
+
+            }
+
+        }
+    );
+
+
+/* ==========================================
+   START GAME
+========================================== */
+
+render();
+
+</script>
+
+</body>
+</html>

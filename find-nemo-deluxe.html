@@ -1,0 +1,3681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>Find Nemo - Coral Reef Adventure</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    background:#003b59;
+    touch-action:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+#game{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% -5%,
+            rgba(220,250,255,.95),
+            transparent 32%
+        ),
+        linear-gradient(
+            to bottom,
+            #09b1e2 0%,
+            #0798d0 22%,
+            #067db4 46%,
+            #055e8c 70%,
+            #003d60 100%
+        );
+}
+
+
+/* =========================================================
+   LIGHT RAYS
+========================================================= */
+
+.ray{
+    position:absolute;
+    z-index:2;
+    top:-30%;
+    height:160%;
+    width:180px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.13),
+            transparent
+        );
+
+    transform-origin:top;
+    pointer-events:none;
+
+    animation:rays 10s ease-in-out infinite alternate;
+}
+
+.ray:nth-child(1){
+    left:0;
+    width:210px;
+}
+
+.ray:nth-child(2){
+    left:43%;
+    width:110px;
+    animation-delay:-4s;
+}
+
+.ray:nth-child(3){
+    right:0;
+    width:230px;
+    animation-delay:-2s;
+}
+
+@keyframes rays{
+
+    from{
+        transform:rotate(8deg);
+        opacity:.25;
+    }
+
+    to{
+        transform:rotate(20deg);
+        opacity:.75;
+    }
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+#hud{
+    position:absolute;
+    z-index:800;
+
+    top:max(8px,env(safe-area-inset-top));
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:min(1000px,calc(100% - 14px));
+
+    display:flex;
+    gap:8px;
+    justify-content:center;
+
+    pointer-events:none;
+}
+
+.hudBox{
+    min-width:120px;
+
+    padding:8px 14px;
+
+    border-radius:18px;
+
+    color:white;
+    text-align:center;
+
+    background:rgba(0,35,63,.82);
+
+    border:2px solid rgba(255,255,255,.2);
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.22);
+
+    backdrop-filter:blur(8px);
+}
+
+.hudLabel{
+    display:block;
+
+    font-size:9px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+
+    opacity:.7;
+}
+
+.hudValue{
+    display:block;
+
+    margin-top:1px;
+
+    font-size:22px;
+    font-weight:1000;
+}
+
+#timerBox{
+    min-width:160px;
+}
+
+#timerBar{
+    width:100%;
+    height:7px;
+
+    margin-top:5px;
+
+    border-radius:20px;
+    overflow:hidden;
+
+    background:rgba(255,255,255,.16);
+}
+
+#timerFill{
+    width:100%;
+    height:100%;
+
+    background:#65eaff;
+
+    transition:
+        width .25s linear,
+        background .25s;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+#title{
+    position:absolute;
+    z-index:300;
+
+    top:82px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:100%;
+
+    text-align:center;
+
+    color:white;
+
+    pointer-events:none;
+
+    text-shadow:
+        0 4px 15px rgba(0,0,0,.4);
+}
+
+#title h1{
+    margin:0;
+
+    font-size:clamp(28px,5vw,52px);
+
+    line-height:1;
+
+    letter-spacing:-2px;
+
+    font-weight:1000;
+}
+
+#title p{
+    margin:7px 0 0;
+
+    font-size:clamp(10px,2vw,16px);
+
+    opacity:.9;
+}
+
+
+/* =========================================================
+   WATER PARTICLES
+========================================================= */
+
+.waterParticle{
+    position:absolute;
+
+    z-index:15;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.55);
+
+    pointer-events:none;
+
+    animation:
+        particleFloat
+        5s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes particleFloat{
+
+    from{
+        transform:translateY(0);
+        opacity:.15;
+    }
+
+    to{
+        transform:translateY(-30px);
+        opacity:.7;
+    }
+}
+
+
+/* =========================================================
+   SEABED
+========================================================= */
+
+#seabed{
+    position:absolute;
+
+    z-index:50;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:18%;
+
+    min-height:110px;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 30%,
+            rgba(255,255,255,.15) 0 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 55% 70%,
+            rgba(255,255,255,.1) 0 2px,
+            transparent 3px
+        ),
+
+        radial-gradient(
+            circle at 85% 45%,
+            rgba(80,55,30,.18) 0 5px,
+            transparent 6px
+        ),
+
+        linear-gradient(
+            #cbb477,
+            #8a6b3c
+        );
+
+    border-top:
+        6px solid
+        rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   LARGE REALISTIC REEF WALLS
+========================================================= */
+
+.reef{
+    position:absolute;
+
+    z-index:120;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 10px 9px
+            rgba(0,0,0,.32)
+        );
+}
+
+
+/* large coral base */
+
+.reefBase{
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:100%;
+
+    border-radius:
+        45%
+        55%
+        10%
+        12%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ed7189 0%,
+            #c84269 35%,
+            #963453 68%,
+            #642d48 100%
+        );
+
+    box-shadow:
+
+        inset
+        15px 12px 0
+        rgba(255,255,255,.12),
+
+        inset
+        -20px -15px 0
+        rgba(0,0,0,.18);
+}
+
+
+/* orange reef */
+
+.reef.orange .reefBase{
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffad52,
+            #ed6636 38%,
+            #b63b32 70%,
+            #74302d
+        );
+}
+
+
+/* purple reef */
+
+.reef.purple .reefBase{
+
+    background:
+        linear-gradient(
+            145deg,
+            #c678e8,
+            #884db8 42%,
+            #613a88 70%,
+            #3e2c5e
+        );
+}
+
+
+/* blue reef */
+
+.reef.blue .reefBase{
+
+    background:
+        linear-gradient(
+            145deg,
+            #65d8e8,
+            #3d9fbd 40%,
+            #286d91 70%,
+            #254d65
+        );
+}
+
+
+/* yellow reef */
+
+.reef.yellow .reefBase{
+
+    background:
+        linear-gradient(
+            145deg,
+            #f5df73,
+            #dba346 40%,
+            #aa682f 70%,
+            #75452a
+        );
+}
+
+
+/* =========================================================
+   CORAL HEADS
+========================================================= */
+
+.coralHead{
+    position:absolute;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.12),
+            rgba(0,0,0,.18)
+        );
+
+    box-shadow:
+        inset
+        -7px -7px 0
+        rgba(0,0,0,.12),
+
+        inset
+        5px 5px 0
+        rgba(255,255,255,.12);
+}
+
+
+/* =========================================================
+   BUBBLE CORAL / TEXTURE
+========================================================= */
+
+.coralHole{
+    position:absolute;
+
+    width:14px;
+    height:11px;
+
+    border-radius:50%;
+
+    background:
+        rgba(55,20,40,.32);
+
+    box-shadow:
+        inset
+        3px 3px 5px
+        rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+   LARGE CAVES
+========================================================= */
+
+.cave{
+    position:absolute;
+
+    z-index:180;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #001622 0%,
+            #002332 48%,
+            #00384b 75%,
+            #00465a 100%
+        );
+
+    box-shadow:
+        inset
+        0 18px 35px
+        rgba(0,0,0,.72);
+}
+
+.cave.arch{
+    border-radius:
+        55%
+        55%
+        8%
+        8%;
+}
+
+.cave.round{
+    border-radius:50%;
+}
+
+.cave.tunnel{
+    border-radius:48%;
+}
+
+.cave::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:8%;
+
+    border-radius:inherit;
+
+    border:
+        4px solid
+        rgba(0,0,0,.15);
+}
+
+.cave::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:15%;
+
+    border-radius:inherit;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,140,180,.17),
+            transparent 70%
+        );
+}
+
+
+/* =========================================================
+   CORAL LEDGES
+========================================================= */
+
+.coralLedge{
+    position:absolute;
+
+    bottom:0;
+
+    height:35px;
+
+    border-radius:
+        60%
+        60%
+        20%
+        20%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.14),
+            rgba(0,0,0,.22)
+        );
+}
+
+
+/* =========================================================
+   ROCKS
+========================================================= */
+
+.rock{
+    position:absolute;
+
+    z-index:100;
+
+    border-radius:
+        48%
+        52%
+        25%
+        30%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #758287,
+            #46565a 45%,
+            #2c3d42
+        );
+
+    box-shadow:
+
+        inset
+        10px 8px 0
+        rgba(255,255,255,.08),
+
+        inset
+        -12px -10px 0
+        rgba(0,0,0,.2),
+
+        0 7px 8px
+        rgba(0,0,0,.25);
+
+    pointer-events:none;
+}
+
+.rock::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:30%;
+    height:15%;
+
+    top:18%;
+    left:18%;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.1);
+}
+
+
+/* =========================================================
+   SEAWEED
+========================================================= */
+
+.seaweed{
+    position:absolute;
+
+    z-index:220;
+
+    bottom:9%;
+
+    width:10px;
+    height:130px;
+
+    border-radius:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #07543d,
+            #24bd6e
+        );
+
+    transform-origin:bottom;
+
+    pointer-events:none;
+
+    animation:
+        seaweedMove
+        2.7s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.seaweed::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-9px;
+    top:25px;
+
+    width:9px;
+    height:110px;
+
+    border-radius:100%;
+
+    background:#0d8953;
+
+    transform:rotate(-11deg);
+}
+
+.seaweed::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:10px;
+    top:8px;
+
+    width:9px;
+    height:120px;
+
+    border-radius:100%;
+
+    background:#1eaa64;
+
+    transform:rotate(10deg);
+}
+
+@keyframes seaweedMove{
+
+    from{
+        transform:rotate(-8deg);
+    }
+
+    to{
+        transform:rotate(8deg);
+    }
+}
+
+
+/* =========================================================
+   DECOR
+========================================================= */
+
+.shell,
+.star,
+.treasure{
+    position:absolute;
+
+    z-index:240;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 5px 4px
+            rgba(0,0,0,.28)
+        );
+}
+
+.shell{
+    font-size:27px;
+}
+
+.star{
+    font-size:25px;
+}
+
+.treasure{
+    font-size:40px;
+}
+
+
+/* =========================================================
+   FISH
+========================================================= */
+
+.fish{
+
+    position:absolute;
+
+    z-index:260;
+
+    white-space:nowrap;
+
+    pointer-events:none;
+
+    font-size:
+        clamp(
+            27px,
+            4vw,
+            50px
+        );
+
+    filter:
+        drop-shadow(
+            0 5px 4px
+            rgba(0,0,0,.3)
+        );
+
+    --fishScale:1;
+
+    will-change:
+        transform,
+        left;
+}
+
+
+/* =========================================================
+   NEMO
+========================================================= */
+
+#nemo{
+
+    position:absolute;
+
+    z-index:500;
+
+    width:105px;
+    height:74px;
+
+    pointer-events:auto;
+
+    cursor:pointer;
+
+    will-change:
+        left,
+        top,
+        transform;
+
+    filter:
+        drop-shadow(
+            0 7px 7px
+            rgba(0,0,0,.4)
+        );
+
+    touch-action:manipulation;
+}
+
+#nemo::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-30px;
+    top:-30px;
+
+    width:165px;
+    height:134px;
+
+    border-radius:50%;
+
+    background:transparent;
+}
+
+#nemoBody{
+
+    position:absolute;
+
+    left:18px;
+    top:14px;
+
+    width:72px;
+    height:47px;
+
+    border-radius:
+        52%
+        47%
+        48%
+        52%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ff641f 0 24%,
+            white 24% 37%,
+            #ff641f 37% 63%,
+            white 63% 76%,
+            #ff641f 76%
+        );
+
+    border:3px solid #111820;
+
+    box-shadow:
+
+        inset
+        -5px -5px 0
+        rgba(0,0,0,.08),
+
+        inset
+        4px 3px 0
+        rgba(255,255,255,.2);
+}
+
+#nemoBody::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-29px;
+    top:5px;
+
+    width:34px;
+    height:38px;
+
+    background:#ff641f;
+
+    border:3px solid #111820;
+
+    clip-path:
+        polygon(
+            100% 50%,
+            0 0,
+            12% 50%,
+            0 100%
+        );
+}
+
+.nemoEye{
+
+    position:absolute;
+
+    z-index:10;
+
+    left:25px;
+    top:21px;
+
+    width:16px;
+    height:16px;
+
+    border:2px solid #101820;
+
+    border-radius:50%;
+
+    background:white;
+}
+
+.nemoEye::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:3px;
+    top:3px;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#111;
+}
+
+.nemoEye::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:4px;
+    top:3px;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    z-index:3;
+}
+
+.nemoFin{
+
+    position:absolute;
+
+    z-index:5;
+
+    width:25px;
+    height:20px;
+
+    border:3px solid #101820;
+
+    border-radius:50%;
+
+    background:#ff7825;
+}
+
+.finTop{
+    top:2px;
+    left:49px;
+    transform:rotate(-24deg);
+}
+
+.finBottom{
+    bottom:2px;
+    left:47px;
+    transform:rotate(24deg);
+}
+
+#nemo.hintGlow{
+
+    filter:
+        drop-shadow(0 0 15px white)
+        drop-shadow(0 0 30px #66eaff);
+}
+
+
+/* =========================================================
+   BUBBLES
+========================================================= */
+
+.bubble{
+
+    position:absolute;
+
+    z-index:210;
+
+    border:
+        2px solid
+        rgba(255,255,255,.65);
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    pointer-events:none;
+
+    animation:
+        bubbleRise
+        linear
+        infinite;
+}
+
+@keyframes bubbleRise{
+
+    0%{
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(.6);
+
+        opacity:0;
+    }
+
+    10%{
+        opacity:.7;
+    }
+
+    100%{
+
+        transform:
+            translateY(-115vh)
+            translateX(60px)
+            scale(1.25);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+#controls{
+
+    position:absolute;
+
+    z-index:900;
+
+    right:
+        max(
+            12px,
+            env(safe-area-inset-right)
+        );
+
+    bottom:
+        max(
+            12px,
+            env(safe-area-inset-bottom)
+        );
+
+    display:flex;
+
+    gap:9px;
+}
+
+.gameBtn{
+
+    min-height:50px;
+    min-width:96px;
+
+    padding:10px 18px;
+
+    border-radius:17px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.2);
+
+    color:white;
+
+    background:
+        rgba(0,33,61,.92);
+
+    font-size:15px;
+
+    font-weight:1000;
+
+    box-shadow:
+        0 7px 18px
+        rgba(0,0,0,.3);
+}
+
+.gameBtn:active{
+    transform:scale(.94);
+}
+
+
+/* =========================================================
+   HINT
+========================================================= */
+
+#hintText{
+
+    position:absolute;
+
+    z-index:850;
+
+    left:50%;
+    bottom:83px;
+
+    transform:translateX(-50%);
+
+    width:min(90%,580px);
+
+    padding:12px 18px;
+
+    color:white;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:
+        rgba(0,29,54,.92);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+}
+
+#hintText.show{
+    opacity:1;
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+#startScreen,
+#levelScreen,
+#gameOver{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2000;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    background:
+        rgba(0,28,52,.58);
+
+    backdrop-filter:blur(8px);
+}
+
+.modal{
+
+    width:min(
+        650px,
+        calc(100% - 28px)
+    );
+
+    padding:30px;
+
+    text-align:center;
+
+    color:white;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,108,164,.97),
+            rgba(0,39,76,.97)
+        );
+
+    border:
+        2px solid
+        rgba(255,255,255,.2);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.45);
+}
+
+.modal h1{
+
+    margin:0 0 8px;
+
+    font-size:
+        clamp(
+            34px,
+            7vw,
+            60px
+        );
+}
+
+.modal p{
+    line-height:1.5;
+    opacity:.92;
+}
+
+.bigNemo{
+
+    font-size:88px;
+
+    animation:
+        floatNemo
+        2s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes floatNemo{
+
+    from{
+        transform:
+            translateY(-8px)
+            rotate(-3deg);
+    }
+
+    to{
+        transform:
+            translateY(8px)
+            rotate(3deg);
+    }
+}
+
+.startBtn{
+
+    min-height:55px;
+
+    margin-top:14px;
+
+    padding:14px 30px;
+
+    border:0;
+
+    border-radius:18px;
+
+    color:#003b5b;
+
+    background:#69e8ff;
+
+    font-size:18px;
+
+    font-weight:1000;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.25);
+}
+
+.startBtn:active{
+    transform:scale(.96);
+}
+
+
+/* =========================================================
+   EFFECTS
+========================================================= */
+
+#flash{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1900;
+
+    background:white;
+
+    opacity:0;
+
+    pointer-events:none;
+}
+
+#flash.active{
+    animation:flash .5s;
+}
+
+@keyframes flash{
+
+    0%{
+        opacity:0;
+    }
+
+    30%{
+        opacity:.55;
+    }
+
+    100%{
+        opacity:0;
+    }
+}
+
+.spark{
+
+    position:absolute;
+
+    z-index:1950;
+
+    pointer-events:none;
+
+    font-size:24px;
+
+    animation:
+        spark
+        .95s
+        forwards
+        ease-out;
+}
+
+@keyframes spark{
+
+    from{
+        transform:
+            translate(0,0)
+            scale(.3);
+
+        opacity:1;
+    }
+
+    to{
+        transform:
+            translate(var(--x),var(--y))
+            scale(1.4);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   IPAD / MOBILE
+========================================================= */
+
+@media(pointer:coarse){
+
+    .gameBtn{
+        min-height:53px;
+    }
+
+    #nemo::before{
+
+        left:-35px;
+        top:-35px;
+
+        width:175px;
+        height:144px;
+    }
+}
+
+@media(max-width:700px){
+
+    #hud{
+
+        width:calc(100% - 10px);
+
+        top:5px;
+
+        gap:4px;
+    }
+
+    .hudBox{
+
+        flex:1;
+
+        min-width:0;
+
+        padding:6px 4px;
+    }
+
+    .hudValue{
+        font-size:17px;
+    }
+
+    .hudLabel{
+        font-size:8px;
+    }
+
+    #timerBox{
+        min-width:100px;
+    }
+
+    #title{
+        top:77px;
+    }
+
+    #title h1{
+        font-size:28px;
+    }
+
+    #title p{
+        font-size:10px;
+    }
+
+    .gameBtn{
+
+        min-height:45px;
+        min-width:0;
+
+        padding:8px 11px;
+
+        font-size:12px;
+    }
+
+    .modal{
+        padding:22px 16px;
+    }
+
+    .bigNemo{
+        font-size:70px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div id="game">
+
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+
+    <div id="hud">
+
+        <div class="hudBox">
+
+            <span class="hudLabel">
+                Level
+            </span>
+
+            <span
+                class="hudValue"
+                id="level"
+            >
+                1
+            </span>
+
+        </div>
+
+
+        <div class="hudBox">
+
+            <span class="hudLabel">
+                Score
+            </span>
+
+            <span
+                class="hudValue"
+                id="score"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <div
+            class="hudBox"
+            id="timerBox"
+        >
+
+            <span class="hudLabel">
+                Find Nemo
+            </span>
+
+            <span class="hudValue">
+
+                <span id="time">
+                    42
+                </span>s
+
+            </span>
+
+            <div id="timerBar">
+
+                <div id="timerFill"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="title">
+
+        <h1>
+            🐠 FIND NEMO!
+        </h1>
+
+        <p>
+            Search the caves and coral reef!
+        </p>
+
+    </div>
+
+
+    <div id="seabed"></div>
+
+
+    <div id="hintText"></div>
+
+
+    <div id="flash"></div>
+
+
+    <div id="controls">
+
+        <button
+            class="gameBtn"
+            onclick="giveHint()"
+        >
+            💡 Hint
+        </button>
+
+        <button
+            class="gameBtn"
+            onclick="restartGame()"
+        >
+            🔄 Restart
+        </button>
+
+    </div>
+
+
+    <!-- START -->
+
+    <div id="startScreen">
+
+        <div class="modal">
+
+            <div class="bigNemo">
+                🐠
+            </div>
+
+            <h1>
+                Find Nemo!
+            </h1>
+
+            <p>
+                Nemo has disappeared into
+                a huge coral reef!
+            </p>
+
+            <p>
+                🪸 Search the giant coral<br>
+                🕳️ Look through caves<br>
+                🐟 Watch the fish swimming<br>
+                🫧 Follow the bubbles
+            </p>
+
+            <button
+                class="startBtn"
+                onclick="startGame()"
+            >
+                🌊 START ADVENTURE
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- LEVEL -->
+
+    <div
+        id="levelScreen"
+        style="display:none"
+    >
+
+        <div class="modal">
+
+            <div class="bigNemo">
+                🐠
+            </div>
+
+            <h1 id="levelTitle">
+                Level 2
+            </h1>
+
+            <p id="levelDescription">
+                The reef is getting busier!
+            </p>
+
+            <button
+                class="startBtn"
+                onclick="continueLevel()"
+            >
+                🔎 FIND NEMO
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME OVER -->
+
+    <div
+        id="gameOver"
+        style="display:none"
+    >
+
+        <div class="modal">
+
+            <div class="bigNemo">
+                🐠
+            </div>
+
+            <h1>
+                Reef Champion!
+            </h1>
+
+            <p>
+                You found Nemo through
+                all twelve reef levels!
+            </p>
+
+            <h2>
+
+                Final Score:
+                <span id="finalScore">
+                    0
+                </span>
+
+            </h2>
+
+            <button
+                class="startBtn"
+                onclick="restartGame()"
+            >
+                🌊 PLAY AGAIN
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const game =
+    document.getElementById("game");
+
+const levelEl =
+    document.getElementById("level");
+
+const scoreEl =
+    document.getElementById("score");
+
+const timeEl =
+    document.getElementById("time");
+
+const timerFill =
+    document.getElementById("timerFill");
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const levelScreen =
+    document.getElementById("levelScreen");
+
+const gameOver =
+    document.getElementById("gameOver");
+
+const levelTitle =
+    document.getElementById("levelTitle");
+
+const levelDescription =
+    document.getElementById("levelDescription");
+
+const hintText =
+    document.getElementById("hintText");
+
+const flash =
+    document.getElementById("flash");
+
+
+let level=1;
+let score=0;
+
+let timeLeft=42;
+let maxTime=42;
+
+let gameRunning=false;
+
+let nemo=null;
+
+let timer=null;
+
+let nemoAnimationFrame=null;
+
+let nemoX=0;
+let nemoY=0;
+
+let nemoBaseY=0;
+
+let nemoDirection=1;
+
+let nemoScale=1;
+
+let nemoSpeed=75;
+
+let nemoPhase=0;
+
+let nemoNextTurn=0;
+
+let nemoLastTime=0;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function random(min,max){
+
+    return Math.random()*
+        (max-min)+min;
+}
+
+
+function randomInt(min,max){
+
+    return Math.floor(
+        random(min,max+1)
+    );
+}
+
+
+function clamp(value,min,max){
+
+    return Math.max(
+        min,
+        Math.min(max,value)
+    );
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+function startGame(){
+
+    startScreen.style.display="none";
+
+    level=1;
+    score=0;
+
+    updateHUD();
+
+    buildReef();
+
+    startLevel();
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartGame(){
+
+    clearInterval(timer);
+
+    stopNemoMovement();
+
+    removeNemo();
+
+    document
+        .querySelectorAll(
+            ".decor,.fish,.bubble"
+        )
+        .forEach(e=>e.remove());
+
+    startScreen.style.display="none";
+
+    levelScreen.style.display="none";
+
+    gameOver.style.display="none";
+
+    level=1;
+
+    score=0;
+
+    updateHUD();
+
+    buildReef();
+
+    startLevel();
+}
+
+
+/* =========================================================
+   BUILD REEF
+========================================================= */
+
+function buildReef(){
+
+    document
+        .querySelectorAll(
+            ".decor,.fish,.bubble"
+        )
+        .forEach(e=>e.remove());
+
+    createWaterParticles();
+
+    createLargeReefWalls();
+
+    createSecondaryReefs();
+
+    createStandaloneCaves();
+
+    createRocks();
+
+    createSeaweed();
+
+    createDecor();
+
+    createFish();
+
+    createBubbles();
+}
+
+
+/* =========================================================
+   WATER PARTICLES
+========================================================= */
+
+function createWaterParticles(){
+
+    for(let i=0;i<75;i++){
+
+        const p=
+            document.createElement("div");
+
+        p.className=
+            "waterParticle decor";
+
+        p.style.left=
+            random(0,100)+"%";
+
+        p.style.top=
+            random(12,84)+"%";
+
+        p.style.animationDelay=
+            random(0,5)+"s";
+
+        game.appendChild(p);
+    }
+}
+
+
+/* =========================================================
+   HUGE CORAL WALLS
+========================================================= */
+
+function createLargeReefWalls(){
+
+    const colours=[
+        "",
+        "orange",
+        "purple",
+        "blue",
+        "yellow"
+    ];
+
+    /*
+       The reef now deliberately hugs
+       the edges of the screen.
+
+       This creates a natural central
+       swimming area while giving Nemo
+       lots of places to disappear.
+    */
+
+    const formations=[
+        {
+            left:-4,
+            bottom:9,
+            width:310,
+            height:350
+        },
+        {
+            left:7,
+            bottom:10,
+            width:260,
+            height:250
+        },
+        {
+            left:78,
+            bottom:9,
+            width:340,
+            height:390
+        },
+        {
+            left:67,
+            bottom:11,
+            width:270,
+            height:260
+        },
+        {
+            left:29,
+            bottom:9,
+            width:210,
+            height:185
+        }
+    ];
+
+    formations.forEach((data,index)=>{
+
+        const reef=
+            document.createElement("div");
+
+        reef.className=
+            "reef "+
+            colours[
+                index %
+                colours.length
+            ]+
+            " decor";
+
+        reef.style.left=
+            data.left+"%";
+
+        reef.style.bottom=
+            data.bottom+"%";
+
+        reef.style.width=
+            data.width+"px";
+
+        reef.style.height=
+            data.height+"px";
+
+
+        const base=
+            document.createElement("div");
+
+        base.className="reefBase";
+
+        reef.appendChild(base);
+
+
+        /*
+           Large rounded coral heads.
+        */
+
+        for(let i=0;i<12;i++){
+
+            const head=
+                document.createElement("div");
+
+            head.className="coralHead";
+
+            const size=
+                random(35,100);
+
+            head.style.width=
+                size+"px";
+
+            head.style.height=
+                size*
+                random(.65,1.15)+"px";
+
+            head.style.left=
+                random(-5,82)+"%";
+
+            head.style.bottom=
+                random(35,82)+"%";
+
+            reef.appendChild(head);
+        }
+
+
+        /*
+           Small natural coral holes.
+        */
+
+        for(let i=0;i<18;i++){
+
+            const hole=
+                document.createElement("div");
+
+            hole.className="coralHole";
+
+            hole.style.left=
+                random(5,90)+"%";
+
+            hole.style.bottom=
+                random(20,80)+"%";
+
+            hole.style.transform=
+                `scale(${random(.6,1.6)})`;
+
+            reef.appendChild(hole);
+        }
+
+
+        /*
+           Large entrance cave.
+        */
+
+        const cave=
+            document.createElement("div");
+
+        cave.className="cave arch";
+
+        cave.style.left="27%";
+
+        cave.style.bottom="0";
+
+        cave.style.width="47%";
+
+        cave.style.height=
+            random(90,165)+"px";
+
+        reef.appendChild(cave);
+
+
+        /*
+           Secondary opening.
+        */
+
+        if(index!==4){
+
+            const cave2=
+                document.createElement("div");
+
+            cave2.className="cave round";
+
+            cave2.style.left=
+                random(5,65)+"%";
+
+            cave2.style.bottom=
+                random(18,38)+"%";
+
+            cave2.style.width=
+                random(45,85)+"px";
+
+            cave2.style.height=
+                random(40,75)+"px";
+
+            reef.appendChild(cave2);
+        }
+
+
+        /*
+           Ledges.
+        */
+
+        for(let i=0;i<4;i++){
+
+            const ledge=
+                document.createElement("div");
+
+            ledge.className=
+                "coralLedge";
+
+            ledge.style.left=
+                random(0,70)+"%";
+
+            ledge.style.width=
+                random(70,150)+"px";
+
+            ledge.style.bottom=
+                random(20,60)+"%";
+
+            reef.appendChild(ledge);
+        }
+
+
+        game.appendChild(reef);
+    });
+}
+
+
+/* =========================================================
+   SECONDARY CORAL CLUSTERS
+========================================================= */
+
+function createSecondaryReefs(){
+
+    const positions=[
+        [-2,30,160,160],
+        [18,15,140,130],
+        [82,35,180,180],
+        [59,18,150,135],
+        [38,16,120,115],
+        [92,20,130,150]
+    ];
+
+    positions.forEach(
+        (p,index)=>{
+
+        const reef=
+            document.createElement("div");
+
+        reef.className=
+            "reef "+
+            (
+                index%2===0
+                ?"orange"
+                :"purple"
+            )+
+            " decor";
+
+        reef.style.left=
+            p[0]+"%";
+
+        reef.style.bottom=
+            p[1]+"%";
+
+        reef.style.width=
+            p[2]+"px";
+
+        reef.style.height=
+            p[3]+"px";
+
+
+        const base=
+            document.createElement("div");
+
+        base.className="reefBase";
+
+        reef.appendChild(base);
+
+
+        for(let i=0;i<7;i++){
+
+            const head=
+                document.createElement("div");
+
+            head.className="coralHead";
+
+            const size=
+                random(30,65);
+
+            head.style.width=
+                size+"px";
+
+            head.style.height=
+                size+
+                "px";
+
+            head.style.left=
+                random(0,75)+"%";
+
+            head.style.bottom=
+                random(35,80)+"%";
+
+            reef.appendChild(head);
+        }
+
+
+        game.appendChild(reef);
+    });
+}
+
+
+/* =========================================================
+   STANDALONE CAVES
+========================================================= */
+
+function createStandaloneCaves(){
+
+    const caves=[
+
+        [14,38,145,105],
+
+        [33,31,125,90],
+
+        [50,43,155,110],
+
+        [70,35,135,105],
+
+        [86,42,120,95]
+
+    ];
+
+
+    caves.forEach((p,index)=>{
+
+        const wrapper=
+            document.createElement("div");
+
+        wrapper.className=
+            "reef decor";
+
+        wrapper.style.left=
+            p[0]+"%";
+
+        wrapper.style.bottom=
+            p[1]+"%";
+
+        wrapper.style.width=
+            p[2]+"px";
+
+        wrapper.style.height=
+            p[3]+"px";
+
+
+        const left=
+            document.createElement("div");
+
+        left.className="reefBase";
+
+        left.style.left="0";
+
+        left.style.width="43%";
+
+        left.style.height="80%";
+
+
+        const right=
+            document.createElement("div");
+
+        right.className="reefBase";
+
+        right.style.right="0";
+
+        right.style.width="43%";
+
+        right.style.height="90%";
+
+
+        const cave=
+            document.createElement("div");
+
+        cave.className="cave tunnel";
+
+        cave.style.left="27%";
+
+        cave.style.bottom="0";
+
+        cave.style.width="46%";
+
+        cave.style.height="65%";
+
+
+        wrapper.appendChild(left);
+
+        wrapper.appendChild(right);
+
+        wrapper.appendChild(cave);
+
+
+        game.appendChild(wrapper);
+
+    });
+}
+
+
+/* =========================================================
+   ROCKS
+========================================================= */
+
+function createRocks(){
+
+    const count=
+        16+
+        Math.min(level,10);
+
+    for(let i=0;i<count;i++){
+
+        const rock=
+            document.createElement("div");
+
+        rock.className=
+            "rock decor";
+
+        rock.style.left=
+            random(-3,97)+"%";
+
+        rock.style.bottom=
+            random(7,20)+"%";
+
+        rock.style.width=
+            random(55,150)+"px";
+
+        rock.style.height=
+            random(30,90)+"px";
+
+        rock.style.transform=
+            `rotate(${random(-12,12)}deg)`;
+
+        game.appendChild(rock);
+    }
+}
+
+
+/* =========================================================
+   SEAWEED
+========================================================= */
+
+function createSeaweed(){
+
+    for(let i=0;i<35;i++){
+
+        const weed=
+            document.createElement("div");
+
+        weed.className=
+            "seaweed decor";
+
+        weed.style.left=
+            random(0,100)+"%";
+
+        weed.style.height=
+            random(70,180)+"px";
+
+        weed.style.animationDelay=
+            random(0,3)+"s";
+
+        game.appendChild(weed);
+    }
+}
+
+
+/* =========================================================
+   DECOR
+========================================================= */
+
+function createDecor(){
+
+    for(let i=0;i<22;i++){
+
+        const shell=
+            document.createElement("div");
+
+        shell.className=
+            "shell decor";
+
+        shell.textContent=
+            i%3===0
+            ?"🪸"
+            :"🐚";
+
+        shell.style.left=
+            random(2,97)+"%";
+
+        shell.style.bottom=
+            random(7,19)+"%";
+
+        shell.style.fontSize=
+            random(19,32)+"px";
+
+        game.appendChild(shell);
+    }
+
+
+    for(let i=0;i<14;i++){
+
+        const star=
+            document.createElement("div");
+
+        star.className=
+            "star decor";
+
+        star.textContent="⭐";
+
+        star.style.left=
+            random(2,97)+"%";
+
+        star.style.bottom=
+            random(7,18)+"%";
+
+        star.style.fontSize=
+            random(18,30)+"px";
+
+        game.appendChild(star);
+    }
+
+
+    for(let i=0;i<5;i++){
+
+        const treasure=
+            document.createElement("div");
+
+        treasure.className=
+            "treasure decor";
+
+        treasure.textContent="🧰";
+
+        treasure.style.left=
+            random(5,92)+"%";
+
+        treasure.style.bottom=
+            random(8,17)+"%";
+
+        game.appendChild(treasure);
+    }
+}
+
+
+/* =========================================================
+   FISH
+========================================================= */
+
+function createFish(){
+
+    const types=[
+        "🐟",
+        "🐠",
+        "🐡",
+        "🐟",
+        "🐠",
+        "🐬",
+        "🦑",
+        "🐙",
+        "🐢",
+        "🦐"
+    ];
+
+
+    const counts=[
+        15,
+        21,
+        28,
+        36,
+        45,
+        54,
+        64,
+        74,
+        85,
+        96,
+        108,
+        120
+    ];
+
+
+    const count=
+        counts[
+            Math.min(
+                level-1,
+                11
+            )
+        ];
+
+
+    for(let i=0;i<count;i++){
+
+        const fish=
+            document.createElement("div");
+
+        fish.className=
+            "fish decor";
+
+        fish.textContent=
+            types[
+                randomInt(
+                    0,
+                    types.length-1
+                )
+            ];
+
+
+        fish.style.left=
+            random(0,100)+"%";
+
+        fish.style.top=
+            random(19,72)+"%";
+
+
+        fish.style.setProperty(
+            "--fishScale",
+            random(.5,1.25)
+        );
+
+
+        fish.dataset.speed=
+            random(35,90);
+
+
+        fish.dataset.direction=
+            Math.random()>.5
+            ?"1"
+            :"-1";
+
+
+        fish.dataset.phase=
+            random(
+                0,
+                Math.PI*2
+            );
+
+
+        game.appendChild(fish);
+    }
+
+
+    requestAnimationFrame(moveFish);
+}
+
+
+function moveFish(time){
+
+    const allFish=
+        document.querySelectorAll(
+            ".fish"
+        );
+
+
+    allFish.forEach(fish=>{
+
+        if(!fish.dataset.x){
+
+            fish.dataset.x=
+                random(
+                    -200,
+                    window.innerWidth
+                );
+        }
+
+
+        let x=
+            parseFloat(
+                fish.dataset.x
+            );
+
+
+        const speed=
+            parseFloat(
+                fish.dataset.speed
+            );
+
+
+        const direction=
+            parseFloat(
+                fish.dataset.direction
+            );
+
+
+        x+=
+            speed*
+            direction*
+            .016;
+
+
+        if(
+            direction>0 &&
+            x>window.innerWidth+150
+        ){
+
+            x=-180;
+        }
+
+
+        if(
+            direction<0 &&
+            x<-180
+        ){
+
+            x=
+                window.innerWidth+150;
+        }
+
+
+        fish.dataset.x=x;
+
+
+        const phase=
+            parseFloat(
+                fish.dataset.phase
+            );
+
+
+        const baseTop=
+            parseFloat(
+                fish.style.top
+            );
+
+
+        const bob=
+            Math.sin(
+                time*.0015+
+                phase
+            )*1.5;
+
+
+        fish.style.left=
+            x+"px";
+
+
+        fish.style.top=
+            `calc(
+                ${baseTop}% +
+                ${bob}px
+            )`;
+
+
+        const scale=
+            parseFloat(
+                fish.style.getPropertyValue(
+                    "--fishScale"
+                )
+            );
+
+
+        fish.style.transform=
+            direction>0
+            ?
+            `scale(${scale})`
+            :
+            `scaleX(-1) scale(${scale})`;
+    });
+
+
+    requestAnimationFrame(moveFish);
+}
+
+
+/* =========================================================
+   BUBBLES
+========================================================= */
+
+function createBubbles(){
+
+    for(let i=0;i<80;i++){
+
+        const b=
+            document.createElement("div");
+
+        b.className=
+            "bubble decor";
+
+        const size=
+            random(4,18);
+
+        b.style.width=
+            size+"px";
+
+        b.style.height=
+            size+"px";
+
+        b.style.left=
+            random(0,100)+"%";
+
+        b.style.bottom=
+            random(-20,25)+"%";
+
+        b.style.animationDuration=
+            random(5,15)+"s";
+
+        b.style.animationDelay=
+            random(-15,0)+"s";
+
+        game.appendChild(b);
+    }
+}
+
+
+/* =========================================================
+   LEVEL
+========================================================= */
+
+function startLevel(){
+
+    clearInterval(timer);
+
+    gameRunning=false;
+
+    const times=[
+        42,
+        40,
+        38,
+        36,
+        34,
+        32,
+        30,
+        29,
+        28,
+        27,
+        26,
+        25
+    ];
+
+
+    maxTime=
+        times[
+            Math.min(
+                level-1,
+                11
+            )
+        ];
+
+
+    timeLeft=maxTime;
+
+    updateHUD();
+
+
+    if(level===1){
+
+        beginSearching();
+
+    }else{
+
+        showLevelScreen();
+    }
+}
+
+
+/* =========================================================
+   LEVEL SCREEN
+========================================================= */
+
+function showLevelScreen(){
+
+    const descriptions=[
+
+        "The reef is getting busier!",
+
+        "More fish are swimming through the caves!",
+
+        "Nemo is disappearing behind the reef!",
+
+        "There are caves everywhere now!",
+
+        "The coral maze is getting bigger!",
+
+        "Look through every opening!",
+
+        "Nemo is becoming harder to spot!",
+
+        "The reef is packed with fish!",
+
+        "Can you find him behind the coral?",
+
+        "The caves are getting deeper!",
+
+        "Only sharp eyes will find Nemo!",
+
+        "The ultimate reef challenge!"
+    ];
+
+
+    levelTitle.textContent=
+        "Level "+level;
+
+
+    levelDescription.textContent=
+        descriptions[
+            level-1
+        ];
+
+
+    levelScreen.style.display=
+        "flex";
+}
+
+
+function continueLevel(){
+
+    levelScreen.style.display=
+        "none";
+
+    buildReef();
+
+    beginSearching();
+}
+
+
+/* =========================================================
+   SEARCHING
+========================================================= */
+
+function beginSearching(){
+
+    clearInterval(timer);
+
+    gameRunning=false;
+
+    timeLeft=maxTime;
+
+    updateHUD();
+
+    spawnNemo();
+
+    gameRunning=true;
+
+
+    timer=setInterval(()=>{
+
+        if(!gameRunning)return;
+
+        timeLeft--;
+
+        updateHUD();
+
+        if(timeLeft<=0){
+
+            timeExpired();
+        }
+
+    },1000);
+}
+
+
+/* =========================================================
+   NEMO
+========================================================= */
+
+function spawnNemo(){
+
+    stopNemoMovement();
+
+    removeNemo();
+
+
+    nemo=
+        document.createElement("div");
+
+    nemo.id="nemo";
+
+
+    nemo.innerHTML=`
+
+        <div id="nemoBody"></div>
+
+        <div class="nemoEye"></div>
+
+        <div class="nemoFin finTop"></div>
+
+        <div class="nemoFin finBottom"></div>
+
+    `;
+
+
+    nemoScale=
+        Math.max(
+            .66,
+            1-
+            Math.max(
+                0,
+                level-3
+            )*.045
+        );
+
+
+    nemoSpeed=
+        Math.max(
+            42,
+            88-level*2
+        );
+
+
+    nemoDirection=
+        Math.random()>.5
+        ?1
+        :-1;
+
+
+    if(nemoDirection>0){
+
+        nemoX=-150;
+
+    }else{
+
+        nemoX=
+            window.innerWidth+150;
+    }
+
+
+    nemoBaseY=
+        random(
+            window.innerHeight*.24,
+            window.innerHeight*.67
+        );
+
+
+    nemoY=nemoBaseY;
+
+
+    nemoPhase=
+        random(
+            0,
+            Math.PI*2
+        );
+
+
+    nemoNextTurn=
+        performance.now()+
+        random(
+            3500,
+            6500
+        );
+
+
+    nemo.style.transform=
+        nemoDirection>0
+        ?
+        `scale(${nemoScale})`
+        :
+        `scaleX(-1) scale(${nemoScale})`;
+
+
+    nemo.style.left=
+        nemoX+"px";
+
+    nemo.style.top=
+        nemoY+"px";
+
+
+    nemo.addEventListener(
+        "pointerdown",
+        foundNemo
+    );
+
+
+    nemo.addEventListener(
+        "click",
+        foundNemo
+    );
+
+
+    game.appendChild(nemo);
+
+
+    nemoAnimationFrame=
+        requestAnimationFrame(
+            updateNemo
+        );
+}
+
+
+/* =========================================================
+   NEMO MOVEMENT
+========================================================= */
+
+function updateNemo(timestamp){
+
+    if(
+        !gameRunning ||
+        !nemo
+    ){
+
+        nemoAnimationFrame=
+            requestAnimationFrame(
+                updateNemo
+            );
+
+        return;
+    }
+
+
+    if(!nemoLastTime){
+
+        nemoLastTime=
+            timestamp;
+    }
+
+
+    let delta=
+        (timestamp-nemoLastTime)
+        /1000;
+
+
+    delta=
+        Math.min(
+            delta,
+            .04
+        );
+
+
+    nemoLastTime=
+        timestamp;
+
+
+    nemoX+=
+        nemoDirection*
+        nemoSpeed*
+        delta;
+
+
+    const wave=
+        Math.sin(
+            timestamp*.0022+
+            nemoPhase
+        );
+
+
+    const wave2=
+        Math.sin(
+            timestamp*.0011+
+            nemoPhase*1.7
+        );
+
+
+    nemoY=
+        nemoBaseY+
+        wave*15+
+        wave2*7;
+
+
+    /*
+       Nemo occasionally changes direction
+       and depth.
+    */
+
+    if(timestamp>nemoNextTurn){
+
+        if(Math.random()>.25){
+
+            nemoDirection*=-1;
+        }
+
+
+        nemoBaseY=
+            clamp(
+                nemoBaseY+
+                random(-80,80),
+
+                window.innerHeight*.20,
+
+                window.innerHeight*.68
+            );
+
+
+        nemoNextTurn=
+            timestamp+
+            random(
+                3500,
+                7000
+            );
+    }
+
+
+    /*
+       Loop around the reef.
+    */
+
+    if(
+        nemoDirection>0 &&
+        nemoX>
+        window.innerWidth+150
+    ){
+
+        nemoX=-150;
+
+        nemoBaseY=
+            random(
+                window.innerHeight*.23,
+                window.innerHeight*.66
+            );
+    }
+
+
+    if(
+        nemoDirection<0 &&
+        nemoX<-150
+    ){
+
+        nemoX=
+            window.innerWidth+150;
+
+        nemoBaseY=
+            random(
+                window.innerHeight*.23,
+                window.innerHeight*.66
+            );
+    }
+
+
+    nemo.style.left=
+        nemoX+"px";
+
+    nemo.style.top=
+        nemoY+"px";
+
+
+    nemo.style.transform=
+        nemoDirection>0
+        ?
+        `scale(${nemoScale})`
+        :
+        `scaleX(-1) scale(${nemoScale})`;
+
+
+    nemoAnimationFrame=
+        requestAnimationFrame(
+            updateNemo
+        );
+}
+
+
+/* =========================================================
+   STOP NEMO
+========================================================= */
+
+function stopNemoMovement(){
+
+    if(nemoAnimationFrame){
+
+        cancelAnimationFrame(
+            nemoAnimationFrame
+        );
+
+        nemoAnimationFrame=null;
+    }
+
+    nemoLastTime=0;
+}
+
+
+function removeNemo(){
+
+    stopNemoMovement();
+
+    if(nemo){
+
+        nemo.remove();
+
+        nemo=null;
+    }
+}
+
+
+/* =========================================================
+   FOUND NEMO
+========================================================= */
+
+function foundNemo(e){
+
+    if(
+        !gameRunning ||
+        !nemo
+    ){
+        return;
+    }
+
+
+    e.preventDefault();
+
+    e.stopPropagation();
+
+
+    gameRunning=false;
+
+    clearInterval(timer);
+
+    stopNemoMovement();
+
+
+    const earned=
+        500+
+        timeLeft*15+
+        level*75;
+
+
+    score+=earned;
+
+    updateHUD();
+
+
+    createCelebration();
+
+
+    flash.classList.remove(
+        "active"
+    );
+
+    void flash.offsetWidth;
+
+    flash.classList.add(
+        "active"
+    );
+
+
+    nemo.classList.add(
+        "hintGlow"
+    );
+
+
+    setTimeout(()=>{
+
+        removeNemo();
+
+
+        if(level>=12){
+
+            finishGame();
+
+        }else{
+
+            level++;
+
+            updateHUD();
+
+            setTimeout(
+                startLevel,
+                1000
+            );
+        }
+
+    },1100);
+}
+
+
+/* =========================================================
+   HINT
+========================================================= */
+
+function giveHint(){
+
+    if(
+        !gameRunning ||
+        !nemo
+    ){
+        return;
+    }
+
+
+    score=
+        Math.max(
+            0,
+            score-75
+        );
+
+
+    updateHUD();
+
+
+    hintText.textContent=
+        "💡 Nemo is glowing! Look through the reef and caves!";
+
+
+    hintText.classList.add(
+        "show"
+    );
+
+
+    nemo.classList.add(
+        "hintGlow"
+    );
+
+
+    setTimeout(()=>{
+
+        if(nemo){
+
+            nemo.classList.remove(
+                "hintGlow"
+            );
+        }
+
+    },1800);
+
+
+    setTimeout(()=>{
+
+        hintText.classList.remove(
+            "show"
+        );
+
+    },2300);
+}
+
+
+/* =========================================================
+   TIME EXPIRED
+========================================================= */
+
+function timeExpired(){
+
+    gameRunning=false;
+
+    clearInterval(timer);
+
+    stopNemoMovement();
+
+
+    hintText.textContent=
+        "😮 Nemo swam deeper into the reef!";
+
+
+    hintText.classList.add(
+        "show"
+    );
+
+
+    setTimeout(()=>{
+
+        hintText.classList.remove(
+            "show"
+        );
+
+        buildReef();
+
+        beginSearching();
+
+    },1500);
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+function createCelebration(){
+
+    if(!nemo)return;
+
+
+    const symbols=[
+        "⭐",
+        "✨",
+        "🐠",
+        "💙",
+        "🫧",
+        "🌟",
+        "🪸"
+    ];
+
+
+    const rect=
+        nemo.getBoundingClientRect();
+
+
+    for(let i=0;i<50;i++){
+
+        const spark=
+            document.createElement("div");
+
+        spark.className=
+            "spark";
+
+
+        spark.textContent=
+            symbols[
+                randomInt(
+                    0,
+                    symbols.length-1
+                )
+            ];
+
+
+        spark.style.left=
+            (
+                rect.left+
+                rect.width/2
+            )+"px";
+
+
+        spark.style.top=
+            (
+                rect.top+
+                rect.height/2
+            )+"px";
+
+
+        spark.style.setProperty(
+            "--x",
+            random(-210,210)+"px"
+        );
+
+
+        spark.style.setProperty(
+            "--y",
+            random(-210,210)+"px"
+        );
+
+
+        game.appendChild(spark);
+
+
+        setTimeout(
+            ()=>spark.remove(),
+            1000
+        );
+    }
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+function updateHUD(){
+
+    levelEl.textContent=
+        level;
+
+    scoreEl.textContent=
+        score;
+
+    timeEl.textContent=
+        Math.max(
+            0,
+            timeLeft
+        );
+
+
+    const percentage=
+        maxTime>0
+        ?
+        (timeLeft/maxTime)*100
+        :
+        0;
+
+
+    timerFill.style.width=
+        percentage+"%";
+
+
+    if(percentage<25){
+
+        timerFill.style.background=
+            "#ff596d";
+
+    }else if(percentage<50){
+
+        timerFill.style.background=
+            "#ffd35c";
+
+    }else{
+
+        timerFill.style.background=
+            "#65eaff";
+    }
+}
+
+
+/* =========================================================
+   FINISH
+========================================================= */
+
+function finishGame(){
+
+    clearInterval(timer);
+
+    gameRunning=false;
+
+    stopNemoMovement();
+
+
+    document.getElementById(
+        "finalScore"
+    ).textContent=
+        score;
+
+
+    gameOver.style.display=
+        "flex";
+}
+
+
+/* =========================================================
+   CONTINUOUS BUBBLES
+========================================================= */
+
+setInterval(()=>{
+
+    if(!gameRunning)return;
+
+
+    const b=
+        document.createElement("div");
+
+
+    b.className="bubble";
+
+
+    const size=
+        random(4,14);
+
+
+    b.style.width=
+        size+"px";
+
+    b.style.height=
+        size+"px";
+
+    b.style.left=
+        random(0,100)+"%";
+
+    b.style.bottom=
+        "-20px";
+
+    b.style.animationDuration=
+        random(5,10)+"s";
+
+
+    game.appendChild(b);
+
+
+    setTimeout(
+        ()=>b.remove(),
+        11000
+    );
+
+},450);
+
+
+/* =========================================================
+   TOUCH RIPPLE
+========================================================= */
+
+game.addEventListener(
+    "pointerdown",
+    e=>{
+
+        if(!gameRunning)return;
+
+
+        if(
+            e.target.closest("#hud") ||
+            e.target.closest("#controls") ||
+            e.target.closest("#nemo")
+        ){
+
+            return;
+        }
+
+
+        const ring=
+            document.createElement("div");
+
+
+        ring.style.position=
+            "absolute";
+
+        ring.style.zIndex=
+            "700";
+
+        ring.style.left=
+            e.clientX+"px";
+
+        ring.style.top=
+            e.clientY+"px";
+
+        ring.style.width=
+            "10px";
+
+        ring.style.height=
+            "10px";
+
+        ring.style.border=
+            "2px solid rgba(255,255,255,.6)";
+
+        ring.style.borderRadius=
+            "50%";
+
+        ring.style.transform=
+            "translate(-50%,-50%)";
+
+        ring.style.pointerEvents=
+            "none";
+
+
+        game.appendChild(ring);
+
+
+        ring.animate(
+
+            [
+                {
+                    width:"10px",
+                    height:"10px",
+                    opacity:.8
+                },
+
+                {
+                    width:"100px",
+                    height:"100px",
+                    opacity:0
+                }
+            ],
+
+            {
+                duration:650,
+                easing:"ease-out"
+            }
+
+        ).onfinish=
+            ()=>ring.remove();
+    }
+);
+
+
+/* =========================================================
+   IPAD DOUBLE TAP PROTECTION
+========================================================= */
+
+document.addEventListener(
+    "contextmenu",
+    e=>e.preventDefault()
+);
+
+
+let lastTouch=0;
+
+
+document.addEventListener(
+    "touchend",
+
+    e=>{
+
+        const now=
+            Date.now();
+
+
+        if(
+            now-lastTouch<=300
+        ){
+
+            e.preventDefault();
+        }
+
+
+        lastTouch=now;
+
+    },
+
+    {
+        passive:false
+    }
+);
+
+</script>
+
+</body>
+</html>
