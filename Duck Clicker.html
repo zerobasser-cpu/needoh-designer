@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Duck Clicker 🦆</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+    background:#8ed8ff;
+    color:#17384d;
+}
+
+button{
+    font:inherit;
+    cursor:pointer;
+    border:none;
+}
+
+#game{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+    background:
+      linear-gradient(#78cef5 0%,#b9ecff 45%,#8ed9f4 46%,#68c7e8 100%);
+}
+
+/* SKY */
+.sun{
+    position:absolute;
+    top:55px;
+    right:8%;
+    width:90px;
+    height:90px;
+    background:#fff3a1;
+    border-radius:50%;
+    box-shadow:0 0 50px #fff2a0;
+}
+
+.cloud{
+    position:absolute;
+    width:180px;
+    height:55px;
+    background:rgba(255,255,255,.82);
+    border-radius:50px;
+    opacity:.8;
+    animation:cloudMove linear infinite;
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+    position:absolute;
+    background:white;
+    border-radius:50%;
+}
+
+.cloud:before{
+    width:75px;
+    height:75px;
+    left:25px;
+    top:-35px;
+}
+
+.cloud:after{
+    width:90px;
+    height:90px;
+    right:25px;
+    top:-45px;
+}
+
+.cloud.one{top:95px;left:-220px;animation-duration:55s}
+.cloud.two{top:180px;left:-300px;animation-duration:75s;transform:scale(.7)}
+.cloud.three{top:50px;left:-400px;animation-duration:90s;transform:scale(.55)}
+
+@keyframes cloudMove{
+    from{transform:translateX(0)}
+    to{transform:translateX(calc(100vw + 600px))}
+}
+
+/* HEADER */
+.header{
+    position:relative;
+    z-index:20;
+    padding:15px;
+    display:flex;
+    justify-content:center;
+}
+
+.stats{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.stat{
+    background:rgba(255,255,255,.9);
+    border:3px solid rgba(28,101,129,.18);
+    border-radius:18px;
+    padding:9px 16px;
+    min-width:125px;
+    text-align:center;
+    box-shadow:0 7px 18px rgba(0,60,90,.15);
+}
+
+.stat small{
+    display:block;
+    font-weight:bold;
+    color:#547586;
+    font-size:11px;
+}
+
+.stat strong{
+    display:block;
+    font-size:20px;
+    margin-top:2px;
+}
+
+/* TITLE */
+.title{
+    position:relative;
+    z-index:5;
+    text-align:center;
+    margin-top:4px;
+}
+
+.title h1{
+    font-size:clamp(36px,7vw,68px);
+    color:#fff;
+    text-shadow:
+      0 4px 0 #397c94,
+      0 7px 15px rgba(0,50,70,.25);
+}
+
+.title p{
+    color:#15536b;
+    font-weight:bold;
+}
+
+/* POND */
+.pond{
+    position:relative;
+    width:100%;
+    height:390px;
+    margin-top:25px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 30%,#73d5ed,#3caacb 55%,#258caf 100%);
+    border-top:12px solid #65ad70;
+    box-shadow:
+      inset 0 20px 30px rgba(255,255,255,.12),
+      inset 0 -20px 30px rgba(0,70,100,.15);
+}
+
+.pond:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(
+        5deg,
+        transparent 0 34px,
+        rgba(255,255,255,.06) 35px 37px
+      );
+    pointer-events:none;
+}
+
+/* WATER RIPPLE */
+.ripple{
+    position:absolute;
+    width:100px;
+    height:30px;
+    border:3px solid rgba(255,255,255,.35);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    animation:ripple .8s ease-out forwards;
+    pointer-events:none;
+}
+
+@keyframes ripple{
+    from{opacity:1;transform:translate(-50%,-50%) scale(.5)}
+    to{opacity:0;transform:translate(-50%,-50%) scale(2)}
+}
+
+/* LILY PADS */
+.lily{
+    position:absolute;
+    width:80px;
+    height:42px;
+    background:#4eaa61;
+    border-radius:50%;
+    box-shadow:inset -8px -6px rgba(0,70,30,.15);
+}
+
+.lily:after{
+    content:"";
+    position:absolute;
+    right:2px;
+    top:0;
+    border-top:22px solid #258caf;
+    border-left:18px solid transparent;
+}
+
+.lily.a{left:8%;top:30%;transform:rotate(-15deg)}
+.lily.b{right:10%;top:62%;transform:rotate(25deg) scale(.8)}
+.lily.c{left:70%;top:15%;transform:scale(.65)}
+.lily.d{left:25%;top:70%;transform:scale(.75) rotate(15deg)}
+
+/* MAIN DUCK */
+.main-duck-area{
+    position:absolute;
+    left:50%;
+    top:47%;
+    transform:translate(-50%,-50%);
+    width:220px;
+    height:220px;
+    z-index:8;
+}
+
+.main-duck{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:150px;
+    user-select:none;
+    filter:drop-shadow(0 14px 8px rgba(0,60,70,.25));
+    transition:.15s;
+    cursor:pointer;
+    animation:duckBob 2s ease-in-out infinite;
+}
+
+.main-duck:hover{
+    transform:translate(-50%,-50%) scale(1.06);
+}
+
+.main-duck:active{
+    transform:translate(-50%,-50%) scale(.9);
+}
+
+@keyframes duckBob{
+    0%,100%{margin-top:0}
+    50%{margin-top:-8px}
+}
+
+/* ACCESSORIES */
+.accessory{
+    position:absolute;
+    z-index:12;
+    pointer-events:none;
+    display:none;
+}
+
+.accessory.equipped{display:block}
+
+.hat{
+    top:5px;
+    left:86px;
+    font-size:55px;
+}
+
+.glasses{
+    top:88px;
+    left:67px;
+    font-size:38px;
+}
+
+.crown{
+    top:-5px;
+    left:78px;
+    font-size:60px;
+}
+
+.necklace{
+    top:140px;
+    left:70px;
+    font-size:65px;
+}
+
+.cape{
+    top:85px;
+    left:15px;
+    font-size:100px;
+}
+
+.rocket{
+    top:115px;
+    left:0;
+    font-size:70px;
+}
+
+/* RAINBOW DUCKS */
+.rainbow-duck{
+    position:absolute;
+    z-index:10;
+    font-size:65px;
+    cursor:pointer;
+    user-select:none;
+    filter:drop-shadow(0 6px 5px rgba(0,0,0,.25));
+    animation:rainbowSwim 7s linear forwards;
+}
+
+@keyframes rainbowSwim{
+    from{left:-100px;transform:scaleX(1)}
+    45%{left:45%;transform:scaleX(1)}
+    50%{transform:scaleX(-1)}
+    95%{left:105%;transform:scaleX(-1)}
+    to{left:110%;opacity:0}
+}
+
+.rainbow-label{
+    position:absolute;
+    top:-27px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#fff;
+    color:#8d42c9;
+    border-radius:10px;
+    padding:3px 7px;
+    font-size:10px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+/* POPUPS */
+.coin-pop{
+    position:absolute;
+    z-index:50;
+    font-weight:900;
+    color:#fff6a4;
+    text-shadow:0 2px 4px #245d6b;
+    pointer-events:none;
+    animation:coinPop 900ms ease-out forwards;
+}
+
+@keyframes coinPop{
+    0%{opacity:1;transform:translate(-50%,0) scale(.8)}
+    100%{opacity:0;transform:translate(-50%,-80px) scale(1.3)}
+}
+
+/* BOTTOM PANELS */
+.panels{
+    position:relative;
+    z-index:20;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    max-width:1250px;
+    margin:-10px auto 25px;
+    padding:0 15px;
+}
+
+.panel{
+    background:rgba(255,255,255,.94);
+    border-radius:22px;
+    padding:16px;
+    box-shadow:0 10px 25px rgba(0,70,90,.16);
+}
+
+.panel h2{
+    font-size:20px;
+    margin-bottom:10px;
+    color:#215a70;
+}
+
+.shop-item{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:9px;
+    margin:7px 0;
+    border-radius:13px;
+    background:#eefaff;
+    border:2px solid #d3f0fa;
+}
+
+.shop-item .emoji{
+    font-size:30px;
+}
+
+.shop-info{
+    flex:1;
+}
+
+.shop-info strong{
+    display:block;
+    font-size:13px;
+}
+
+.shop-info small{
+    color:#66808c;
+    display:block;
+}
+
+.buy{
+    background:#43b96b;
+    color:white;
+    padding:7px 9px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.buy:disabled{
+    background:#b7c8ce;
+    cursor:not-allowed;
+}
+
+.big-button{
+    width:100%;
+    background:linear-gradient(#62d781,#31a957);
+    color:white;
+    padding:14px;
+    border-radius:15px;
+    font-weight:900;
+    box-shadow:0 5px 0 #258545;
+}
+
+.big-button:active{
+    transform:translateY(3px);
+    box-shadow:0 2px 0 #258545;
+}
+
+/* REBIRTH */
+.rebirth{
+    border:4px solid #d6a32a;
+    background:linear-gradient(#fffdf0,#fff3c4);
+}
+
+.rebirth h2{
+    color:#a87500;
+}
+
+.rebirth-button{
+    width:100%;
+    padding:14px;
+    border-radius:15px;
+    color:white;
+    font-weight:900;
+    font-size:17px;
+    background:linear-gradient(135deg,#ffcf42,#ef8d18);
+    box-shadow:0 5px 0 #bf7110;
+    margin-top:8px;
+}
+
+.rebirth-button:disabled{
+    background:#aebbc0;
+    box-shadow:none;
+    cursor:not-allowed;
+}
+
+.progress{
+    height:12px;
+    background:#e1e7e8;
+    border-radius:20px;
+    overflow:hidden;
+    margin:8px 0;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ffcf42,#ff7b2e);
+    transition:.3s;
+}
+
+/* BOOK */
+.book-container{
+    display:flex;
+    justify-content:center;
+    margin:20px 0 30px;
+    position:relative;
+    z-index:20;
+}
+
+.book{
+    width:190px;
+    height:120px;
+    border-radius:10px 15px 15px 10px;
+    background:
+      linear-gradient(90deg,#713f20,#9b602e 10%,#713f20 12%,#a96d35 100%);
+    border:6px solid #593017;
+    color:#ffe4a5;
+    box-shadow:0 12px 25px rgba(0,0,0,.25);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transition:.2s;
+}
+
+.book:hover{
+    transform:translateY(-5px) rotate(-1deg);
+}
+
+.book .book-title{
+    font-size:35px;
+    font-weight:1000;
+    letter-spacing:4px;
+    text-shadow:0 3px #42200f;
+}
+
+.book small{
+    font-weight:bold;
+    margin-top:5px;
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(8,39,49,.72);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.show{display:flex}
+
+.book-open{
+    width:min(950px,96vw);
+    height:min(650px,90vh);
+    display:flex;
+    perspective:1400px;
+    animation:bookOpen .5s ease;
+}
+
+@keyframes bookOpen{
+    from{transform:scale(.7) rotateX(20deg);opacity:0}
+    to{transform:scale(1) rotateX(0);opacity:1}
+}
+
+.page{
+    width:50%;
+    height:100%;
+    background:
+      repeating-linear-gradient(
+        transparent 0 34px,
+        rgba(140,100,50,.12) 35px 36px
+      ),
+      #fff6dc;
+    border:4px solid #704522;
+    padding:25px;
+    overflow:hidden;
+}
+
+.left-page{
+    border-radius:20px 4px 4px 20px;
+    border-right:2px solid #b58b55;
+}
+
+.right-page{
+    border-radius:4px 20px 20px 4px;
+    border-left:2px solid #b58b55;
+}
+
+.page h2{
+    text-align:center;
+    color:#72451f;
+    margin-bottom:12px;
+}
+
+.page-number{
+    text-align:center;
+    color:#8d7458;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.index-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.index-card{
+    min-height:115px;
+    border:2px solid #dbc397;
+    background:rgba(255,255,255,.65);
+    border-radius:12px;
+    padding:7px;
+    text-align:center;
+}
+
+.index-card .duck-icon{
+    font-size:39px;
+}
+
+.index-card .duck-name{
+    font-size:12px;
+    font-weight:bold;
+    color:#674522;
+}
+
+.index-card small{
+    display:block;
+    font-size:10px;
+    color:#88745e;
+}
+
+.locked{
+    filter:grayscale(1);
+    opacity:.55;
+}
+
+.locked .duck-icon{
+    font-size:39px;
+}
+
+.close-book{
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#fff;
+    color:#54351f;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.book-nav{
+    position:absolute;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+}
+
+.book-nav button{
+    background:#704522;
+    color:#ffe4ad;
+    padding:9px 18px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* CONFETTI */
+.confetti{
+    position:fixed;
+    z-index:200;
+    width:10px;
+    height:18px;
+    pointer-events:none;
+    animation:confetti 1.5s ease-out forwards;
+}
+
+@keyframes confetti{
+    from{transform:translate(0,0) rotate(0);opacity:1}
+    to{transform:translate(var(--x),var(--y)) rotate(720deg);opacity:0}
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    z-index:300;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%) translateY(100px);
+    background:#17384d;
+    color:white;
+    padding:13px 20px;
+    border-radius:15px;
+    font-weight:bold;
+    transition:.3s;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+    .panels{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .stat{
+        min-width:100px;
+        padding:7px 10px;
+    }
+
+    .stat strong{font-size:16px}
+
+    .pond{
+        height:330px;
+    }
+
+    .main-duck{
+        font-size:125px;
+    }
+
+    .panels{
+        grid-template-columns:1fr;
+    }
+
+    .book-open{
+        height:80vh;
+    }
+
+    .page{
+        padding:12px;
+    }
+
+    .left-page{
+        width:100%;
+    }
+
+    .right-page{
+        display:none;
+    }
+
+    .index-grid{
+        grid-template-columns:1fr 1fr;
+        gap:6px;
+    }
+
+    .index-card{
+        min-height:100px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+    <div class="sun"></div>
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="cloud three"></div>
+
+    <header class="header">
+        <div class="stats">
+            <div class="stat">
+                <small>🪙 COINS</small>
+                <strong id="coins">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>🖱️ CLICKS</small>
+                <strong id="clicks">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>🪙 PER CLICK</small>
+                <strong id="cpc">1</strong>
+            </div>
+
+            <div class="stat">
+                <small>🐣 AUTO / SEC</small>
+                <strong id="cps">0</strong>
+            </div>
+
+            <div class="stat">
+                <small>🌀 REBIRTHS</small>
+                <strong id="rebirths">0</strong>
+            </div>
+        </div>
+    </header>
+
+    <div class="title">
+        <h1>🦆 DUCK CLICKER 🦆</h1>
+        <p>Build the biggest duck empire!</p>
+    </div>
+
+    <div class="pond" id="pond">
+
+        <div class="lily a"></div>
+        <div class="lily b"></div>
+        <div class="lily c"></div>
+        <div class="lily d"></div>
+
+        <div class="main-duck-area" id="mainDuckArea">
+
+            <div class="accessory cape" id="cape">🦸</div>
+            <div class="accessory rocket" id="rocket">🚀</div>
+            <div class="accessory hat" id="hat">🎩</div>
+            <div class="accessory glasses" id="glasses">🕶️</div>
+            <div class="accessory crown" id="crown">👑</div>
+            <div class="accessory necklace" id="necklace">📿</div>
+
+            <div class="main-duck" id="mainDuck">🦆</div>
+        </div>
+
+    </div>
+
+    <!-- BOOK -->
+    <div class="book-container">
+        <button class="book" onclick="openIndex()">
+            <div class="book-title">INDEX</div>
+            <small>🦆 DUCKLING COLLECTION 🦆</small>
+        </button>
+    </div>
+
+    <div class="panels">
+
+        <!-- CPC SHOP -->
+        <div class="panel">
+            <h2>🪙 Coin Upgrades</h2>
+            <div id="upgradeShop"></div>
+        </div>
+
+        <!-- DUCK SHOP -->
+        <div class="panel">
+            <h2>🦆 Main Ducks</h2>
+            <div id="duckShop"></div>
+        </div>
+
+        <!-- PET SHOP -->
+        <div class="panel">
+            <h2>🐣 Duck Pets</h2>
+            <div id="petShop"></div>
+        </div>
+
+        <!-- REBIRTH + ACCESSORIES -->
+        <div class="panel rebirth">
+            <h2>🌀 Rebirth</h2>
+
+            <div>
+                Next rebirth:
+                <strong id="rebirthRequirement">50M</strong>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" id="rebirthProgress"></div>
+            </div>
+
+            <div id="rebirthText">
+                Reach 50,000,000 coins!
+            </div>
+
+            <button
+                class="rebirth-button"
+                id="rebirthButton"
+                onclick="rebirth()"
+                disabled>
+                🌀 REBIRTH
+            </button>
+
+            <hr style="margin:15px 0;border:none;border-top:2px solid #ead49a">
+
+            <h2>🎩 Accessories</h2>
+            <div id="accessoryShop"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- INDEX MODAL -->
+<div class="modal" id="indexModal">
+
+    <button class="close-book" onclick="closeIndex()">×</button>
+
+    <div class="book-open">
+
+        <div class="page left-page">
+
+            <h2>🦆 DUCKLING INDEX</h2>
+
+            <div class="page-number" id="indexStatus">
+                0 / 24 FOUND
+            </div>
+
+            <div class="index-grid" id="indexGrid"></div>
+
+        </div>
+
+        <div class="page right-page">
+
+            <h2>📖 COLLECTION</h2>
+
+            <div class="page-number">
+                Discover more ducklings!
+            </div>
+
+            <div id="indexDetails"
+                 style="text-align:center;padding-top:30px;color:#725536">
+
+                <div style="font-size:75px">🦆</div>
+
+                <h3>Duckling Collector</h3>
+
+                <p style="margin-top:12px">
+                    Buy helper ducks to discover them
+                    in your collection.
+                </p>
+
+                <p style="margin-top:20px">
+                    Every duckling has its own rarity
+                    and automatic coin power.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================
+   GAME DATA
+========================= */
+
+const upgrades = [
+    ["🥖","Bigger Bread",25,2],
+    ["🌽","Golden Corn",100,5],
+    ["🍪","Duck Treats",500,10],
+    ["🪱","Worm Feast",2000,25],
+    ["🥚","Egg Basket",10000,50],
+    ["🏠","Duck House",50000,100],
+    ["🌾","Duck Farm",250000,500],
+    ["👑","Duck Kingdom",1000000,1000],
+    ["💎","Diamond Pond",10000000,10000],
+    ["🌈","Rainbow Pond",100000000,100000],
+    ["✨","Magical Duck Pond",1000000000,1000000],
+    ["🌌","Cosmic Duck Pond",10000000000,10000000]
+];
+
+const mainDucks = [
+    ["🦆","Brown Duck",0,0],
+    ["🐥","Duckling",500,2],
+    ["🦢","Swan",5000,10],
+    ["👑","King Duck",25000,50],
+    ["🌈","Rainbow Duck",100000,200],
+    ["💎","Diamond Duck",1000000,1000],
+    ["🚀","Space Duck",10000000,10000]
+];
+
+const pets = [
+    ["🐤","Baby Duck",50,1,"Common"],
+    ["🐥","Yellow Duckling",250,5,"Common"],
+    ["🦆","Brown Duckling",500,10,"Common"],
+    ["🐣","Tiny Duckling",750,15,"Common"],
+    ["🦆","Little Runner",1500,25,"Common"],
+    ["🪿","Speckled Duck",3000,40,"Common"],
+
+    ["🦆","Mallard Duckling",6000,80,"Uncommon"],
+    ["🐤","Blue Duckling",10000,120,"Uncommon"],
+    ["🐥","Fluffy Duckling",15000,200,"Uncommon"],
+    ["🦆","Greenhead Duckling",25000,350,"Uncommon"],
+    ["🐤","Rain Duckling",40000,500,"Uncommon"],
+
+    ["🦢","Swanling",75000,800,"Rare"],
+    ["🌈","Rainbow Duckling",125000,1500,"Rare"],
+    ["✨","Golden Duckling",200000,2500,"Rare"],
+    ["💗","Pink Duckling",350000,4000,"Rare"],
+    ["🥈","Silver Duckling",600000,6500,"Rare"],
+    ["💎","Crystal Duckling",1000000,10000,"Rare"],
+
+    ["👑","Royal Duckling",2500000,18000,"Epic"],
+    ["🥷","Ninja Duckling",5000000,30000,"Epic"],
+    ["🏴‍☠️","Pirate Duckling",10000000,50000,"Epic"],
+    ["🧙","Wizard Duckling",25000000,85000,"Epic"],
+    ["🔥","Fire Duckling",50000000,150000,"Epic"],
+    ["❄️","Ice Duckling",100000000,250000,"Epic"],
+
+    ["💎","Diamond Duckling",250000000,500000,"Legendary"],
+    ["🚀","Space Duckling",500000000,1000000,"Legendary"],
+    ["🌌","Galaxy Duckling",1000000000,2500000,"Legendary"],
+    ["🐉","Dragon Duckling",5000000000,7500000,"Legendary"],
+    ["☄️","Cosmic Duckling",25000000000,25000000,"Legendary"],
+    ["🌈","Rainbow God Duckling",100000000000,100000000,"Legendary"]
+];
+
+const accessories = [
+    ["🎩","Top Hat",250,"hat"],
+    ["🕶️","Sunglasses",500,"glasses"],
+    ["👑","Crown",5000,"crown"],
+    ["📿","Necklace",50000,"necklace"],
+    ["🦸","Superhero Cape",250000,"cape"],
+    ["🚀","Rocket Pack",1000000,"rocket"]
+];
+
+/* =========================
+   SAVE DATA
+========================= */
+
+let save = JSON.parse(localStorage.getItem("duckClickerSave")) || {};
+
+let coins = Number(save.coins || 0);
+let clicks = Number(save.clicks || 0);
+let baseCpc = Number(save.baseCpc || 1);
+let upgradeIndex = Number(save.upgradeIndex || 0);
+
+let rebirths = Number(save.rebirths || 0);
+
+let ownedDucks = save.ownedDucks || [true];
+let selectedDuck = Number(save.selectedDuck || 0);
+
+let petCounts = save.petCounts || Array(pets.length).fill(0);
+let discovered = save.discovered || Array(pets.length).fill(false);
+
+let ownedAccessories = save.ownedAccessories || [];
+let equippedAccessories = save.equippedAccessories || [];
+
+let rainbowCount = 0;
+
+let autoCps = 0;
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatNumber(n){
+
+    n = Number(n);
+
+    if(n >= 1e15) return (n/1e15).toFixed(2)+"Qa";
+    if(n >= 1e12) return (n/1e12).toFixed(2)+"T";
+    if(n >= 1e9) return (n/1e9).toFixed(2)+"B";
+    if(n >= 1e6) return (n/1e6).toFixed(2)+"M";
+    if(n >= 1e3) return (n/1e3).toFixed(2)+"K";
+
+    return Math.floor(n).toLocaleString();
+}
+
+function saveGame(){
+
+    localStorage.setItem(
+        "duckClickerSave",
+        JSON.stringify({
+            coins,
+            clicks,
+            baseCpc,
+            upgradeIndex,
+            rebirths,
+            ownedDucks,
+            selectedDuck,
+            petCounts,
+            discovered,
+            ownedAccessories,
+            equippedAccessories
+        })
+    );
+}
+
+function getCpc(){
+
+    return baseCpc * Math.pow(2,rebirths);
+}
+
+function calculateCps(){
+
+    let total = 0;
+
+    petCounts.forEach((count,i)=>{
+        total += count * pets[i][3];
+    });
+
+    autoCps = total;
+
+    return total;
+}
+
+/* =========================
+   MAIN DUCK
+========================= */
+
+function updateDuck(){
+
+    const duck = mainDucks[selectedDuck];
+
+    document.getElementById("mainDuck").textContent = duck[0];
+
+    equippedAccessories.forEach(id=>{
+        const element = document.getElementById(id);
+        if(element) element.classList.add("equipped");
+    });
+}
+
+document.getElementById("mainDuck").addEventListener("click",function(e){
+
+    const amount = getCpc();
+
+    coins += amount;
+    clicks++;
+
+    showCoinPop(
+        e.clientX,
+        e.clientY,
+        "+" + formatNumber(amount)
+    );
+
+    makeRipple(e.clientX,e.clientY);
+
+    if(clicks % 100 === 0){
+        rainbowWave();
+    }
+
+    updateUI();
+    saveGame();
+});
+
+/* =========================
+   COIN POP
+========================= */
+
+function showCoinPop(x,y,text){
+
+    const pop = document.createElement("div");
+
+    pop.className="coin-pop";
+    pop.textContent=text;
+    pop.style.left=x+"px";
+    pop.style.top=y+"px";
+
+    document.body.appendChild(pop);
+
+    setTimeout(()=>pop.remove(),900);
+}
+
+/* =========================
+   RIPPLES
+========================= */
+
+function makeRipple(x,y){
+
+    const pond = document.getElementById("pond");
+    const rect = pond.getBoundingClientRect();
+
+    const ripple=document.createElement("div");
+
+    ripple.className="ripple";
+
+    ripple.style.left=(x-rect.left)+"px";
+    ripple.style.top=(y-rect.top)+"px";
+
+    pond.appendChild(ripple);
+
+    setTimeout(()=>ripple.remove(),800);
+}
+
+/* =========================
+   RAINBOW DUCKS
+========================= */
+
+function rainbowWave(){
+
+    showToast("🌈 10 RAINBOW DUCKS HAVE ARRIVED! +100 EACH!");
+
+    for(let i=0;i<10;i++){
+
+        setTimeout(()=>{
+            createRainbowDuck(i);
+        },i*450);
+    }
+
+    confettiBurst();
+}
+
+function createRainbowDuck(i){
+
+    const pond=document.getElementById("pond");
+
+    const duck=document.createElement("div");
+
+    duck.className="rainbow-duck";
+
+    duck.innerHTML=`
+        <div class="rainbow-label">+100 🪙</div>
+        🌈🦆
+    `;
+
+    duck.style.top=(30 + Math.random()*60)+"%";
+    duck.style.animationDuration=(5+Math.random()*4)+"s";
+
+    duck.addEventListener("click",function(e){
+
+        coins += 100;
+
+        showCoinPop(
+            e.clientX,
+            e.clientY,
+            "+100 🪙"
+        );
+
+        makeRipple(e.clientX,e.clientY);
+
+        duck.remove();
+
+        updateUI();
+        saveGame();
+    });
+
+    pond.appendChild(duck);
+
+    setTimeout(()=>{
+        if(duck.parentElement) duck.remove();
+    },10000);
+}
+
+/* =========================
+   UPGRADE SHOP
+========================= */
+
+function renderUpgrades(){
+
+    const shop=document.getElementById("upgradeShop");
+
+    shop.innerHTML="";
+
+    upgrades.forEach((u,i)=>{
+
+        const [emoji,name,cost,cpc]=u;
+
+        const item=document.createElement("div");
+
+        item.className="shop-item";
+
+        const purchased=i < upgradeIndex;
+
+        item.innerHTML=`
+            <div class="emoji">${emoji}</div>
+
+            <div class="shop-info">
+                <strong>${name}</strong>
+                <small>
+                    ${purchased
+                        ? "Owned"
+                        : formatNumber(cost)+" coins → "+formatNumber(cpc)+" / click"
+                    }
+                </small>
+            </div>
+
+            <button
+                class="buy"
+                ${purchased || i!==upgradeIndex || coins<cost ? "disabled":""}
+                onclick="buyUpgrade(${i})">
+                ${purchased ? "✓" : "BUY"}
+            </button>
+        `;
+
+        shop.appendChild(item);
+    });
+}
+
+function buyUpgrade(i){
+
+    if(i!==upgradeIndex) return;
+
+    const u=upgrades[i];
+
+    if(coins<u[2]) return;
+
+    coins-=u[2];
+
+    baseCpc=u[3];
+
+    upgradeIndex++;
+
+    showToast("🪙 "+u[1]+" purchased!");
+
+    updateUI();
+    saveGame();
+}
+
+/* =========================
+   MAIN DUCK SHOP
+========================= */
+
+function renderDuckShop(){
+
+    const shop=document.getElementById("duckShop");
+
+    shop.innerHTML="";
+
+    mainDucks.forEach((d,i)=>{
+
+        const [emoji,name,cost,bonus]=d;
+
+        const owned=ownedDucks[i];
+
+        const item=document.createElement("div");
+
+        item.className="shop-item";
+
+        item.innerHTML=`
+            <div class="emoji">${emoji}</div>
+
+            <div class="shop-info">
+                <strong>${name}</strong>
+                <small>
+                    ${i===0
+                        ? "Starter duck"
+                        : "+"+formatNumber(bonus)+" click bonus"
+                    }
+                </small>
+            </div>
+
+            ${
+                owned
+                ?
+                `<button class="buy"
+                    onclick="selectDuck(${i})">
+                    ${selectedDuck===i ? "✓ USING" : "USE"}
+                </button>`
+                :
+                `<button class="buy"
+                    ${coins<cost?"disabled":""}
+                    onclick="buyDuck(${i})">
+                    ${formatNumber(cost)}
+                </button>`
+            }
+        `;
+
+        shop.appendChild(item);
+    });
+}
+
+function buyDuck(i){
+
+    const duck=mainDucks[i];
+
+    if(coins<duck[2]) return;
+
+    coins-=duck[2];
+
+    ownedDucks[i]=true;
+    selectedDuck=i;
+
+    baseCpc += duck[3];
+
+    showToast(duck[0]+" "+duck[1]+" unlocked!");
+
+    updateDuck();
+    updateUI();
+    saveGame();
+}
+
+function selectDuck(i){
+
+    if(!ownedDucks[i]) return;
+
+    selectedDuck=i;
+
+    updateDuck();
+    renderDuckShop();
+    saveGame();
+}
+
+/* =========================
+   PET SHOP
+========================= */
+
+function renderPetShop(){
+
+    const shop=document.getElementById("petShop");
+
+    shop.innerHTML="";
+
+    pets.slice(0,10).forEach((p,i)=>{
+
+        const [emoji,name,cost,cps,rarity]=p;
+
+        const item=document.createElement("div");
+
+        item.className="shop-item";
+
+        item.innerHTML=`
+            <div class="emoji">${emoji}</div>
+
+            <div class="shop-info">
+                <strong>${name}</strong>
+                <small>
+                    ${rarity} • +${formatNumber(cps)}/sec
+                    ${petCounts[i]>0 ? " • x"+petCounts[i] : ""}
+                </small>
+            </div>
+
+            <button
+                class="buy"
+                ${coins<cost?"disabled":""}
+                onclick="buyPet(${i})">
+                ${formatNumber(cost)}
+            </button>
+        `;
+
+        shop.appendChild(item);
+    });
+
+    const more=document.createElement("div");
+
+    more.style.textAlign="center";
+    more.style.marginTop="8px";
+    more.style.fontSize="12px";
+    more.style.color="#6b7e86";
+
+    more.textContent="More ducklings are waiting in the INDEX! 📖";
+
+    shop.appendChild(more);
+}
+
+function buyPet(i){
+
+    const pet=pets[i];
+
+    if(coins<pet[2]) return;
+
+    coins-=pet[2];
+
+    petCounts[i]++;
+
+    if(!discovered[i]){
+
+        discovered[i]=true;
+
+        showToast(
+            "📖 New duckling discovered: "+pet[1]+"!"
+        );
+    }
+
+    calculateCps();
+
+    updateUI();
+    renderIndex();
+    saveGame();
+}
+
+/* =========================
+   ACCESSORIES
+========================= */
+
+function renderAccessories(){
+
+    const shop=document.getElementById("accessoryShop");
+
+    shop.innerHTML="";
+
+    accessories.forEach((a,i)=>{
+
+        const [emoji,name,cost,id]=a;
+
+        const owned=ownedAccessories.includes(id);
+        const equipped=equippedAccessories.includes(id);
+
+        const item=document.createElement("div");
+
+        item.className="shop-item";
+
+        item.innerHTML=`
+            <div class="emoji">${emoji}</div>
+
+            <div class="shop-info">
+                <strong>${name}</strong>
+                <small>${owned ? "Owned" : formatNumber(cost)+" coins"}</small>
+            </div>
+
+            ${
+                owned
+                ?
+                `<button class="buy"
+                    onclick="toggleAccessory('${id}')">
+                    ${equipped?"REMOVE":"WEAR"}
+                </button>`
+                :
+                `<button class="buy"
+                    ${coins<cost?"disabled":""}
+                    onclick="buyAccessory(${i})">
+                    BUY
+                </button>`
+            }
+        `;
+
+        shop.appendChild(item);
+    });
+}
+
+function buyAccessory(i){
+
+    const a=accessories[i];
+
+    if(coins<a[2]) return;
+
+    coins-=a[2];
+
+    ownedAccessories.push(a[3]);
+    equippedAccessories.push(a[3]);
+
+    showToast(a[0]+" "+a[1]+" equipped!");
+
+    updateDuck();
+    updateUI();
+    saveGame();
+}
+
+function toggleAccessory(id){
+
+    if(equippedAccessories.includes(id)){
+
+        equippedAccessories=
+            equippedAccessories.filter(x=>x!==id);
+
+    }else{
+
+        equippedAccessories.push(id);
+    }
+
+    updateDuck();
+    renderAccessories();
+    saveGame();
+}
+
+/* =========================
+   REBIRTH
+========================= */
+
+function getRebirthRequirement(){
+
+    /*
+       50M → 100M → 150M...
+       Rebirth 20 reaches 1B.
+    */
+
+    return Math.min(
+        50000000 + rebirths*50000000,
+        1000000000
+    );
+}
+
+function rebirth(){
+
+    const requirement=getRebirthRequirement();
+
+    if(coins<requirement) return;
+
+    const oldCpc=getCpc();
+
+    coins=0;
+    clicks=0;
+
+    /*
+       Everything else remains:
+       ducks
+       pets
+       accessories
+       index
+       upgrades
+    */
+
+    rebirths++;
+
+    showToast(
+        "🌀 REBIRTH! Coins Per Click doubled!"
+    );
+
+    confettiBurst();
+
+    setTimeout(()=>{
+        showToast(
+            "🦆 You now earn "+
+            formatNumber(oldCpc*2)+
+            " coins per click!"
+        );
+    },1500);
+
+    updateUI();
+    saveGame();
+}
+
+function updateRebirth(){
+
+    const requirement=getRebirthRequirement();
+
+    document.getElementById("rebirthRequirement").textContent=
+        formatNumber(requirement);
+
+    const percentage=
+        Math.min(100,(coins/requirement)*100);
+
+    document.getElementById("rebirthProgress").style.width=
+        percentage+"%";
+
+    document.getElementById("rebirthButton").disabled=
+        coins<requirement;
+
+    document.getElementById("rebirthText").innerHTML=
+        coins>=requirement
+        ?
+        "🎉 You can rebirth! Your Coins Per Click will DOUBLE!"
+        :
+        "Reach "+formatNumber(requirement)+" coins.";
+
+}
+
+/* =========================
+   INDEX
+========================= */
+
+function openIndex(){
+
+    document.getElementById("indexModal")
+        .classList.add("show");
+
+    renderIndex();
+}
+
+function closeIndex(){
+
+    document.getElementById("indexModal")
+        .classList.remove("show");
+}
+
+function renderIndex(){
+
+    const grid=document.getElementById("indexGrid");
+
+    grid.innerHTML="";
+
+    pets.forEach((p,i)=>{
+
+        const [emoji,name,cost,cps,rarity]=p;
+
+        const found=discovered[i];
+
+        const card=document.createElement("div");
+
+        card.className=
+            "index-card "+(found?"":"locked");
+
+        card.innerHTML=found
+        ?
+        `
+            <div class="duck-icon">${emoji}</div>
+            <div class="duck-name">${name}</div>
+            <small>${rarity}</small>
+            <small>🪙 ${formatNumber(cps)}/sec</small>
+        `
+        :
+        `
+            <div class="duck-icon">❓</div>
+            <div class="duck-name">???</div>
+            <small>Undiscovered</small>
+        `;
+
+        grid.appendChild(card);
+    });
+
+    const found=discovered.filter(Boolean).length;
+
+    document.getElementById("indexStatus").textContent=
+        found+" / "+pets.length+" FOUND";
+}
+
+/* =========================
+   CONFETTI
+========================= */
+
+function confettiBurst(){
+
+    for(let i=0;i<70;i++){
+
+        const c=document.createElement("div");
+
+        c.className="confetti";
+
+        c.style.left="50%";
+        c.style.top="45%";
+
+        c.style.setProperty(
+            "--x",
+            ((Math.random()-.5)*window.innerWidth*1.2)+"px"
+        );
+
+        c.style.setProperty(
+            "--y",
+            ((Math.random()-.5)*window.innerHeight*1.2)+"px"
+        );
+
+        c.style.background=
+            ["#ffcf42","#ff6b9e","#55c7ff","#72df7d","#b47cff"][
+                Math.floor(Math.random()*5)
+            ];
+
+        document.body.appendChild(c);
+
+        setTimeout(()=>c.remove(),1600);
+    }
+}
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+        toast.classList.remove("show");
+    },2600);
+}
+
+/* =========================
+   UI
+========================= */
+
+function updateUI(){
+
+    calculateCps();
+
+    document.getElementById("coins").textContent=
+        formatNumber(coins);
+
+    document.getElementById("clicks").textContent=
+        formatNumber(clicks);
+
+    document.getElementById("cpc").textContent=
+        formatNumber(getCpc());
+
+    document.getElementById("cps").textContent=
+        formatNumber(autoCps);
+
+    document.getElementById("rebirths").textContent=
+        rebirths;
+
+    updateRebirth();
+
+    renderUpgrades();
+    renderDuckShop();
+    renderPetShop();
+    renderAccessories();
+}
+
+/* =========================
+   AUTO COINS
+========================= */
+
+setInterval(()=>{
+
+    const cps=calculateCps();
+
+    if(cps>0){
+
+        coins += cps;
+
+        updateUI();
+        saveGame();
+    }
+
+},1000);
+
+/* =========================
+   RANDOM WATER RIPPLE
+========================= */
+
+setInterval(()=>{
+
+    const pond=document.getElementById("pond");
+
+    const rect=pond.getBoundingClientRect();
+
+    const ripple=document.createElement("div");
+
+    ripple.className="ripple";
+
+    ripple.style.left=
+        Math.random()*rect.width+"px";
+
+    ripple.style.top=
+        Math.random()*rect.height+"px";
+
+    pond.appendChild(ripple);
+
+    setTimeout(()=>ripple.remove(),800);
+
+},1800);
+
+/* =========================
+   CALM SOUND
+========================= */
+
+let audioCtx=null;
+
+function startAudio(){
+
+    if(audioCtx) return;
+
+    try{
+
+        audioCtx=
+            new (window.AudioContext ||
+            window.webkitAudioContext)();
+
+        const gain=
+            audioCtx.createGain();
+
+        gain.gain.value=.035;
+
+        gain.connect(audioCtx.destination);
+
+        const notes=[261.63,329.63,392,329.63];
+
+        let i=0;
+
+        setInterval(()=>{
+
+            if(!audioCtx) return;
+
+            const osc=
+                audioCtx.createOscillator();
+
+            osc.frequency.value=notes[i%notes.length];
+            osc.type="sine";
+
+            osc.connect(gain);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime+.6);
+
+            i++;
+
+        },1500);
+
+    }catch(e){}
+
+}
+
+document.addEventListener("click",startAudio,{once:true});
+
+/* =========================
+   INITIALIZE
+========================= */
+
+updateDuck();
+renderIndex();
+updateUI();
+
+</script>
+
+</body>
+</html>
