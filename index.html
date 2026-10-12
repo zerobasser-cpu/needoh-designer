@@ -3,520 +3,1152 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Teddy's Game Hub</title>
-<meta name="description" content="Teddy's Game Hub - fun creative games for kids 7+.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teddy's Game Hub | Play Something Awesome</title>
+<meta name="description" content="Welcome to Teddy's Game Hub! Explore creative games, arcade challenges, fun experiments and more.">
+<meta name="theme-color" content="#0b1020">
 
 <style>
-:root{
---ink:#25304a;
---muted:#68738d;
---white:#fff;
---pink:#ff67aa;
---purple:#7665ee;
---blue:#42b7f5;
---green:#4dcc8b;
---yellow:#ffd65a;
---orange:#ff9254;
---shadow:0 12px 30px rgba(47,57,92,.14)
+:root {
+  --bg:#0b1020;
+  --panel:#171e34;
+  --panel2:#202944;
+  --text:#f1f4ff;
+  --muted:#a2acc9;
+  --cyan:#38d9ff;
+  --purple:#a58bff;
+  --pink:#ff5fbd;
+  --green:#50edb0;
+  --yellow:#ffe16a;
+  --border:#303956;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-margin:0;color:var(--ink);
-font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-background:
-radial-gradient(circle at 8% 5%,rgba(255,255,255,.9) 0 70px,transparent 71px),
-radial-gradient(circle at 92% 12%,rgba(255,255,255,.8) 0 55px,transparent 56px),
-linear-gradient(180deg,#dff7ff 0%,#f5edff 47%,#fff8d9 100%);
-min-height:100vh;overflow-x:hidden
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(ellipse at 15% 0%,rgba(111,73,220,.22),transparent 40%),
+    radial-gradient(ellipse at 90% 25%,rgba(0,190,255,.13),transparent 35%),
+    var(--bg);
 }
-body:before,body:after{
-content:"";position:fixed;z-index:-1;border-radius:50%;
-filter:blur(2px);opacity:.5
+
+body:before,body:after {
+  content:"";
+  position:fixed;
+  z-index:-1;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.3;
 }
-body:before{width:360px;height:360px;background:#ffd7e9;left:-180px;top:40%}
-body:after{width:400px;height:400px;background:#ccecff;right:-200px;bottom:3%}
-header{text-align:center;padding:30px 16px 20px;position:relative}
-.sparkles span{position:absolute;font-size:25px;animation:float 3s ease-in-out infinite}
+
+body:before {
+  width:350px;height:350px;
+  background:#7539ff;
+  left:-200px;top:35%;
+}
+
+body:after {
+  width:400px;height:400px;
+  background:#00bfff;
+  right:-230px;bottom:5%;
+}
+
+button,input { font:inherit; }
+button { -webkit-tap-highlight-color:transparent; }
+
+header {
+  text-align:center;
+  padding:35px 16px 22px;
+  position:relative;
+}
+
+.sparkles span {
+  position:absolute;
+  font-size:23px;
+  animation:float 3s ease-in-out infinite;
+  pointer-events:none;
+}
+
 .sparkles span:nth-child(1){left:8%;top:25px}
 .sparkles span:nth-child(2){right:10%;top:40px;animation-delay:.5s}
 .sparkles span:nth-child(3){left:18%;bottom:0;animation-delay:1s}
 .sparkles span:nth-child(4){right:20%;bottom:4px;animation-delay:1.5s}
-@keyframes float{50%{transform:translateY(-8px) rotate(8deg)}}
-.brand{
-display:inline-flex;align-items:center;gap:14px;background:#fff;
-border-radius:999px;padding:10px 20px 10px 11px;box-shadow:var(--shadow)
+
+@keyframes float {
+  50%{transform:translateY(-8px) rotate(8deg)}
 }
-h1{
-margin:0;font-size:clamp(2.2rem,6vw,4.4rem);line-height:.95;
-letter-spacing:-3px;background:linear-gradient(90deg,#ff559d,#7760ee,#27a9ee);
--webkit-background-clip:text;background-clip:text;color:transparent
+
+.brand {
+  display:inline-flex;
+  align-items:center;
+  gap:17px;
+  padding:15px 24px 15px 15px;
+  background:linear-gradient(145deg,#1c2542,#12182b);
+  border:1px solid rgba(137,154,255,.25);
+  border-radius:25px;
+  box-shadow:0 10px 35px rgba(0,0,0,.3),0 0 30px rgba(121,90,255,.1);
 }
-.tagline{margin-top:9px;color:var(--muted);font-weight:800}
-.teddy{
-width:65px;height:65px;border-radius:50%;background:#b97845;
-position:relative;box-shadow:inset -6px -8px 0 rgba(80,40,20,.12),0 6px 0 #8e5a36
+
+.logo-bear {
+  position:relative;
+  flex-shrink:0;
+  width:68px;
+  height:68px;
+  border:3px solid #b6a7ff;
+  border-radius:23px;
+  background:linear-gradient(145deg,#a18aff,#6250dc);
+  box-shadow:inset -5px -6px 0 rgba(20,10,70,.18),0 5px 0 #4433a5;
 }
-.teddy:before,.teddy:after{
-content:"";position:absolute;width:26px;height:26px;border-radius:50%;
-background:#a7663c;top:-4px;z-index:-1
+
+.logo-bear:before,.logo-bear:after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:-7px;
+  width:25px;height:25px;
+  border-radius:50%;
+  background:#8570f4;
+  border:3px solid #b6a7ff;
 }
-.teddy:before{left:1px}.teddy:after{right:1px}
-.ear{position:absolute;width:22px;height:22px;border-radius:50%;background:#d69660;top:7px}
-.ear.l{left:6px}.ear.r{right:6px}
-.eye{position:absolute;width:7px;height:9px;border-radius:50%;background:#35251e;top:29px}
-.eye.l{left:21px}.eye.r{right:21px}
-.nose{position:absolute;width:12px;height:9px;border-radius:50%;background:#3c2921;left:27px;top:39px}
-.mouth{position:absolute;width:13px;height:7px;border-bottom:3px solid #3c2921;border-radius:50%;left:26px;top:45px}
-.toolbar{
-width:min(1100px,calc(100% - 10px));margin:17px auto 0;
-display:flex;gap:9px;flex-wrap:wrap;justify-content:center
+
+.logo-bear:before{left:0}
+.logo-bear:after{right:0}
+
+.logo-ear {
+  position:absolute;
+  top:20px;
+  width:11px;height:22px;
+  border:2px solid #d4f7ff;
+  border-radius:7px;
+  background:var(--cyan);
+  z-index:3;
 }
-.search{
-flex:1 1 310px;max-width:510px;display:flex;align-items:center;background:#fff;
-border:3px solid rgba(118,101,238,.12);border-radius:18px;padding:0 14px;box-shadow:var(--shadow)
+
+.logo-ear.left{left:-9px}
+.logo-ear.right{right:-9px}
+
+.logo-eye {
+  position:absolute;
+  top:25px;
+  width:6px;height:7px;
+  border-radius:50%;
+  background:#11162b;
 }
+
+.logo-eye.left{left:19px}
+.logo-eye.right{right:19px}
+
+.logo-nose {
+  position:absolute;
+  top:35px;left:25px;
+  width:11px;height:8px;
+  border-radius:50%;
+  background:#202541;
+}
+
+.logo-mouth {
+  position:absolute;
+  top:40px;left:24px;
+  width:12px;height:6px;
+  border-bottom:2px solid #202541;
+  border-radius:50%;
+}
+
+.brand-copy{text-align:left}
+
+h1 {
+  margin:0;
+  font-size:clamp(2rem,5.5vw,4rem);
+  line-height:.98;
+  letter-spacing:-2px;
+  font-weight:950;
+  background:linear-gradient(100deg,#fff,#8cdbff 48%,#c2a4ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.tagline {
+  margin-top:9px;
+  color:#aab8db;
+  font-weight:750;
+  letter-spacing:.3px;
+}
+
+.toolbar {
+  width:min(1100px,calc(100% - 20px));
+  margin:22px auto 0;
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.search {
+  flex:1 1 300px;
+  max-width:510px;
+  display:flex;
+  align-items:center;
+  background:var(--panel);
+  border:1px solid #343d61;
+  border-radius:15px;
+  padding:0 14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+
+.search:focus-within {
+  border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(56,217,255,.1);
+}
+
 .search span{font-size:21px}
-.search input{
-width:100%;border:0;outline:0;padding:14px 9px;font-size:16px;
-font-weight:750;color:var(--ink);background:transparent
-}
-.filter{border:0;border-radius:15px;padding:0 16px;background:#fff;color:var(--ink);font-weight:900;box-shadow:var(--shadow);cursor:pointer}
-.filter.active{background:var(--ink);color:#fff}
-main{width:min(1150px,calc(100% - 26px));margin:20px auto 55px}
-.hero{
-position:relative;overflow:hidden;border-radius:30px;padding:30px;
-background:linear-gradient(135deg,#7865ee,#42b7f5);color:#fff;
-box-shadow:0 18px 45px rgba(75,85,190,.24);
-display:flex;justify-content:space-between;align-items:center;gap:25px
-}
-.hero:after{
-content:"";position:absolute;width:260px;height:260px;border-radius:50%;
-background:rgba(255,255,255,.12);right:-70px;top:-90px
-}
-.hero h2{font-size:clamp(1.8rem,4vw,2.8rem);margin:0 0 8px}
-.hero p{margin:0;max-width:680px;font-weight:650}
-.hero-buttons{display:flex;gap:10px;z-index:1;flex-wrap:wrap}
-.hero button{border:0;border-radius:16px;padding:14px 18px;font-weight:950;cursor:pointer}
-.surprise{background:var(--yellow);color:#493d18;box-shadow:0 5px 0 #d4ac35}
-.featured-link{background:#fff;color:#4e42c5}
-.section-title{display:flex;justify-content:space-between;align-items:end;margin:30px 3px 14px}
-.section-title h2{margin:0;font-size:1.7rem}
-.section-title small{color:var(--muted);font-weight:800}
-.featured{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
-.feature-card{
-min-height:180px;border-radius:25px;padding:22px;color:#fff;position:relative;
-overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:.2s transform
-}
-.feature-card:hover{transform:translateY(-5px)}
-.feature-card:after{
-content:"";position:absolute;width:150px;height:150px;border-radius:50%;
-right:-45px;bottom:-55px;background:rgba(255,255,255,.16)
-}
-.feature-card h3{font-size:1.5rem;margin:0 0 7px}
-.feature-card p{max-width:430px;font-weight:650;margin:0 0 17px}
-.feature-card .mini{display:inline-block;background:#fff;color:var(--ink);border-radius:12px;padding:9px 13px;font-weight:950}
-.feature-icon{position:absolute;right:18px;top:18px;font-size:62px;filter:drop-shadow(0 8px 4px rgba(0,0,0,.13))}
-.f1{background:linear-gradient(135deg,#ff6cae,#ff9b63)}
-.f2{background:linear-gradient(135deg,#8067ef,#48b9f6)}
-.f3{background:linear-gradient(135deg,#45c98b,#9bdf77)}
-.games{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.game{background:#fff;border-radius:25px;overflow:hidden;box-shadow:var(--shadow);transition:.2s transform,.2s box-shadow}
-.game:hover{transform:translateY(-6px);box-shadow:0 18px 35px rgba(48,55,91,.2)}
-.thumb{height:145px;display:grid;place-items:center;position:relative;overflow:hidden}
-.thumb:before{
-content:"";position:absolute;width:180px;height:180px;border-radius:50%;
-right:-40px;top:-65px;background:rgba(255,255,255,.17)
-}
-.thumb .emoji{font-size:73px;z-index:1;filter:drop-shadow(0 8px 5px rgba(0,0,0,.13))}
-.pink{background:linear-gradient(135deg,#ff91c1,#ff5e9f)}
-.blue{background:linear-gradient(135deg,#72d8ff,#48a9ff)}
-.green{background:linear-gradient(135deg,#91e9b3,#43c987)}
-.orange{background:linear-gradient(135deg,#ffc66e,#ff8751)}
-.purple{background:linear-gradient(135deg,#b79fff,#7965ed)}
-.yellow{background:linear-gradient(135deg,#ffea7b,#ffc84b)}
-.cyan{background:linear-gradient(135deg,#69e5e4,#39b8cf)}
-.football{
-background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.22) 0 35px,transparent 36px),linear-gradient(135deg,#35c979,#159447)
-}
-.halloween{
-background:radial-gradient(circle at 20% 25%,rgba(255,190,70,.35) 0 35px,transparent 36px),linear-gradient(135deg,#241044,#6925a5 55%,#ff792e)
-}
-.halloween .emoji{font-size:clamp(42px,5vw,65px);letter-spacing:3px}
 
-/* NEW WORLD MAP CHALLENGE THUMBNAIL */
-.world-map{
-background:
-radial-gradient(circle at 18% 18%,rgba(255,255,255,.45) 0 3px,transparent 4px),
-radial-gradient(circle at 80% 70%,rgba(255,255,255,.35) 0 4px,transparent 5px),
-linear-gradient(140deg,#00b9d9,#2875e8 55%,#6552dc)
+.search input {
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  padding:14px 9px;
+  color:white;
+  background:transparent;
+  font-size:16px;
+  font-weight:700;
 }
-.world-map .emoji{font-size:75px;z-index:3}
-.map-art{
-position:absolute;width:118px;height:118px;border-radius:50%;
-left:50%;top:50%;transform:translate(-50%,-50%);
-background:linear-gradient(130deg,#82e6a0,#28bd82);
-border:5px solid rgba(255,255,255,.9);
-box-shadow:0 9px 0 rgba(20,55,125,.2),inset -12px -9px 0 rgba(0,80,100,.12);
-overflow:hidden;z-index:1
-}
-.map-art:before{
-content:"";position:absolute;width:47px;height:35px;left:13px;top:17px;
-background:#f6d36a;border-radius:55% 35% 60% 40%;transform:rotate(-25deg);
-box-shadow:45px 28px 0 -3px #f6d36a,17px 62px 0 -8px #f6d36a
-}
-.map-art:after{
-content:"";position:absolute;width:28px;height:48px;left:66px;top:5px;
-background:#f6d36a;border-radius:45% 55% 40% 60%;transform:rotate(30deg);
-box-shadow:-42px 53px 0 -7px #f6d36a
-}
-.map-pin{
-position:absolute;z-index:4;font-size:26px;
-filter:drop-shadow(0 3px 2px rgba(0,0,0,.2));
-animation:pinBounce 2s ease-in-out infinite
-}
-.map-pin.one{left:20%;top:18%}
-.map-pin.two{right:19%;top:20%;animation-delay:.5s}
-.map-pin.three{right:20%;bottom:12%;animation-delay:1s}
-@keyframes pinBounce{50%{transform:translateY(-5px)}}
 
-.game-body{padding:16px 17px 18px}
-.game h3{margin:0;font-size:1.27rem}
-.game p{margin:6px 0 14px;color:var(--muted);font-weight:650;line-height:1.4;font-size:.93rem}
-.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.badge{position:absolute;top:11px;left:11px;z-index:5;background:#fff;border-radius:999px;padding:6px 9px;font-size:.7rem;font-weight:950}
-.play{border:0;border-radius:13px;padding:10px 15px;background:#efeeff;color:#5649c9;font-weight:950;cursor:pointer}
-.play:hover{background:#dedbff;transform:translateY(-1px)}
-.age{font-size:.78rem;color:var(--muted);font-weight:850}
-.no-results{display:none;background:#fff;border-radius:22px;padding:35px;text-align:center;box-shadow:var(--shadow);font-weight:800;color:var(--muted)}
-.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
-.quick button{border:0;background:#fff;border-radius:18px;padding:15px 10px;box-shadow:var(--shadow);font-weight:900;color:var(--ink);cursor:pointer}
-.quick button span{display:block;font-size:28px;margin-bottom:4px}
-footer{text-align:center;padding:0 20px 35px;color:#68728b;font-weight:700}
-.toast{
-position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);
-background:#26304a;color:#fff;padding:14px 20px;border-radius:16px;font-weight:850;
-box-shadow:0 12px 35px rgba(0,0,0,.25);transition:.3s;z-index:20;
-white-space:nowrap;max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis
+.search input::placeholder{color:#7f8bad}
+
+.filter {
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:12px 16px;
+  background:var(--panel);
+  color:#dce4ff;
+  font-weight:850;
+  cursor:pointer;
+  transition:.2s;
 }
+
+.filter:hover{border-color:var(--purple);transform:translateY(-2px)}
+
+.filter.active {
+  background:linear-gradient(110deg,#7259ed,#4e85ff);
+  border-color:transparent;
+  color:white;
+  box-shadow:0 5px 18px rgba(110,90,255,.25);
+}
+
+main {
+  width:min(1150px,calc(100% - 26px));
+  margin:20px auto 55px;
+}
+
+.hero {
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(180,173,255,.3);
+  border-radius:26px;
+  padding:35px;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(65,217,255,.19),transparent 35%),
+    linear-gradient(125deg,#28234d,#172849 65%,#172b40);
+  box-shadow:0 20px 55px rgba(0,0,0,.22);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
+
+.hero:after {
+  content:"✦";
+  position:absolute;
+  font-size:170px;
+  color:rgba(163,147,255,.08);
+  right:30%;
+  top:-55px;
+  pointer-events:none;
+}
+
+.hero-copy{position:relative;z-index:1}
+
+.hero h2 {
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin:0 0 10px;
+  letter-spacing:-1px;
+}
+
+.hero p {
+  margin:0;
+  max-width:680px;
+  color:#c5d0f0;
+  font-weight:650;
+  line-height:1.6;
+}
+
+.hero-buttons {
+  display:flex;
+  gap:10px;
+  z-index:1;
+  flex-wrap:wrap;
+  flex-shrink:0;
+}
+
+.hero button {
+  border:0;
+  border-radius:13px;
+  padding:14px 18px;
+  font-weight:950;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.hero button:hover{transform:translateY(-3px)}
+
+.surprise {
+  background:linear-gradient(110deg,#ffe47c,#ffad65);
+  color:#33263a;
+  box-shadow:0 5px 0 #bd7849;
+}
+
+.featured-link {
+  background:#e9e5ff;
+  color:#4533a7;
+}
+
+.section-title {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin:32px 3px 15px;
+  gap:12px;
+}
+
+.section-title h2 {
+  margin:0;
+  font-size:1.65rem;
+  letter-spacing:-.5px;
+}
+
+.section-title small {
+  color:var(--muted);
+  font-weight:800;
+}
+
+.featured {
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:16px;
+}
+
+.feature-card {
+  min-height:185px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:22px;
+  padding:23px;
+  color:white;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:.22s transform,.22s box-shadow;
+  text-decoration:none;
+  display:block;
+}
+
+.feature-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 15px 38px rgba(0,0,0,.32);
+}
+
+.feature-card:after {
+  content:"";
+  position:absolute;
+  width:160px;height:160px;
+  border-radius:50%;
+  right:-45px;bottom:-65px;
+  background:rgba(255,255,255,.12);
+}
+
+.feature-card h3 {
+  font-size:1.4rem;
+  margin:0 0 7px;
+  position:relative;
+  z-index:1;
+}
+
+.feature-card p {
+  max-width:430px;
+  font-weight:650;
+  margin:0 0 17px;
+  color:rgba(255,255,255,.88);
+  position:relative;
+  z-index:1;
+}
+
+.feature-card .mini {
+  display:inline-block;
+  background:rgba(255,255,255,.95);
+  color:#20243c;
+  border-radius:10px;
+  padding:9px 13px;
+  font-weight:950;
+  position:relative;
+  z-index:1;
+}
+
+.feature-icon {
+  position:absolute;
+  right:16px;top:15px;
+  font-size:52px;
+  filter:drop-shadow(0 8px 4px rgba(0,0,0,.18));
+}
+
+.f1{background:linear-gradient(135deg,#c23f91,#713bcb)}
+.f2{background:linear-gradient(135deg,#365ce8,#159ac8)}
+.f3{background:linear-gradient(135deg,#159e85,#537e44)}
+
+.games {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.game {
+  min-width:0;
+  background:#151c30;
+  border:1px solid #29334f;
+  border-radius:21px;
+  overflow:hidden;
+  box-shadow:0 9px 25px rgba(0,0,0,.2);
+  transition:.22s transform,.22s box-shadow,.22s border-color;
+}
+
+.game:hover {
+  transform:translateY(-6px);
+  border-color:#7770e9;
+  box-shadow:0 18px 40px rgba(0,0,0,.32),0 0 22px rgba(118,101,238,.09);
+}
+
+.thumb {
+  height:155px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.thumb:before {
+  content:"";
+  position:absolute;
+  width:180px;height:180px;
+  border-radius:50%;
+  right:-40px;top:-65px;
+  background:rgba(255,255,255,.13);
+}
+
+.thumb .emoji {
+  font-size:73px;
+  z-index:1;
+  filter:drop-shadow(0 8px 5px rgba(0,0,0,.18));
+  transition:.25s transform;
+}
+
+.game:hover .thumb .emoji{transform:scale(1.1) rotate(-3deg)}
+
+.pink{background:linear-gradient(135deg,#cf5595,#8135a9)}
+.blue{background:linear-gradient(135deg,#278cce,#3d50bd)}
+.green{background:linear-gradient(135deg,#279d83,#247d58)}
+.orange{background:linear-gradient(135deg,#df9850,#bd593b)}
+.purple{background:linear-gradient(135deg,#8e68dc,#5341a9)}
+.yellow{background:linear-gradient(135deg,#d7ae47,#b97a35)}
+.cyan{background:linear-gradient(135deg,#279cae,#3569c0)}
+.football{background:linear-gradient(135deg,#147e57,#176b46)}
+.halloween{background:linear-gradient(135deg,#21112e,#652a8c 55%,#bc592e)}
+.snow{background:linear-gradient(135deg,#73c8ed,#596bd4)}
+.duck{background:linear-gradient(135deg,#d6aa39,#e97842)}
+.jar{background:linear-gradient(135deg,#537ac6,#7555ba)}
+.world-map{background:linear-gradient(140deg,#087eaa,#2852c7 55%,#5138a6)}
+
+.badge {
+  position:absolute;
+  top:11px;left:11px;
+  z-index:5;
+  background:rgba(11,16,32,.85);
+  border:1px solid rgba(255,255,255,.2);
+  color:white;
+  border-radius:8px;
+  padding:6px 9px;
+  font-size:.68rem;
+  letter-spacing:.7px;
+  font-weight:950;
+}
+
+.game-body{padding:17px 18px 19px}
+
+.game h3{margin:0;font-size:1.22rem}
+
+.game p {
+  margin:7px 0 16px;
+  color:#aab5d0;
+  font-weight:600;
+  line-height:1.5;
+  font-size:.93rem;
+  min-height:42px;
+}
+
+.meta {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.play {
+  display:inline-block;
+  text-decoration:none;
+  border:1px solid rgba(153,137,255,.28);
+  border-radius:11px;
+  padding:10px 15px;
+  background:#272746;
+  color:#c5b9ff;
+  font-weight:950;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.play:hover {
+  background:linear-gradient(110deg,#7658ec,#397fe8);
+  color:white;
+  border-color:transparent;
+  transform:translateY(-2px);
+}
+
+.age {
+  font-size:.78rem;
+  color:#9ca8c6;
+  font-weight:850;
+}
+
+.no-results {
+  display:none;
+  background:var(--panel);
+  border:1px solid rgba(163,176,255,.15);
+  border-radius:20px;
+  padding:35px;
+  text-align:center;
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+  font-weight:800;
+  color:var(--muted);
+}
+
+.quick {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+.quick button {
+  border:1px solid #29334f;
+  background:#171e34;
+  border-radius:16px;
+  padding:16px 10px;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  font-weight:850;
+  color:#e5eaff;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.quick button:hover {
+  transform:translateY(-4px);
+  border-color:var(--cyan);
+  background:#202b48;
+}
+
+.quick button span {
+  display:block;
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+footer {
+  text-align:center;
+  padding:0 20px 35px;
+  color:#8e9ab9;
+  font-weight:700;
+}
+
+footer a{color:#b9aaff}
+
+.toast {
+  position:fixed;
+  left:50%;bottom:25px;
+  transform:translate(-50%,120px);
+  background:#252b49;
+  border:1px solid #454b79;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:14px;
+  font-weight:850;
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
+  transition:.3s;
+  z-index:20;
+  max-width:calc(100% - 24px);
+  text-align:center;
+}
+
 .toast.show{transform:translate(-50%,0)}
-@media(max-width:900px){
-.featured{grid-template-columns:1fr 1fr}
-.feature-card:first-child{grid-column:1/-1}
-.games{grid-template-columns:repeat(2,1fr)}
+
+button:focus-visible,a:focus-visible,input:focus-visible {
+  outline:3px solid var(--cyan);
+  outline-offset:3px;
 }
-@media(max-width:650px){
-.hero{flex-direction:column;align-items:flex-start}
-.featured{grid-template-columns:1fr}
-.feature-card:first-child{grid-column:auto}
-.games{grid-template-columns:1fr}
-.quick{grid-template-columns:repeat(2,1fr)}
+
+@media(max-width:900px) {
+  .featured{grid-template-columns:1fr 1fr}
+  .feature-card:first-child{grid-column:1/-1}
+  .games{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:500px){
-.brand{gap:9px}
-.teddy{width:55px;height:55px}
-.teddy .eye{top:25px}
-.teddy .nose{top:34px}
-.teddy .mouth{top:40px}
-h1{letter-spacing:-2px}
-.sparkles{display:none}
+
+@media(max-width:650px) {
+  header{padding-top:25px}
+  .brand{border-radius:20px;gap:12px;padding:13px}
+  .hero{flex-direction:column;align-items:flex-start;padding:25px}
+  .featured{grid-template-columns:1fr}
+  .feature-card:first-child{grid-column:auto}
+  .games{grid-template-columns:1fr}
+  .quick{grid-template-columns:repeat(2,1fr)}
+  .hero-buttons{width:100%}
+  .hero-buttons button{flex:1}
+  .hero:after{right:5%}
 }
-@media(prefers-reduced-motion:reduce){
-*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+
+@media(max-width:500px) {
+  .logo-bear{width:53px;height:53px;border-radius:17px}
+  .logo-eye{top:19px}
+  .logo-eye.left{left:13px}
+  .logo-eye.right{right:13px}
+  .logo-nose{top:28px;left:19px}
+  .logo-mouth{top:33px;left:18px}
+  h1{font-size:clamp(1.45rem,7vw,2.3rem);letter-spacing:-1.5px}
+  .tagline{font-size:.7rem}
+  .sparkles{display:none}
+  .section-title h2{font-size:1.35rem}
+  .filter{padding:10px 12px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {
+    animation:none!important;
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
 
 <body>
-<header>
-<div class="sparkles"><span>✨</span><span>⭐</span><span>💫</span><span>🌟</span></div>
-<div class="brand">
-<div class="teddy">
-<div class="ear l"></div><div class="ear r"></div>
-<div class="eye l"></div><div class="eye r"></div>
-<div class="nose"></div><div class="mouth"></div>
-</div>
-<div>
-<h1>Teddy's Game Hub</h1>
-<div class="tagline">Play • Create • Experiment • Have Fun! 🧸🎮</div>
-</div>
-</div>
 
-<div class="toolbar">
-<label class="search">
-<span>🔎</span>
-<input id="search" type="search" placeholder="Search Teddy's games...">
-</label>
-<button class="filter active" data-filter="all">All Games</button>
-<button class="filter" data-filter="creative">Creative</button>
-<button class="filter" data-filter="arcade">Arcade</button>
-<button class="filter" data-filter="chill">Chill</button>
-<button class="filter" data-filter="action">Action</button>
-</div>
+<header>
+  <div class="sparkles" aria-hidden="true">
+    <span>✦</span><span>✧</span><span>✦</span><span>✧</span>
+  </div>
+
+  <div class="brand">
+    <div class="logo-bear" aria-hidden="true">
+      <span class="logo-ear left"></span>
+      <span class="logo-ear right"></span>
+      <span class="logo-eye left"></span>
+      <span class="logo-eye right"></span>
+      <span class="logo-nose"></span>
+      <span class="logo-mouth"></span>
+    </div>
+    <div class="brand-copy">
+      <h1>Teddy's Game Hub</h1>
+      <div class="tagline">PLAY • CREATE • EXPERIMENT • HAVE FUN!</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <label class="search">
+      <span aria-hidden="true">🔎</span>
+      <input id="searchInput" type="search" placeholder="Find your next favourite game..." aria-label="Search games">
+    </label>
+
+    <button class="filter active" data-filter="all">🎮 All Games</button>
+    <button class="filter" data-filter="creative">🎨 Creative</button>
+    <button class="filter" data-filter="arcade">🕹️ Arcade</button>
+    <button class="filter" data-filter="chill">🌈 Chill</button>
+    <button class="filter" data-filter="action">⚡ Action</button>
+  </div>
 </header>
 
 <main>
-<section class="hero">
-<div>
-<h2>Welcome to Teddy's fun zone! 🎉</h2>
-<p>Sixteen awesome games to build, create, smash, pop, experiment, explore and play. What will you play first?</p>
-</div>
-<div class="hero-buttons">
-<button class="featured-link" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">⭐ Featured</button>
-<button class="surprise" onclick="randomGame()">🎲 Surprise Me!</button>
-</div>
-</section>
+  <section class="hero">
+    <div class="hero-copy">
+      <h2>Your next adventure starts here! 🚀</h2>
+      <p>Build amazing things, try crazy experiments, take on challenges and discover your next favourite game. Pick a game and jump straight in!</p>
+    </div>
+    <div class="hero-buttons">
+      <button class="surprise" id="surpriseBtn">🎲 Surprise Me!</button>
+      <button class="featured-link" id="browseBtn">Explore Games ↓</button>
+    </div>
+  </section>
 
-<section id="featured">
-<div class="section-title"><h2>🌟 Featured Games</h2><small>Pick a favourite</small></div>
-<div class="featured">
-<div class="feature-card f1" onclick="go('monster-maker-deluxe-v4.html')">
-<div class="feature-icon">👾</div>
-<h3>Monster Maker Deluxe</h3>
-<p>Create a totally crazy monster with loads of fun combinations.</p>
-<span class="mini">Play Monster Maker →</span>
-</div>
-<div class="feature-card f2" onclick="go('volcano-builder-deluxe.html')">
-<div class="feature-icon">🌋</div>
-<h3>Volcano Builder</h3>
-<p>Build it, customise it and make the lava flow!</p>
-<span class="mini">Erupt! →</span>
-</div>
-<div class="feature-card f3" onclick="go('crazy-potion-lab-deluxe.html')">
-<div class="feature-icon">🧪</div>
-<h3>Crazy Potion Lab</h3>
-<p>Mix up mysterious magical experiments.</p>
-<span class="mini">Start Lab →</span>
-</div>
-</div>
-</section>
+  <section aria-labelledby="featuredTitle">
+    <div class="section-title">
+      <h2 id="featuredTitle">⭐ Featured Games</h2>
+      <small>Hand-picked adventures</small>
+    </div>
 
-<div class="section-title">
-<h2>🎮 All Games</h2>
-<small id="count">16 games</small>
-</div>
+    <div class="featured">
+      <a class="feature-card f1" href="monster-maker-deluxe-v4.html">
+        <span class="feature-icon" aria-hidden="true">👾</span>
+        <h3>Monster Maker Deluxe</h3>
+        <p>Create your own crazy monsters. Mix and match parts to invent something completely unique!</p>
+        <span class="mini">MAKE A MONSTER →</span>
+      </a>
 
-<section class="games" id="games">
+      <a class="feature-card f2" href="volcano-builder-deluxe.html">
+        <span class="feature-icon" aria-hidden="true">🌋</span>
+        <h3>Volcano Builder</h3>
+        <p>Build a volcano and watch your creation erupt!</p>
+        <span class="mini">START BUILDING →</span>
+      </a>
 
-<!-- 1 -->
-<article class="game" data-category="arcade" data-name="Volcano Builder Deluxe">
-<div class="thumb orange"><span class="badge">ARCADE</span><span class="emoji">🌋</span></div>
-<div class="game-body"><h3>Volcano Builder Deluxe</h3>
-<p>Build your volcano, customise the eruption and watch lava flow down the mountain.</p>
-<div class="meta"><button class="play" onclick="go('volcano-builder-deluxe.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <a class="feature-card f3" href="crazy-potion-lab-deluxe.html">
+        <span class="feature-icon" aria-hidden="true">🧪</span>
+        <h3>Crazy Potion Lab</h3>
+        <p>Mix ingredients, experiment and discover surprises.</p>
+        <span class="mini">START MIXING →</span>
+      </a>
+    </div>
+  </section>
 
-<!-- 2 -->
-<article class="game" data-category="creative" data-name="Crazy Potion Lab Deluxe">
-<div class="thumb purple"><span class="badge">CREATIVE</span><span class="emoji">🧪</span></div>
-<div class="game-body"><h3>Crazy Potion Lab Deluxe</h3>
-<p>Mix strange ingredients, discover wild reactions and create magical potions.</p>
-<div class="meta"><button class="play" onclick="go('crazy-potion-lab-deluxe.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+  <section id="allGames" aria-labelledby="gamesTitle">
+    <div class="section-title">
+      <h2 id="gamesTitle">🎮 All Games</h2>
+      <small id="gameCount">16 awesome games</small>
+    </div>
 
-<!-- 3 -->
-<article class="game" data-category="action" data-name="Paintball Target Blast">
-<div class="thumb blue"><span class="badge">ACTION</span><span class="emoji">🎯</span></div>
-<div class="game-body"><h3>Paintball Target Blast</h3>
-<p>Aim carefully and blast colourful targets. How high can you score?</p>
-<div class="meta"><button class="play" onclick="go('paintball-target-blast.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+    <div class="games" id="gamesGrid">
 
-<!-- 4 -->
-<article class="game" data-category="arcade" data-name="Whack-a-Mole">
-<div class="thumb yellow"><span class="badge">ARCADE</span><span class="emoji">🔨</span></div>
-<div class="game-body"><h3>Whack-a-Mole</h3>
-<p>Keep your eyes peeled and bonk those speedy moles before they disappear!</p>
-<div class="meta"><button class="play" onclick="go('whack-a-mole.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="creative" data-name="Volcano Builder Deluxe">
+        <div class="thumb orange">
+          <span class="badge">CREATIVE</span>
+          <span class="emoji" aria-hidden="true">🌋</span>
+        </div>
+        <div class="game-body">
+          <h3>Volcano Builder Deluxe</h3>
+          <p>Build your own volcano and create an awesome eruption.</p>
+          <div class="meta">
+            <span class="age">🧱 Build & explore</span>
+            <a class="play" href="volcano-builder-deluxe.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 5 -->
-<article class="game" data-category="creative" data-name="Monster Maker Deluxe">
-<div class="thumb purple"><span class="badge">CREATIVE</span><span class="emoji">👾</span></div>
-<div class="game-body"><h3>Monster Maker Deluxe</h3>
-<p>Mix bodies, eyes, colours, horns and silly accessories to invent your monster.</p>
-<div class="meta"><button class="play" onclick="go('monster-maker-deluxe-v4.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="creative" data-name="Crazy Potion Lab Deluxe">
+        <div class="thumb purple">
+          <span class="badge">EXPERIMENT</span>
+          <span class="emoji" aria-hidden="true">🧪</span>
+        </div>
+        <div class="game-body">
+          <h3>Crazy Potion Lab</h3>
+          <p>Mix mysterious ingredients and see what happens.</p>
+          <div class="meta">
+            <span class="age">🔬 Experiment</span>
+            <a class="play" href="crazy-potion-lab-deluxe.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 6 -->
-<article class="game" data-category="arcade" data-name="Bubble Pop Factory">
-<div class="thumb pink"><span class="badge">ARCADE</span><span class="emoji">🫧</span></div>
-<div class="game-body"><h3>Bubble Pop Factory</h3>
-<p>Make bubbles, pop them and keep the colourful factory running!</p>
-<div class="meta"><button class="play" onclick="go('bubble-pop-factory.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="action" data-name="Paintball Target Blast">
+        <div class="thumb pink">
+          <span class="badge">ACTION</span>
+          <span class="emoji" aria-hidden="true">🎯</span>
+        </div>
+        <div class="game-body">
+          <h3>Paintball Target Blast</h3>
+          <p>Test your aim and blast your way through targets.</p>
+          <div class="meta">
+            <span class="age">🎯 Target challenge</span>
+            <a class="play" href="paintball-target-blast.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 7 -->
-<article class="game" data-category="creative" data-name="Needoh Designer">
-<div class="thumb pink"><span class="badge">CREATIVE</span><span class="emoji">🟪</span></div>
-<div class="game-body"><h3>Needoh Designer</h3>
-<p>Design your own squishy toy with fun colours, patterns and textures.</p>
-<div class="meta"><button class="play" onclick="go('needoh-designer.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="arcade" data-name="Whack a Mole">
+        <div class="thumb green">
+          <span class="badge">ARCADE</span>
+          <span class="emoji" aria-hidden="true">🐹</span>
+        </div>
+        <div class="game-body">
+          <h3>Whack-a-Mole</h3>
+          <p>React quickly, hit the moles and chase a high score.</p>
+          <div class="meta">
+            <span class="age">⚡ Quick reactions</span>
+            <a class="play" href="whack-a-mole.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 8 -->
-<article class="game" data-category="chill" data-name="Kinetic Sand Rake">
-<div class="thumb green"><span class="badge">CHILL</span><span class="emoji">🏖️</span></div>
-<div class="game-body"><h3>Kinetic Sand Rake</h3>
-<p>Relax, rake patterns through the sand and create satisfying designs.</p>
-<div class="meta"><button class="play" onclick="go('kinetic-sand-rake.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="creative" data-name="Monster Maker Deluxe">
+        <div class="thumb purple">
+          <span class="badge">CREATE</span>
+          <span class="emoji" aria-hidden="true">👾</span>
+        </div>
+        <div class="game-body">
+          <h3>Monster Maker Deluxe</h3>
+          <p>Design your own monsters with different body parts.</p>
+          <div class="meta">
+            <span class="age">🎨 Imagination</span>
+            <a class="play" href="monster-maker-deluxe-v4.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 9 -->
-<article class="game" data-category="chill" data-name="Lava Lamp">
-<div class="thumb cyan"><span class="badge">CHILL</span><span class="emoji">🫧</span></div>
-<div class="game-body"><h3>Lava Lamp</h3>
-<p>Create your own mesmerising lava lamp and watch the blobs float around.</p>
-<div class="meta"><button class="play" onclick="go('lava-lamp.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="arcade" data-name="Bubble Pop Factory">
+        <div class="thumb cyan">
+          <span class="badge">ARCADE</span>
+          <span class="emoji" aria-hidden="true">🫧</span>
+        </div>
+        <div class="game-body">
+          <h3>Bubble Pop Factory</h3>
+          <p>Pop colourful bubbles and enjoy satisfying combos.</p>
+          <div class="meta">
+            <span class="age">💥 Pop & play</span>
+            <a class="play" href="bubble-pop-factory.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 10 -->
-<article class="game" data-category="arcade" data-name="67 Clicker">
-<div class="thumb yellow"><span class="badge">ARCADE</span><span class="emoji">🔢</span></div>
-<div class="game-body"><h3>67 Clicker</h3>
-<p>Click 67, earn coins, unlock worlds and upgrade how many coins you earn per click!</p>
-<div class="meta"><button class="play" onclick="go('67-clicker.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="creative" data-name="Needoh Designer">
+        <div class="thumb pink">
+          <span class="badge">DESIGN</span>
+          <span class="emoji" aria-hidden="true">🟪</span>
+        </div>
+        <div class="game-body">
+          <h3>Needoh Designer</h3>
+          <p>Create colourful squishy designs and experiment with styles.</p>
+          <div class="meta">
+            <span class="age">🌈 Creative fun</span>
+            <a class="play" href="needoh-designer.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 11 -->
-<article class="game" data-category="creative" data-name="Dumpling Squishy Designer">
-<div class="thumb orange"><span class="badge">CREATIVE</span><span class="emoji">🥟</span></div>
-<div class="game-body"><h3>Dumpling Squishy Designer</h3>
-<p>Create your own adorable dumpling squishy with loads of colours and fun designs.</p>
-<div class="meta"><button class="play" onclick="go('dumpling-squishy-designer.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="chill" data-name="Kinetic Sand Rake">
+        <div class="thumb yellow">
+          <span class="badge">CHILL</span>
+          <span class="emoji" aria-hidden="true">🏖️</span>
+        </div>
+        <div class="game-body">
+          <h3>Kinetic Sand Rake</h3>
+          <p>Make patterns and relaxing designs in colourful sand.</p>
+          <div class="meta">
+            <span class="age">😌 Relax & create</span>
+            <a class="play" href="kinetic-sand-rake.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 12 -->
-<article class="game" data-category="action" data-name="Find Nemo Deluxe">
-<div class="thumb blue"><span class="badge">ACTION</span><span class="emoji">🐠</span></div>
-<div class="game-body"><h3>Find Nemo Deluxe</h3>
-<p>Help Nemo swim through colourful coral, caves and gaps while avoiding danger!</p>
-<div class="meta"><button class="play" onclick="go('find-nemo-deluxe.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="chill" data-name="Lava Lamp">
+        <div class="thumb purple">
+          <span class="badge">RELAX</span>
+          <span class="emoji" aria-hidden="true">🪔</span>
+        </div>
+        <div class="game-body">
+          <h3>Lava Lamp</h3>
+          <p>Enjoy colourful, flowing visuals and a relaxing atmosphere.</p>
+          <div class="meta">
+            <span class="age">✨ Take it easy</span>
+            <a class="play" href="lava-lamp.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 13 -->
-<article class="game" data-category="action" data-name="Football Penalty Legends">
-<div class="thumb football"><span class="badge">ACTION</span><span class="emoji">⚽</span></div>
-<div class="game-body"><h3>Football Penalty Legends</h3>
-<p>Step up to the spot, aim your shot and become a penalty-kicking legend!</p>
-<div class="meta"><button class="play" onclick="go('football-penalty-legends.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="arcade" data-name="67 Clicker">
+        <div class="thumb blue">
+          <span class="badge">CLICKER</span>
+          <span class="emoji" aria-hidden="true">🖱️</span>
+        </div>
+        <div class="game-body">
+          <h3>67 Clicker</h3>
+          <p>Click, collect and see how high you can make your score.</p>
+          <div class="meta">
+            <span class="age">🪙 Score chase</span>
+            <a class="play" href="67-clicker.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 14 -->
-<article class="game" data-category="arcade" data-name="Duck Clicker">
-<div class="thumb yellow"><span class="badge">ARCADE</span><span class="emoji">🦆</span></div>
-<div class="game-body"><h3>Duck Clicker</h3>
-<p>Click ducks, collect coins, unlock ducklings, explore worlds and become the ultimate duck master!</p>
-<div class="meta"><button class="play" onclick="go('Duck Clicker.html')">Play Now →</button><span class="age">7+ ⭐</span></div></div>
-</article>
+      <article class="game" data-category="arcade" data-name="Duck Clicker">
+        <div class="thumb duck">
+          <span class="badge">CLICKER</span>
+          <span class="emoji" aria-hidden="true">🦆</span>
+        </div>
+        <div class="game-body">
+          <h3>Duck Clicker</h3>
+          <p>Collect coins, find rainbow ducks and build your duck collection.</p>
+          <div class="meta">
+            <span class="age">🪙 Collect & upgrade</span>
+            <a class="play" href="Duck%20Clicker.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 15 -->
-<article class="game" data-category="action" data-name="Halloween Trick or Treat">
-<div class="thumb halloween"><span class="badge">HALLOWEEN</span><span class="emoji">🎃 👻 🦇</span></div>
-<div class="game-body"><h3>Halloween Trick or Treat</h3>
-<p>Explore a spooky Halloween street, knock on doors, meet the people inside and collect delicious sweets!</p>
-<div class="meta"><button class="play" onclick="go('Halloween%20Trick%20or%20Treat.html')">Play Now →</button><span class="age">7+ 🎃</span></div></div>
-</article>
+      <article class="game" data-category="action" data-name="Halloween Trick or Treat">
+        <div class="thumb halloween">
+          <span class="badge">SPECIAL</span>
+          <span class="emoji" aria-hidden="true">🎃👻</span>
+        </div>
+        <div class="game-body">
+          <h3>Halloween Trick or Treat</h3>
+          <p>Explore a spooky street, knock on doors and collect sweets.</p>
+          <div class="meta">
+            <span class="age">🍬 Spooky adventure</span>
+            <a class="play" href="Halloween%20Trick%20or%20Treat.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<!-- 16 - NEW WORLD MAP CHALLENGE -->
-<article class="game" data-category="creative" data-name="World Map Challenge">
-<div class="thumb world-map">
-<span class="badge">EXPLORE</span>
-<div class="map-art"></div>
-<span class="map-pin one">📍</span>
-<span class="map-pin two">📍</span>
-<span class="map-pin three">📍</span>
-<span class="emoji">🌍</span>
-</div>
-<div class="game-body">
-<h3>World Map Challenge</h3>
-<p>🌎 Explore the world! Discover countries, find continents and test your geography knowledge in this exciting map adventure.</p>
-<div class="meta">
-<button class="play" onclick="go('world-map-challenge.html')">Play Now →</button>
-<span class="age">7+ 🧭</span>
-</div>
-</div>
-</article>
+      <article class="game" data-category="action" data-name="Football Penalty Legends">
+        <div class="thumb football">
+          <span class="badge">SPORTS</span>
+          <span class="emoji" aria-hidden="true">⚽</span>
+        </div>
+        <div class="game-body">
+          <h3>Football Penalty Legends</h3>
+          <p>Aim, shoot and try to score past the goalkeeper.</p>
+          <div class="meta">
+            <span class="age">🥅 Penalty challenge</span>
+            <a class="play" href="football-penalty-legends.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-</section>
+      <article class="game" data-category="action" data-name="Alto Snowboard Adventure">
+        <div class="thumb snow">
+          <span class="badge">ADVENTURE</span>
+          <span class="emoji" aria-hidden="true">🏂</span>
+        </div>
+        <div class="game-body">
+          <h3>Snowboard Adventure</h3>
+          <p>Ride snowy mountains, jump over obstacles and explore new worlds.</p>
+          <div class="meta">
+            <span class="age">❄️ Mountain adventure</span>
+            <a class="play" href="altos-adventures.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<div class="no-results" id="noResults">🔎 No games found. Try a different search!</div>
+      <article class="game" data-category="arcade" data-name="Jar Guessing Challenge">
+        <div class="thumb jar">
+          <span class="badge">CHALLENGE</span>
+          <span class="emoji" aria-hidden="true">🍬</span>
+        </div>
+        <div class="game-body">
+          <h3>Jar Guessing Challenge</h3>
+          <p>Make your guess, beat the timer and see who gets closest.</p>
+          <div class="meta">
+            <span class="age">🧠 Guess & win</span>
+            <a class="play" href="jar-guessing-game.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
 
-<div class="section-title"><h2>⚡ Quick Fun</h2><small>Something a little different</small></div>
-<section class="quick">
-<button onclick="randomGame()"><span>🎲</span>Random Game</button>
-<button onclick="toast('🏆 Daily Challenge coming soon!')"><span>🏆</span>Daily Challenge</button>
-<button onclick="toast('🎁 Teddy found a mystery prize!')"><span>🎁</span>Mystery Prize</button>
-<button onclick="toast('🚀 More games are on the way!')"><span>🚀</span>Coming Soon</button>
-</section>
+      <article class="game" data-category="creative" data-name="World Map Challenge">
+        <div class="thumb world-map">
+          <span class="badge">EXPLORE</span>
+          <div class="map-art" aria-hidden="true"></div>
+          <span class="map-pin one" aria-hidden="true">📍</span>
+          <span class="map-pin two" aria-hidden="true">📍</span>
+          <span class="map-pin three" aria-hidden="true">📍</span>
+        </div>
+        <div class="game-body">
+          <h3>World Map Challenge</h3>
+          <p>Explore countries around the world and test your geography knowledge.</p>
+          <div class="meta">
+            <span class="age">🌍 Learn & explore</span>
+            <a class="play" href="world-map-challenge.html">Play Now →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+      <div style="font-size:42px;margin-bottom:10px">🔎</div>
+      <div>No games found!</div>
+      <p>Try another search or choose a different category.</p>
+      <button class="filter active" id="resetSearch">Show All Games</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="quickTitle">
+    <div class="section-title">
+      <h2 id="quickTitle">⚡ Quick Fun</h2>
+      <small>Choose your mood</small>
+    </div>
+
+    <div class="quick">
+      <button data-quick="creative">
+        <span>🎨</span>Make Something
+      </button>
+      <button data-quick="arcade">
+        <span>🕹️</span>Beat a High Score
+      </button>
+      <button data-quick="chill">
+        <span>🌈</span>Relax & Play
+      </button>
+      <button data-quick="action">
+        <span>⚡</span>Take the Challenge
+      </button>
+    </div>
+  </section>
 </main>
 
-<footer>🧸 Teddy's Game Hub · A colourful place for curious kids and big imaginations ⭐</footer>
-<div class="toast" id="toast"></div>
+<footer>
+  <p>🧸 <strong>Teddy's Game Hub</strong></p>
+  <p>Play • Create • Experiment • Have Fun!</p>
+  <p>Made for curious minds and creative gamers.</p>
+  <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const cards=[...document.querySelectorAll('.game')];
-const search=document.getElementById('search');
-const count=document.getElementById('count');
-const noResults=document.getElementById('noResults');
-let active='all';
+(function () {
+  const searchInput = document.getElementById("searchInput");
+  const filterButtons = [...document.querySelectorAll(".filter[data-filter]")];
+  const games = [...document.querySelectorAll(".game")];
+  const gameCount = document.getElementById("gameCount");
+  const noResults = document.getElementById("noResults");
+  const gamesGrid = document.getElementById("gamesGrid");
+  const toast = document.getElementById("toast");
 
-function update(){
-const q=search.value.toLowerCase().trim();
-let shown=0;
+  let currentFilter = "all";
+  let toastTimer;
 
-cards.forEach(card=>{
-const cat=active==='all'||card.dataset.category===active;
-const text=(card.dataset.name+' '+card.innerText).toLowerCase().includes(q);
-const visible=cat&&text;
-card.style.display=visible?'block':'none';
-if(visible)shown++;
-});
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
+  }
 
-count.textContent=shown+(shown===1?' game':' games');
-noResults.style.display=shown?'none':'block';
-}
+  function updateGames() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visible = 0;
 
-search.addEventListener('input',update);
+    games.forEach(game => {
+      const name = game.dataset.name.toLowerCase();
+      const category = game.dataset.category;
+      const description = game.querySelector("p").textContent.toLowerCase();
+      const matchesSearch =
+        name.includes(query) || description.includes(query);
+      const matchesFilter =
+        currentFilter === "all" || category === currentFilter;
+      const show = matchesSearch && matchesFilter;
 
-document.querySelectorAll('.filter').forEach(btn=>{
-btn.addEventListener('click',()=>{
-document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-active=btn.dataset.filter;
-update();
-});
-});
+      game.style.display = show ? "" : "none";
+      if (show) visible++;
+    });
 
-function go(file){
-window.location.href=file;
-}
+    gameCount.textContent =
+      visible + (visible === 1 ? " game found" : " games found");
 
-function toast(message){
-const el=document.getElementById('toast');
-el.textContent=message;
-el.classList.add('show');
-clearTimeout(window.toastTimer);
-window.toastTimer=setTimeout(()=>el.classList.remove('show'),2200);
-}
+    noResults.style.display = visible === 0 ? "block" : "none";
+    gamesGrid.style.display = visible === 0 ? "none" : "grid";
+  }
 
-function randomGame(){
-const visible=cards.filter(c=>getComputedStyle(c).display!=='none');
-if(!visible.length){
-toast('🔎 Try another search!');
-return;
-}
-const chosen=visible[Math.floor(Math.random()*visible.length)];
-chosen.scrollIntoView({behavior:'smooth',block:'center'});
-chosen.animate([
-{transform:'scale(1)'},{transform:'scale(1.04)'},{transform:'scale(1)'}
-],{duration:650});
-toast('🎲 Teddy picked '+chosen.dataset.name+'!');
-}
+  function setFilter(filter) {
+    currentFilter = filter;
 
-update();
+    filterButtons.forEach(button => {
+      const active = button.dataset.filter === filter;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    updateGames();
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      setFilter(button.dataset.filter);
+    });
+  });
+
+  searchInput.addEventListener("input", updateGames);
+
+  document.getElementById("resetSearch").addEventListener("click", () => {
+    searchInput.value = "";
+    setFilter("all");
+    showToast("All games are back! 🎮");
+  });
+
+  document.getElementById("browseBtn").addEventListener("click", () => {
+    document.getElementById("allGames").scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+
+  document.getElementById("surpriseBtn").addEventListener("click", () => {
+    const available = games.filter(game => game.style.display !== "none");
+    if (!available.length) {
+      showToast("No games match your search. Try clearing it!");
+      return;
+    }
+
+    const chosen = available[Math.floor(Math.random() * available.length)];
+    const link = chosen.querySelector(".play");
+
+    showToast("🎲 Your surprise game is " + chosen.dataset.name + "!");
+
+    chosen.scrollIntoView({behavior:"smooth",block:"center"});
+
+    chosen.animate(
+      [
+        {transform:"scale(1)",borderColor:"#29334f"},
+        {transform:"scale(1.025)",borderColor:"#38d9ff"},
+        {transform:"scale(1)",borderColor:"#7770e9"}
+      ],
+      {duration:650}
+    );
+
+    if (link) {
+      setTimeout(() => {
+        if (confirm("Play " + chosen.dataset.name + "?")) {
+          window.location.href = link.href;
+        }
+      }, 500);
+    }
+  });
+
+  document.querySelectorAll("[data-quick]").forEach(button => {
+    button.addEventListener("click", () => {
+      searchInput.value = "";
+      setFilter(button.dataset.quick);
+      document.getElementById("allGames").scrollIntoView({
+        behavior:"smooth"
+      });
+      showToast("Finding your " + button.textContent.trim() + " games!");
+    });
+  });
+
+  updateGames();
+})();
 </script>
+
 </body>
 </html>
 ```
