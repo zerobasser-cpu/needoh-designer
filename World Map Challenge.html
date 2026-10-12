@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Map Challenge</title>
+<style>
+:root {
+  --blue:#2478e5; --navy:#16345c; --bg:#eef6ff;
+  --green:#20a66a; --red:#e85353; --gold:#ffbd35;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--navy);
+  background:linear-gradient(145deg,#dff1ff,#f5f8ff 50%,#e6f8ee);
+  min-height:100vh
+}
+button{font:inherit;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:4px solid #ffbf3f;outline-offset:3px}
+header{
+  background:linear-gradient(120deg,#1469d7,#3897f5);
+  color:white;padding:20px 16px;text-align:center;
+  box-shadow:0 5px 20px #173c6420
+}
+header h1{margin:0;font-size:clamp(26px,4vw,42px)}
+header p{margin:8px 0 0;font-size:16px}
+.mascot{font-size:38px;display:inline-block;margin-right:8px;vertical-align:middle}
+main{max-width:1400px;margin:auto;padding:18px}
+.panel{
+  background:white;border-radius:20px;padding:18px;
+  box-shadow:0 8px 24px #21476b12;border:1px solid #dceafa
+}
+.hidden{display:none!important}
+h2,h3{margin-top:0}
+button.primary{
+  background:var(--blue);color:white;border:0;border-radius:13px;
+  padding:13px 19px;font-weight:bold;box-shadow:0 4px 0 #1555ac
+}
+button.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #1555ac}
+button.secondary{
+  background:#edf5ff;color:#1a5eb1;border:2px solid #cce1ff;
+  border-radius:12px;padding:10px 14px;font-weight:bold
+}
+button:disabled{opacity:.4;cursor:not-allowed}
+.top-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.intro{text-align:center;margin-bottom:18px}
+.intro p{line-height:1.55}
+.level-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.level-card{
+  text-align:left;background:#fff;border:2px solid #dceafa;
+  border-radius:18px;padding:17px;transition:transform .15s,border-color .15s
+}
+.level-card:not(:disabled):hover{transform:translateY(-3px);border-color:#6ca9f4}
+.level-card .emoji{font-size:32px}
+.level-card h3{margin:8px 0}
+.level-card p{font-size:14px;line-height:1.45;color:#526985}
+.level-status{font-size:13px;font-weight:bold;color:#2478e5}
+.level-card.locked{background:#f3f6fa;color:#8795a6}
+.level-card.locked p{color:#8795a6}
+.badge{display:inline-block;border-radius:20px;background:#fff0c8;padding:5px 9px;font-size:12px;font-weight:bold}
+.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.map-panel{padding:12px;min-width:0}
+.map-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:5px 5px 12px}
+.map-toolbar h2{margin:0;font-size:19px}
+.zoom-tools{display:flex;gap:6px;flex-wrap:wrap}
+.zoom-tools button{padding:8px 11px}
+#map-wrap{
+  position:relative;width:100%;min-height:300px;aspect-ratio:1.6;
+  border-radius:15px;overflow:hidden;background:#d9f0ff;
+  border:1px solid #c7e6f7
+}
+#world-map{width:100%;height:100%;display:block;touch-action:pan-y}
+.country{stroke:#fff;stroke-width:.65;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .15s}
+.country:hover{stroke:#183b66;stroke-width:1.4}
+.country.target-hint{fill:#54d98b!important;stroke:#087a43;stroke-width:2}
+.country.correct-map{fill:#54d98b!important;stroke:#087a43;stroke-width:2}
+.country.wrong-map{fill:#ff8d8d!important}
+.map-loading{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:#285b82;font-weight:bold}
+.map-note{font-size:12px;color:#69819b;padding:9px 5px 2px}
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:#f1f7ff;border-radius:12px;text-align:center;padding:11px 4px}
+.stat .number{font-size:23px;font-weight:bold;display:block}
+.stat .label{font-size:11px;color:#647b96;display:block;margin-top:3px}
+.question{text-align:center}
+.flag{font-size:48px;margin:4px 0}
+.question h2{font-size:23px;margin:4px 0 8px}
+.question p{color:#647b96;margin:0 0 12px;font-size:14px}
+.choices{display:grid;gap:9px}
+.choice{
+  background:#f2f7ff;border:2px solid #d9e8fb;border-radius:12px;
+  padding:12px;text-align:left;font-weight:bold;color:#24476e;
+  display:flex;align-items:center;gap:10px
+}
+.choice .letter{background:#dceaff;border-radius:8px;padding:6px 9px;color:#1b64bc}
+.choice:hover{border-color:#70aaf0}
+.choice.correct{background:#e1f9eb;border-color:#22a96a;color:#087345}
+.choice.incorrect{background:#fff0f0;border-color:#ef7777;color:#a83232}
+.feedback{min-height:44px;margin-top:12px;border-radius:10px;padding:10px;font-weight:bold;font-size:14px;line-height:1.4}
+.feedback:empty{padding:0;min-height:0}
+.feedback.good{background:#e1f9eb;color:#087345}
+.feedback.bad{background:#fff0f0;color:#a83232}
+.question-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.question-tools button{flex:1}
+.timer-track{height:9px;background:#e8eff8;border-radius:9px;overflow:hidden;margin-top:10px}
+.timer-fill{height:100%;width:100%;background:#25b875;transition:width .3s linear}
+.progress-outer{height:10px;background:#e8eff8;border-radius:10px;overflow:hidden;margin:10px 0}
+.progress-inner{height:100%;width:0;background:linear-gradient(90deg,#29c58a,#63d8ac);transition:width .25s}
+.stars{font-size:29px;letter-spacing:4px;color:#f3b62f}
+#result-screen{text-align:center;padding:30px 18px}
+#result-emoji{font-size:68px}
+#result-screen h2{font-size:32px;margin:8px}
+#result-screen p{line-height:1.6}
+footer{text-align:center;color:#66809c;padding:22px;font-size:12px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#16345c;color:white;border-radius:12px;padding:12px 18px;z-index:10;box-shadow:0 6px 20px #0002;display:none;text-align:center;max-width:90vw}
+@media(max-width:850px){
+  .game-layout{grid-template-columns:1fr}
+  .sidebar{display:grid;grid-template-columns:1fr 1fr}
+  .stats{grid-column:1/-1}
+}
+@media(max-width:520px){
+  main{padding:10px}
+  .panel{padding:13px}
+  .sidebar{display:flex}
+  #map-wrap{aspect-ratio:1.05;min-height:280px}
+  .map-toolbar h2{font-size:17px}
+  header{padding:17px 10px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="mascot">🧭</span>World Map Challenge</h1>
+  <p>Explore the planet, find countries and become a Geography Master! 🌍</p>
+</header>
+
+<main>
+  <section id="home-screen" class="panel">
+    <div class="intro">
+      <h2>Choose your adventure! 🚀</h2>
+      <p>Start with easy countries and work your way up. Use the flags, hints and map to help you.</p>
+      <div class="top-actions">
+        <button class="primary" id="start-next">▶ Continue playing</button>
+        <button class="secondary" id="practice-home">🎓 Practice mode</button>
+      </div>
+    </div>
+    <div class="level-grid" id="level-grid"></div>
+  </section>
+
+  <section id="game-screen" class="hidden">
+    <div class="panel" style="margin-bottom:15px">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+        <div>
+          <span class="badge" id="level-badge">LEVEL 1</span>
+          <h2 id="level-title" style="margin:8px 0 3px">Beginner</h2>
+          <div id="level-description" style="font-size:14px;color:#627b97">Let's learn some countries!</div>
+        </div>
+        <button class="secondary" id="back-home">🏠 Level select</button>
+      </div>
+      <div class="progress-outer"><div class="progress-inner" id="progress-bar"></div></div>
+      <div style="font-size:13px;color:#637b95" id="progress-label">Question 1 of 10</div>
+    </div>
+
+    <div class="game-layout">
+      <div class="panel map-panel">
+        <div class="map-toolbar">
+          <h2>🗺️ Tap a country on the map!</h2>
+          <div class="zoom-tools">
+            <button class="secondary" id="zoom-in" aria-label="Zoom in">＋ Zoom</button>
+            <button class="secondary" id="zoom-out" aria-label="Zoom out">− Zoom</button>
+            <button class="secondary" id="reset-map">↺ Reset</button>
+          </div>
+        </div>
+        <div id="map-wrap">
+          <svg id="world-map" role="img" aria-label="Interactive world map with country borders"></svg>
+          <div class="map-loading" id="map-loading">🌍 Loading the real world map...<br>Please wait a moment!</div>
+        </div>
+        <div class="map-note">Tip: use the zoom buttons to see smaller countries. You can tap the map or choose an answer.</div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="panel question">
+          <div class="stats">
+            <div class="stat"><span class="number" id="score">0</span><span class="label">POINTS</span></div>
+            <div class="stat"><span class="number" id="lives">❤️❤️❤️❤️❤️</span><span class="label">LIVES</span></div>
+            <div class="stat"><span class="number" id="timer">60</span><span class="label">SECONDS</span></div>
+          </div>
+          <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
+          <div class="flag" id="question-flag">🇬🇧</div>
+          <h2>Can you find it?</h2>
+          <p id="question-prompt">Tap the United Kingdom on the map or pick the right answer.</p>
+          <div class="choices" id="choices"></div>
+          <div id="feedback" class="feedback" aria-live="polite"></div>
+          <div class="question-tools">
+            <button class="secondary" id="hint-button">💡 Hint</button>
+            <button class="secondary" id="skip-button">⏭ Skip</button>
+          </div>
+          <div class="question-tools">
+            <button class="secondary" id="sound-button">🔊 Sound: On</button>
+            <button class="secondary" id="practice-toggle">🎓 Practice: Off</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 style="margin-bottom:8px">⭐ Your progress</h3>
+          <div class="stars" id="level-stars">☆☆☆</div>
+          <div style="font-size:13px;color:#647b96;line-height:1.5">Answer correctly to earn points and stars. Complete the level to unlock the next adventure!</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="result-screen" class="panel hidden">
+    <div id="result-emoji">🏆</div>
+    <h2 id="result-title">Level complete!</h2>
+    <div class="stars" id="result-stars">★★★</div>
+    <p id="result-message">Great work, explorer!</p>
+    <p id="result-score"></p>
+    <div class="top-actions">
+      <button class="primary" id="next-level-button">➡ Next level</button>
+      <button class="secondary" id="replay-button">🔁 Play again</button>
+      <button class="secondary" id="results-home">🏠 Level select</button>
+    </div>
+  </section>
+</main>
+
+<footer>Made for curious explorers • Keep learning, one country at a time! 🌎</footer>
+<div id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+(() => {
+"use strict";
+
+const LEVELS = [
+  {
+    name:"Beginner", emoji:"🌱",
+    description:"Start with 10 famous countries.",
+    countries:[
+      "United Kingdom","France","Japan","United States of America",
+      "Australia","Brazil","India","China","Canada","Italy"
+    ]
+  },
+  {
+    name:"Europe Explorer", emoji:"🏰",
+    description:"Explore countries across Europe.",
+    countries:[
+      "Spain","Germany","Norway","Greece","Portugal",
+      "Sweden","Poland","Ukraine","Ireland","Netherlands"
+    ]
+  },
+  {
+    name:"The Americas", emoji:"🌎",
+    description:"Travel through North and South America.",
+    countries:[
+      "Mexico","Argentina","Chile","Peru","Colombia",
+      "Cuba","Venezuela","Ecuador","Bolivia","Uruguay"
+    ]
+  },
+  {
+    name:"Around the World", emoji:"🦁",
+    description:"Discover Africa, Asia and Oceania.",
+    countries:[
+      "Egypt","South Africa","Kenya","Nigeria","Morocco",
+      "Saudi Arabia","Thailand","Indonesia","New Zealand","Pakistan"
+    ]
+  },
+  {
+    name:"Geography Master", emoji:"🏆",
+    description:"Try some trickier countries!",
+    countries:[
+      "Iceland","Finland","Romania","Hungary","Austria",
+      "Switzerland","Nepal","Mongolia","Madagascar","Sri Lanka"
+    ]
+  }
+];
+
+const FLAGS = {
+  "United Kingdom":"🇬🇧","France":"🇫🇷","Japan":"🇯🇵",
+  "United States of America":"🇺🇸","Australia":"🇦🇺","Brazil":"🇧🇷",
+  "India":"🇮🇳","China":"🇨🇳","Canada":"🇨🇦","Italy":"🇮🇹",
+  "Spain":"🇪🇸","Germany":"🇩🇪","Norway":"🇳🇴","Greece":"🇬🇷",
+  "Portugal":"🇵🇹","Sweden":"🇸🇪","Poland":"🇵🇱","Ukraine":"🇺🇦",
+  "Ireland":"🇮🇪","Netherlands":"🇳🇱","Mexico":"🇲🇽","Argentina":"🇦🇷",
+  "Chile":"🇨🇱","Peru":"🇵🇪","Colombia":"🇨🇴","Cuba":"🇨🇺",
+  "Venezuela":"🇻🇪","Ecuador":"🇪🇨","Bolivia":"🇧🇴","Uruguay":"🇺🇾",
+  "Egypt":"🇪🇬","South Africa":"🇿🇦","Kenya":"🇰🇪","Nigeria":"🇳🇬",
+  "Morocco":"🇲🇦","Saudi Arabia":"🇸🇦","Thailand":"🇹🇭",
+  "Indonesia":"🇮🇩","New Zealand":"🇳🇿","Pakistan":"🇵🇰",
+  "Iceland":"🇮🇸","Finland":"🇫🇮","Romania":"🇷🇴","Hungary":"🇭🇺",
+  "Austria":"🇦🇹","Switzerland":"🇨🇭","Nepal":"🇳🇵","Mongolia":"🇲🇳",
+  "Madagascar":"🇲🇬","Sri Lanka":"🇱🇰"
+};
+
+const $ = id => document.getElementById(id);
+const screens = ["home-screen","game-screen","result-screen"];
+let unlocked = 1;
+let bestStars = [0,0,0,0,0];
+let activeLevel = 0, questionIndex = 0, score = 0, lives = 5;
+let correctCount = 0, secondsLeft = 60, timerId = null;
+let currentQuestion = null, answered = false, practiceMode = false;
+let soundOn = true, mapFeatures = [], mapReady = false;
+let svg, mapGroup, projection, geoPath, zoomBehavior, countryPaths;
+let mapWidth = 960, mapHeight = 600, hintUsed = false;
+let audioContext = null, toastId = null;
+
+try {
+  const saved = JSON.parse(localStorage.getItem("worldMapChallengeSave") || "{}");
+  if (Number.isInteger(saved.unlocked)) unlocked = Math.max(1,Math.min(5,saved.unlocked));
+  if (Array.isArray(saved.bestStars)) bestStars = saved.bestStars.slice(0,5).map(x => Math.max(0,Math.min(3,Number(x)||0)));
+} catch(e) {}
+
+function saveProgress() {
+  try {
+    localStorage.setItem("worldMapChallengeSave",JSON.stringify({unlocked,bestStars}));
+  } catch(e) {}
+}
+
+function showScreen(id) {
+  screens.forEach(s => $(s).classList.toggle("hidden",s !== id));
+  if(id === "game-screen") setTimeout(resizeMap,50);
+}
+
+function toast(message) {
+  const el = $("toast");
+  el.textContent = message;
+  el.style.display = "block";
+  clearTimeout(toastId);
+  toastId = setTimeout(() => el.style.display="none",2300);
+}
+
+function playSound(kind) {
+  if(!soundOn) return;
+  try {
+    audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+    if(audioContext.state === "suspended") audioContext.resume();
+    const notes = kind === "good" ? [660,880,1050] : kind === "bad" ? [230,180] : [500,700];
+    notes.forEach((freq,i) => {
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(.0001,audioContext.currentTime + i*.09);
+      gain.gain.exponentialRampToValueAtTime(.12,audioContext.currentTime + i*.09 + .02);
+      gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime + i*.09 + .16);
+      osc.connect(gain); gain.connect(audioContext.destination);
+      osc.start(audioContext.currentTime+i*.09);
+      osc.stop(audioContext.currentTime+i*.09+.18);
+    });
+  } catch(e) {}
+}
+
+function renderLevels() {
+  const grid = $("level-grid");
+  grid.innerHTML = "";
+  LEVELS.forEach((level,i) => {
+    const isUnlocked = i < unlocked;
+    const card = document.createElement("button");
+    card.className = "level-card" + (isUnlocked ? "" : " locked");
+    card.disabled = !isUnlocked;
+    card.innerHTML = `
+      <div class="emoji">${level.emoji}</div>
+      <h3>Level ${i+1}: ${level.name}</h3>
+      <p>${level.description}</p>
+      <div class="level-status">${isUnlocked ? "▶ Play level" : "🔒 Complete the previous level"}</div>
+      <div class="stars" style="font-size:22px;margin-top:8px">${"★".repeat(bestStars[i])}${"☆".repeat(3-bestStars[i])}</div>`;
+    card.addEventListener("click",() => startLevel(i,false));
+    grid.appendChild(card);
+  });
+  $("start-next").textContent = unlocked > 1 ? `▶ Continue — Level ${Math.min(unlocked,5)}` : "▶ Start Level 1";
+  $("start-next").onclick = () => startLevel(Math.min(unlocked,5)-1,false);
+}
+
+function startLevel(index,practice) {
+  activeLevel = index;
+  practiceMode = !!practice;
+  questionIndex = 0; score = 0; lives = 5; correctCount = 0;
+  showScreen("game-screen");
+  $("level-badge").textContent = `LEVEL ${index+1}${practiceMode ? " • PRACTICE" : ""}`;
+  $("level-title").textContent = LEVELS[index].emoji+" "+LEVELS[index].name;
+  $("level-description").textContent = LEVELS[index].description;
+  $("practice-toggle").textContent = practiceMode ? "🎓 Practice: On" : "🎓 Practice: Off";
+  makeQuestion();
+}
+
+function shuffle(array) {
+  const a = array.slice();
+  for(let i=a.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function makeQuestion() {
+  clearInterval(timerId);
+  if(!practiceMode && lives <= 0) return finishLevel(false);
+  if(questionIndex >= 10) return finishLevel(true);
+
+  answered = false; hintUsed = false;
+  currentQuestion = LEVELS[activeLevel].countries[questionIndex];
+  secondsLeft = activeLevel === 0 ? 60 : activeLevel === 1 ? 55 : activeLevel === 2 ? 50 : activeLevel === 3 ? 45 : 40;
+  const all = LEVELS[activeLevel].countries;
+  const wrongChoices = shuffle(all.filter(c => c !== currentQuestion)).slice(0,2);
+  const choices = shuffle([currentQuestion,...wrongChoices]);
+
+  $("question-flag").textContent = FLAGS[currentQuestion] || "🌍";
+  $("question-prompt").textContent = `Find ${currentQuestion} on the map, or choose the right answer below.`;
+  $("choices").innerHTML = "";
+  choices.forEach((country,i) => {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.innerHTML = `<span class="letter">${String.fromCharCode(65+i)}</span><span>${FLAGS[country] || "🌍"} ${country}</span>`;
+    btn.addEventListener("click",() => answer(country,btn));
+    $("choices").appendChild(btn);
+  });
+
+  $("feedback").textContent = "";
+  $("feedback").className = "feedback";
+  $("progress-label").textContent = `Question ${questionIndex+1} of 10`;
+  $("progress-bar").style.width = `${questionIndex*10}%`;
+  $("score").textContent = score;
+  $("lives").textContent = practiceMode ? "∞" : "❤️".repeat(lives)+"♡".repeat(5-lives);
+  $("timer").textContent = secondsLeft;
+  $("timer-fill").style.width = "100%";
+  $("level-stars").textContent = "★".repeat(Math.min(3,Math.floor(correctCount/3)))+"☆".repeat(3-Math.min(3,Math.floor(correctCount/3)));
+  clearMapHighlights();
+  timerId = setInterval(() => {
+    if(answered || practiceMode) return;
+    secondsLeft--;
+    $("timer").textContent = secondsLeft;
+    $("timer-fill").style.width = Math.max(0,secondsLeft/60*100)+"%";
+    if(secondsLeft <= 10) $("timer-fill").style.background = "#ed5959";
+    else $("timer-fill").style.background = "#25b875";
+    if(secondsLeft <= 0) {
+      clearInterval(timerId);
+      answer(null,null,true);
+    }
+  },1000);
+}
+
+function answer(country,button,timedOut=false,fromMap=false) {
+  if(answered) return;
+  if(!timedOut && country == null) return;
+  if(country === currentQuestion) {
+    answered = true;
+    clearInterval(timerId);
+    correctCount++;
+    const points = Math.max(10,100 + secondsLeft - (hintUsed ? 30 : 0));
+    score += points;
+    $("score").textContent = score;
+    $("feedback").textContent = `🎉 Correct! ${FLAGS[currentQuestion] || "🌍"} ${currentQuestion}! +${points} points`;
+    $("feedback").className = "feedback good";
+    if(button) button.classList.add("correct");
+    highlightCountry(currentQuestion,"correct-map");
+    playSound("good");
+    $("progress-bar").style.width = `${(questionIndex+1)*10}%`;
+    $("level-stars").textContent = "★".repeat(Math.min(3,Math.floor(correctCount/3)))+"☆".repeat(3-Math.min(3,Math.floor(correctCount/3)));
+    setTimeout(() => { questionIndex++; makeQuestion(); },1100);
+  } else {
+    if(!practiceMode) lives--;
+    $("lives").textContent = practiceMode ? "∞" : "❤️".repeat(lives)+"♡".repeat(5-lives);
+    $("feedback").textContent = timedOut ? `⏰ Time's up! The answer was ${currentQuestion}.` : practiceMode ? "Not quite! Try again — practice has no penalty." : `Not quite! Try again. ${lives} ${lives===1?"life":"lives"} left.`;
+    $("feedback").className = "feedback bad";
+    if(button) button.classList.add("incorrect");
+    if(country) highlightCountry(country,"wrong-map");
+    playSound("bad");
+    if(!practiceMode && lives <= 0) {
+      answered = true; clearInterval(timerId);
+      setTimeout(() => finishLevel(false),1000);
+    } else if(timedOut) {
+      answered = true;
+      setTimeout(() => { questionIndex++; makeQuestion(); },1300);
+    } else {
+      setTimeout(() => { if(button) button.classList.remove("incorrect"); },600);
+    }
+  }
+}
+
+function finishLevel(completed) {
+  clearInterval(timerId);
+  showScreen("result-screen");
+  const stars = completed ? (correctCount >= 9 ? 3 : correctCount >= 7 ? 2 : 1) : 0;
+  if(completed) {
+    bestStars[activeLevel] = Math.max(bestStars[activeLevel],stars);
+    unlocked = Math.max(unlocked,Math.min(5,activeLevel+2));
+    saveProgress();
+  }
+  $("result-emoji").textContent = completed ? (stars===3 ? "🏆" : stars===2 ? "🥈" : "🌟") : "💪";
+  $("result-title").textContent = completed ? "Level complete!" : "Good try, explorer!";
+  $("result-stars").textContent = completed ? "★".repeat(stars)+"☆".repeat(3-stars) : "☆☆☆";
+  $("result-message").textContent = completed
+    ? (stars===3 ? "Amazing! You're a geography superstar!" : stars===2 ? "Great work! Keep practising to earn 3 stars." : "You did it! Practise again to earn more stars.")
+    : "Don't worry! Try again, use hints, or switch to practice mode.";
+  $("result-score").textContent = `You scored ${score} points and answered ${correctCount} out of 10 correctly.`;
+  $("next-level-button").classList.toggle("hidden",!completed || activeLevel >= 4);
+  $("next-level-button").textContent = activeLevel===3 ? "➡ Final level" : "➡ Next level";
+  $("replay-button").textContent = "🔁 Play this level again";
+  renderLevels();
+}
+
+function clearMapHighlights() {
+  if(countryPaths) countryPaths.classed("target-hint",false).classed("correct-map",false).classed("wrong-map",false);
+}
+
+function highlightCountry(name,className) {
+  if(!countryPaths) return;
+  countryPaths.filter(d => getCountryName(d) === name).classed(className,true);
+}
+
+function getCountryName(feature) {
+  let name = feature && feature.properties && feature.properties.name;
+  const aliases = {
+    "United States":"United States of America",
+    "United States of America":"United States of America",
+    "UK":"United Kingdom",
+    "Republic of Korea":"South Korea",
+    "Korea":"South Korea",
+    "Russian Federation":"Russia",
+    "Czech Republic":"Czechia"
+  };
+  return aliases[name] || name;
+}
+
+function showHint() {
+  if(answered) return;
+  hintUsed = true;
+  const f = $("feedback");
+  f.textContent = `💡 Hint: look for ${currentQuestion} on the map. Its flag is ${FLAGS[currentQuestion] || "🌍"}. The correct country will glow green!`;
+  f.className = "feedback good";
+  highlightCountry(currentQuestion,"target-hint");
+  toast("💡 Look for the green country!");
+}
+
+function initMap() {
+  if(!window.d3 || !window.topojson) {
+    $("map-loading").innerHTML = "The map libraries could not load.<br>Please check your internet connection and refresh.";
+    return;
+  }
+  svg = d3.select("#world-map");
+  mapGroup = svg.append("g");
+  zoomBehavior = d3.zoom().scaleExtent([1,10]).on("zoom",event => {
+    mapGroup.attr("transform",event.transform);
+  });
+  svg.call(zoomBehavior).on("dblclick.zoom",null);
+  resizeMap();
+
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json")
+    .then(world => {
+      mapFeatures = topojson.feature(world,world.objects.countries).features;
+      drawMap();
+      mapReady = true;
+      $("map-loading").classList.add("hidden");
+    })
+    .catch(err => {
+      console.error(err);
+      $("map-loading").innerHTML = "🌍 The real map couldn't load.<br>Check your internet connection and refresh the page.";
+    });
+}
+
+function resizeMap() {
+  if(!svg) return;
+  const wrap = $("map-wrap");
+  mapWidth = Math.max(320,wrap.clientWidth);
+  mapHeight = Math.max(270,wrap.clientHeight);
+  svg.attr("viewBox",`0 0 ${mapWidth} ${mapHeight}`);
+  projection = d3.geoNaturalEarth1().fitExtent([[5,8],[mapWidth-5,mapHeight-8]],{type:"Sphere"});
+  geoPath = d3.geoPath(projection);
+  if(mapReady) drawMap();
+}
+
+function drawMap() {
+  if(!mapGroup || !mapFeatures.length) return;
+  projection = d3.geoNaturalEarth1().fitExtent([[5,8],[mapWidth-5,mapHeight-8]],{type:"Sphere"});
+  geoPath = d3.geoPath(projection);
+  mapGroup.selectAll("*").remove();
+
+  mapGroup.append("path")
+    .datum({type:"Sphere"})
+    .attr("d",geoPath)
+    .attr("fill","#bde8ff")
+    .attr("stroke","#8dcde9");
+
+  countryPaths = mapGroup.selectAll("path.country")
+    .data(mapFeatures)
+    .join("path")
+    .attr("class","country")
+    .attr("d",geoPath)
+    .attr("fill",(d,i) => ["#a7d8ff","#b5e8cb","#ffe0a8","#d9c9ff","#ffcbc5"][i%5])
+    .attr("aria-label",d => getCountryName(d) || "Country")
+    .on("click",(event,d) => {
+      if(answered || !currentQuestion) return;
+      const name = getCountryName(d);
+      if(!name) return;
+      if(LEVELS[activeLevel].countries.includes(name)) {
+        answer(name,null,false,true);
+      } else {
+        answer(name,null,false,true);
+      }
+    });
+
+  mapGroup.append("path")
+    .datum(topojson.mesh({type:"Topology",objects:{countries:{type:"GeometryCollection",geometries:[]}}}, {}, () => {}))
+    .attr("display","none");
+
+  svg.call(zoomBehavior.transform,d3.zoomIdentity);
+}
+
+function zoomBy(factor) {
+  if(svg && zoomBehavior) svg.transition().duration(250).call(zoomBehavior.scaleBy,factor);
+}
+function resetZoom() {
+  if(svg && zoomBehavior) svg.transition().duration(250).call(zoomBehavior.transform,d3.zoomIdentity);
+}
+
+$("hint-button").addEventListener("click",showHint);
+$("skip-button").addEventListener("click",() => {
+  if(answered) return;
+  clearInterval(timerId);
+  answered = true;
+  $("feedback").textContent = `⏭ Skipped! The answer was ${FLAGS[currentQuestion] || "🌍"} ${currentQuestion}.`;
+  $("feedback").className = "feedback";
+  setTimeout(() => { questionIndex++; makeQuestion(); },900);
+});
+$("sound-button").addEventListener("click",() => {
+  soundOn = !soundOn;
+  $("sound-button").textContent = soundOn ? "🔊 Sound: On" : "🔇 Sound: Off";
+  if(soundOn) playSound("good");
+});
+$("practice-toggle").addEventListener("click",() => {
+  practiceMode = !practiceMode;
+  $("practice-toggle").textContent = practiceMode ? "🎓 Practice: On" : "🎓 Practice: Off";
+  $("level-badge").textContent = `LEVEL ${activeLevel+1}${practiceMode ? " • PRACTICE" : ""}`;
+  $("lives").textContent = practiceMode ? "∞" : "❤️".repeat(lives)+"♡".repeat(5-lives);
+  toast(practiceMode ? "Practice mode on — no lost lives or timer!" : "Challenge mode on!");
+  if(practiceMode) {
+    clearInterval(timerId);
+    $("timer").textContent = "∞";
+    $("timer-fill").style.width = "100%";
+  } else if(!answered) {
+    secondsLeft = 60;
+    $("timer").textContent = secondsLeft;
+    clearInterval(timerId);
+    timerId = setInterval(() => {
+      if(answered || practiceMode) return;
+      secondsLeft--;
+      $("timer").textContent = secondsLeft;
+      $("timer-fill").style.width = Math.max(0,secondsLeft/60*100)+"%";
+      if(secondsLeft<=0) { clearInterval(timerId); answer(null,null,true); }
+    },1000);
+  }
+});
+$("zoom-in").addEventListener("click",() => zoomBy(1.4));
+$("zoom-out").addEventListener("click",() => zoomBy(1/1.4));
+$("reset-map").addEventListener("click",resetZoom);
+$("back-home").addEventListener("click",() => { clearInterval(timerId); renderLevels(); showScreen("home-screen"); });
+$("practice-home").addEventListener("click",() => startLevel(0,true));
+$("results-home").addEventListener("click",() => { renderLevels(); showScreen("home-screen"); });
+$("replay-button").addEventListener("click",() => startLevel(activeLevel,false));
+$("next-level-button").addEventListener("click",() => {
+  if(activeLevel<4) startLevel(activeLevel+1,false);
+});
+$("start-next").addEventListener("click",() => startLevel(Math.min(unlocked,5)-1,false));
+
+window.addEventListener("resize",() => {
+  clearTimeout(window.__mapResizeTimer);
+  window.__mapResizeTimer = setTimeout(resizeMap,150);
+});
+
+renderLevels();
+initMap();
+})();
+</script>
+</body>
+</html>
